@@ -6,4 +6,5 @@ Tatiana Smith,
 Nicholas (Cole) Van Keulen,
 Bobby Wettig,
 Andrew Roberts,
-Jesus Torres
+Jesus Torres,
+Jerrad Vitatoe
