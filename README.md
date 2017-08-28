@@ -6,3 +6,4 @@ Tatiana Smith,
 Nicholas (Cole) Van Keulen,
 Bobby Wettig,
 Andrew Roberts
+Jerrad Vitatoe
