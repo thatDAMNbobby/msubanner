@@ -1,6 +1,6 @@
 /* as implemented at https://spring.io/blog/2016/11/21/the-joy-of-mustache-server-side-templates-for-the-jvm */
 
-package edu.msudenver.cs3250.group6.views;
+package edu.msudenver.cs3250.group6.msubanner;
 
 import java.io.IOException;
 import java.io.Writer;
