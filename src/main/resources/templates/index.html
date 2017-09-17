@@ -1,5 +1,12 @@
 {{#layout}}
-    <h1>Demo</h1>
-    <div>Hello World</div>
+    
+	<h1>User Input Form</h1>
+    <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+    		<p>Id: <input type="text" th:field="*{id}" /></p>
+        <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+        <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>   
+
 {{/layout}}
 {{>layout}}
