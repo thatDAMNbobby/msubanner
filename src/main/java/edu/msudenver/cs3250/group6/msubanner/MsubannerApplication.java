@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan({"edu"})
-public final class MsubannerApplication {
+public class MsubannerApplication {
 
     /**
      * Starts the spring application.
@@ -19,12 +19,5 @@ public final class MsubannerApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(MsubannerApplication.class, args);
-    }
-
-    /**
-     * Prevents instantiation of this class.
-     */
-    private MsubannerApplication() {
-        throw new AssertionError("Instantiating a utility class");
     }
 }
