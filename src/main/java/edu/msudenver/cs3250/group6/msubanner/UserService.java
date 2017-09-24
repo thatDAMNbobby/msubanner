@@ -1,41 +1,65 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service  // marks as a Spring business service, creates singleton
+/**
+ * The user service class.
+ */
+//marks as a Spring business service, creates singleton
+@Service
 public class UserService {
-	
-	@Autowired
-	private UserRepository UserRepository;
 
-	public List<User> getAllUsers() {
-		// return Users;
-		List<User> Users = new ArrayList<>(); // creates new list
-		UserRepository.findAll() // iterate over everything in the repository
-		.forEach(Users::add); // populate the list with each element
-		return Users;
-	}
-	
-	public User getUser(long id) {
-		// iterates on Users List
-		// return Users.stream().filter(t -> t.getId().equals(id)).findFirst().get(); // lambda checks that User id equals id passed in 
-		return UserRepository.findOne(id);
-	}
+    /** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
 
-	public void addUser(User user) {
-		UserRepository.save(user); // out of the box save method to db
-	}
+    /**
+     * Gets the list of all users.
+     * @return the list of all users
+     */
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        // populate the user list with each element in the repository
+        userRepository.findAll().forEach(users::add);
+        return users;
+    }
 
-	public void updateUser(long id, User user) {
-		UserRepository.save(user);
-	}
+    /**
+     * Gets a user by id.
+     * @param id the user id
+     * @return the user
+     */
+    public User getUser(final long id) {
+        return userRepository.findOne(id);
+    }
 
-	public void deleteUser(long id) {
-		UserRepository.delete(id);
-	}
+    /**
+     * Adds a user.
+     * @param user the user to add
+     */
+    public void addUser(final User user) {
+        // out of the box save method to db
+        userRepository.save(user);
+    }
+
+    /**
+     * Updates a user.
+     * @param id the user id
+     * @param user the user to update
+     */
+    public void updateUser(final long id, final User user) {
+        userRepository.save(user);
+    }
+
+    /**
+     * Deletes a user.
+     * @param id the user id
+     */
+    public void deleteUser(final long id) {
+        userRepository.delete(id);
+    }
 }

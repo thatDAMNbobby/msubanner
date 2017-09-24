@@ -1,89 +1,87 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * Persistent User class.
- * @author Group 6
  */
-@Entity 
+@Entity
 @Table(name = "users")
 public class User {
 
-    /**
-     * User's id number.
-     */
+    /** User's id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long myId;
 
-    /**
-     * User's first name.
-     */
+    /** User's first name. */
     @Column
-    private String firstName;
+    private String myFirstName;
 
-    /**
-     * User's last name.
-     */
+    /** User's last name. */
     @Column
-    private String lastName;
+    private String myLastName;
 
-    // default constructor
+    /** Default constructor for user class. */
     public User() {
         try {
-            this.firstName = "First_Name";
-            this.lastName = "Last_Name";
-        }
-        catch (Exception e){
+            this.myFirstName = "First_Name";
+            this.myLastName = "Last_Name";
+        } catch (Exception e) {
             System.out.println("Something went wrong...");
         }
     }
 
     /**
-     * Contructor
-     * @param firstName User's firat name
-     * @param lastName User's last name
+     * Constructor.
+     * @param firstName the user's firat name
+     * @param lastName the user's last name
      */
-    public User (String firstName, String lastName) {
-		super();
-		//this.id = id;
-        if (firstName != "")
-		    this.firstName = firstName;
-        else
-            this.firstName = "First_Name";
+    public User(final String firstName, final String lastName) {
+        super();
+        // this.id = id;
+        if (firstName != "") {
+            myFirstName = firstName;
+        } else {
+            myFirstName = "First_Name";
+        }
 
-        if (lastName != "")
-		    this.lastName = lastName;
-        else
-            this.lastName = "Last_Name";
-	}
+        if (lastName != "") {
+            myLastName = lastName;
+        } else {
+            myLastName = "Last_Name";
+        }
+    }
 
     /**
      * Returns the first name of the User.
      * @return first name
+     * @throws Exception if the first name field is blank
      */
     public String getFirstName() throws Exception {
-
-        if (firstName != "")
-            return firstName;
-        else
+        if (myFirstName != "") {
+            return myFirstName;
+        } else {
             throw new Exception("First name cannot be blank!");
+        }
     }
 
     /**
      * Returns the last name of the User.
      * @return last name
+     * @throws Exception if the last name field is blank
      */
-    public String getLastName()throws Exception {
-        if (lastName != "")
-            return lastName;
-        else
+    public String getLastName() throws Exception {
+        if (myLastName != "") {
+            return myLastName;
+        } else {
             throw new Exception("Last name cannot be blank!");
+        }
     }
 
     /**
@@ -91,41 +89,44 @@ public class User {
      * @return id
      */
     public long getId() {
-        return id;
+        return myId;
     }
 
     /**
-     * Sets the user's ID
-     * @param id new ID number
-     * @throws Exception
+     * Sets the user's id.
+     * @param id the id number
+     * @throws Exception if the id number is less than 1
      */
-	public void setId(long id) throws Exception {
-        if (id != 0)
-            this.id = id;
-        else throw new Exception("Invalid Id");
-	}
+    public void setId(final long id) throws Exception {
+        if (id > 0) {
+            myId = id;
+        } else {
+            throw new Exception("Invalid Id. Id cannot be less than 1.");
+        }
+    }
 
     /**
-     * Sets the user's first name
-     * @param firstName New first name
+     * Sets the user's first name.
+     * @param firstName the first name
      */
-	public void setFirstName(String firstName) {
-
-        if (firstName != "")
-            this.firstName = firstName;
-        else
-            this.firstName = "First_Name";
-	}
+    public void setFirstName(final String firstName) {
+        if (firstName != "") {
+            myFirstName = firstName;
+        } else {
+            myFirstName = "First_Name";
+        }
+    }
 
     /**
-     * Sets the user's last name
-     * @param lastName New last name
+     * Sets the user's last name.
+     * @param lastName the last name
      */
-	public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
 
-        if (lastName != "")
-            this.lastName = lastName;
-        else
-            this.lastName = "Last_Name";
-	}
+        if (lastName != "") {
+            myLastName = lastName;
+        } else {
+            myLastName = "Last_Name";
+        }
+    }
 }
