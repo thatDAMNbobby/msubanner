@@ -48,7 +48,7 @@ public class UserController {
      * @param id the user id
      * @return the user
      */
-    @RequestMapping("/users/{id}")
+    @RequestMapping("/users/getuser/{id}")
     //@PathVariable indicates use of {id} wildcard above
     public User getUser(@PathVariable final long id) {
     return userService.getUser(id);
@@ -58,7 +58,7 @@ public class UserController {
      * Adds a user.
      * @param user the user to be added
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/users")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/adduser")
     // take request body, turn into User instance and pass to addUser()
     public void addUser(@RequestBody final User user) {
         // POST body should contain object being sent
@@ -70,7 +70,7 @@ public class UserController {
      * @param user the user to be updated
      * @param id the user's id
      */
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/updateuser/{id}")
     // take request body, turn into User instance and pass to addUser()
     public void updateUser(@RequestBody final User user,
                            @PathVariable final long id) {
@@ -82,7 +82,7 @@ public class UserController {
      * Deletes a user.
      * @param id the user's id
      */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/deleteuser/{id}")
     public void deleteUser(@PathVariable final long id) {
         //@PathVariable indicates use of wildcard above
         userService.deleteUser(id);
