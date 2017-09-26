@@ -27,14 +27,16 @@ public class User {
     @Column
     private String myLastName;
 
+    /** Constant multiplier for hash method. */
+    private static final int HASH_MULTIPLIER = 31;
+
+    /** Constant base for hash method. */
+    private static final int HASH_BASE = 17;
+
     /** Default constructor for user class. */
     public User() {
-        try {
-            this.myFirstName = "First_Name";
-            this.myLastName = "Last_Name";
-        } catch (Exception e) {
-            System.out.println("Something went wrong...");
-        }
+        this.myFirstName = "First_Name";
+        this.myLastName = "Last_Name";
     }
 
     /**
@@ -43,18 +45,15 @@ public class User {
      * @param lastName the user's last name
      */
     public User(final String firstName, final String lastName) {
-        super();
-        // this.id = id;
-        if (firstName != "") {
-            myFirstName = firstName;
-        } else {
+        if (firstName == null || firstName.equals("")) {
             myFirstName = "First_Name";
-        }
-
-        if (lastName != "") {
-            myLastName = lastName;
         } else {
+            myFirstName = firstName;
+        }
+        if (lastName == null || lastName.equals("")) {
             myLastName = "Last_Name";
+        } else {
+            myLastName = lastName;
         }
     }
 
@@ -63,12 +62,8 @@ public class User {
      * @return first name
      * @throws Exception if the first name field is blank
      */
-    public String getFirstName() throws Exception {
-        if (myFirstName != "") {
-            return myFirstName;
-        } else {
-            throw new Exception("First name cannot be blank!");
-        }
+    public String getFirstName() {
+        return myFirstName;
     }
 
     /**
@@ -76,12 +71,8 @@ public class User {
      * @return last name
      * @throws Exception if the last name field is blank
      */
-    public String getLastName() throws Exception {
-        if (myLastName != "") {
-            return myLastName;
-        } else {
-            throw new Exception("Last name cannot be blank!");
-        }
+    public String getLastName() {
+        return myLastName;
     }
 
     /**
@@ -95,38 +86,79 @@ public class User {
     /**
      * Sets the user's id.
      * @param id the id number
-     * @throws Exception if the id number is less than 1
      */
-    public void setId(final long id) throws Exception {
-        if (id > 0) {
-            myId = id;
-        } else {
-            throw new Exception("Invalid Id. Id cannot be less than 1.");
-        }
+    public void setId(final long id) {
+        //TODO: we don't want someone to be able to set id
+        myId = id;
     }
 
     /**
      * Sets the user's first name.
      * @param firstName the first name
+     * @throws IllegalArgumentException if the first name value is null or empty
      */
-    public void setFirstName(final String firstName) {
-        if (firstName != "") {
-            myFirstName = firstName;
-        } else {
-            myFirstName = "First_Name";
+    public void setFirstName(final String firstName)
+            throws IllegalArgumentException {
+        if (firstName == null || firstName.equals("")) {
+            throw new IllegalArgumentException(
+                    "First name must not be empty or null.");
         }
+        myFirstName = firstName;
     }
 
     /**
      * Sets the user's last name.
      * @param lastName the last name
+     * @throws IllegalArgumentException if the last name value is null or empty
      */
-    public void setLastName(final String lastName) {
-
-        if (lastName != "") {
-            myLastName = lastName;
-        } else {
-            myLastName = "Last_Name";
+    public void setLastName(final String lastName)
+            throws IllegalArgumentException {
+        if (lastName == null || lastName.equals("")) {
+            throw new IllegalArgumentException(
+                    "Last name must not be empty or null.");
         }
+        myLastName = lastName;
+    }
+
+    /**
+     * Required explanation on how to implement this for classes that extend
+     * User.
+     */
+    @Override
+    public boolean equals(final Object other) {
+        if (other == null || !(other instanceof User)) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        final User otherUser = (User) other;
+        // TO-DO: equals only needs to rely on id
+        // once we make sure that id cannot be set on accident.
+        return this.getId() == otherUser.getId()
+                && this.getFirstName().equals(otherUser.getFirstName())
+                && this.getLastName().equals(otherUser.getLastName());
+    }
+
+    /**
+     * Required explanation on how to implement this for classes that extend
+     * User.
+     */
+    @Override
+    public int hashCode() {
+        int result = HASH_BASE;
+        result = (int) (HASH_MULTIPLIER * result + myId);
+        result = HASH_MULTIPLIER * result + myFirstName.hashCode();
+        result = HASH_MULTIPLIER * result + myLastName.hashCode();
+        return result;
+    }
+
+    /**
+     * Required explanation on how to implement this for classes that extend
+     * User.
+     */
+    @Override
+    public String toString() {
+        return "User: " + myFirstName + " " + myLastName + " " + myId;
     }
 }

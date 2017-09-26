@@ -27,17 +27,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // @GetMapping("/user")
-    // public String userForm(Model model) {
-    // model.addAttribute("user", new User());
-    // return "user";
-    // }
-    //
-    // @PostMapping("/user")
-    // public String userSubmit(@ModelAttribute User user) {
-    // return "result";
-    // }
-
     /**
      * Gets the list of all users.
      * @return the list of all users
@@ -93,7 +82,7 @@ public class UserController {
         // POST body should contain object being sent
         User existingUser = userService.getUser(id);
         if (existingUser == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         } else {
             userService.updateUser(user);
             return new ResponseEntity<Void>(HttpStatus.OK);
