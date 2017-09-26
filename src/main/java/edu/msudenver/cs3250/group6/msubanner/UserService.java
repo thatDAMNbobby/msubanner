@@ -48,10 +48,9 @@ public class UserService {
 
     /**
      * Updates a user.
-     * @param id the user id
      * @param user the user to update
      */
-    public void updateUser(final long id, final User user) {
+    public void updateUser(final User user) {
         userRepository.save(user);
     }
 
