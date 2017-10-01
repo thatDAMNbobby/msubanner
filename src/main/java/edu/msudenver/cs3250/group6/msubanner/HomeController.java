@@ -31,7 +31,8 @@ class HomeController {
      * Maps to the add user form.
      * @return the add user form string
      */
-    @RequestMapping("/adduserform")
+    // Changed the mapping for this to point to the same place the POST request to add a user is supposed to be directed
+    @RequestMapping("/users/adduser")
     String addUserForm() {
         return "adduserform";
     }
