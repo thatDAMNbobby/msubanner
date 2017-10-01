@@ -42,7 +42,6 @@ public class UserService {
      * @param user the user to add
      */
     public void addUser(final User user) {
-        // out of the box save method to db
         userRepository.save(user);
     }
 

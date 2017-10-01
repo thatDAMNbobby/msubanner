@@ -88,8 +88,9 @@ public class User {
      * @param id the id number
      */
     public void setId(final long id) {
-        //TODO: we don't want someone to be able to set id
-        myId = id;
+        if (id > 0) {
+            myId = id;
+        }
     }
 
     /**
@@ -133,8 +134,6 @@ public class User {
             return true;
         }
         final User otherUser = (User) other;
-        // TO-DO: equals only needs to rely on id
-        // once we make sure that id cannot be set on accident.
         return this.getId() == otherUser.getId()
                 && this.getFirstName().equals(otherUser.getFirstName())
                 && this.getLastName().equals(otherUser.getLastName());

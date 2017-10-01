@@ -1,6 +1,11 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Persistent Section class.
@@ -10,31 +15,28 @@ import javax.persistence.*;
 @Table(name = "sections")
 public class Section {
 
-    /**
-     * Section's Id number.
-     */
+    /** Section's Id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long myId;
 
-    /**
-     * Course this section belongs to.
-     */
+    /** Course this section belongs to. */
     @ManyToOne
-    private Course course;
+    private Course myCourse;
 
-    /**
-     * Section's professor.
-     */
+    /** Section's professor. */
     @ManyToOne
-    private User professor;
+    private User myProfessor;
+
+    /** Number used to compute hash value. */
+    private static final int HASH_SHIFT = 32;
 
     /**
-     * Default contstructor, creates a blank section.
+     * Default constructor, creates a blank section.
      */
     public Section() {
-        this.professor = new User();
-        this.course = new Course();
+        myProfessor = new User();
+        myCourse = new Course();
     }
 
     /**
@@ -43,8 +45,12 @@ public class Section {
      * @param professor The professor for this section
      */
     public Section(final Course course, final User professor) {
-        if (course != null) this.course = course;
-        if (professor != null) this.professor = professor;
+        if (course != null) {
+            myCourse = course;
+        }
+        if (professor != null) {
+            myProfessor = professor;
+        }
     }
 
     /**
@@ -52,7 +58,7 @@ public class Section {
      * @return id of this course
      */
     public long getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -60,7 +66,9 @@ public class Section {
      * @param id new id number for this section
      */
     public void setId(final long id) {
-        if (id != 0) this.id = id;
+        if (id > 0) {
+            myId = id;
+        }
     }
 
     /**
@@ -68,18 +76,19 @@ public class Section {
      * @return course this section belongs to
      */
     public Course getCourse() {
-        return course;
+        return myCourse;
     }
 
     /**
      * Sets the course this section belongs to.
      * @param course new course for this section
+     * @throws IllegalArgumentException if the course is null
      */
     public void setCourse(final Course course) throws IllegalArgumentException {
-        if (course == null)
+        if (course == null) {
             throw new IllegalArgumentException("Course cannot be null!");
-
-        this.course = course;
+        }
+        this.myCourse = course;
     }
 
     /**
@@ -87,39 +96,54 @@ public class Section {
      * @return the professor of this section
      */
     public User getProfessor() {
-        return professor;
+        return myProfessor;
     }
 
     /**
      * Sets the professor of this section.
      * @param professor new professor for this section
+     * @throws IllegalArgumentException if the professor is null
      */
-    public void setProfessor(final User professor) throws IllegalArgumentException {
+    public void setProfessor(final User professor)
+            throws IllegalArgumentException {
         if (professor == null) {
             throw new IllegalArgumentException("Professor cannot be null!");
         }
-        this.professor = professor;
+        this.myProfessor = professor;
     }
 
     /**
-     * Hash code function
-     * @return some integer
+     * Hash code function.
      */
-
     @Override
     public int hashCode() {
-        return (int) (getId() ^ (getId() >>> 32));
+        return (int) (getId() ^ (getId() >>> HASH_SHIFT));
+    }
+
+    /**
+     * Returns if one section is equal to another.
+     */
+    @Override
+    public boolean equals(final Object other) {
+        if (other == null || !(other instanceof Section)) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        final Section otherSection = (Section) other;
+        return this.getId() == otherSection.getId()
+                && this.getCourse().equals(otherSection.getCourse())
+                && this.getProfessor().equals(otherSection.getProfessor());
     }
 
     /**
      * Returns the Section as a nice, readable string.
-     * @return The Section as a nice, readable string.
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + id + ", Course="
-                + /*course.toString() +*/ ", professor:"
-                + professor.toString() + '}';
+        return "Section{" + "id=" + myId + ", Course="
+                + /* course.toString() + */ ", professor:"
+                + myProfessor.toString() + '}';
     }
 }
-

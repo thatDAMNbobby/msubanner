@@ -1,14 +1,21 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The controller for the section class.
+ */
 @RestController
 public class SectionController {
 
-    /** The section service.*/
+    /** The section service. */
     @Autowired
     private SectionService sectionService;
 
@@ -27,7 +34,7 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping("/sections/getsection/{id}")
-    //@PathVariable indicates use of {id} wildcard above
+    // @PathVariable indicates use of {id} wildcard above
     public Section getSection(@PathVariable final long id) {
         return sectionService.getSection(id);
     }
@@ -48,10 +55,11 @@ public class SectionController {
      * @param section the section to be updated
      * @param id the section's id
      */
-    @RequestMapping(method = RequestMethod.PUT, value = "/sections/updatesection/{id}")
+    @RequestMapping(method = RequestMethod.PUT,
+                    value = "/sections/updatesection/{id}")
     // take request body, turn into Section instance and pass to addSection()
     public void updateSection(@RequestBody final Section section,
-                           @PathVariable final long id) {
+            @PathVariable final long id) {
         // POST body should contain object being sent
         sectionService.updateSection(section);
     }
@@ -60,9 +68,10 @@ public class SectionController {
      * Deletes a section.
      * @param id the section's id
      */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/sections/deletesection/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,
+                    value = "/sections/deletesection/{id}")
     public void deleteSection(@PathVariable final long id) {
-        //@PathVariable indicates use of wildcard above
+        // @PathVariable indicates use of wildcard above
         sectionService.deleteSection(id);
     }
 }

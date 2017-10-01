@@ -5,6 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,6 +43,21 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testAddUserSuccess() throws Exception {
+        User user = new User("Jesus", "Torres");
+
+        when(userService.getUser(user.getId())).thenReturn(user);
+        doNothing().when(userService).addUser(user);
+
+        mockMvc.perform(post("/users/adduser")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(asJsonString(user))).andExpect(status().isCreated());
+
+        verify(userService, times(1)).addUser(user);
+        verifyNoMoreInteractions(userService);
+    }
+
+    @Test
     public void testUpdateUserSuccess() throws Exception {
         User user = new User("Morty", "Smith");
 
@@ -57,24 +73,23 @@ public class UserControllerTest {
         verifyNoMoreInteractions(userService);
     }
 
+    // TODO: Fix this or test the right thing
+    // should someone even be able to get to /users/updateuser/{id}
+    // with an invalid id? Doesn't seem good.
 
-// TODO: Fix this or test the right thing
-// should someone even be able to get to /users/updateuser/{id}
-// with an invalid id? Doesn't seem good.
-
-//    @Test
-//    public void testUpdateUserFailure() throws Exception {
-//        User user = new User();
-//        when(userService.getUser(user.getId())).thenReturn(null);
-//
-//        mockMvc.perform(put("/users/updateuser/{id}", user.getId())
-//                .contentType(MediaType.APPLICATION_JSON_UTF8)
-//                .contentType(asJsonString(user)))
-//                .andExpect(status().isNotFound());
-//
-//        verify(userService, times(1)).getUser(user.getId());
-//        verifyNoMoreInteractions(userService);
-//    }
+    // @Test
+    // public void testUpdateUserFailure() throws Exception {
+    // User user = new User();
+    // when(userService.getUser(user.getId())).thenReturn(null);
+    //
+    // mockMvc.perform(put("/users/updateuser/{id}", user.getId())
+    // .contentType(MediaType.APPLICATION_JSON_UTF8)
+    // .contentType(asJsonString(user)))
+    // .andExpect(status().isNotFound());
+    //
+    // verify(userService, times(1)).getUser(user.getId());
+    // verifyNoMoreInteractions(userService);
+    // }
 
     public static String asJsonString(final Object obj) {
         try {
