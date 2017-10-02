@@ -8,9 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name= "deparment")
 public class Department {
-    public static void main(){
-
-    }
 
     /** Department Id */
     @Id
