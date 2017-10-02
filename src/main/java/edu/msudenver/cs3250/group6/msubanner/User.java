@@ -32,10 +32,6 @@ public class User {
     @Column
     ClassLevel userLevel;
 
-    /**Global School Name */
-    @Column
-    public static final String schoolName = "MSUDENVER";
-
     /** Constant multiplier for hash method. */
     private static final int HASH_MULTIPLIER = 31;
 
