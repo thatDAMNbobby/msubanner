@@ -6,12 +6,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The section service.
+ */
 @Service
 public class SectionService {
 
+    /** The section repository. */
     @Autowired
     private SectionRepository sectionRepository;
 
+    /**
+     * Gets the list of all sections.
+     * @return the list of all sections
+     */
     public List<Section> getAllSections() {
         List<Section> sections = new ArrayList<>();
         // populate the section list with each element in the repository
@@ -33,7 +41,6 @@ public class SectionService {
      * @param section the section to add
      */
     public void addSection(final Section section) {
-        // out of the box save method to db
         sectionRepository.save(section);
     }
 
