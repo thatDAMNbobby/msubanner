@@ -28,6 +28,13 @@ public class User {
     @Column
     private String myLastName;
 
+    /** Class Level for student */
+    @Column
+    ClassLevel userLevel;
+
+    /**Global School Name */
+    @Column
+    public static final String schoolName = "MSUDENVER";
 
     /** Constant multiplier for hash method. */
     private static final int HASH_MULTIPLIER = 31;
@@ -39,6 +46,7 @@ public class User {
     public User() {
         this.myFirstName = "First_Name";
         this.myLastName = "Last_Name";
+        userLevel = ClassLevel.FRESHMAN;
     }
 
     /**
@@ -57,6 +65,7 @@ public class User {
         } else {
             myLastName = lastName;
         }
+        userLevel = ClassLevel.FRESHMAN;
     }
 
     /**
@@ -162,4 +171,5 @@ public class User {
     public String toString() {
         return "User: " + myFirstName + " " + myLastName + " " + myId;
     }
+
 }
