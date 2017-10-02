@@ -32,7 +32,7 @@ public class Department {
         if (myDepartmentName == null || myDepartmentName.equals("")) {
             myDepartmentName = "Department Name";
         } else {
-            myDepartmentName = myDepartmentName;
+            myDepartmentName = departmentName;
         }
     }
     /**
