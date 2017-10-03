@@ -1,5 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
+import edu.msudenver.cs3250.group6.msubanner.course.Course;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -30,7 +31,8 @@ public class CourseTest {
 
     @Test
     public void equals() {
-        Course course = new Course("Test title", "Test description");
+        Course course = new Course("Test title", "Test description", 4,
+                "Test objectives", ClassLevel.FRESHMAN);
         Course course2 = course;
         assertEquals(course, course2);
     }
@@ -44,21 +46,23 @@ public class CourseTest {
 
     @Test
     public void emptyStringInConstructorTest() {
-        Course course = new Course("", "");
+        Course course = new Course("", "", 0, "", ClassLevel.FRESHMAN);
         assertEquals("Empty title", course.getTitle());
         assertEquals("No description available", course.getDescription());
     }
 
     @Test
     public void constructorTest() {
-        Course course = new Course("Test title", "Test description");
+        Course course = new Course("Test title", "Test description", 4,
+                "Test objectives", ClassLevel.FRESHMAN);
         assertEquals("Test title", course.getTitle());
         assertEquals("Test description", course.getDescription());
     }
 
     @Test
     public void toStringTest() {
-        Course course = new Course("Test title", "Test description");
+        Course course = new Course("Test title", "Test description", 4,
+                "Test objectives", ClassLevel.FRESHMAN);
         assertEquals("Course{Id=0, Title= Test title, Description= "
                 + "Test description}", course.toString());
     }

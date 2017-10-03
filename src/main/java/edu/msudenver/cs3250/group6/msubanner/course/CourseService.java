@@ -1,4 +1,4 @@
-package edu.msudenver.cs3250.group6.msubanner;
+package edu.msudenver.cs3250.group6.msubanner.course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
