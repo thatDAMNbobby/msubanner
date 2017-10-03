@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.concurrent.Callable;
 
 /**
  * Persistent User class.
@@ -28,10 +27,6 @@ public class User {
     @Column
     private String myLastName;
 
-    /** Class Level for student */
-    @Column
-    ClassLevel userLevel;
-
     /** Constant multiplier for hash method. */
     private static final int HASH_MULTIPLIER = 31;
 
@@ -42,7 +37,6 @@ public class User {
     public User() {
         this.myFirstName = "First_Name";
         this.myLastName = "Last_Name";
-        userLevel = ClassLevel.FRESHMAN;
     }
 
     /**
@@ -61,7 +55,6 @@ public class User {
         } else {
             myLastName = lastName;
         }
-        userLevel = ClassLevel.FRESHMAN;
     }
 
     /**
