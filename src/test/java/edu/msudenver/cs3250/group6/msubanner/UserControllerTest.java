@@ -9,6 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import edu.msudenver.cs3250.group6.msubanner.user.User;
+import edu.msudenver.cs3250.group6.msubanner.user.UserController;
+import edu.msudenver.cs3250.group6.msubanner.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

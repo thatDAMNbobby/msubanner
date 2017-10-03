@@ -3,6 +3,9 @@ package edu.msudenver.cs3250.group6.msubanner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import edu.msudenver.cs3250.group6.msubanner.course.Course;
+import edu.msudenver.cs3250.group6.msubanner.section.Section;
+import edu.msudenver.cs3250.group6.msubanner.user.User;
 import org.junit.Test;
 
 public class SectionTest {
