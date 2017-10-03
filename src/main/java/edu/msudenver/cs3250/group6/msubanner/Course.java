@@ -1,6 +1,11 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Persistent Course class.
@@ -10,16 +15,16 @@ import javax.persistence.*;
 public class Course {
 
     /**
-     * Course id number
+     * Course id number.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long myId;
 
-    //todo: Add field for department
+    // todo: Add field for department
 
     /**
-     * Title of the course
+     * Title of the course.
      */
     @Column
     private String myTitle;
@@ -29,9 +34,15 @@ public class Course {
      */
     private String myDescription;
 
+    /** Constant multiplier for hash method. */
+    private static final int HASH_MULTIPLIER = 31;
+
+    /** Constant base for hash method. */
+    private static final int HASH_BASE = 17;
+
     /**
-     * Default constructor, initializes fields with default values
-     * Directions for use: Do NOT
+     * Default constructor, initializes fields with default values. Directions
+     * for use: Do NOT
      */
     public Course() {
         this.myTitle = "Empty title";
@@ -39,26 +50,31 @@ public class Course {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * @param title Course Title
      * @param description Course description
      */
-    public Course(String title, String description) {
-        if (title.equals("") || title.equals(" "))
-            this.myTitle = "Empty title";
-        else this.myTitle = title;
-
-        if (description.equals("") || description.equals(" "))
-            this.myDescription = "No description available";
-        else this.myDescription = description;
+    public Course(final String title, final String description) {
+        if (title == null || title.isEmpty()) {
+            myTitle = "Empty title";
+        } else {
+            myTitle = title;
+        }
+        if (description == null || description.isEmpty()) {
+            myDescription = "No description available";
+        } else {
+            myDescription = description;
+        }
     }
 
     /**
      * Sets the id of the course.
      * @param id New id for the course
      */
-    public void setId(long id) {
-        this.myId = id;
+    public void setId(final long id) {
+        if (id > 0) {
+            myId = id;
+        }
     }
 
     /**
@@ -74,9 +90,10 @@ public class Course {
      * @param title New title of the course
      * @throws IllegalArgumentException if new title is blank
      */
-    public void setTitle(String title) throws IllegalArgumentException {
-        if (title.equals("") || title.equals(" "))
-            throw new IllegalArgumentException("Ttile cannot be blank!");
+    public void setTitle(final String title) throws IllegalArgumentException {
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be blank.");
+        }
         this.myTitle = title;
     }
 
@@ -92,9 +109,10 @@ public class Course {
      * Sets the decription of the course.
      * @param description New description of the course
      */
-    public void setDescription(String description) {
-        if (description.equals("") || description.equals(" "))
+    public void setDescription(final String description) {
+        if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("Description cannot be blank!");
+        }
         this.myDescription = description;
     }
 
@@ -106,28 +124,42 @@ public class Course {
         return myDescription;
     }
 
+    /**
+     * toString method for Course.
+     */
     @Override
     public String toString() {
-        return "Course{" + "Id=" + myId + ", Title= "
-                + myTitle + ", Description= " + myDescription + "}";
+        return "Course{" + "Id=" + myId + ", Title= " + myTitle
+                + ", Description= " + myDescription + "}";
     }
 
+    /**
+     * equals method for Course.
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Course)) return false;
+    public boolean equals(final Object o) {
+        if (o == null || !(o instanceof Course)) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
 
         Course course = (Course) o;
-        if (getId() != course.getId()) return false;
-        if (!getTitle().equals(course.getTitle())) return false;
-        return getDescription().equals(course.getDescription());
+        return this.getId() == course.getId()
+                && this.getDescription().equals(course.getDescription())
+                && this.getTitle().equals(course.getTitle());
     }
 
+    /**
+     * hashCode method for Course.
+     */
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + getDescription().hashCode();
+        int result = HASH_BASE;
+        result = (int) (HASH_MULTIPLIER * result + myId);
+        result = HASH_MULTIPLIER * result + myTitle.hashCode();
+        result = HASH_MULTIPLIER * result + myDescription.hashCode();
         return result;
     }
 }

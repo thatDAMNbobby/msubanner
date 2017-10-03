@@ -10,8 +10,8 @@ public class CourseTest {
     @Test
     public void setIdSetIdTest() {
         Course course = new Course();
-        course.setId(-1);
-        assertEquals(-1, course.getId());
+        course.setId(1);
+        assertEquals(1, course.getId());
     }
 
     @Test
