@@ -1,4 +1,4 @@
-package edu.msudenver.cs3250.group6.msubanner;
+package edu.msudenver.cs3250.group6.msubanner.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,6 @@ public class UserService {
      * @param user the user to add
      */
     public void addUser(final User user) {
-        // out of the box save method to db
         userRepository.save(user);
     }
 

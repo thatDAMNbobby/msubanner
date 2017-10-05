@@ -1,19 +1,23 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import static org.junit.Assert.*;
+import edu.msudenver.cs3250.group6.msubanner.course.Course;
+import edu.msudenver.cs3250.group6.msubanner.section.Section;
+import edu.msudenver.cs3250.group6.msubanner.user.User;
+import org.junit.Test;
 
 public class SectionTest {
 
     @Test
-    public void sectionTest() throws Exception {
+    public void sectionTest() {
         Section section = new Section();
 
     }
 
     @Test
-    public void sectionWithArgsTest() throws Exception {
+    public void sectionWithArgsTest() {
         Course course = new Course();
         User prof = new User("Dr.", "Meseeks");
         Section section = new Section(course, prof);
@@ -22,20 +26,20 @@ public class SectionTest {
     }
 
     @Test
-    public void getId() throws Exception {
+    public void getId() {
         Section section = new Section();
         assertNotNull(section.getId());
     }
 
     @Test
-    public void setId() throws Exception {
+    public void setId() {
         Section section = new Section();
         section.setId(99);
         assertEquals(99, section.getId());
     }
 
     @Test
-    public void getProfessor() throws Exception {
+    public void getProfessor() {
         Course course = new Course();
         User prof = new User();
         Section section = new Section(course, prof);
@@ -43,7 +47,7 @@ public class SectionTest {
     }
 
     @Test
-    public void setProfessor() throws Exception {
+    public void setProfessor() {
         Course course = new Course();
         User prof = new User();
         Section section = new Section();
@@ -52,7 +56,7 @@ public class SectionTest {
     }
 
     @Test
-    public void setCourseTest() throws Exception {
+    public void setCourseTest() {
         Course course = new Course();
         User prof = new User();
         Section section = new Section();
@@ -61,7 +65,7 @@ public class SectionTest {
     }
 
     @Test
-    public void getCourseTest() throws Exception {
+    public void getCourseTest() {
         Course course = new Course();
         User prof = new User();
         Section section = new Section(course, prof);
@@ -69,17 +73,19 @@ public class SectionTest {
     }
 
     @Test
-    public void hashTest() throws Exception {
+    public void hashTest() {
         Section section = new Section();
         assertEquals(0, section.hashCode());
     }
 
     @Test
-    public void toStringTest() throws Exception {
+    public void toStringTest() {
         Course course = new Course();
         User prof = new User("Mr.", "Meseeks");
         Section section = new Section(course, prof);
-        String out = "Section{" + "id=" + section.getId() + ", Course=" + /*course.toString() +*/ ", professor:" + prof.toString() + '}';
+        String out = "Section{" + "id=" + section.getId() + ", Course="
+                + course.toString() + ", professor:" + prof.toString()
+                + '}';
         assertEquals(out, section.toString());
     }
 }
