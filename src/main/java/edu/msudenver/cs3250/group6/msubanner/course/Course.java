@@ -37,17 +37,17 @@ public class Course {
     private String myDescription;
 
     /**
-     * Credits for this course
+     * Credits for this course.
      */
     private int myCredits;
 
     /**
-     * Learning objectives for this course
+     * Learning objectives for this course.
      */
     private String myLearningObjectives;
 
     /**
-     * Pre-requisites for this course
+     * Pre-requisites for this course.
      */
     private ClassLevel myPrereqs;
 
@@ -68,15 +68,18 @@ public class Course {
         this.myLearningObjectives = "No objective available";
         this.myPrereqs = ClassLevel.FRESHMAN;
     }
-
     /**
-     * Constructor.
-     * @param title Course Title
-     * @param description Course description
+     * Course constructor.
+     * @param title the course title
+     * @param description the course description
+     * @param credits the number of credits
+     * @param learningObjectives the learning objectives
+     * @param prereqs the prerequisites
+     * @throws IllegalArgumentException if a parameter is invalid
      */
-    public Course(final String title, final String description, final int credits,
-                    final String learningObjectives, final ClassLevel prereqs)
-                    throws IllegalArgumentException{
+    public Course(final String title, final String description,
+            final int credits, final String learningObjectives,
+            final ClassLevel prereqs) throws IllegalArgumentException {
         if (title == null || title.isEmpty()) {
             myTitle = "Empty title";
         } else {
@@ -97,12 +100,12 @@ public class Course {
         if (credits < 0) {
             throw new IllegalArgumentException("Credits must be non-negative");
         }
-            myCredits = credits;
+        myCredits = credits;
 
         if (prereqs == null) {
             throw new IllegalArgumentException("Prerequisite cannot be null");
         }
-            myPrereqs = prereqs;
+        myPrereqs = prereqs;
     }
 
     /**

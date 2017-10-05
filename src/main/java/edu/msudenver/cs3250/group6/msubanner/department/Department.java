@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @Table(name = "department")
 public class Department {
 
-    //TODO: Should departments have an ID number?
     /** Department Id. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

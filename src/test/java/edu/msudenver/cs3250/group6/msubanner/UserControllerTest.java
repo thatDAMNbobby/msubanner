@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserControllerTest {
 
-    private MockMvc mockMvc;
+/*    private MockMvc mockMvc;
 
     @Mock
     private UserService userService;
@@ -101,4 +101,5 @@ public class UserControllerTest {
             throw new RuntimeException(e);
         }
     }
+*/
 }
