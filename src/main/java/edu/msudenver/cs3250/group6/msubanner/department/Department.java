@@ -55,5 +55,17 @@ public class Department {
         return myId;
     }
 
+    /**
+     * Sets the department name
+     * @param name name to set department name to
+     */
+    public void setDepartmentName(String name) { myDepartmentName = name; }
+
+    /**
+     * Sets the department's ID
+     * @param id ID to assign to the department
+     */
+    public void setId(long id) { myId = id; }
+
     //TODO: add setters and equals, hashcode, tostring for testing
 }

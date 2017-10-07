@@ -1,16 +1,12 @@
 package edu.msudenver.cs3250.group6.msubanner.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Persistent User class.
  */
 @Entity
+@Inheritance
 @Table(name = "users")
 public class User {
 
