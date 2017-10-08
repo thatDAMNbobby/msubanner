@@ -1,0 +1,14 @@
+{{#layout}}
+<div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
+    <h1>User Input Form (Currently Working)</h1>
+    <form action="#" th:action="@{/departments/adddepartment}" th:object="${department}" method="post">
+        <!-- Removed this input line, since the user gets an id when added to the database
+        <p>Id: <input type="text" th:field="*{id}" /></p>
+        -->
+        <!-- Added name fields so that the data in the form gets placed in a map -->
+        <p>Department Name: <input type="text" name="departmentName" th:field="*{departmentName}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/layout}}
+{{>layout}}

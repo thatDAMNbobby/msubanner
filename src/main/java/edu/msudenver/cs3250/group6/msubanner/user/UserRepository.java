@@ -11,4 +11,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 @Persistent
 public interface UserRepository extends CrudRepository<User, Long> {
-}
+        }

@@ -1,16 +1,18 @@
 package edu.msudenver.cs3250.group6.msubanner.department;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for the department class.
  */
+@RestController
 public class DepartmentController {
 
     /** The department service. */
@@ -45,9 +47,23 @@ public class DepartmentController {
             value = "/departments/adddepartment")
     // take request body, turn into Department instance and pass to
     // addDepartment()
-    public void addDepartment(@RequestBody final Department department) {
+    public ResponseEntity<Department> addDepartment(@RequestParam final Map<String, String> body) {
         // POST body should contain object being sent
-        departmentService.addDepartment(department);
+        //departmentService.addDepartment(department);
+
+        System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
+        for (String key : body.keySet()) {
+            String val = body.get(key);
+            System.out.println(key + ": " + val);
+        }
+
+        Department dept = new Department();
+        String deptName = body.get("departmentName");
+
+        dept.setDepartmentName(deptName);
+
+        departmentService.addDepartment(dept);
+        return new ResponseEntity<Department>(dept, HttpStatus.CREATED);
     }
 
     /**
