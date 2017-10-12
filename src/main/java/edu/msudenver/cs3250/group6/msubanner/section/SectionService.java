@@ -22,7 +22,6 @@ public class SectionService {
      */
     public List<Section> getAllSections() {
         List<Section> sections = new ArrayList<>();
-        // populate the section list with each element in the repository
         sectionRepository.findAll().forEach(sections::add);
         return sections;
     }

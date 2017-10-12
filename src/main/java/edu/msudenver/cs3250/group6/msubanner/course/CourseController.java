@@ -34,7 +34,6 @@ public class CourseController {
      * @return the course
      */
     @RequestMapping("/courses/getcourse/{id}")
-    // @PathVariable indicates use of {id} wildcard above
     public Course getCourse(@PathVariable final long id) {
         return courseService.getCourse(id);
     }
@@ -44,9 +43,7 @@ public class CourseController {
      * @param course the course to be added
      */
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
-    // take request body, turn into Course instance and pass to addCourse()
     public void addCourse(@RequestBody final Course course) {
-        // POST body should contain object being sent
         courseService.addCourse(course);
     }
 
@@ -57,10 +54,8 @@ public class CourseController {
      */
     @RequestMapping(method = RequestMethod.PUT,
             value = "/courses/updatecourse/{id}")
-    // take request body, turn into Course instance and pass to addCourse()
     public void updateCourse(@RequestBody final Course course,
                               @PathVariable final long id) {
-        // POST body should contain object being sent
         courseService.updateCourse(course);
     }
 
@@ -71,7 +66,6 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.DELETE,
             value = "/courses/deletecourse/{id}")
     public void deleteCourse(@PathVariable final long id) {
-        // @PathVariable indicates use of wildcard above
         courseService.deleteCourse(id);
     }
 }

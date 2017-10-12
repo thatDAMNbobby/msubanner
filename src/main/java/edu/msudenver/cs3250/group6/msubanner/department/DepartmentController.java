@@ -34,7 +34,6 @@ public class DepartmentController {
      * @return the department
      */
     @RequestMapping("/departments/getdepartment/{id}")
-    // @PathVariable indicates use of {id} wildcard above
     public Department getDepartment(@PathVariable final long id) {
         return departmentService.getDepartment(id);
     }
@@ -45,11 +44,7 @@ public class DepartmentController {
      */
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
-    // take request body, turn into Department instance and pass to
-    // addDepartment()
     public ResponseEntity<Department> addDepartment(@RequestParam final Map<String, String> body) {
-        // POST body should contain object being sent
-        //departmentService.addDepartment(department);
 
         System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
         for (String key : body.keySet()) {
@@ -73,11 +68,8 @@ public class DepartmentController {
      */
     @RequestMapping(method = RequestMethod.PUT,
             value = "/departments/updatedepartment/{id}")
-    // take request body, turn into Department instance and pass to
-    // addDepartment()
     public void updateDepartment(@RequestBody final Department department,
             @PathVariable final long id) {
-        // POST body should contain object being sent
         departmentService.updateDepartment(department);
     }
 
@@ -88,7 +80,6 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.DELETE,
             value = "/departments/deletedepartment/{id}")
     public void deleteDepartment(@PathVariable final long id) {
-        // @PathVariable indicates use of wildcard above
         departmentService.deleteDepartment(id);
     }
 }

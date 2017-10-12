@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 /**
  * The user service class.
  */
-//marks as a Spring business service, creates singleton
 @Service
 public class UserService {
 
@@ -23,7 +22,6 @@ public class UserService {
      */
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        // populate the user list with each element in the repository
         userRepository.findAll().forEach(users::add);
         return users;
     }

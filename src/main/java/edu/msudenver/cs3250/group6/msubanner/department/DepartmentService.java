@@ -23,7 +23,6 @@ public class DepartmentService {
      */
     public List<Department> getAllDepartments() {
         List<Department> departments = new ArrayList<>();
-        // populate the department list with each element in the repository
         departmentRepository.findAll().forEach(departments::add);
         return departments;
     }
