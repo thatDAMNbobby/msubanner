@@ -34,7 +34,6 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping("/sections/getsection/{id}")
-    // @PathVariable indicates use of {id} wildcard above
     public Section getSection(@PathVariable final long id) {
         return sectionService.getSection(id);
     }
@@ -44,9 +43,7 @@ public class SectionController {
      * @param section the section to be added
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
-    // take request body, turn into Section instance and pass to addSection()
     public void addSection(@RequestBody final Section section) {
-        // POST body should contain object being sent
         sectionService.addSection(section);
     }
 
@@ -57,10 +54,8 @@ public class SectionController {
      */
     @RequestMapping(method = RequestMethod.PUT,
                     value = "/sections/updatesection/{id}")
-    // take request body, turn into Section instance and pass to addSection()
     public void updateSection(@RequestBody final Section section,
             @PathVariable final long id) {
-        // POST body should contain object being sent
         sectionService.updateSection(section);
     }
 
@@ -71,7 +66,6 @@ public class SectionController {
     @RequestMapping(method = RequestMethod.DELETE,
                     value = "/sections/deletesection/{id}")
     public void deleteSection(@PathVariable final long id) {
-        // @PathVariable indicates use of wildcard above
         sectionService.deleteSection(id);
     }
 }

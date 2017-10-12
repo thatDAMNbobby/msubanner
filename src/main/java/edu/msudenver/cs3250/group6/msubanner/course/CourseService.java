@@ -22,7 +22,6 @@ public class CourseService {
      */
     public List<Course> getAllCourses() {
         List<Course> courses = new ArrayList<>();
-        // populate the course list with each element in the repository
         courseRepository.findAll().forEach(courses::add);
         return courses;
     }

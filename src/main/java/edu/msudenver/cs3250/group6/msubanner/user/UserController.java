@@ -32,11 +32,7 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
-            // We did this so we could see a user when the server was started
-            // to make sure the get request worked.
-            // remove if un-needed
             users.add(new User("Database is", "Actually Empty"));
-            //return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
@@ -47,7 +43,6 @@ public class UserController {
      * @return the user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/users/getuser/{id}")
-    //@PathVariable indicates use of {id} wildcard above
     public ResponseEntity<User> getUser(@PathVariable final long id) {
         User user = userService.getUser(id);
         if (user == null) {
@@ -62,32 +57,19 @@ public class UserController {
      * @return the new user
      */
     @RequestMapping(method = RequestMethod.POST, value = "/users/adduser")
-    // the @RequestBody param was not working, so we re tooled this to use a Map<String, String>
-    // This gives us key/value pairs from the form which we can use to build/validate a user object
     public ResponseEntity<User> addUser(@RequestParam final Map<String, String> body) {
-//        Old code
-//        System.out.println("Adding user. id: " + user.getId() + "name : " + user.getFirstName() + " " + user.getLastName() );
-//        // POST body should contain object being sent
-//        //userService.addUser(user);
-//        return new ResponseEntity<User>(user, HttpStatus.CREATED);
-
-        // Debug stuff to print out the content of the form that was received
         System.out.println("Post request hit /users/adduser containing " + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
         }
 
-        // Create and validate a user object
         User user = new User();
         String firstName = body.get("firstName");
         String lastName = body.get("lastName");
-        // TBD: Sanitize input! - remove any html tags to prevent XSS attacks
 
-        // Set name fields
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        // id field is populated when added to the database
 
         userService.addUser(user);
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
@@ -101,10 +83,8 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.PUT,
                     value = "/users/updateuser/{id}")
-    // take request body, turn into User instance and pass to addUser()
     public ResponseEntity<Void> updateUser(@RequestBody final User user,
                                            @PathVariable final long id) {
-        // POST body should contain object being sent
         User existingUser = userService.getUser(id);
         if (existingUser == null) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -121,7 +101,6 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.DELETE,
                     value = "/users/deleteuser/{id}")
-    //@PathVariable indicates use of wildcard above
     public ResponseEntity<Void> deleteUser(@PathVariable final long id) {
         User user = userService.getUser(id);
         if (user == null) {

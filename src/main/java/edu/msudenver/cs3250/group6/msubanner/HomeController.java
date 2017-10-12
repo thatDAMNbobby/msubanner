@@ -31,7 +31,6 @@ class HomeController {
      * Maps to the add user form.
      * @return the add user form string
      */
-    // Changed the mapping for this to point to the same place the POST request to add a user is supposed to be directed
     @RequestMapping("/users/adduser")
     String addUserForm() {
         return "adduserform";
@@ -41,7 +40,6 @@ class HomeController {
      * Maps to the add department form.
      * @return the add department form string
      */
-    // Changed the mapping for this to point to the same place the POST request to add a department is supposed to be directed
     @RequestMapping("/departments/adddepartment")
     String addDepartmentForm() {
         return "adddepartmentform";
