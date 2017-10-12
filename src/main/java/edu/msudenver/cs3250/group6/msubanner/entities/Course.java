@@ -1,4 +1,4 @@
-package edu.msudenver.cs3250.group6.msubanner.course;
+package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 

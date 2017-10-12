@@ -4,7 +4,7 @@
  *     /the-joy-of-mustache-server-side-templates-for-the-jvm
  */
 
-package edu.msudenver.cs3250.group6.msubanner;
+package edu.msudenver.cs3250.group6.msubanner.layouts;
 
 import java.io.IOException;
 import java.io.Writer;
