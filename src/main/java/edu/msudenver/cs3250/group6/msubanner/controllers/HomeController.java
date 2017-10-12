@@ -45,4 +45,12 @@ class HomeController {
         return "adddepartmentform";
     }
 
+    /**
+     * Maps to the add course form.
+     * @return the add course form string
+     */
+    @RequestMapping("/courses/addcourse")
+    String addCourseForm() {
+        return "addcourseform";
+    }
 }
