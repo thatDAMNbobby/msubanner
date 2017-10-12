@@ -1,7 +1,4 @@
-package edu.msudenver.cs3250.group6.msubanner.section;
-
-import edu.msudenver.cs3250.group6.msubanner.user.User;
-import edu.msudenver.cs3250.group6.msubanner.course.Course;
+package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

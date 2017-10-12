@@ -1,4 +1,4 @@
-package edu.msudenver.cs3250.group6.msubanner.department;
+package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

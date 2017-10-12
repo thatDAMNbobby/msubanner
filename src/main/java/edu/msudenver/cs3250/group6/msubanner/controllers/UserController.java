@@ -1,8 +1,10 @@
-package edu.msudenver.cs3250.group6.msubanner.user;
+package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import java.util.List;
 import java.util.Map;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import edu.msudenver.cs3250.group6.msubanner.course.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

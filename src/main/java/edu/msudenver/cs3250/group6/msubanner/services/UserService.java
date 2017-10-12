@@ -1,8 +1,10 @@
-package edu.msudenver.cs3250.group6.msubanner.user;
+package edu.msudenver.cs3250.group6.msubanner.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
