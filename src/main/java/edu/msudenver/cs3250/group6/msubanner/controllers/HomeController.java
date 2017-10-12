@@ -53,4 +53,7 @@ class HomeController {
     String addCourseForm() {
         return "addcourseform";
     }
+
+    @RequestMapping("/courseshow")
+    String courseshow() { return "courseshow"; }
 }
