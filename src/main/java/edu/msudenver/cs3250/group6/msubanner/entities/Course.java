@@ -13,7 +13,6 @@ import javax.persistence.Table;
  * Persistent Course class.
  */
 @Entity
-@Table(name = "courses")
 public class Course {
 
     /**
@@ -28,7 +27,6 @@ public class Course {
     /**
      * Title of the course.
      */
-    @Column
     private String myTitle;
 
     /**
@@ -102,10 +100,12 @@ public class Course {
         }
         myCredits = credits;
 
-        if (prereqs == null) {
-            throw new IllegalArgumentException("Prerequisite cannot be null");
+        if (prereqs != null) {
+            //throw new IllegalArgumentException("Prerequisite cannot be null");
+            myPrereqs = prereqs;
         }
-        myPrereqs = prereqs;
+        else
+        myPrereqs = ClassLevel.FRESHMAN;
     }
 
     /**
@@ -163,6 +163,35 @@ public class Course {
      */
     public String getDescription() {
         return myDescription;
+    }
+
+    public void setCredits(int credits) throws IllegalArgumentException {
+        if (credits < 0)
+            throw new IllegalArgumentException("Credits cannot be negative!");
+        myCredits = credits;
+    }
+
+    public void setLearningObjectives(String learningObjectives) {
+        if (learningObjectives.equals("") || learningObjectives.equals(" "))
+            myLearningObjectives = "Default learning objectives.";
+        else
+            myLearningObjectives = learningObjectives;
+    }
+
+    public void setPrereqs(ClassLevel prereqs) {
+        myPrereqs = prereqs;
+    }
+
+    public ClassLevel getPrereqs() {
+        return myPrereqs;
+    }
+
+    public String getLearningObjectives() {
+        return myLearningObjectives;
+    }
+
+    public int getCredits() {
+        return myCredits;
     }
 
     /**

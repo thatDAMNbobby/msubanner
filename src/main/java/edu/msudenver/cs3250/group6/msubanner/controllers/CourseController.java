@@ -1,15 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The controller for the course class.
@@ -45,7 +43,8 @@ public class CourseController {
      * @param course the course to be added
      */
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
-    public void addCourse(@RequestBody final Course course) {
+    public void addCourse(@RequestParam final String courseTitle, String courseDescription, int courseCredits, String courseLearningObjectives, ClassLevel coursePrereqs) {
+        Course course = new Course(courseTitle, courseDescription, courseCredits, courseLearningObjectives, coursePrereqs);
         courseService.addCourse(course);
     }
 
