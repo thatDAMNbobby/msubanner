@@ -1,6 +1,6 @@
 {{#layout}}
 <div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
-    <h1>Section Input Form (Testing)</h1>
+    <h1>Section Input Form (Not Working)</h1>
     <form action="#" th:action="@{/sections/addsection}" th:object="${section}" method="post">
         <p>Course: <select name="course" th:field="*{course}">
             <option th:each="course : ${courses}" th:text="*{id}" th:value="*{title}" />
