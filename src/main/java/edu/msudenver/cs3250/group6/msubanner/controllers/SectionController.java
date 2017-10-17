@@ -1,14 +1,20 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Section;
+import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
 
 /**
  * The controller for the section class.
@@ -22,6 +28,7 @@ public class SectionController {
 
     /**
      * Gets the list of all sections.
+     *
      * @return the list of all sections
      */
     @RequestMapping("/sections")
@@ -31,6 +38,7 @@ public class SectionController {
 
     /**
      * Gets a section by id number.
+     *
      * @param id the section id
      * @return the section
      */
@@ -41,10 +49,13 @@ public class SectionController {
 
     /**
      * Adds a section.
+     *
      * @param course The course the section belongs to
-     * */
+     * @return the section
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
-    public ResponseEntity<Section> addSection(@RequestParam final Course course) {
+    public ResponseEntity<Section> addSection(
+            @RequestParam final Course course) {
         Section section = new Section(course);
         sectionService.addSection(section);
         return new ResponseEntity<Section>(section, HttpStatus.CREATED);
@@ -52,11 +63,12 @@ public class SectionController {
 
     /**
      * Updates a section.
+     *
      * @param section the section to be updated
      * @param id the section's id
      */
     @RequestMapping(method = RequestMethod.PUT,
-                    value = "/sections/updatesection/{id}")
+            value = "/sections/updatesection/{id}")
     public void updateSection(@RequestBody final Section section,
             @PathVariable final long id) {
         sectionService.updateSection(section);
@@ -64,10 +76,11 @@ public class SectionController {
 
     /**
      * Deletes a section.
+     *
      * @param id the section's id
      */
     @RequestMapping(method = RequestMethod.DELETE,
-                    value = "/sections/deletesection/{id}")
+            value = "/sections/deletesection/{id}")
     public void deleteSection(@PathVariable final long id) {
         sectionService.deleteSection(id);
     }

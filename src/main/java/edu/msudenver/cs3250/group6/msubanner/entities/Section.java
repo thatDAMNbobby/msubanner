@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 /**
  * Persistent Section class.
- *
  */
 @Entity
 @Table(name = "sections")
@@ -41,6 +40,7 @@ public class Section {
 
     /**
      * Creates a new section and instantiates the course and professor fields.
+     *
      * @param course The course that this section belongs to
      * @param professor The professor for this section
      */
@@ -53,17 +53,23 @@ public class Section {
         }
     }
 
-    //overloaded to allow creation without professor
+    /**
+     * Overloaded constructor - allows for creation without a professor.
+     *
+     * @param course the course
+     * @throws IllegalArgumentException if course is null
+     */
     public Section(final Course course) throws IllegalArgumentException {
         if (course != null) {
             myCourse = course;
-        }
-        else
+        } else {
             throw new IllegalArgumentException("Course cannot be null");
+        }
     }
 
     /**
      * Returns the course id number.
+     *
      * @return id of this course
      */
     public long getId() {
@@ -72,6 +78,7 @@ public class Section {
 
     /**
      * Sets the section id number.
+     *
      * @param id new id number for this section
      */
     public void setId(final long id) {
@@ -82,6 +89,7 @@ public class Section {
 
     /**
      * Returns the course this section belongs to.
+     *
      * @return course this section belongs to
      */
     public Course getCourse() {
@@ -90,6 +98,7 @@ public class Section {
 
     /**
      * Sets the course this section belongs to.
+     *
      * @param course new course for this section
      * @throws IllegalArgumentException if the course is null
      */
@@ -102,6 +111,7 @@ public class Section {
 
     /**
      * Returns the professor of this section.
+     *
      * @return the professor of this section
      */
     public User getProfessor() {
@@ -110,6 +120,7 @@ public class Section {
 
     /**
      * Sets the professor of this section.
+     *
      * @param professor new professor for this section
      * @throws IllegalArgumentException if the professor is null
      */
@@ -151,8 +162,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + myId + ", Course="
-                + myCourse.toString() + ", professor:"
-                + myProfessor.toString() + '}';
+        return "Section{" + "id=" + myId + ", Course=" + myCourse.toString()
+                + ", professor:" + myProfessor.toString() + '}';
     }
 }

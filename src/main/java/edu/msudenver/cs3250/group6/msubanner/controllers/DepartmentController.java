@@ -1,14 +1,20 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
+import edu.msudenver.cs3250.group6.msubanner.entities.Department;
+import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 
 /**
  * Controller for the department class.
@@ -22,6 +28,7 @@ public class DepartmentController {
 
     /**
      * Gets the list of all departments.
+     *
      * @return the list of all departments
      */
     @RequestMapping("/departments")
@@ -31,6 +38,7 @@ public class DepartmentController {
 
     /**
      * Gets a department by id number.
+     *
      * @param id the department id
      * @return the department
      */
@@ -41,13 +49,17 @@ public class DepartmentController {
 
     /**
      * Adds a department.
-     * @param department the course to be added
+     *
+     * @param body the department info
+     * @return the department
      */
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
-    public ResponseEntity<Department> addDepartment(@RequestParam final Map<String, String> body) {
-
-        System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
+    public ResponseEntity<Department> addDepartment(
+            @RequestParam final Map<String, String> body) {
+        System.out.println(
+                "Post request hit /departments/adddepartment containing "
+                        + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
@@ -64,6 +76,7 @@ public class DepartmentController {
 
     /**
      * Updates a department.
+     *
      * @param department the department to be updated
      * @param id the department's id
      */
@@ -76,6 +89,7 @@ public class DepartmentController {
 
     /**
      * Deletes a department.
+     *
      * @param id the department's id
      */
     @RequestMapping(method = RequestMethod.DELETE,

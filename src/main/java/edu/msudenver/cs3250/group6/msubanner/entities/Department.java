@@ -30,6 +30,7 @@ public class Department {
 
     /**
      * Constructor.
+     *
      * @param departmentName the department name
      */
     public Department(final String departmentName) {
@@ -39,8 +40,10 @@ public class Department {
             myDepartmentName = departmentName;
         }
     }
+
     /**
      * Returns the name of the Department.
+     *
      * @return Department name
      */
     public String getDepartmentName() {
@@ -49,6 +52,7 @@ public class Department {
 
     /**
      * Returns the department id.
+     *
      * @return Department id
      */
     public Long getId() {
@@ -56,16 +60,22 @@ public class Department {
     }
 
     /**
-     * Sets the department name
+     * Sets the department name.
+     *
      * @param name name to set department name to
      */
-    public void setDepartmentName(String name) { myDepartmentName = name; }
+    public void setDepartmentName(final String name) {
+        myDepartmentName = name;
+    }
 
     /**
-     * Sets the department's ID
+     * Sets the department's ID.
+     *
      * @param id ID to assign to the department
      */
-    public void setId(long id) { myId = id; }
+    public void setId(final long id) {
+        myId = id;
+    }
 
-    //TODO: add setters and equals, hashcode, tostring for testing
+    // TODO: add setters and equals, hashcode, tostring for testing
 }

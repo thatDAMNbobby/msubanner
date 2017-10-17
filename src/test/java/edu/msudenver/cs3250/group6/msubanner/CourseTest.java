@@ -1,9 +1,10 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class CourseTest {
 
@@ -31,8 +32,7 @@ public class CourseTest {
 
     @Test
     public void equals() {
-        Course course = new Course("Test title", "Test description", 4,
-                "Test objectives", ClassLevel.FRESHMAN);
+        Course course = new Course("Test title", "Test description", 4, "Test objectives", ClassLevel.FRESHMAN);
         Course course2 = course;
         assertEquals(course, course2);
     }
@@ -53,18 +53,15 @@ public class CourseTest {
 
     @Test
     public void constructorTest() {
-        Course course = new Course("Test title", "Test description", 4,
-                "Test objectives", ClassLevel.FRESHMAN);
+        Course course = new Course("Test title", "Test description", 4, "Test objectives", ClassLevel.FRESHMAN);
         assertEquals("Test title", course.getTitle());
         assertEquals("Test description", course.getDescription());
     }
 
     @Test
     public void toStringTest() {
-        Course course = new Course("Test title", "Test description", 4,
-                "Test objectives", ClassLevel.FRESHMAN);
-        assertEquals("Course{Id=0, Title= Test title, Description= "
-                + "Test description}", course.toString());
+        Course course = new Course("Test title", "Test description", 4, "Test objectives", ClassLevel.FRESHMAN);
+        assertEquals("Course{Id=0, Title= Test title, Description= " + "Test description}", course.toString());
     }
 
 }

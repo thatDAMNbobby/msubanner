@@ -1,14 +1,20 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
+import edu.msudenver.cs3250.group6.msubanner.entities.Room;
+import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
+
 /**
  * The controller for the room class.
  */
@@ -45,10 +51,14 @@ public class RoomController {
 
     /**
      * Adds a room.
-     * @param room the room to be added
+     *
+     * @param roomNumber the room number
+     * @param roomCapacity the room capacity
+     * @return the room
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
-    public ResponseEntity<Room> addRoom(@RequestParam final int roomNumber, int roomCapacity) {
+    public ResponseEntity<Room> addRoom(@RequestParam final int roomNumber,
+            final int roomCapacity) {
         Room room = new Room(roomNumber, roomCapacity);
         roomService.addRoom(room);
         return new ResponseEntity<Room>(room, HttpStatus.CREATED);
@@ -58,12 +68,12 @@ public class RoomController {
      * Updates a course.
      *
      * @param room the room to be updated
-     * @param id     the room's id
+     * @param id the room's id
      */
     @RequestMapping(method = RequestMethod.PUT,
             value = "/rooms/updateroom/{id}")
     public void updateRoom(@RequestBody final Room room,
-                           @PathVariable final long id) {
+            @PathVariable final long id) {
         roomService.updateRoom(room);
     }
 

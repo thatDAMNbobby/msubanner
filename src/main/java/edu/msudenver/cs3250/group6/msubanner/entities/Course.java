@@ -1,13 +1,11 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 
 /**
  * Persistent Course class.
@@ -66,8 +64,10 @@ public class Course {
         this.myLearningObjectives = "No objective available";
         this.myPrereqs = ClassLevel.FRESHMAN;
     }
+
     /**
      * Course constructor.
+     *
      * @param title the course title
      * @param description the course description
      * @param credits the number of credits
@@ -101,15 +101,17 @@ public class Course {
         myCredits = credits;
 
         if (prereqs != null) {
-            //throw new IllegalArgumentException("Prerequisite cannot be null");
+            // throw new IllegalArgumentException("Prerequisite cannot be
+            // null");
             myPrereqs = prereqs;
+        } else {
+            myPrereqs = ClassLevel.FRESHMAN;
         }
-        else
-        myPrereqs = ClassLevel.FRESHMAN;
     }
 
     /**
      * Sets the id of the course.
+     *
      * @param id New id for the course
      */
     public void setId(final long id) {
@@ -120,6 +122,7 @@ public class Course {
 
     /**
      * Returns the id number of the course.
+     *
      * @return id number of the course
      */
     public long getId() {
@@ -128,6 +131,7 @@ public class Course {
 
     /**
      * Sets the title of the course.
+     *
      * @param title New title of the course
      * @throws IllegalArgumentException if new title is blank
      */
@@ -140,6 +144,7 @@ public class Course {
 
     /**
      * Returns the title of the course.
+     *
      * @return Title of the course
      */
     public String getTitle() {
@@ -148,6 +153,7 @@ public class Course {
 
     /**
      * Sets the decription of the course.
+     *
      * @param description New description of the course
      */
     public void setDescription(final String description) {
@@ -159,37 +165,71 @@ public class Course {
 
     /**
      * Returns the description of the course.
+     *
      * @return Description of the course
      */
     public String getDescription() {
         return myDescription;
     }
 
-    public void setCredits(int credits) throws IllegalArgumentException {
-        if (credits < 0)
+    /**
+     * Sets the number of credits.
+     *
+     * @param credits the number of credits
+     * @throws IllegalArgumentException if a negative number is used
+     */
+    public void setCredits(final int credits) throws IllegalArgumentException {
+        if (credits < 0) {
             throw new IllegalArgumentException("Credits cannot be negative!");
+        }
         myCredits = credits;
     }
 
-    public void setLearningObjectives(String learningObjectives) {
-        if (learningObjectives.equals("") || learningObjectives.equals(" "))
+    /**
+     * Sets the learning objectives.
+     *
+     * @param learningObjectives the learning objectives
+     */
+    public void setLearningObjectives(final String learningObjectives) {
+        if (learningObjectives.equals("") || learningObjectives.equals(" ")) {
             myLearningObjectives = "Default learning objectives.";
-        else
+        } else {
             myLearningObjectives = learningObjectives;
+        }
     }
 
-    public void setPrereqs(ClassLevel prereqs) {
+    /**
+     * Sets the prerequisites.
+     *
+     * @param prereqs the class level prereq
+     */
+    public void setPrereqs(final ClassLevel prereqs) {
         myPrereqs = prereqs;
     }
 
+    /**
+     * Gets the class level prereq.
+     *
+     * @return the prereq class level
+     */
     public ClassLevel getPrereqs() {
         return myPrereqs;
     }
 
+    /**
+     * Gets the learning objectives.
+     *
+     * @return the learning objectives
+     */
     public String getLearningObjectives() {
         return myLearningObjectives;
     }
 
+    /**
+     * Gets the number of credits.
+     *
+     * @return the number of credits
+     */
     public int getCredits() {
         return myCredits;
     }
