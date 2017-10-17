@@ -2,7 +2,6 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /*
  *  The purpose here is to get a mapping to the index.html in templates
@@ -17,10 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @Controller
 class HomeController {
-    // TODO: make it work for /index.html too
-
     /**
      * Maps the home page to index.html.
+     *
      * @return the index string
      */
     @RequestMapping("/")
@@ -30,6 +28,7 @@ class HomeController {
 
     /**
      * Maps to the add user form.
+     *
      * @return the add user form string
      */
     @RequestMapping("/users/adduser")
@@ -39,6 +38,7 @@ class HomeController {
 
     /**
      * Maps to the add department form.
+     *
      * @return the add department form string
      */
     @RequestMapping("/departments/adddepartment")
@@ -48,6 +48,7 @@ class HomeController {
 
     /**
      * Maps to the add course form.
+     *
      * @return the add course form string
      */
     @RequestMapping("/courses/addcourse")
@@ -55,21 +56,41 @@ class HomeController {
         return "addcourseform";
     }
 
+    /**
+     * Maps to the course show form.
+     *
+     * @return courseshow form string
+     */
     @RequestMapping("/courseshow")
     String courseshow() {
         return "courseshow";
     }
 
+    /**
+     * Maps to the add section form.
+     *
+     * @return the add section form string
+     */
     @RequestMapping("sections/addsection")
-    String addSectionForn() {
+    String addSectionForm() {
         return "addsectionform";
     }
 
+    /**
+     * Maps to the add building form.
+     *
+     * @return the add building form string
+     */
     @RequestMapping("/buildings/addbuilding")
     String addBuildingForm() {
         return "addbuildingform";
     }
 
+    /**
+     * Maps to the add room form.
+     *
+     * @return the add room form string
+     */
     @RequestMapping("/rooms/addroom")
     String addRoomForm() {
         return "addroomform";
