@@ -1,0 +1,28 @@
+{{#layout}}
+<div>
+    <h2>Section List</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Course</th>
+            <th>Professor</th>
+            <th>View</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            {{#allsections}}
+            <td><a href="/sections/{{id}}">{{id}}</a></td>
+            <td>{{course}}</td>
+            <td>{{professor}}</td>
+            <td><a href="/sections/getsection/{{id}}">View</a></td>
+            <td><a href="/sections/deletesection/{{id}}">Delete</a> </td>
+        </tr>
+        {{/allsections}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/sections/addsection'" class="btn-default">New Section</button>
+</div>
+{{/layout}}
+{{>layout}}

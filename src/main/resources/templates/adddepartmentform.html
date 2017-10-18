@@ -1,8 +1,8 @@
 {{#layout}}
-<div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="container">
     <h1>Department Input Form (Currently Working)</h1>
-    <form action="#" th:action="@{/departments/adddepartment}" th:object="${department}" method="post">
-        <p>Department Name: <input type="text" name="departmentName" th:field="*{departmentName}" /></p>
+    <form action="#" method="post">
+        <p>Department Name: <input type="text" name="departmentName"/></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>

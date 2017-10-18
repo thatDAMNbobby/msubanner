@@ -1,8 +1,10 @@
 {{#layout}}
 <div class="container">
-    <h1>Building Input Form (Currently Working)</h1>
+    <h1>Department Input Form (Currently Working)</h1>
     <form action="#" method="post">
-        <p>Building Name: <input type="text" name="buildingName"/></p>
+        {{#department}}
+        <p>Department Name: <input type="text" name="departmentName" value="{{departmentName}}"/></p>
+        {{/department}}
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>

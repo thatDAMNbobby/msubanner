@@ -1,18 +1,21 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 /**
  * The controller for the room class.
  */
-@RestController
+@Controller
 public class RoomController {
 
     /**
@@ -27,9 +30,11 @@ public class RoomController {
      * @return the list of all rooms
      */
     @RequestMapping("/rooms")
-    public List<Room> getAllRooms() {
-
-        return roomService.getAllRooms();
+    public ModelAndView getAllRooms() {
+        ModelAndView mav = new ModelAndView("rooms");
+        mav.addObject("allrooms", roomService.getAllRooms());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -39,8 +44,11 @@ public class RoomController {
      * @return the room
      */
     @RequestMapping("/rooms/getroom/{id}")
-    public Room getRoom(@PathVariable final long id) {
-        return roomService.getRoom(id);
+    public ModelAndView getRoom(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("showroom");
+        mav.addObject("room", roomService.getRoom(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -48,10 +56,12 @@ public class RoomController {
      * @param room the room to be added
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
-    public ResponseEntity<Room> addRoom(@RequestParam final int roomNumber, int roomCapacity) {
+    public ModelAndView addRoom(@RequestParam final int roomNumber, int roomCapacity) {
         Room room = new Room(roomNumber, roomCapacity);
         roomService.addRoom(room);
-        return new ResponseEntity<Room>(room, HttpStatus.CREATED);
+        ModelAndView mav = new ModelAndView("showroom");
+        mav.addObject("room", room);
+        return mav;
     }
 
     /**
@@ -76,5 +86,15 @@ public class RoomController {
             value = "/rooms/deleteroom/{id}")
     public void deleteRoom(@PathVariable final long id) {
         roomService.deleteRoom(id);
+    }
+
+    @RequestMapping(method=RequestMethod.GET,
+            value = "/rooms/deleteroom/{id}")
+    public ModelAndView deleteRoomRedirect(@PathVariable final long id) {
+        roomService.deleteRoom(id);
+        ModelAndView mav = new ModelAndView("rooms");
+        mav.addObject("allrooms", roomService.getAllRooms());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 }
