@@ -1,7 +1,11 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
+import edu.msudenver.cs3250.group6.msubanner.Global;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 /*
  *  The purpose here is to get a mapping to the index.html in templates
@@ -22,8 +26,10 @@ class HomeController {
      * @return the index string
      */
     @RequestMapping("/")
-    String index() {
-        return "index";
+    ModelAndView index() {
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -42,8 +48,10 @@ class HomeController {
      * @return the add department form string
      */
     @RequestMapping("/departments/adddepartment")
-    String addDepartmentForm() {
-        return "adddepartmentform";
+    ModelAndView addDepartmentForm() {
+        ModelAndView mav = new ModelAndView("adddepartmentform");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -52,18 +60,11 @@ class HomeController {
      * @return the add course form string
      */
     @RequestMapping("/courses/addcourse")
-    String addCourseForm() {
-        return "addcourseform";
-    }
-
-    /**
-     * Maps to the course show form.
-     *
-     * @return courseshow form string
-     */
-    @RequestMapping("/courseshow")
-    String courseshow() {
-        return "courseshow";
+    ModelAndView addCourseForm() {
+        ModelAndView mav = new ModelAndView("addcourseform");
+        mav.addObject("prereqs", ClassLevel.values());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -95,4 +96,5 @@ class HomeController {
     String addRoomForm() {
         return "addroomform";
     }
+
 }

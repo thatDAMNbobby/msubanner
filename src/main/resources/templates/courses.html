@@ -1,0 +1,28 @@
+{{#layout}}
+    <div>
+        <h2>Course List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Course Name</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                {{#allcourses}}
+                <td>{{id}}</a></td>
+                <td>{{title}}</td>
+                <td><a href="/courses/{{id}}">View</a></td>
+                <td><a href="/courses/editcourse/{{id}}">Edit</a></td>
+                <td><a href="/courses/deletecourse/{{id}}">Delete</a> </td>
+            </tr>
+            {{/allcourses}}
+        </table>
+    </div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/courses/addcourse'" class="btn-default">New Course</button>
+</div>
+{{/layout}}
+{{>layout}}

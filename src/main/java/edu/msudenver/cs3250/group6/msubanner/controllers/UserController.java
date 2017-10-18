@@ -3,18 +3,16 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 import java.util.List;
 import java.util.Map;
 
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
-import edu.msudenver.cs3250.group6.msubanner.services.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /*
  * Reference:
@@ -26,7 +24,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.UserService;
  *
  * @author Group 6
  */
-@RestController
+@Controller
 public class UserController {
 
     /** The user service. */
@@ -39,12 +37,11 @@ public class UserController {
      * @return the list of all users
      */
     @RequestMapping(method = RequestMethod.GET, value = "/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        if (users.isEmpty()) {
-            users.add(new User("Database is", "Actually Empty"));
-        }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    public ModelAndView getAllUsers() {
+        ModelAndView mav = new ModelAndView("users");
+        mav.addObject("allusers", userService.getAllUsers());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -54,12 +51,10 @@ public class UserController {
      * @return the user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/users/getuser/{id}")
-    public ResponseEntity<User> getUser(@PathVariable final long id) {
-        User user = userService.getUser(id);
-        if (user == null) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+    public ModelAndView getUser(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("showuser");
+        mav.addObject("user", userService.getUser(id));
+        return mav;
     }
 
     /**
@@ -69,10 +64,8 @@ public class UserController {
      * @return the user
      */
     @RequestMapping(method = RequestMethod.POST, value = "/users/adduser")
-    public ResponseEntity<User> addUser(
-            @RequestParam final Map<String, String> body) {
-        System.out.println("Post request hit /users/adduser containing "
-                + body.size() + " elements");
+    public ModelAndView addUser(@RequestParam final Map<String, String> body) {
+        System.out.println("Post request hit /users/adduser containing " + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
@@ -86,7 +79,10 @@ public class UserController {
         user.setLastName(lastName);
 
         userService.addUser(user);
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        ModelAndView mav = new ModelAndView("users");
+        mav.addObject("allusers", userService.getAllUsers());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -125,5 +121,15 @@ public class UserController {
             userService.deleteUser(id);
             return new ResponseEntity<Void>(HttpStatus.GONE);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/users/deleteuser/{id}")
+    public ModelAndView deleteUserRedirect(@PathVariable final long id) {
+        userService.deleteUser(id);
+        ModelAndView mav = new ModelAndView("users");
+        mav.addObject("allusers", userService.getAllUsers());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 }

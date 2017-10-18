@@ -1,16 +1,18 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import java.util.List;
-
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
+import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
@@ -19,7 +21,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 /**
  * The controller for the course class.
  */
-@RestController
+@Controller
 public class CourseController {
 
     /** The course service. */
@@ -31,9 +33,12 @@ public class CourseController {
      *
      * @return the list of all courses
      */
-    @RequestMapping("/courses")
-    public List<Course> getAllCourses() {
-        return courseService.getAllCourses();
+    @RequestMapping(value = "/courses", method = RequestMethod.GET)
+    public ModelAndView getAllCourses() {
+        ModelAndView mav = new ModelAndView("courses");
+        mav.addObject("allcourses", courseService.getAllCourses());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -42,9 +47,12 @@ public class CourseController {
      * @param id the course id
      * @return the course
      */
-    @RequestMapping("/courses/getcourse/{id}")
-    public Course getCourse(@PathVariable final long id) {
-        return courseService.getCourse(id);
+    @RequestMapping("/courses/{id}")
+    public ModelAndView getCourse(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("showcourse");
+        mav.addObject("course", courseService.getCourse(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -58,15 +66,15 @@ public class CourseController {
      * @return the course
      */
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
-    public ResponseEntity<Course> addCourse(
-            @RequestParam final String courseTitle,
-            final String courseDescription, final int courseCredits,
-            final String courseLearningObjectives,
-            final ClassLevel coursePrereqs) {
-        Course course = new Course(courseTitle, courseDescription,
-                courseCredits, courseLearningObjectives, coursePrereqs);
+    public ModelAndView addCourse(@RequestParam final String courseTitle, String courseDescription,
+                                  int courseCredits, String courseLearningObjectives, ClassLevel coursePrereqs) {
+        Course course = new Course(courseTitle, courseDescription, courseCredits,
+                courseLearningObjectives, coursePrereqs);
         courseService.addCourse(course);
-        return new ResponseEntity<Course>(course, HttpStatus.CREATED);
+        ModelAndView mav = new ModelAndView("showcourse");
+        mav.addObject("course", course);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -75,11 +83,15 @@ public class CourseController {
      * @param course the course to be updated
      * @param id the course's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/courses/updatecourse/{id}")
-    public void updateCourse(@RequestBody final Course course,
-            @PathVariable final long id) {
+    public ModelAndView updateCourse(@RequestParam final Course course,
+                              @PathVariable final long id) {
         courseService.updateCourse(course);
+        ModelAndView mav = new ModelAndView("showcourse");
+        mav.addObject("course", course);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -87,9 +99,21 @@ public class CourseController {
      *
      * @param id the course's id
      */
-    @RequestMapping(method = RequestMethod.DELETE,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/courses/deletecourse/{id}")
-    public void deleteCourse(@PathVariable final long id) {
+    public ModelAndView deleteCourse(@PathVariable final long id) {
         courseService.deleteCourse(id);
+        ModelAndView mav = new ModelAndView("courses");
+        mav.addObject("allcourses", courseService.getAllCourses());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    @RequestMapping("/courses/editcourse/{id}")
+    public ModelAndView editCourse(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("editcourseform");
+        mav.addObject("course", courseService.getCourse(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 }

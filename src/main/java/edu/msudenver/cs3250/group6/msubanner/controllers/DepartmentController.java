@@ -1,17 +1,16 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import java.util.List;
-import java.util.Map;
-
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Department;
+import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import java.util.Map;
 
 import edu.msudenver.cs3250.group6.msubanner.entities.Department;
 import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
@@ -19,7 +18,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 /**
  * Controller for the department class.
  */
-@RestController
+@Controller
 public class DepartmentController {
 
     /** The department service. */
@@ -32,8 +31,11 @@ public class DepartmentController {
      * @return the list of all departments
      */
     @RequestMapping("/departments")
-    public List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    public ModelAndView getAllDepartments() {
+        ModelAndView mav = new ModelAndView("departments");
+        mav.addObject("alldepartments", departmentService.getAllDepartments());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -42,9 +44,12 @@ public class DepartmentController {
      * @param id the department id
      * @return the department
      */
-    @RequestMapping("/departments/getdepartment/{id}")
-    public Department getDepartment(@PathVariable final long id) {
-        return departmentService.getDepartment(id);
+    @RequestMapping("/departments/{id}")
+    public ModelAndView getDepartment(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("showdepartment");
+        mav.addObject("department", departmentService.getDepartment(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -55,11 +60,9 @@ public class DepartmentController {
      */
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
-    public ResponseEntity<Department> addDepartment(
-            @RequestParam final Map<String, String> body) {
-        System.out.println(
-                "Post request hit /departments/adddepartment containing "
-                        + body.size() + " elements");
+    public ModelAndView addDepartment(@RequestParam final Map<String, String> body) {
+        ModelAndView mav = new ModelAndView("showdepartment");
+        System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
@@ -71,7 +74,9 @@ public class DepartmentController {
         dept.setDepartmentName(deptName);
 
         departmentService.addDepartment(dept);
-        return new ResponseEntity<Department>(dept, HttpStatus.CREATED);
+        mav.addObject("department", dept);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -92,9 +97,13 @@ public class DepartmentController {
      *
      * @param id the department's id
      */
-    @RequestMapping(method = RequestMethod.DELETE,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/departments/deletedepartment/{id}")
-    public void deleteDepartment(@PathVariable final long id) {
+    public ModelAndView deleteDepartment(@PathVariable final long id) {
         departmentService.deleteDepartment(id);
+        ModelAndView mav = new ModelAndView("departments");
+        mav.addObject("alldepartments", departmentService.getAllDepartments());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 }

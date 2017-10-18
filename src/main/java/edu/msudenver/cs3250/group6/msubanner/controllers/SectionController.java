@@ -1,30 +1,30 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import java.util.List;
-
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Section;
+import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
+import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The controller for the section class.
  */
-@RestController
+@Controller
 public class SectionController {
 
     /** The section service. */
     @Autowired
     private SectionService sectionService;
+    private CourseService courseService;
 
     /**
      * Gets the list of all sections.
@@ -32,8 +32,12 @@ public class SectionController {
      * @return the list of all sections
      */
     @RequestMapping("/sections")
-    public List<Section> getAllSections() {
-        return sectionService.getAllSections();
+    public ModelAndView getAllSections() {
+        ModelAndView mav = new ModelAndView("sections");
+        mav.addObject("allsections", sectionService.getAllSections());
+        //mav.addObject("allcourses", courseService.getAllCourses());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -43,8 +47,10 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping("/sections/getsection/{id}")
-    public Section getSection(@PathVariable final long id) {
-        return sectionService.getSection(id);
+    public ModelAndView getSection(@PathVariable final long id) {
+        ModelAndView mav = new ModelAndView("showsection");
+        mav.addObject("section", sectionService.getSection(id));
+        return mav;
     }
 
     /**
@@ -54,11 +60,12 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
-    public ResponseEntity<Section> addSection(
-            @RequestParam final Course course) {
+    public ModelAndView addSection(@RequestParam final Course course) {
         Section section = new Section(course);
         sectionService.addSection(section);
-        return new ResponseEntity<Section>(section, HttpStatus.CREATED);
+        ModelAndView mav = new ModelAndView("showsection");
+        mav.addObject("section", section);
+        return mav;
     }
 
     /**
