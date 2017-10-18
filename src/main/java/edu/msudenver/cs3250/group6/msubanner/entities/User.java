@@ -1,6 +1,12 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
 
 /**
  * Persistent User class.
@@ -37,6 +43,7 @@ public class User {
 
     /**
      * Constructor.
+     *
      * @param firstName the user's firat name
      * @param lastName the user's last name
      */
@@ -55,6 +62,7 @@ public class User {
 
     /**
      * Returns the first name of the User.
+     *
      * @return first name
      * @throws Exception if the first name field is blank
      */
@@ -64,6 +72,7 @@ public class User {
 
     /**
      * Returns the last name of the User.
+     *
      * @return last name
      * @throws Exception if the last name field is blank
      */
@@ -73,6 +82,7 @@ public class User {
 
     /**
      * Returns the id number of the User.
+     *
      * @return id
      */
     public long getId() {
@@ -81,6 +91,7 @@ public class User {
 
     /**
      * Sets the user's id.
+     *
      * @param id the id number
      */
     public void setId(final long id) {
@@ -91,6 +102,7 @@ public class User {
 
     /**
      * Sets the user's first name.
+     *
      * @param firstName the first name
      * @throws IllegalArgumentException if the first name value is null or empty
      */
@@ -105,6 +117,7 @@ public class User {
 
     /**
      * Sets the user's last name.
+     *
      * @param lastName the last name
      * @throws IllegalArgumentException if the last name value is null or empty
      */

@@ -1,5 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import java.util.List;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 
 /**
  * The controller for the building class.
@@ -25,6 +27,7 @@ public class BuildingController {
 
     /**
      * Gets the list of all buildings.
+     *
      * @return the list of all buildings
      */
     @RequestMapping("/buildings")
@@ -37,6 +40,7 @@ public class BuildingController {
 
     /**
      * Gets a building by id number.
+     *
      * @param id the building id
      * @return the building
      */
@@ -49,6 +53,9 @@ public class BuildingController {
 
     /**
      * Adds a building.
+     *
+     * @param buildingName the building name
+     * @return the building
      */
     @RequestMapping(method = RequestMethod.POST, value = "/buildings/addbuilding")
     public ModelAndView addBuilding(@RequestParam final String buildingName) {
@@ -62,6 +69,7 @@ public class BuildingController {
 
     /**
      * Updates a building.
+     *
      * @param building the building to be updated
      * @param id the building's id
      */
@@ -69,13 +77,14 @@ public class BuildingController {
             value = "/buildings/updatebuilding/{id}")
     // take request body, turn into Building instance and pass to addBuilding()
     public void updateBuilding(@RequestBody final Building building,
-                             @PathVariable final long id) {
+            @PathVariable final long id) {
         // POST body should contain object being sent
         buildingService.updateBuilding(building);
     }
 
     /**
      * Deletes a building.
+     *
      * @param id the building's id
      */
     @RequestMapping(method = RequestMethod.GET,

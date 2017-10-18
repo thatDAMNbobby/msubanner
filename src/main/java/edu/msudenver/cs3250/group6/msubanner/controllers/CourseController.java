@@ -14,8 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 
 /**
  * The controller for the course class.
@@ -29,6 +30,7 @@ public class CourseController {
 
     /**
      * Gets the list of all courses.
+     *
      * @return the list of all courses
      */
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
@@ -41,6 +43,7 @@ public class CourseController {
 
     /**
      * Gets a course by id number.
+     *
      * @param id the course id
      * @return the course
      */
@@ -54,6 +57,13 @@ public class CourseController {
 
     /**
      * Adds a course.
+     *
+     * @param courseTitle the course title
+     * @param courseDescription the course description
+     * @param courseCredits the course credits
+     * @param courseLearningObjectives the course learning objectives
+     * @param coursePrereqs the course prereqs
+     * @return the course
      */
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
     public ModelAndView addCourse(@RequestParam final String courseTitle, String courseDescription,
@@ -69,6 +79,7 @@ public class CourseController {
 
     /**
      * Updates a course.
+     *
      * @param course the course to be updated
      * @param id the course's id
      */
@@ -85,6 +96,7 @@ public class CourseController {
 
     /**
      * Deletes a course.
+     *
      * @param id the course's id
      */
     @RequestMapping(method = RequestMethod.GET,

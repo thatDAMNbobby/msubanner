@@ -28,6 +28,7 @@ public class SectionController {
 
     /**
      * Gets the list of all sections.
+     *
      * @return the list of all sections
      */
     @RequestMapping("/sections")
@@ -41,6 +42,7 @@ public class SectionController {
 
     /**
      * Gets a section by id number.
+     *
      * @param id the section id
      * @return the section
      */
@@ -53,8 +55,10 @@ public class SectionController {
 
     /**
      * Adds a section.
+     *
      * @param course The course the section belongs to
-     * */
+     * @return the section
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
     public ModelAndView addSection(@RequestParam final Course course) {
         Section section = new Section(course);
@@ -66,11 +70,12 @@ public class SectionController {
 
     /**
      * Updates a section.
+     *
      * @param section the section to be updated
      * @param id the section's id
      */
     @RequestMapping(method = RequestMethod.PUT,
-                    value = "/sections/updatesection/{id}")
+            value = "/sections/updatesection/{id}")
     public void updateSection(@RequestBody final Section section,
             @PathVariable final long id) {
         sectionService.updateSection(section);
@@ -78,10 +83,11 @@ public class SectionController {
 
     /**
      * Deletes a section.
+     *
      * @param id the section's id
      */
     @RequestMapping(method = RequestMethod.DELETE,
-                    value = "/sections/deletesection/{id}")
+            value = "/sections/deletesection/{id}")
     public void deleteSection(@PathVariable final long id) {
         sectionService.deleteSection(id);
     }

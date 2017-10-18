@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Building service.
+ */
 @Service
 public class BuildingService {
 
@@ -22,7 +25,7 @@ public class BuildingService {
      * @return the list of all buildings
      */
     public List<Building> getAllBuildings() {
-        List<Building> buildings = new ArrayList<>();
+        List<Building> buildings = new ArrayList<Building>();
         // populate the course list with each element in the repository
         buildingRepository.findAll().forEach(buildings::add);
         return buildings;

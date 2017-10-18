@@ -1,20 +1,26 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import edu.msudenver.cs3250.group6.msubanner.entities.Room;
+import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
+
+/**
+ * Room service.
+ */
 @Service
 public class RoomService {
+    /** The room repository. */
     @Autowired
     private RoomRepository roomRepository;
 
     /**
      * Gets the list of all courses.
+     *
      * @return the list of all courses
      */
     public List<Room> getAllRooms() {
@@ -25,6 +31,7 @@ public class RoomService {
 
     /**
      * Gets a course by id.
+     *
      * @param id the course id
      * @return the course
      */
@@ -34,6 +41,7 @@ public class RoomService {
 
     /**
      * Adds a room.
+     *
      * @param room the room to add
      */
     public void addRoom(final Room room) {
@@ -42,6 +50,7 @@ public class RoomService {
 
     /**
      * Updates a room.
+     *
      * @param room the room to update
      */
     public void updateRoom(final Room room) {
@@ -50,6 +59,7 @@ public class RoomService {
 
     /**
      * Deletes a room.
+     *
      * @param id the room id
      */
     public void deleteRoom(final long id) {

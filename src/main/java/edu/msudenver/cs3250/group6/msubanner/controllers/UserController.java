@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller for the User class.
+ *
  * @author Group 6
  */
 @Controller
@@ -32,6 +33,7 @@ public class UserController {
 
     /**
      * Gets the list of all users.
+     *
      * @return the list of all users
      */
     @RequestMapping(method = RequestMethod.GET, value = "/users")
@@ -44,6 +46,7 @@ public class UserController {
 
     /**
      * Gets a user by id number.
+     *
      * @param id the user id
      * @return the user
      */
@@ -55,9 +58,10 @@ public class UserController {
     }
 
     /**
-     * Adds a new user.
-     * * @param user the user to be added
-     * @return the new user
+     * Adds a user.
+     *
+     * @param body the user info
+     * @return the user
      */
     @RequestMapping(method = RequestMethod.POST, value = "/users/adduser")
     public ModelAndView addUser(@RequestParam final Map<String, String> body) {
@@ -83,14 +87,15 @@ public class UserController {
 
     /**
      * Updates an existing user.
+     *
      * @param user the user to be updated
      * @param id the user's id
      * @return void
      */
     @RequestMapping(method = RequestMethod.PUT,
-                    value = "/users/updateuser/{id}")
+            value = "/users/updateuser/{id}")
     public ResponseEntity<Void> updateUser(@RequestBody final User user,
-                                           @PathVariable final long id) {
+            @PathVariable final long id) {
         User existingUser = userService.getUser(id);
         if (existingUser == null) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -102,11 +107,12 @@ public class UserController {
 
     /**
      * Deletes a user.
+     *
      * @param id the user id
      * @return void
      */
     @RequestMapping(method = RequestMethod.DELETE,
-                    value = "/users/deleteuser/{id}")
+            value = "/users/deleteuser/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable final long id) {
         User user = userService.getUser(id);
         if (user == null) {

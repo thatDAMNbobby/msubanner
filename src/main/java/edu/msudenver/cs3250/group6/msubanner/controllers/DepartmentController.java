@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import edu.msudenver.cs3250.group6.msubanner.entities.Department;
+import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 
 /**
  * Controller for the department class.
@@ -26,6 +26,7 @@ public class DepartmentController {
 
     /**
      * Gets the list of all departments.
+     *
      * @return the list of all departments
      */
     @RequestMapping("/departments")
@@ -38,6 +39,7 @@ public class DepartmentController {
 
     /**
      * Gets a department by id number.
+     *
      * @param id the department id
      * @return the department
      */
@@ -51,7 +53,9 @@ public class DepartmentController {
 
     /**
      * Adds a department.
-     * @param department the course to be added
+     *
+     * @param body the department info
+     * @return the department
      */
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
@@ -76,6 +80,7 @@ public class DepartmentController {
 
     /**
      * Updates a department.
+     *
      * @param department the department to be updated
      * @param id the department's id
      */
@@ -88,6 +93,7 @@ public class DepartmentController {
 
     /**
      * Deletes a department.
+     *
      * @param id the department's id
      */
     @RequestMapping(method = RequestMethod.GET,

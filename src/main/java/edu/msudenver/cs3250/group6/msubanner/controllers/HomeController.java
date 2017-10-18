@@ -20,10 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 class HomeController {
-    // TODO: make it work for /index.html too
-
     /**
      * Maps the home page to index.html.
+     *
      * @return the index string
      */
     @RequestMapping("/")
@@ -35,6 +34,7 @@ class HomeController {
 
     /**
      * Maps to the add user form.
+     *
      * @return the add user form string
      */
     @RequestMapping("/users/adduser")
@@ -44,6 +44,7 @@ class HomeController {
 
     /**
      * Maps to the add department form.
+     *
      * @return the add department form string
      */
     @RequestMapping("/departments/adddepartment")
@@ -55,6 +56,7 @@ class HomeController {
 
     /**
      * Maps to the add course form.
+     *
      * @return the add course form string
      */
     @RequestMapping("/courses/addcourse")
@@ -65,16 +67,31 @@ class HomeController {
         return mav;
     }
 
+    /**
+     * Maps to the add section form.
+     *
+     * @return the add section form string
+     */
     @RequestMapping("sections/addsection")
-    String addSectionForn() {
+    String addSectionForm() {
         return "addsectionform";
     }
 
+    /**
+     * Maps to the add building form.
+     *
+     * @return the add building form string
+     */
     @RequestMapping("/buildings/addbuilding")
     String addBuildingForm() {
         return "addbuildingform";
     }
 
+    /**
+     * Maps to the add room form.
+     *
+     * @return the add room form string
+     */
     @RequestMapping("/rooms/addroom")
     String addRoomForm() {
         return "addroomform";

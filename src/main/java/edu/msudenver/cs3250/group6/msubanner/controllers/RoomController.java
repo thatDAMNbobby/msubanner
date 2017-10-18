@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
 /**
  * The controller for the room class.
  */
@@ -53,7 +51,10 @@ public class RoomController {
 
     /**
      * Adds a room.
-     * @param room the room to be added
+     *
+     * @param roomNumber the room number
+     * @param roomCapacity the room capacity
+     * @return the room
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
     public ModelAndView addRoom(@RequestParam final int roomNumber, int roomCapacity) {
@@ -68,12 +69,12 @@ public class RoomController {
      * Updates a course.
      *
      * @param room the room to be updated
-     * @param id     the room's id
+     * @param id the room's id
      */
     @RequestMapping(method = RequestMethod.PUT,
             value = "/rooms/updateroom/{id}")
     public void updateRoom(@RequestBody final Room room,
-                           @PathVariable final long id) {
+            @PathVariable final long id) {
         roomService.updateRoom(room);
     }
 

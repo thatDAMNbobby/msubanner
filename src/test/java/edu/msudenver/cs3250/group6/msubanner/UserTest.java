@@ -43,26 +43,26 @@ public class UserTest {
         User user = new User();
         user.setFirstName("");
     }
-    
+
     @Test
     public void setLastName() {
         User user = new User();
         user.setLastName("test name");
         assertEquals("test name", user.getLastName());
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void setLastNameNull() {
         User user = new User();
         user.setLastName(null);
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void setLastNameEmpty() {
         User user = new User();
         user.setLastName("");
     }
-    
+
     @Test
     public void setId() {
         User user = new User();
@@ -99,8 +99,7 @@ public class UserTest {
     @Test
     public void testToString() {
         User user = new User();
-        assertEquals("User: First_Name Last_Name " + user.getId(),
-                user.toString());
+        assertEquals("User: First_Name Last_Name " + user.getId(), user.toString());
     }
 
     @Test
@@ -109,7 +108,7 @@ public class UserTest {
         // must set id if not connected to db
         // otherwise all ids are set to 0
         user1.setId(1);
-        
+
         // test null and object not an instanceof
         String notUser = "Not a user at all";
         assertFalse(user1.equals(notUser));
