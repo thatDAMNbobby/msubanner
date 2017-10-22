@@ -12,8 +12,8 @@
         <tr>
             {{#allsections}}
             <td><a href="/sections/{{id}}">{{id}}</a></td>
-            <td>{{course}}</td>
-            <td>{{professor}}</td>
+            <td>{{course.myTitle}}</td>
+            <td>{{professor.myLastName}}</td>
             <td><a href="/sections/getsection/{{id}}">View</a></td>
             <td><a href="/sections/deletesection/{{id}}">Delete</a> </td>
         </tr>

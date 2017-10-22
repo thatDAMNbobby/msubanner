@@ -2,6 +2,9 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,6 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 class HomeController {
+
+
+    @Autowired
+    private CourseService courseService;
+
+
+    @Autowired
+    private UserService userService;
     /**
      * Maps the home page to index.html.
      *
@@ -73,8 +84,13 @@ class HomeController {
      * @return the add section form string
      */
     @RequestMapping("sections/addsection")
-    String addSectionForm() {
-        return "addsectionform";
+    ModelAndView addSectionForm() {
+        ModelAndView mav = new ModelAndView("addsectionform");
+        mav.addObject("allcourses", courseService.getAllCourses());
+        mav.addObject("allprofs", userService.getAllUsers());
+
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
