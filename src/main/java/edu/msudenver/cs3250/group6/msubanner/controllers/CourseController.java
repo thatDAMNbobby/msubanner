@@ -68,9 +68,11 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
     public ModelAndView addCourse(@RequestParam final String courseTitle, String courseDescription,
                                   int courseCredits, String courseLearningObjectives, ClassLevel coursePrereqs) {
+
         Course course = new Course(courseTitle, courseDescription, courseCredits,
                 courseLearningObjectives, coursePrereqs);
         courseService.addCourse(course);
+
         ModelAndView mav = new ModelAndView("showcourse");
         mav.addObject("course", course);
         mav.addObject("school_name", Global.SCHOOL_NAME);

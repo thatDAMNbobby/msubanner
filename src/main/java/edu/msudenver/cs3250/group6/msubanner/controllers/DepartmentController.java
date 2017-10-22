@@ -61,7 +61,7 @@ public class DepartmentController {
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
     public ModelAndView addDepartment(@RequestParam final Map<String, String> body) {
-        ModelAndView mav = new ModelAndView("showdepartment");
+
         System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
@@ -74,6 +74,8 @@ public class DepartmentController {
         dept.setDepartmentName(deptName);
 
         departmentService.addDepartment(dept);
+
+        ModelAndView mav = new ModelAndView("showdepartment");
         mav.addObject("department", dept);
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;

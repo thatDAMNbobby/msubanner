@@ -3,6 +3,7 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
+import edu.msudenver.cs3250.group6.msubanner.entities.User;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class SectionController {
     /** The section service. */
     @Autowired
     private SectionService sectionService;
-    private CourseService courseService;
 
     /**
      * Gets the list of all sections.
@@ -35,7 +35,6 @@ public class SectionController {
     public ModelAndView getAllSections() {
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections", sectionService.getAllSections());
-        //mav.addObject("allcourses", courseService.getAllCourses());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
@@ -60,11 +59,15 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
-    public ModelAndView addSection(@RequestParam final Course course) {
-        Section section = new Section(course);
+    public ModelAndView addSection(@RequestParam final Course course, @RequestParam final User professor) {
+        Section section = new Section(course, professor);
+
+        System.out.println("Adding section " + course.getTitle() + " Taught by " + professor.getLastName() + ", " + professor.getFirstName());
         sectionService.addSection(section);
-        ModelAndView mav = new ModelAndView("showsection");
-        mav.addObject("section", section);
+
+
+        ModelAndView mav = new ModelAndView("sections");
+        mav.addObject("allsections", sectionService.getAllSections());
         return mav;
     }
 
