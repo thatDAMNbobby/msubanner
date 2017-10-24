@@ -23,9 +23,7 @@ public class CourseService {
      * @return the list of all courses
      */
     public List<Course> getAllCourses() {
-        List<Course> courses = new ArrayList<>();
-        courseRepository.findAll().forEach(courses::add);
-        return courses;
+        return courseRepository.findAll();
     }
 
     /**
@@ -33,7 +31,7 @@ public class CourseService {
      * @param id the course id
      * @return the course
      */
-    public Course getCourse(final long id) {
+    public Course getCourse(final String id) {
         return courseRepository.findOne(id);
     }
 
@@ -57,7 +55,7 @@ public class CourseService {
      * Deletes a course.
      * @param id the course id
      */
-    public void deleteCourse(final long id) {
+    public void deleteCourse(final String id) {
         courseRepository.delete(id);
     }
 }

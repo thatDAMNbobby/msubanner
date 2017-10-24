@@ -24,9 +24,7 @@ public class DepartmentService {
      * @return the list of all departments
      */
     public List<Department> getAllDepartments() {
-        List<Department> departments = new ArrayList<>();
-        departmentRepository.findAll().forEach(departments::add);
-        return departments;
+        return departmentRepository.findAll();
     }
 
     /**
@@ -34,7 +32,7 @@ public class DepartmentService {
      * @param id the department id
      * @return the department
      */
-    public Department getDepartment(final long id) {
+    public Department getDepartment(final String id) {
         return departmentRepository.findOne(id);
     }
 
@@ -58,7 +56,7 @@ public class DepartmentService {
      * Deletes a department.
      * @param id the department id
      */
-    public void deleteDepartment(final long id) {
+    public void deleteDepartment(final String id) {
         departmentRepository.delete(id);
     }
 }

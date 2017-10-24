@@ -46,7 +46,7 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping("/sections/getsection/{id}")
-    public ModelAndView getSection(@PathVariable final long id) {
+    public ModelAndView getSection(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showsection");
         mav.addObject("section", sectionService.getSection(id));
         return mav;
@@ -89,9 +89,10 @@ public class SectionController {
      *
      * @param id the section's id
      */
-    @RequestMapping(method = RequestMethod.DELETE,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/sections/deletesection/{id}")
-    public void deleteSection(@PathVariable final long id) {
+    public String deleteSection(@PathVariable final String id) {
         sectionService.deleteSection(id);
+        return "redirect:/sections/";
     }
 }

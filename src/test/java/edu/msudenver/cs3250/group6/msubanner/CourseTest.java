@@ -12,8 +12,8 @@ public class CourseTest {
     @Test
     public void setIdSetIdTest() {
         Course course = new Course();
-        course.setId(1);
-        assertEquals(1, course.getId());
+        course.setId("1");
+        assertEquals("1", course.getId());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class CourseTest {
     @Test
     public void toStringTest() {
         Course course = new Course("Test title", "Test description", 4, "Test objectives", ClassLevel.FRESHMAN);
-        assertEquals("Course{Id=0, Title= Test title, Description= " + "Test description}", course.toString());
+        assertEquals("Course{Id=null, Title= Test title, Description= " + "Test description}", course.toString());
     }
 
 }

@@ -24,9 +24,7 @@ public class RoomService {
      * @return the list of all courses
      */
     public List<Room> getAllRooms() {
-        List<Room> rooms = new ArrayList<>();
-        roomRepository.findAll().forEach(rooms::add);
-        return rooms;
+        return roomRepository.findAll();
     }
 
     /**
@@ -35,7 +33,7 @@ public class RoomService {
      * @param id the course id
      * @return the course
      */
-    public Room getRoom(final long id) {
+    public Room getRoom(final String id) {
         return roomRepository.findOne(id);
     }
 
@@ -62,7 +60,7 @@ public class RoomService {
      *
      * @param id the room id
      */
-    public void deleteRoom(final long id) {
+    public void deleteRoom(final String id) {
         roomRepository.delete(id);
     }
 
