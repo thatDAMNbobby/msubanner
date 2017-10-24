@@ -5,14 +5,14 @@
         <p>Course:
             <select name="course">
                 {{#allcourses}}
-                    <option value="{{myId}}" >{{myTitle}}</option>
+                    <option value="{{id}}" >{{title}}</option>
                 {{/allcourses}}
             </select>
         </p>
         <p>Professor:
             <select name="professor">
                 {{#allprofs}}
-                    <option value="{{myId}}" >{{myLastName}}, {{myFirstName}}</option>
+                    <option value="{{id}}" >{{lastName}}, {{firstName}}</option>
                 {{/allprofs}}
             </select>
         </p>

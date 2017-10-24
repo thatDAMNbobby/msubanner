@@ -10,8 +10,6 @@ import javax.persistence.Table;
 /**
  * Persistent Building class.
  */
-@Entity
-@Table(name = "buildings")
 public class Building {
 
     /**
@@ -19,7 +17,7 @@ public class Building {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long myId;
+    private String id;
 
     /**
      * Name of the building.
@@ -55,10 +53,8 @@ public class Building {
      *
      * @param id New id for the building
      */
-    public void setId(final long id) {
-        if (id > 0) {
-            myId = id;
-        }
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -66,8 +62,8 @@ public class Building {
      *
      * @return id number of the building
      */
-    public long getId() {
-        return myId;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -99,7 +95,7 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Building{" + "Id=" + myId + ", Title= " + myBuildingName
+        return "Building{" + "Id=" + id + ", Title= " + myBuildingName
                 + ", Description=   }";
     }
 }

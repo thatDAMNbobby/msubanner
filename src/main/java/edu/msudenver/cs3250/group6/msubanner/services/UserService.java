@@ -23,9 +23,7 @@ public class UserService {
      * @return the list of all users
      */
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
-        return users;
+        return userRepository.findAll();
     }
 
     /**
@@ -33,7 +31,7 @@ public class UserService {
      * @param id the user id
      * @return the user
      */
-    public User getUser(final long id) {
+    public User getUser(final String id) {
         return userRepository.findOne(id);
     }
 
@@ -57,7 +55,7 @@ public class UserService {
      * Deletes a user.
      * @param id the user id
      */
-    public void deleteUser(final long id) {
+    public void deleteUser(final String id) {
         userRepository.delete(id);
     }
 }

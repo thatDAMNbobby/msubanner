@@ -51,7 +51,7 @@ public class UserController {
      * @return the user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/users/getuser/{id}")
-    public ModelAndView getUser(@PathVariable final long id) {
+    public ModelAndView getUser(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showuser");
         mav.addObject("user", userService.getUser(id));
         return mav;
@@ -95,7 +95,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.PUT,
             value = "/users/updateuser/{id}")
     public ResponseEntity<Void> updateUser(@RequestBody final User user,
-            @PathVariable final long id) {
+            @PathVariable final String id) {
         User existingUser = userService.getUser(id);
         if (existingUser == null) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -113,7 +113,7 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.DELETE,
             value = "/users/deleteuser/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable final long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable final String id) {
         User user = userService.getUser(id);
         if (user == null) {
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -125,7 +125,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET,
             value = "/users/deleteuser/{id}")
-    public ModelAndView deleteUserRedirect(@PathVariable final long id) {
+    public ModelAndView deleteUserRedirect(@PathVariable final String id) {
         userService.deleteUser(id);
         ModelAndView mav = new ModelAndView("users");
         mav.addObject("allusers", userService.getAllUsers());

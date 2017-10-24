@@ -10,14 +10,13 @@ import javax.persistence.Table;
 /**
  * Persistent Department class.
  */
-@Entity
-@Table(name = "department")
+
 public class Department {
 
     /** Department Id. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long myId;
+    private String id;
 
     /** Department name. */
     @Column
@@ -55,8 +54,8 @@ public class Department {
      *
      * @return Department id
      */
-    public Long getId() {
-        return myId;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -73,8 +72,8 @@ public class Department {
      *
      * @param id ID to assign to the department
      */
-    public void setId(final long id) {
-        myId = id;
+    public void setId(final String id) {
+        this.id = id;
     }
 
     // TODO: add setters and equals, hashcode, tostring for testing

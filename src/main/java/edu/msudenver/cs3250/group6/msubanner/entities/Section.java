@@ -1,31 +1,29 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * Persistent Section class.
  */
-@Entity
-@Table(name = "sections")
+
 public class Section {
 
     /** Section's Id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long myId;
+    private String id;
 
     /** Course this section belongs to. */
-    @ManyToOne
+    @DBRef
     private Course myCourse;
 
     /** Section's professor. */
-    @ManyToOne
-    private User myProfessor;
+    @DBRef
+    private User professor;
 
     /** Number used to compute hash value. */
     private static final int HASH_SHIFT = 32;
@@ -34,8 +32,7 @@ public class Section {
      * Default constructor, creates a blank section.
      */
     public Section() {
-        myProfessor = new User();
-        myCourse = new Course();
+
     }
 
     /**
@@ -49,7 +46,7 @@ public class Section {
             myCourse = course;
         }
         if (professor != null) {
-            myProfessor = professor;
+            this.professor = professor;
         }
     }
 
@@ -72,8 +69,8 @@ public class Section {
      *
      * @return id of this course
      */
-    public long getId() {
-        return myId;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -81,10 +78,8 @@ public class Section {
      *
      * @param id new id number for this section
      */
-    public void setId(final long id) {
-        if (id > 0) {
-            myId = id;
-        }
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -115,7 +110,7 @@ public class Section {
      * @return the professor of this section
      */
     public User getProfessor() {
-        return myProfessor;
+        return professor;
     }
 
     /**
@@ -129,16 +124,9 @@ public class Section {
         if (professor == null) {
             throw new IllegalArgumentException("Professor cannot be null!");
         }
-        this.myProfessor = professor;
+        this.professor = professor;
     }
 
-    /**
-     * Hash code function.
-     */
-    @Override
-    public int hashCode() {
-        return (int) (getId() ^ (getId() >>> HASH_SHIFT));
-    }
 
     /**
      * Returns if one section is equal to another.
@@ -162,7 +150,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + myId + ", Course=" + myCourse.toString()
-                + ", professor:" + myProfessor.toString() + '}';
+        return "Section{" + "id=" + id + ", Course=" + myCourse.toString()
+                + ", professor:" + professor.toString() + '}';
     }
 }

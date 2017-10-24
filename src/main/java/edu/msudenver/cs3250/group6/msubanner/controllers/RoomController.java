@@ -42,7 +42,7 @@ public class RoomController {
      * @return the room
      */
     @RequestMapping("/rooms/getroom/{id}")
-    public ModelAndView getRoom(@PathVariable final long id) {
+    public ModelAndView getRoom(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showroom");
         mav.addObject("room", roomService.getRoom(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
@@ -85,13 +85,13 @@ public class RoomController {
      */
     @RequestMapping(method = RequestMethod.DELETE,
             value = "/rooms/deleteroom/{id}")
-    public void deleteRoom(@PathVariable final long id) {
+    public void deleteRoom(@PathVariable final String id) {
         roomService.deleteRoom(id);
     }
 
     @RequestMapping(method=RequestMethod.GET,
             value = "/rooms/deleteroom/{id}")
-    public ModelAndView deleteRoomRedirect(@PathVariable final long id) {
+    public ModelAndView deleteRoomRedirect(@PathVariable final String id) {
         roomService.deleteRoom(id);
         ModelAndView mav = new ModelAndView("rooms");
         mav.addObject("allrooms", roomService.getAllRooms());

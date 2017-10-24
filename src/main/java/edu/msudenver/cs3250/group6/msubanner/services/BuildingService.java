@@ -25,10 +25,7 @@ public class BuildingService {
      * @return the list of all buildings
      */
     public List<Building> getAllBuildings() {
-        List<Building> buildings = new ArrayList<Building>();
-        // populate the course list with each element in the repository
-        buildingRepository.findAll().forEach(buildings::add);
-        return buildings;
+        return buildingRepository.findAll();
     }
 
     /**
@@ -36,7 +33,7 @@ public class BuildingService {
      * @param id the building id
      * @return the building
      */
-    public Building getBuilding(final long id) {
+    public Building getBuilding(final String id) {
         return buildingRepository.findOne(id);
     }
 
@@ -60,7 +57,7 @@ public class BuildingService {
      * Deletes a building.
      * @param id the course id
      */
-    public void deleteBuilding(final long id) {
+    public void deleteBuilding(final String id) {
         buildingRepository.delete(id);
     }
 }

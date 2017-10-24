@@ -45,7 +45,7 @@ public class BuildingController {
      * @return the building
      */
     @RequestMapping("/buildings/getbuilding/{id}")
-    public ModelAndView getBuilding(@PathVariable final long id){
+    public ModelAndView getBuilding(@PathVariable final String id){
         ModelAndView mav = new ModelAndView("showbuilding");
         mav.addObject("building", buildingService.getBuilding(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
@@ -89,7 +89,7 @@ public class BuildingController {
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/buildings/deletebuilding/{id}")
-    public ModelAndView deleteBuilding(@PathVariable final long id) {
+    public ModelAndView deleteBuilding(@PathVariable final String id) {
         buildingService.deleteBuilding(id);
         ModelAndView mav = new ModelAndView("buildings");
         mav.addObject("allbuildings", buildingService.getAllBuildings());

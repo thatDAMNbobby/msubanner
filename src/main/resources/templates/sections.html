@@ -12,10 +12,10 @@
         <tr>
             {{#allsections}}
             <td><a href="/sections/{{id}}">{{id}}</a></td>
-            <td>{{course.myTitle}}</td>
-            <td>{{professor.myLastName}}</td>
+            <td>{{course.title}}</td>
+            <td>{{professor.lastName}}</td>
             <td><a href="/sections/getsection/{{id}}">View</a></td>
-            <td><a href="/sections/deletesection/{{id}}">Delete</a> </td>
+            <td><form action="/sections/deletesection/{{id}}" method="delete"><button type="submit">Delete</button> </form></td>
         </tr>
         {{/allsections}}
     </table>

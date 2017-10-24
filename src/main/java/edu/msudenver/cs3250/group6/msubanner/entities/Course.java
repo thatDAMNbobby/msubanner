@@ -10,7 +10,6 @@ import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 /**
  * Persistent Course class.
  */
-@Entity
 public class Course {
 
     /**
@@ -18,7 +17,7 @@ public class Course {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long myId;
+    private String id;
 
     // todo: Add field for department
 
@@ -114,10 +113,8 @@ public class Course {
      *
      * @param id New id for the course
      */
-    public void setId(final long id) {
-        if (id > 0) {
-            myId = id;
-        }
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -125,8 +122,8 @@ public class Course {
      *
      * @return id number of the course
      */
-    public long getId() {
-        return myId;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -239,7 +236,7 @@ public class Course {
      */
     @Override
     public String toString() {
-        return "Course{" + "Id=" + myId + ", Title= " + myTitle
+        return "Course{" + "Id=" + id + ", Title= " + myTitle
                 + ", Description= " + myDescription + "}";
     }
 
@@ -260,16 +257,5 @@ public class Course {
                 && this.getDescription().equals(course.getDescription())
                 && this.getTitle().equals(course.getTitle());
     }
-
-    /**
-     * hashCode method for Course.
-     */
-    @Override
-    public int hashCode() {
-        int result = HASH_BASE;
-        result = (int) (HASH_MULTIPLIER * result + myId);
-        result = HASH_MULTIPLIER * result + myTitle.hashCode();
-        result = HASH_MULTIPLIER * result + myDescription.hashCode();
-        return result;
-    }
+    
 }

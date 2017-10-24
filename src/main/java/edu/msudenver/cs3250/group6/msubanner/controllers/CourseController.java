@@ -48,7 +48,7 @@ public class CourseController {
      * @return the course
      */
     @RequestMapping("/courses/{id}")
-    public ModelAndView getCourse(@PathVariable final long id) {
+    public ModelAndView getCourse(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showcourse");
         mav.addObject("course", courseService.getCourse(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
@@ -88,7 +88,7 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/courses/updatecourse/{id}")
     public ModelAndView updateCourse(@RequestParam final Course course,
-                              @PathVariable final long id) {
+                              @PathVariable final String id) {
         courseService.updateCourse(course);
         ModelAndView mav = new ModelAndView("showcourse");
         mav.addObject("course", course);
@@ -103,7 +103,7 @@ public class CourseController {
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/courses/deletecourse/{id}")
-    public ModelAndView deleteCourse(@PathVariable final long id) {
+    public ModelAndView deleteCourse(@PathVariable final String id) {
         courseService.deleteCourse(id);
         ModelAndView mav = new ModelAndView("courses");
         mav.addObject("allcourses", courseService.getAllCourses());
@@ -112,7 +112,7 @@ public class CourseController {
     }
 
     @RequestMapping("/courses/editcourse/{id}")
-    public ModelAndView editCourse(@PathVariable final long id) {
+    public ModelAndView editCourse(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editcourseform");
         mav.addObject("course", courseService.getCourse(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);

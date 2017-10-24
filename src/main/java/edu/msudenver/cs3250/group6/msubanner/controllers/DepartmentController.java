@@ -45,7 +45,7 @@ public class DepartmentController {
      * @return the department
      */
     @RequestMapping("/departments/{id}")
-    public ModelAndView getDepartment(@PathVariable final long id) {
+    public ModelAndView getDepartment(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showdepartment");
         mav.addObject("department", departmentService.getDepartment(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
@@ -101,7 +101,7 @@ public class DepartmentController {
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/departments/deletedepartment/{id}")
-    public ModelAndView deleteDepartment(@PathVariable final long id) {
+    public ModelAndView deleteDepartment(@PathVariable final String id) {
         departmentService.deleteDepartment(id);
         ModelAndView mav = new ModelAndView("departments");
         mav.addObject("alldepartments", departmentService.getAllDepartments());

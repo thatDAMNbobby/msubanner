@@ -23,9 +23,7 @@ public class SectionService {
      * @return the list of all sections
      */
     public List<Section> getAllSections() {
-        List<Section> sections = new ArrayList<>();
-        sectionRepository.findAll().forEach(sections::add);
-        return sections;
+        return sectionRepository.findAll();
     }
 
     /**
@@ -33,8 +31,8 @@ public class SectionService {
      * @param id the section id
      * @return the section
      */
-    public Section getSection(final long id) {
-        return sectionRepository.findOne(id);
+    public Section getSection(final String id) {
+        return sectionRepository.findById(id);
     }
 
     /**
@@ -57,7 +55,7 @@ public class SectionService {
      * Deletes a section.
      * @param id the section id
      */
-    public void deleteSection(final long id) {
+    public void deleteSection(final String id) {
         sectionRepository.delete(id);
     }
 }
