@@ -1,0 +1,30 @@
+{{#layout}}
+<div class="container">
+    <h1>Schedule Input Form (Working)</h1>
+    <form action="#" method="post">
+        <p>Room:
+            <select name="room">
+                {{#allrooms}}
+                <option value="{{id}}" >{{roomNumber}}</option>
+                {{/allrooms}}
+            </select>
+        Building:
+            <select name="building">
+                {{#allbuildings}}
+                <option value="{{id}}" >{{buildingName}}</option>
+                {{/allbuildings}}
+            </select>
+        </p>
+
+        <p> Semester:<input type="text" name="semester"/> </p>
+        <p> Start Date:<input type="text" name="startDate"/> </p>
+        <p> Duration:<input type="number" name="duration"/> </p>
+        <p> Days:<input type="text" name="days"/> </p>
+        <p> Hours:<input type="text" name="hours"/> </p>
+
+
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/layout}}
+{{>layout}}

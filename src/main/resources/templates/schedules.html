@@ -1,0 +1,38 @@
+{{#layout}}
+<div>
+    <h2>Schedule List</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Room</th>
+            <th>Building</th>
+            <th>Semester</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+            <th>Days</th>
+            <th>Hours</th>
+            <th>View</th>
+            <th>Delete</th>
+        </tr>
+        {{#allschedules}}
+        <tr>
+            <td><a href="/schedules/{{id}}">{{id}}</a></td>
+            <td>{{room}}</td>
+            <td>{{building}}</td>
+            <td>{{semester}}</td>
+            <td>{{startDate}}</td>
+            <td>{{duration}}</td>
+            <td>{{days}}</td>
+            <td>{{hours}}</td>
+            <td><a href="/schedules/getschedule/{{id}}">View</a></td>
+            <td><a href="/schedules/deleteschedule/{{id}}">Delete</a> </td>
+        </tr>
+        {{/allschedules}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/schedules/addschedule'" class="btn-default">New Schedule</button>
+</div>
+{{/layout}}
+{{>layout}}

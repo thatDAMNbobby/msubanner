@@ -19,7 +19,7 @@ public class Section {
 
     /** Course this section belongs to. */
     @DBRef
-    private Course myCourse;
+    private Course course;
 
     /** Section's professor. */
     @DBRef
@@ -43,7 +43,7 @@ public class Section {
      */
     public Section(final Course course, final User professor) {
         if (course != null) {
-            myCourse = course;
+            this.course = course;
         }
         if (professor != null) {
             this.professor = professor;
@@ -58,7 +58,7 @@ public class Section {
      */
     public Section(final Course course) throws IllegalArgumentException {
         if (course != null) {
-            myCourse = course;
+            this.course = course;
         } else {
             throw new IllegalArgumentException("Course cannot be null");
         }
@@ -88,7 +88,7 @@ public class Section {
      * @return course this section belongs to
      */
     public Course getCourse() {
-        return myCourse;
+        return course;
     }
 
     /**
@@ -101,7 +101,7 @@ public class Section {
         if (course == null) {
             throw new IllegalArgumentException("Course cannot be null!");
         }
-        this.myCourse = course;
+        this.course = course;
     }
 
     /**
@@ -150,7 +150,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + id + ", Course=" + myCourse.toString()
+        return "Section{" + "id=" + id + ", Course=" + course.toString()
                 + ", professor:" + professor.toString() + '}';
     }
 }

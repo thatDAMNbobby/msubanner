@@ -1,11 +1,9 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Persistent Building class.
@@ -23,7 +21,7 @@ public class Building {
      * Name of the building.
      */
     @Column
-    private String myBuildingName;
+    private String buildingName;
 
     // private Room myRooms;
 
@@ -31,7 +29,7 @@ public class Building {
      * Default Constructor.
      */
     public Building() {
-        this.myBuildingName = "No building";
+        this.buildingName = "No building";
     }
 
     /**
@@ -42,9 +40,9 @@ public class Building {
     public Building(final String buildingName) {
 
         if (buildingName == null || buildingName.isEmpty()) {
-            myBuildingName = "No building";
+            this.buildingName = "No building";
         } else {
-            myBuildingName = buildingName;
+            this.buildingName = buildingName;
         }
     }
 
@@ -78,7 +76,7 @@ public class Building {
             throw new IllegalArgumentException(
                     "Building name cannot be blank.");
         }
-        this.myBuildingName = buildingName;
+        this.buildingName = buildingName;
     }
 
     /**
@@ -87,7 +85,7 @@ public class Building {
      * @return Name of the building
      */
     public String getBuildingName() {
-        return myBuildingName;
+        return buildingName;
     }
 
     /**
@@ -95,7 +93,7 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Building{" + "Id=" + id + ", Title= " + myBuildingName
+        return "Building{" + "Id=" + id + ", Title= " + buildingName
                 + ", Description=   }";
     }
 }
