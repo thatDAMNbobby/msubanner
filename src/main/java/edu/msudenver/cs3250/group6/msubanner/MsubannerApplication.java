@@ -1,8 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
 import edu.msudenver.cs3250.group6.msubanner.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -47,12 +45,18 @@ public class MsubannerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("\n\n\n----------\nWorking Directory = "
+                + System.getProperty("user.dir")
+                + "\n\n\n\n");
+
         sectionRepository.deleteAll();
         courseRepository.deleteAll();
         userRepository.deleteAll();
         buildingRepository.deleteAll();
         roomRepository.deleteAll();
         departmentRepository.deleteAll();
+
+
         Section section = new Section();
         section.setId("900123456");
 
@@ -70,6 +74,19 @@ public class MsubannerApplication implements CommandLineRunner {
         userRepository.save(user);
         section.setProfessor(user);
         sectionRepository.save(section);
+
+        Room room = new Room();
+        room.setId("54564");
+        room.setRoomNumber(42);
+        roomRepository.save(room);
+
+        Building building = new Building();
+        building.setBuildingName("Central");
+        building.setId("1488");
+        buildingRepository.save(building);
+
+
+
 
     }
 }

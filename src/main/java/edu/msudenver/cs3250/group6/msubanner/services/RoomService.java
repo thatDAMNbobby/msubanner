@@ -11,6 +11,7 @@ import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
 
 /**
  * Room service.
+ * Lol
  */
 @Service
 public class RoomService {
@@ -19,19 +20,19 @@ public class RoomService {
     private RoomRepository roomRepository;
 
     /**
-     * Gets the list of all courses.
+     * Gets the list of all rooms.
      *
-     * @return the list of all courses
+     * @return the list of all rooms
      */
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
 
     /**
-     * Gets a course by id.
+     * Gets a room by id.
      *
-     * @param id the course id
-     * @return the course
+     * @param id the room id
+     * @return the room
      */
     public Room getRoom(final String id) {
         return roomRepository.findOne(id);

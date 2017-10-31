@@ -1,11 +1,9 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Persistent Room class.
@@ -23,18 +21,18 @@ public class Room {
      * Room number.
      */
     @Column
-    private int myRoomNumber;
+    private int roomNumber;
 
     /**
      * Room Capacity.
      */
-    private int myCapacity;
+    private int capacity;
 
     /**
      * Default Constructor.
      */
     public Room() {
-        this.myRoomNumber = 0;
+        this.roomNumber = 0;
     }
 
     /**
@@ -48,13 +46,13 @@ public class Room {
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            myRoomNumber = roomNumber;
+            this.roomNumber = roomNumber;
         }
 
         if (roomCapacity < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            myCapacity = roomCapacity;
+            capacity = roomCapacity;
         }
     }
 
@@ -87,7 +85,7 @@ public class Room {
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            myRoomNumber = roomNumber;
+            this.roomNumber = roomNumber;
         }
     }
 
@@ -97,7 +95,7 @@ public class Room {
      * @return Name of the room
      */
     public int getRoomNumber() {
-        return myRoomNumber;
+        return roomNumber;
     }
 
     /**
@@ -106,7 +104,7 @@ public class Room {
      * @return Capacity of the room
      */
     public int getRoomCapacity() {
-        return myCapacity;
+        return capacity;
     }
 
     /**
@@ -114,6 +112,6 @@ public class Room {
      */
     @Override
     public String toString() {
-        return "Building{" + "Id=" + id + ", Title= " + myRoomNumber + " }";
+        return "Building{" + "Id=" + id + ", Title= " + roomNumber + " }";
     }
 }

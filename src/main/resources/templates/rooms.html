@@ -9,8 +9,8 @@
             <th>View</th>
             <th>Delete</th>
         </tr>
+        {{#allrooms}}
         <tr>
-            {{#allrooms}}
             <td><a href="/rooms/{{id}}">{{id}}</a></td>
             <td>{{roomNumber}}</td>
             <td>{{roomCapacity}}</td>
