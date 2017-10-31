@@ -104,8 +104,8 @@ public class HourBlock {
     }
 
     /**
-     * checks to see if there is a conflict with another HourBlock
-     * using the logic "if lowerStartTime + duration > higherStartTime, then conflict"
+     * hasConflict method - checks to see if there is a conflict with another HourBlock
+     *   using the logic "if lowerStartTime + duration > higherStartTime, then conflict"
      */
     public boolean hasConflict(final Object o) {
         if (o == null || !(o instanceof HourBlock)) {
