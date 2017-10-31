@@ -65,9 +65,9 @@ public class Section {
     }
 
     /**
-     * Returns the course id number.
+     * Returns the section id number.
      *
-     * @return id of this course
+     * @return id of this section
      */
     public String getId() {
         return id;
@@ -109,9 +109,7 @@ public class Section {
      *
      * @return the professor of this section
      */
-    public User getProfessor() {
-        return professor;
-    }
+    public User getProfessor() { return professor; }
 
     /**
      * Sets the professor of this section.

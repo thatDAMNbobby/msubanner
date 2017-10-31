@@ -93,7 +93,6 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Building{" + "Id=" + id + ", Title= " + buildingName
-                + ", Description=   }";
+        return "Id: " + id + ", Building Name: " + buildingName;
     }
 }
