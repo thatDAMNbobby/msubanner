@@ -81,7 +81,7 @@ public class MsubannerApplication implements CommandLineRunner {
         roomRepository.save(room);
 
         Building building = new Building();
-        building.setBuildingName("Centrakfks");
+        building.setBuildingName("Central");
         building.setId("1488");
         buildingRepository.save(building);
 

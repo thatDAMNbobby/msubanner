@@ -87,6 +87,74 @@ public class Schedule {
         return id;
     }
 
+    /**
+     * Returns the course this section belongs to.
+     *
+     * @return course this section belongs to
+     */
+    public Room getRoom() {
+        return room;
+    }
 
+    /**
+     * Sets the course this section belongs to.
+     *
+     * @param room new course for this section
+     * @throws IllegalArgumentException if the room is null
+     */
+    public void setRoom(final Room room) throws IllegalArgumentException {
+        if (room == null) {
+            throw new IllegalArgumentException("Room cannot be null!");
+        }
+        this.room = room;
+    }
 
+    /**
+     * Returns the building of this schedule.
+     *
+     * @return the building of this schedule
+     */
+    public Building getBuilding() {
+        return building;
+    }
+
+    /**
+     * Sets the building of this schedule.
+     *
+     * @param building new professor for this section
+     * @throws IllegalArgumentException if the professor is null
+     */
+    public void setBuilding(final Building building)
+            throws IllegalArgumentException {
+        if (building == null) {
+            throw new IllegalArgumentException("Building cannot be null!");
+        }
+        this.building = building;
+    }
+
+    /**
+     * Returns if one schedule is equal to another.
+     */
+    @Override
+    public boolean equals(final Object other) {
+        if (other == null || !(other instanceof Schedule)) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        final Schedule otherSchedule = (Schedule) other;
+        return this.getId() == otherSchedule.getId()
+                && this.getRoom().equals(otherSchedule.getRoom())
+                && this.getBuilding().equals(otherSchedule.getBuilding());
+    }
+    /**
+     * Returns the Schedule as a nice, readable string.
+     */
+    @Override
+    public String toString() {
+        return "Schedule{" + "id=" + id + ", Room=" + room.toString()
+                + ", building:" + building.toString() + '}';
+    }
 }
+

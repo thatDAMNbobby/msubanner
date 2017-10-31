@@ -7,9 +7,7 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -37,6 +35,39 @@ public class ScheduleController {
         return mav;
     }
 
-
-
+    /**
+     * Gets a schedule by id number.
+     *
+     * @param id the schedule id
+     * @return the schedule
+     */
+    @RequestMapping("/schedules/getSchedule/{id}")
+    public ModelAndView getSchedule(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("showschedule");
+        mav.addObject("schedule", scheduleService.getSchedule(id));
+        return mav;
+    }
+    /**
+     * Updates a schedule.
+     *
+     * @param schedule the schedule to be updated
+     * @param id the schedule's id
+     */
+    @RequestMapping(method = RequestMethod.PUT,
+            value = "/schedules/updateschedule/{id}")
+    public void updateSection(@RequestBody final Schedule schedule,
+                              @PathVariable final long id) {
+        scheduleService.updateSchedule(schedule);
+    }
+    /**
+     * Deletes a section.
+     *
+     * @param id the schedule's id
+     */
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/schedules/deleteschedule/{id}")
+    public String deleteSchedule(@PathVariable final String id) {
+        scheduleService.deleteSchedule(id);
+        return "redirect:/schedules/";
+    }
 }
