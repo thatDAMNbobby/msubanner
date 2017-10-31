@@ -112,6 +112,6 @@ public class Room {
      */
     @Override
     public String toString() {
-        return "Building{" + "Id=" + id + ", Title= " + roomNumber + " }";
+        return "Id: " + id + ", Room Number: " + roomNumber;
     }
 }
