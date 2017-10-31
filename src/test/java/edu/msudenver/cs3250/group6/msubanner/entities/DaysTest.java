@@ -10,6 +10,12 @@ public class DaysTest {
     public void SetIdSetIdTest() {
         Days days = new Days();
         days.setId("1");
+        assertEquals("1", days.getId());
     }
 
+    @Test
+    public void testAddDayToDays() {
+        Days days = new Days();
+
+    }
 }
