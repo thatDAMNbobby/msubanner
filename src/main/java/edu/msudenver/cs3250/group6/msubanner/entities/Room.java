@@ -90,6 +90,20 @@ public class Room {
     }
 
     /**
+     * Sets the room's capacity.
+     * @param capacity Capacity of the room
+     * @throws IllegalArgumentException if capacity is negative
+     */
+    public void setRoomCapacity(final int capacity)
+            throws IllegalArgumentException {
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Stay positive");
+        } else {
+            this.capacity = capacity;
+        }
+    }
+
+    /**
      * Returns the name of the room.
      *
      * @return Name of the room

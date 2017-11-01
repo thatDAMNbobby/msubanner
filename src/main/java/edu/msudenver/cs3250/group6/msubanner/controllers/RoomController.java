@@ -68,14 +68,20 @@ public class RoomController {
     /**
      * Updates a course.
      *
-     * @param room the room to be updated
      * @param id the room's id
      */
-    @RequestMapping(method = RequestMethod.PUT,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/rooms/updateroom/{id}")
-    public void updateRoom(@RequestBody final Room room,
-            @PathVariable final long id) {
+    public ModelAndView updateRoom(@RequestParam final int roomNumber, final int roomCapacity,
+            @PathVariable final String id) {
+        Room room = roomService.getRoom(id);
+        room.setRoomNumber(roomNumber);
+        room.setRoomCapacity(roomCapacity);
         roomService.updateRoom(room);
+        ModelAndView mav = new ModelAndView("showroom");
+        mav.addObject("room", roomService.getRoom(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
     }
 
     /**
@@ -89,12 +95,42 @@ public class RoomController {
         roomService.deleteRoom(id);
     }
 
+    /**
+     * Deletes the selected room.
+     * @param id The room's id
+     * @return ModelAndView containing the list of all rooms
+     */
     @RequestMapping(method=RequestMethod.GET,
             value = "/rooms/deleteroom/{id}")
     public ModelAndView deleteRoomRedirect(@PathVariable final String id) {
         roomService.deleteRoom(id);
         ModelAndView mav = new ModelAndView("rooms");
         mav.addObject("allrooms", roomService.getAllRooms());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the edit room form
+     * @param id The room's id
+     * @return ModelAndView containing the selected room
+     */
+    @RequestMapping("/rooms/editroom/{id}")
+    public ModelAndView editRoom(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("editroomform");
+        mav.addObject("room", roomService.getRoom(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the add room form.
+     *
+     * @return ModelAndView containing the add room form
+     */
+    @RequestMapping("/rooms/addroom")
+    public ModelAndView addRoomForm() {
+        ModelAndView mav = new ModelAndView("addroomform");
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }

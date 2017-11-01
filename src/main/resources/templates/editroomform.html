@@ -1,8 +1,8 @@
 {{#layout}}
+{{#room}}
 <div class="container">
     <h1>Room Input Form (Currently Working)</h1>
-    <form action="#" method="post">
-        {{#room}}
+    <form action="/rooms/updateroom/{{id}}" method="get">
         <p>Room Number: <input type="number" name="roomNumber" value="{{roomNumber}}" /></p>
         <p>Room Capacity: <input type="number" name="roomCapacity" value="{{roomCapacity}}" /></p>
         {{/room}}
