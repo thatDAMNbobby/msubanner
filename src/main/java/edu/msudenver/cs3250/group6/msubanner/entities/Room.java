@@ -29,6 +29,11 @@ public class Room {
     private int capacity;
 
     /**
+     * Building
+     */
+    private Building building;
+
+    /**
      * Default Constructor.
      */
     public Room() {
@@ -40,8 +45,9 @@ public class Room {
      *
      * @param roomNumber the room number
      * @param roomCapacity the room capacity
+     * @param building the building the room is in
      */
-    public Room(final int roomNumber, final int roomCapacity) {
+    public Room(final int roomNumber, final int roomCapacity, final Building building) {
 
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
@@ -53,6 +59,12 @@ public class Room {
             throw new IllegalArgumentException("Stay positive");
         } else {
             capacity = roomCapacity;
+        }
+
+        if (building == null) {
+            throw new IllegalArgumentException("Building cannot be null");
+        } else {
+            this.building = building;
         }
     }
 
@@ -104,6 +116,20 @@ public class Room {
     }
 
     /**
+     * Sets the building this room is in.
+     * @param building new building containing this room
+     * @throws IllegalArgumentException id building is null
+     */
+    public void setBuilding(final Building building)
+            throws IllegalArgumentException {
+        if (building == null) {
+            throw new IllegalArgumentException("Building cannot be null");
+        } else {
+            this.building = building;
+        }
+    }
+
+    /**
      * Returns the name of the room.
      *
      * @return Name of the room
@@ -119,6 +145,15 @@ public class Room {
      */
     public int getRoomCapacity() {
         return capacity;
+    }
+
+    /**
+     * Returns the building that contains this room.
+     *
+     * @return Building containing this room
+     */
+    public Building getBuilding() {
+        return building;
     }
 
     /**

@@ -1,7 +1,9 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,9 @@ public class RoomController {
      */
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private BuildingService buildingService;
 
     /**
      * Gets the list of all rooms.
@@ -54,14 +59,17 @@ public class RoomController {
      *
      * @param roomNumber the room number
      * @param roomCapacity the room capacity
+     * @param building the building that contains this room
      * @return the room
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
-    public ModelAndView addRoom(@RequestParam final int roomNumber, int roomCapacity) {
-        Room room = new Room(roomNumber, roomCapacity);
+    public ModelAndView addRoom(@RequestParam final int roomNumber, final int roomCapacity,
+                                final Building building) {
+        Room room = new Room(roomNumber, roomCapacity, building);
         roomService.addRoom(room);
         ModelAndView mav = new ModelAndView("showroom");
         mav.addObject("room", room);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
 
@@ -73,10 +81,11 @@ public class RoomController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/rooms/updateroom/{id}")
     public ModelAndView updateRoom(@RequestParam final int roomNumber, final int roomCapacity,
-            @PathVariable final String id) {
+                                    final Building building, @PathVariable final String id) {
         Room room = roomService.getRoom(id);
         room.setRoomNumber(roomNumber);
         room.setRoomCapacity(roomCapacity);
+        room.setBuilding(building);
         roomService.updateRoom(room);
         ModelAndView mav = new ModelAndView("showroom");
         mav.addObject("room", roomService.getRoom(id));
@@ -119,6 +128,7 @@ public class RoomController {
     public ModelAndView editRoom(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editroomform");
         mav.addObject("room", roomService.getRoom(id));
+        mav.addObject("allbuildings",buildingService.getAllBuildings());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
@@ -131,6 +141,7 @@ public class RoomController {
     @RequestMapping("/rooms/addroom")
     public ModelAndView addRoomForm() {
         ModelAndView mav = new ModelAndView("addroomform");
+        mav.addObject("allbuildings",buildingService.getAllBuildings());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
