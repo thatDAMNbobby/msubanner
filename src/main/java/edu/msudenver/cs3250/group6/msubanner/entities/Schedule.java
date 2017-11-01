@@ -2,6 +2,7 @@ package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,27 @@ public class Schedule {
      * format is {code YYYY/MM/DD }
     */
     private String startDate;
+
+    public Schedule() {
+
+    }
+
+    /**
+     * Returns the startDate of the schedule.
+     *
+     * @return startDate of the schedule
+     */
     public String getStartDate() { return startDate; }
+
+    /**
+     * Sets the startDate of the schedule.
+     *
+     * @param startDate New id for the schedule
+     */
+    public void setStartDate(final String startDate) {
+        this.startDate = startDate;
+    }
+
     /**
     * number of weeks
     */
@@ -69,13 +90,42 @@ public class Schedule {
             capacity = roomCapacity;
         }*/
     }
+
+
     /**
-     * Sets the id of the schedule.
+     * Returns the days of the schedule.
      *
-     * @param id New id for the schedule
+     * @return days of the schedule
      */
-    public void setId(final String id) {
-        this.id = id;
+    public String getDays() {
+        return days;
+    }
+
+    /**
+     * Sets the days of the schedule.
+     *
+     * @param days New id for the schedule
+     */
+    public void setDays(final String days) {
+        this.days = days;
+    }
+
+    /**
+     * Returns the semester of the schedule.
+     *
+     * @return semester of the schedule
+     */
+    public String getSemester() {
+        return semester;
+    }
+
+    /**
+     * Sets the semester of the schedule.
+     *
+     * @param semester New id for the schedule
+     */
+    public void setSemester(final String semester) {
+        this.semester = semester;
     }
 
     /**
@@ -85,6 +135,15 @@ public class Schedule {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Sets the id of the schedule.
+     *
+     * @param id New id for the schedule
+     */
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -132,26 +191,35 @@ public class Schedule {
         this.building = building;
     }
 
-    public void setDays(String days) {
-        this.days = days;
+    /**
+     * Returns the schedule hours.
+     *
+     * @return hours of this schedule
+     */
+    public String getHours() {
+        return hours;
     }
+    /**
+     * Sets the schedule hours.
+     *
+     * @param hours new hours  for this schedule
+     */
+    public void setHours(final String hours) {this.hours = hours; }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    /**
+     * Returns the schedule duration.
+     *
+     * @return duration of this schedule
+     */
+    public int getDuration() {
+        return duration;
     }
-
-    public void setHours(String hours) {
-        this.hours = hours;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
+    /**
+     * Sets the schedule hours.
+     *
+     * @param duration new hours  for this schedule
+     */
+    public void setDuration(final int duration) {this.duration = duration; }
 
     /**
      * Returns if one schedule is equal to another.
@@ -169,6 +237,29 @@ public class Schedule {
                 && this.getRoom().equals(otherSchedule.getRoom())
                 && this.getBuilding().equals(otherSchedule.getBuilding());
     }
+
+
+    /**
+     * Name of the building.
+     */
+    @Column
+    private String scheduleName;
+
+    /**
+     * Sets the name of the building.
+     *
+     * @param scheduleName New scheduleName of the schedule.
+     * @throws IllegalArgumentException if new scheduleName is blank
+     */
+    public void setScheduleName(final String scheduleName)
+            throws IllegalArgumentException {
+        if (scheduleName == null || scheduleName.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Building name cannot be blank.");
+        }
+        this.scheduleName = scheduleName;
+    }
+
     /**
      * Returns the Schedule as a nice, readable string.
      */
