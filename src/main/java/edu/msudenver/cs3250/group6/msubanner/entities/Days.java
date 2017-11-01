@@ -1,12 +1,8 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.codehaus.groovy.runtime.powerassert.SourceText;
-
-import javax.annotation.Generated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -103,6 +99,11 @@ public class Days {
         }
     }
 
+    /**
+     * Removes an association of number to day to the dayList HashMap
+     *
+     * @param dayToRemove
+     */
     public void removeDayFromList(String dayToRemove) {
         if(dayToRemove.equals(Day.SUNDAY.dayName)) {
             dayList.remove(Day.SUNDAY.dayNum);
