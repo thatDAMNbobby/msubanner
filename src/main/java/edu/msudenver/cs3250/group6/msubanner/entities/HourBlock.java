@@ -5,12 +5,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Persistent Hours class
+ * Persistent HourBlock class
  */
 
 public class HourBlock {
     /**
-     * Hours id number.
+     * HourBlock id number.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
