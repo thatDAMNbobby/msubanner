@@ -1,11 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import org.codehaus.groovy.runtime.powerassert.SourceText;
+
 import javax.annotation.Generated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Persistent Days Class
@@ -95,8 +99,36 @@ public class Days {
             dayList.put(Day.SATURDAY.dayNum, Day.SATURDAY.dayName);
         }
         else {
-            System.out.println("Console Warning: dayToAdd expected a capitalized day name, ie. Monday, Tuesday, etc");
+            System.out.println("Console Warning: Invalid input '"+ dayToAdd +"', Days.addToDayList() expected a capitalized day name, ie. Monday, Tuesday, etc");
         }
+    }
+
+    public void removeDayFromList(String dayToRemove) {
+        if(dayToRemove.equals(Day.SUNDAY.dayName)) {
+            dayList.remove(Day.SUNDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.MONDAY.dayName)) {
+            dayList.remove(Day.MONDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.TUESDAY.dayName)) {
+            dayList.remove(Day.TUESDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.WEDNESDAY.dayName)) {
+            dayList.remove(Day.WEDNESDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.THURSDAY.dayName)) {
+            dayList.remove(Day.THURSDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.FRIDAY.dayName)) {
+            dayList.remove(Day.FRIDAY.dayNum);
+        }
+        else if(dayToRemove.equals(Day.SATURDAY.dayName)) {
+            dayList.remove(Day.SATURDAY.dayNum);
+        }
+        else {
+            System.out.println("Console Warning: Invalid input '"+ dayToRemove +"', Days.removeDayFromList() expected a capitalized day name, ie. Monday, Tuesday, etc");
+        }
+
     }
 
     /**
@@ -106,6 +138,35 @@ public class Days {
      */
     public HashMap<Integer,String> getDayList() {
         return dayList;
+    }
+
+    /**
+     * Checks to see if there is crossover between two days
+     * inspired by: https://stackoverflow.com/questions/18644579/getting-the-difference-between-two-sets
+     *
+     * @param mapToCompare the days list to be compared against the calling days list
+     * @return
+     */
+    public boolean hasConflict(HashMap<Integer,String> mapToCompare) {
+
+        if(mapToCompare.size() >= 4 && this.dayList.size() >= 4) {
+            return true;
+        }
+
+        Set<Integer> set1 = new HashSet<>();
+        set1.addAll(this.dayList.keySet());
+
+        Set<Integer> set2 = new HashSet<>();
+        set2.addAll(mapToCompare.keySet());
+
+        set1.removeAll(set2);
+
+        if(set1.size() != this.dayList.keySet().size()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 

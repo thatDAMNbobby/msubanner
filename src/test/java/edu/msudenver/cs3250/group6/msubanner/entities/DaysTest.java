@@ -157,4 +157,84 @@ public class DaysTest {
 
         assertEquals(daysToTest, days.getDayList());
     }
+
+    @Test
+    public void testHasConflictTrue() {
+        Days days = new Days();
+        days.addToDayList("Saturday");
+        days.addToDayList("Monday");
+
+
+        HashMap<Integer,String> daysToTest = new HashMap<Integer,String>();
+        daysToTest.put(2,"Monday");
+        daysToTest.put(6,"Friday");
+
+        assertEquals(true, days.hasConflict(daysToTest));
+    }
+
+    @Test
+    public void testHasConflictNull() {
+        Days days = new Days();
+
+        HashMap<Integer,String> daysToTest = new HashMap<Integer,String>();
+        daysToTest.put(2,"Monday");
+        daysToTest.put(6,"Friday");
+
+        assertEquals(false, days.hasConflict(daysToTest));
+    }
+
+    @Test
+    public void testFourDaysHasConflict() {
+        Days days = new Days();
+        days.addToDayList("Saturday");
+        days.addToDayList("Sunday");
+        days.addToDayList("Monday");
+        days.addToDayList("Tuesday");
+
+
+
+        HashMap<Integer,String> daysToTest = new HashMap<Integer,String>();
+        daysToTest.put(6,"Friday");
+        daysToTest.put(2,"Monday");
+        daysToTest.put(4,"Wednesday");
+        daysToTest.put(5,"Thursday");
+
+        assertEquals(true, days.hasConflict(daysToTest));
+    }
+
+    @Test
+    public void testRemoveDayFromList() {
+        Days days = new Days();
+        days.addToDayList("Saturday");
+        days.addToDayList("Sunday");
+        days.addToDayList("Monday");
+        days.addToDayList("Tuesday");
+
+        HashMap<Integer,String> daysToTest = new HashMap<Integer,String>();
+        daysToTest.put(7,"Saturday");
+        daysToTest.put(1,"Sunday");
+        daysToTest.put(3,"Tuesday");
+
+        days.removeDayFromList("Monday");
+
+        assertEquals(daysToTest, days.getDayList());
+    }
+
+    @Test
+    public void testRemoveDayFromListDayDoesntExist() {
+        Days days = new Days();
+        days.addToDayList("Saturday");
+        days.addToDayList("Sunday");
+        days.addToDayList("Tuesday");
+
+        HashMap<Integer,String> daysToTest = new HashMap<Integer,String>();
+        daysToTest.put(7,"Saturday");
+        daysToTest.put(1,"Sunday");
+        daysToTest.put(3,"Tuesday");
+
+        days.removeDayFromList("Poo2");
+
+        assertEquals(daysToTest, days.getDayList());
+    }
+
 }
