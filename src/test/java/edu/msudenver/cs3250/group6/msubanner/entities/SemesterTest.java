@@ -12,4 +12,36 @@ public class SemesterTest {
         semester.setId("1");
         assertEquals("1", semester.getId());
     }
+
+    @Test
+    public void setSeasonTestFallFail() {
+        Semester semester = new Semester();
+        semester.setSeason("fall");
+
+        assertEquals("Season Not Set", semester.getSeason());
+    }
+
+    @Test
+    public void setSeasonTestFall() {
+        Semester semester = new Semester();
+        semester.setSeason("Fall");
+
+        assertEquals("Fall", semester.getSeason());
+    }
+
+    @Test
+    public void setSeasonTestSpring() {
+        Semester semester = new Semester();
+        semester.setSeason("Spring");
+
+        assertEquals("Spring", semester.getSeason());
+    }
+
+    @Test
+    public void setSeasonTestSummer() {
+        Semester semester = new Semester();
+        semester.setSeason("Summer");
+
+        assertEquals("Summer", semester.getSeason());
+    }
 }
