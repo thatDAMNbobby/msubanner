@@ -60,6 +60,8 @@ public class MsubannerApplication implements CommandLineRunner {
         departmentRepository.deleteAll();
         scheduleRepository.deleteAll();
 
+        Department department = new Department("Placeholder department");
+        departmentRepository.save(department);
 
         Section section = new Section();
         section.setId("900123456");
@@ -69,25 +71,30 @@ public class MsubannerApplication implements CommandLineRunner {
         course.setTitle("Bla");
         course.setCredits(2);
         course.setLearningObjectives("none");
+        course.setDepartment(department);
         courseRepository.save(course);
-        section.setCourse(course);
+
+        // TBA for professor
         User user = new User();
         user.setId("65");
-        user.setFirstName("bob");
-        user.setLastName("Mow");
+        user.setFirstName("TBA");
+        user.setLastName("TBA");
         userRepository.save(user);
-        section.setProfessor(user);
-        sectionRepository.save(section);
 
-        Room room = new Room();
-        room.setId("54564");
-        room.setRoomNumber(42);
-        roomRepository.save(room);
+        section.setProfessor(user);
+        section.setCourse(course);
+        sectionRepository.save(section);
 
         Building building = new Building();
         building.setBuildingName("Central");
         building.setId("1488");
         buildingRepository.save(building);
+
+        Room room = new Room();
+        room.setId("54564");
+        room.setRoomNumber(42);
+        room.setBuilding(building);
+        roomRepository.save(room);
 
         Schedule schedule = new Schedule();
         schedule.setScheduleName("Schedule 1");

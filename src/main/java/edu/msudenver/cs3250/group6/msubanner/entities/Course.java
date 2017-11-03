@@ -46,6 +46,11 @@ public class Course {
      */
     private ClassLevel myPrereqs;
 
+    /**
+     * Department this course belongs to.
+     */
+    private Department myDepartment;
+
     /** Constant multiplier for hash method. */
     private static final int HASH_MULTIPLIER = 31;
 
@@ -62,6 +67,7 @@ public class Course {
         this.myCredits = 0;
         this.myLearningObjectives = "No objective available";
         this.myPrereqs = ClassLevel.FRESHMAN;
+        this.myDepartment = new Department("Blank department");
     }
 
     /**
@@ -76,7 +82,9 @@ public class Course {
      */
     public Course(final String title, final String description,
             final int credits, final String learningObjectives,
-            final ClassLevel prereqs) throws IllegalArgumentException {
+            final ClassLevel prereqs, final Department department)
+            throws IllegalArgumentException {
+
         if (title == null || title.isEmpty()) {
             myTitle = "Empty title";
         } else {
@@ -105,6 +113,12 @@ public class Course {
             myPrereqs = prereqs;
         } else {
             myPrereqs = ClassLevel.FRESHMAN;
+        }
+
+        if (department != null) {
+            myDepartment = department;
+        } else {
+            throw new IllegalArgumentException("Department cannot be null");
         }
     }
 
@@ -229,6 +243,29 @@ public class Course {
      */
     public int getCredits() {
         return myCredits;
+    }
+
+    /**
+     * Gets the department.
+     *
+     * @return The department this course belongs to
+     */
+    public Department getDepartment() {
+        return myDepartment;
+    }
+
+    /**
+     * Sets the department.
+     *
+     * @param department Department this course belongs to
+     * @throws IllegalArgumentException if department is null
+     */
+    public void setDepartment(Department department) throws IllegalArgumentException {
+        if (department != null) {
+            this.myDepartment = myDepartment;
+        } else {
+            throw new IllegalArgumentException("Department cannot be null");
+        }
     }
 
     /**

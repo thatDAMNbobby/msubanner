@@ -2,10 +2,13 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 import edu.msudenver.cs3250.group6.msubanner.entities.User;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
+import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.GeneratedValue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,12 @@ public class SectionController {
     /** The section service. */
     @Autowired
     private SectionService sectionService;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ScheduleService scheduleService;
 
     /**
      * Gets the list of all sections.
@@ -49,6 +59,7 @@ public class SectionController {
     public ModelAndView getSection(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showsection");
         mav.addObject("section", sectionService.getSection(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
 
@@ -59,15 +70,16 @@ public class SectionController {
      * @return the section
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
-    public ModelAndView addSection(@RequestParam final Course course, @RequestParam final User professor) {
-        Section section = new Section(course, professor);
-
+    public ModelAndView addSection(@RequestParam final Course course,
+                                   @RequestParam final User professor, final Schedule schedule) {
+        Section section = new Section(course, professor, schedule);
         System.out.println("Adding section " + course.getTitle() + " Taught by " + professor.getLastName() + ", " + professor.getFirstName());
         sectionService.addSection(section);
 
 
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections", sectionService.getAllSections());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
 
@@ -79,17 +91,32 @@ public class SectionController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/sections/updatesection/{id}")
     public ModelAndView updateSection(@RequestParam final Course course, final User professor,
-            @PathVariable final String id) {
+            final Schedule schedule, @PathVariable final String id) {
         Section section = sectionService.getSection(id);
         section.setCourse(course);
         section.setProfessor(professor);
+        section.setSchedule(schedule);
         sectionService.updateSection(section);
         ModelAndView mav = new ModelAndView("showsection");
         mav.addObject("section", section);
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+    /**
+     * Maps to the add section form.
+     *
+     * @return the add section form string
+     */
+    @RequestMapping("sections/addsection")
+    ModelAndView addSectionForm() {
+        ModelAndView mav = new ModelAndView("addsectionform");
+        mav.addObject("allcourses", courseService.getAllCourses());
+        mav.addObject("allprofs", userService.getAllUsers());
+        mav.addObject("allschedules", scheduleService.getAllSchedules());
 
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
     /**
      * Maps to the add section form.
      * @param id the id of the section
@@ -98,8 +125,15 @@ public class SectionController {
     @RequestMapping("/sections/editsection/{id}")
     public ModelAndView editSection(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editsectionform");
-        mav.addObject("section", sectionService.getSection(id));
+        Section section = sectionService.getSection(id);
+
+        mav.addObject("section", section);
+        mav.addObject("thiscourse", section.getCourse());
+        mav.addObject("thisprof", section.getProfessor());
+        mav.addObject("allprofs", userService.getAllUsers());
+        mav.addObject("allcourses", courseService.getAllCourses());
         mav.addObject("school_name", Global.SCHOOL_NAME);
+        mav.addObject("allschedules", scheduleService.getAllSchedules());
         return mav;
     }
 
@@ -114,4 +148,33 @@ public class SectionController {
         sectionService.deleteSection(id);
         return "redirect:/sections/";
     }
+
+    /**
+     * Maps to the sections page with a list of all sections in a given semester.
+     *
+     * @param semester String value of semester
+     * @return ModelAndView containing list of sections
+     */
+    @RequestMapping("/sections/bysemester")
+    public ModelAndView sectionsBySemester(@RequestParam String semester) {
+        ModelAndView mav = new ModelAndView("sections");
+        mav.addObject("allsections", sectionService.getSectionsBySemester(semester));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+
+        System.out.println(sectionService.getSectionsBySemester(semester));
+        return mav;
+    }
+
+    /**
+     * Maps to select semester page.
+     *
+     * @return ModelAndView directing to the page
+     */
+    @RequestMapping("/sections/selectsemester")
+    public ModelAndView selectSemester() {
+        ModelAndView mav = new ModelAndView("selectsemester");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
 }

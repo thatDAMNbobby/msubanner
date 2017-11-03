@@ -8,17 +8,21 @@
                 <p class="form-control-static">{{id}}</p>
             </div>
         </div>
+        {{#room}}
         <div class="form-group">
             <label class="col-sm-2 control-label">Room number:</label>
             <div class="col-sm-10">
-                <p class="form-control-static">{{room.roomNumber}}</p></div>
+                <p class="form-control-static">{{roomNumber}}</p></div>
         </div>
+        {{/room}}
+        {{#building}}
         <div class="form-group">
             <label class="col-sm-2 control-label">Building:</label>
             <div class="col-sm-10">
-                <p class="form-control-static">{{building.buildingName}}</p>
+                <p class="form-control-static">{{buildingName}}</p>
             </div>
         </div>
+        {{/building}}
         <div class="form-group">
             <label class="col-sm-2 control-label">Semester:</label>
             <div class="col-sm-10">
@@ -54,7 +58,6 @@
         </div>
 
     </form>
-</div>
 </div>
 {{/schedule}}
 {{/layout}}

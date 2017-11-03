@@ -14,5 +14,8 @@ import java.util.List;
 public interface SectionRepository extends MongoRepository<Section, String> {
     public Section findById(String id);
     public List<Section> findAll();
+    public List<Section> findAllByProfessor_Id(String id);
+    public List<Section> findSectionsByScheduleSemester(String semester);
+
 }
 

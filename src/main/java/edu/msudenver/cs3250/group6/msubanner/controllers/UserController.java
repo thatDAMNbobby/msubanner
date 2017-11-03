@@ -54,6 +54,7 @@ public class UserController {
     public ModelAndView getUser(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showuser");
         mav.addObject("user", userService.getUser(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
 

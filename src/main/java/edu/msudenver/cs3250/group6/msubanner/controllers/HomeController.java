@@ -62,34 +62,6 @@ class HomeController {
     }
 
     /**
-     * Maps to the add course form.
-     *
-     * @return the add course form string
-     */
-    @RequestMapping("/courses/addcourse")
-    ModelAndView addCourseForm() {
-        ModelAndView mav = new ModelAndView("addcourseform");
-        mav.addObject("prereqs", ClassLevel.values());
-        mav.addObject("school_name", Global.SCHOOL_NAME);
-        return mav;
-    }
-
-    /**
-     * Maps to the add section form.
-     *
-     * @return the add section form string
-     */
-    @RequestMapping("sections/addsection")
-    ModelAndView addSectionForm() {
-        ModelAndView mav = new ModelAndView("addsectionform");
-        mav.addObject("allcourses", courseService.getAllCourses());
-        mav.addObject("allprofs", userService.getAllUsers());
-
-        mav.addObject("school_name", Global.SCHOOL_NAME);
-        return mav;
-    }
-
-    /**
      * Maps to the add section form.
      *
      * @return the add section form string
