@@ -16,6 +16,13 @@
                 {{/allprofs}}
             </select>
         </p>
+        <p>Schedule:
+            <select name="schedule">
+                {{#allschedules}}
+                <option value="{{id}}" >{{semester}}, {{days}}, {{hours}}</option>
+                {{/allschedules}}
+            </select>
+        </p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </div>

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 import edu.msudenver.cs3250.group6.msubanner.entities.User;
 import org.junit.Test;
@@ -20,7 +21,8 @@ public class SectionTest {
     public void sectionWithArgsTest() {
         Course course = new Course();
         User prof = new User("Dr.", "Meseeks");
-        Section section = new Section(course, prof);
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
         assertNotNull(course);
         assertNotNull(prof);
     }
@@ -42,7 +44,8 @@ public class SectionTest {
     public void getProfessor() {
         Course course = new Course();
         User prof = new User();
-        Section section = new Section(course, prof);
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
         assertEquals(prof, section.getProfessor());
     }
 
@@ -68,7 +71,8 @@ public class SectionTest {
     public void getCourseTest() {
         Course course = new Course();
         User prof = new User();
-        Section section = new Section(course, prof);
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
         assertEquals(course, section.getCourse());
     }
 
@@ -82,7 +86,8 @@ public class SectionTest {
     public void toStringTest() {
         Course course = new Course();
         User prof = new User("Mr.", "Meseeks");
-        Section section = new Section(course, prof);
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
         String out = "Section{" + "id=" + section.getId() + ", Course="
                 + course.toString() + ", professor:" + prof.toString()
                 + '}';

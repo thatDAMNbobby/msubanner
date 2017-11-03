@@ -4,6 +4,8 @@ import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
+import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,8 @@ public class ScheduleController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/schedules/addschedule")
-    public ModelAndView addSchedule(@RequestParam final Room room, @RequestParam final Building building, String semester, String startDate, int duration, String days, String hours) {
+    public ModelAndView addSchedule(@RequestParam final Room room, @RequestParam final Building building,
+                                    String semester, String startDate, int duration, String days, String hours) {
         Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, hours);
         scheduleService.addSchedule(schedule);
 
@@ -48,11 +51,12 @@ public class ScheduleController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
     /**
      * Updates a schedule.
      *
      * @param id the schedule's id
-     */
+     **/
     @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/updateschedule/{id}")
     public ModelAndView updateSection(@RequestParam final Building building, final Room room, final String semester,
@@ -70,6 +74,8 @@ public class ScheduleController {
 
         ModelAndView mav = new ModelAndView("showschedule");
         mav.addObject("schedule", scheduleService.getSchedule(id));
+        mav.addObject("room", room);
+        mav.addObject("building", building);
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
@@ -93,7 +99,12 @@ public class ScheduleController {
     @RequestMapping("/schedules/editschedule/{id}")
     public ModelAndView editSchedule(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editscheduleform");
+        Schedule schedule = scheduleService.getSchedule(id);
+        Room room = schedule.getRoom();
+        Building building = schedule.getBuilding();
         mav.addObject("schedule", scheduleService.getSchedule(id));
+        mav.addObject("room", room);
+        mav.addObject("building", building);
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }

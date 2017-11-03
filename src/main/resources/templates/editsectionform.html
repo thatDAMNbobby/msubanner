@@ -5,7 +5,6 @@
     <form action="/sections/updatesection/{{id}}" method="get">
         <p>Course:
             <select name="course">
-                <option value="{{id}}" >{{course.title}}</option>
                 {{#allcourses}}
                 <option value="{{id}}" >{{title}}</option>
                 {{/allcourses}}
@@ -13,7 +12,6 @@
         </p>
         <p>Professor:
             <select name="professor">
-                <option value="{{id}}" >{{professor.lastName}}, {{professor.firstName}}</option>
                 {{#allprofs}}
                 <option value="{{id}}" >{{lastName}}, {{firstName}}</option>
                 {{/allprofs}}

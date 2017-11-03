@@ -58,4 +58,14 @@ public class SectionService {
     public void deleteSection(final String id) {
         sectionRepository.delete(id);
     }
+
+    /**
+     * Gets all sections in a given semester.
+     *
+     * @param semester String value of semester
+     * @return List containing the sections
+     */
+    public List<Section> getSectionsBySemester(final String semester) {
+        return sectionRepository.findAllBySchedule_Semester(semester);
+    }
 }

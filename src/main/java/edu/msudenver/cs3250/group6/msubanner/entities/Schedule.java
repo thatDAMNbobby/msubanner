@@ -233,7 +233,7 @@ public class Schedule {
             return true;
         }
         final Schedule otherSchedule = (Schedule) other;
-        return this.getId() == otherSchedule.getId()
+        return this.getId().equals(otherSchedule.getId())
                 && this.getRoom().equals(otherSchedule.getRoom())
                 && this.getBuilding().equals(otherSchedule.getBuilding());
     }

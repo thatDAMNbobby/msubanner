@@ -25,6 +25,10 @@ public class Section {
     @DBRef
     private User professor;
 
+    /** Section's schedule. */
+    @DBRef
+    private Schedule schedule;
+
     /** Number used to compute hash value. */
     private static final int HASH_SHIFT = 32;
 
@@ -41,12 +45,15 @@ public class Section {
      * @param course The course that this section belongs to
      * @param professor The professor for this section
      */
-    public Section(final Course course, final User professor) {
+    public Section(final Course course, final User professor, final Schedule schedule) {
         if (course != null) {
             this.course = course;
         }
         if (professor != null) {
             this.professor = professor;
+        }
+        if (schedule != null) {
+            this.schedule = schedule;
         }
     }
 
@@ -125,6 +132,25 @@ public class Section {
         this.professor = professor;
     }
 
+    /**
+     * Returns the section's schedule.
+     *
+     * @return the schedule of this section
+     */
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    /**
+     * Set's the section's schedule.
+     *
+     * @param schedule new schedule for this section
+     */
+    public void setSchedule(Schedule schedule) {
+        if (schedule != null) {
+            this.schedule = schedule;
+        }
+    }
 
     /**
      * Returns if one section is equal to another.
@@ -138,7 +164,7 @@ public class Section {
             return true;
         }
         final Section otherSection = (Section) other;
-        return this.getId() == otherSection.getId()
+        return this.getId().equals(otherSection.getId())
                 && this.getCourse().equals(otherSection.getCourse())
                 && this.getProfessor().equals(otherSection.getProfessor());
     }
