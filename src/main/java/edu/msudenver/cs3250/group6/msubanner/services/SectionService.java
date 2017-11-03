@@ -66,6 +66,6 @@ public class SectionService {
      * @return List containing the sections
      */
     public List<Section> getSectionsBySemester(final String semester) {
-        return sectionRepository.findSectionsByScheduleSemester(semester);
+        return sectionRepository.findAllBySchedule_Semester(semester);
     }
 }

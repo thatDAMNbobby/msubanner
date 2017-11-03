@@ -52,7 +52,9 @@ public class Building {
      * @param id New id for the building
      */
     public void setId(final String id) {
-        this.id = id;
+        if (id != null) {
+            this.id = id;
+        }
     }
 
     /**

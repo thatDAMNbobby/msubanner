@@ -262,7 +262,7 @@ public class Course {
      */
     public void setDepartment(Department department) throws IllegalArgumentException {
         if (department != null) {
-            this.myDepartment = myDepartment;
+            this.myDepartment = department;
         } else {
             throw new IllegalArgumentException("Department cannot be null");
         }
