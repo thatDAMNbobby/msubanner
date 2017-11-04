@@ -8,21 +8,46 @@ public class SemesterTest {
 
     @Test
     public void setIdTest() {
+        System.out.println("\n" +
+                           "\n-----------------------------------" +
+                           "\nTesting Semester Id" +
+                           "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setId("1");
         assertEquals("1", semester.getId());
     }
 
     @Test
-    public void setSeasonTestFallFail() {
+    public void setIdTest2() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester Id 2" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
-        System.out.print("test showing improper capitalization: ");
+        semester.setId("3");
+        assertEquals("3", semester.getId());
+    }
+
+    @Test
+    public void setSeasonTestFallWarn() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSeason()  should warn" +
+                "\n-----------------------------------");
+        Semester semester = new Semester();
+        semester.setId("1");
         semester.setSeason("fall");
-        assertEquals("Season Not Set", semester.getSeason());
+
+        Semester semester1 = new Semester();
+        assertEquals(semester1.getSeason(), semester.getSeason());
     }
 
     @Test
     public void setSeasonTestFall() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSeason() Fall" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSeason("Fall");
 
@@ -31,6 +56,10 @@ public class SemesterTest {
 
     @Test
     public void setSeasonTestSpring() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSeason() Spring" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSeason("Spring");
 
@@ -39,6 +68,10 @@ public class SemesterTest {
 
     @Test
     public void setSeasonTestSummer() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSeason() Summer" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSeason("Summer");
 
@@ -47,6 +80,10 @@ public class SemesterTest {
 
     @Test
     public void setSemesterStartDateTest() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSemesterStartDate()" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSemesterStartDate(2018, 1, 12);
 
@@ -57,31 +94,48 @@ public class SemesterTest {
 
     @Test
     public void setSemesterYearTest() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSemesterYear()" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSemesterYear(2019);
 
-        assertEquals(2019, semester.getSemesterStartDate().getYear());
+        assertEquals(2019, semester.getSemesterYear());
     }
 
     @Test
     public void semesterAlreadyExistsTestTrue() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester hasConflict() true" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         Semester semester2 = new Semester();
 
-        assertEquals(true, semester.semesterAlreadyExists(semester2));
+        assertEquals(true, semester.hasConflict(semester2));
     }
 
     @Test
     public void semesterAlreadyExistsTestFalse() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester hasConflict() false" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
+        semester.setId("1");
         Semester semester2 = new Semester();
         semester2.setSeason("Spring");
-
-        assertEquals(false, semester.semesterAlreadyExists(semester2));
+        semester2.setId("2");
+        assertEquals(false, semester.hasConflict(semester2));
     }
 
     @Test
     public void testAutoSetSeasonFall() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester autoSetSeason() Fall" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSemesterStartDate(2020, 9, 1);
 
@@ -90,6 +144,10 @@ public class SemesterTest {
 
     @Test
     public void testAutoSetSeasonSpring() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester autoSetSeason() Spring" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSemesterStartDate(2020, 2, 1);
 
@@ -98,6 +156,10 @@ public class SemesterTest {
 
     @Test
     public void testAutoSetSeasonSummer() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester autoSetSeason() Summer" +
+                "\n-----------------------------------");
         Semester semester = new Semester();
         semester.setSemesterStartDate(2020, 7, 1);
 
