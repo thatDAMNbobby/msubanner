@@ -44,4 +44,13 @@ public class SemesterTest {
 
         assertEquals("Summer", semester.getSeason());
     }
+
+    @Test
+    public void setSemesterStartDateTest() {
+        Semester semester = new Semester();
+        semester.setSeasonStartDate(2018, 1, 12);
+
+        assertEquals("Friday, January 12, 2018", semester.getSemesterStartDate());
+    }
+
 }

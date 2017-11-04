@@ -3,6 +3,9 @@ package edu.msudenver.cs3250.group6.msubanner.entities;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Persistent Semester class.
@@ -16,11 +19,40 @@ public class Semester {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
-
     /**
      * String representing the Semester season
      */
     private String season;
+
+    /**
+     * int representing the year of the Semester
+     */
+    private int semesterYear;
+
+    /**
+     * java.util.Date object containing the start date of the Semester
+     */
+    private Date semesterStartDate;
+
+    /**
+     *
+     * @return DateFormat obj of the Semester Start Date obj
+     */
+    public String getSemesterStartDate() {
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
+        return dateFormat.format(semesterStartDate);
+    }
+
+
+
+    public void setSeasonStartDate(int year, int month, int date) {
+        GregorianCalendar dateBuild = new GregorianCalendar(year, month-1, date);
+        Date dateObj = dateBuild.getTime();
+        this.semesterStartDate = dateObj;
+        System.out.println("Semester Start Date set as: " + this.semesterStartDate);
+    }
+
+
 
     /**
      * Valid enum to put in season field
@@ -43,11 +75,20 @@ public class Semester {
     }
 
     /**
-     *
-     * @return String representing the season the Semester is in
+     * Sets the id of a Semester instance.
+     * @param id New id for the Semester
      */
-    public String getSeason() {
-        return season;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Returns the id number of the Semester instance.
+     *
+     * @return id number of the Semester
+     */
+    public String getId() {
+        return id;
     }
 
     /**
@@ -68,21 +109,32 @@ public class Semester {
         }
     }
 
-
     /**
-     * Sets the id of a Semester instance.
-     * @param id New id for the Semester
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Returns the id number of the Semester instance.
      *
-     * @return id number of the Semester
+     * @return String representing the season the Semester is in
      */
-    public String getId() {
-        return id;
+    public String getSeason() {
+        return season;
     }
+
+    /**
+     *
+     * @return int representing the year the semester falls in
+     */
+    public int getSemesterYear() {
+        return semesterYear;
+    }
+
+    // TODO: public void setYear, CHANGE TO JAVA.UTIL.DATE OBJECT METHODS
+    public void setSemesterYear(int semesterYear) {
+        this.semesterYear = semesterYear;
+
+    }
+
+
+    // TODO: public void setStartDate
+
+    // TODO: public boolean checkDuplicate and integrate into constructor
+
+
 }
