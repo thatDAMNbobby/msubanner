@@ -1,11 +1,12 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+
 
 /**
  * Persistent Semester class.
@@ -30,28 +31,65 @@ public class Semester {
     private int semesterYear;
 
     /**
-     * java.util.Date object containing the start date of the Semester
+     * LocalDate object containing the start date of the Semester
+     *   https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html
      */
-    private Date semesterStartDate;
+    private LocalDate semesterStartDate;
 
     /**
-     *
+     * Public Constructor for a Semester
+     * sets default values to the current LocalDate
+     */
+    public Semester() {
+
+        this.semesterStartDate = LocalDate.now();
+        this.semesterYear = this.semesterStartDate.getYear();
+        this.autoSetSeason();
+    }
+
+    private void autoSetSeason() {
+        if(
+                this.semesterStartDate.getMonth().toString().equals("JANUARY") ||
+                this.semesterStartDate.getMonth().toString().equals("FEBRUARY") ||
+                this.semesterStartDate.getMonth().toString().equals("MARCH")) {
+
+                    this.setSeason("Spring");
+        }
+        else if (
+                this.semesterStartDate.getMonth().toString().equals("APRIL") ||
+                this.semesterStartDate.getMonth().toString().equals("MAY")   ||
+                this.semesterStartDate.getMonth().toString().equals("JUNE")  ||
+                this.semesterStartDate.getMonth().toString().equals("JULY")
+                ) {
+                    this.setSeason("Summer");
+        }
+        else {
+
+                    this.setSeason("Fall");
+        }
+
+    }
+
+    /**
      * @return DateFormat obj of the Semester Start Date obj
      */
-    public String getSemesterStartDate() {
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
-        return dateFormat.format(semesterStartDate);
+    public LocalDate getSemesterStartDate() {
+        return this.semesterStartDate;
     }
 
-
-
-    public void setSeasonStartDate(int year, int month, int date) {
-        GregorianCalendar dateBuild = new GregorianCalendar(year, month-1, date);
-        Date dateObj = dateBuild.getTime();
-        this.semesterStartDate = dateObj;
-        System.out.println("Semester Start Date set as: " + this.semesterStartDate);
+    /**
+     * Sets the semesterStartDate as a LocalDate object
+     *
+     * @param year the year the semester is in
+     * @param month the month the semester starts
+     * @param date the start day of the semester
+     */
+    public void setSemesterStartDate(int year, int month, int date) {
+        LocalDate localDate = LocalDate.of(year, month, date);
+        this.semesterStartDate = localDate;
+        this.semesterYear = localDate.getYear();
+        this.autoSetSeason();
     }
-
 
 
     /**
@@ -67,7 +105,7 @@ public class Semester {
         /**
          * Constructor for Season
          *
-         * @param seasonName the not all uppercase name of the season
+         * @param seasonName the first letter uppercase name of the season
          */
         Season(final String seasonName) {
             this.seasonName = seasonName;
@@ -76,6 +114,7 @@ public class Semester {
 
     /**
      * Sets the id of a Semester instance.
+     *
      * @param id New id for the Semester
      */
     public void setId(String id) {
@@ -93,24 +132,22 @@ public class Semester {
 
     /**
      * Sets the season with a valid string of the season name,
-     *   otherwise sets with "Season Not Set"
+     * otherwise sets with "Season Not Set"
      *
      * @param season
      */
     public void setSeason(String season) {
-        if(     season.equals(Season.FALL.seasonName) ||
+        if (season.equals(Season.FALL.seasonName) ||
                 season.equals(Season.SPRING.seasonName) ||
                 season.equals(Season.SUMMER.seasonName)) {
             this.season = season;
-        }
-        else {
-            System.out.println("warning: Season must be 'Fall', 'Spring' or 'Summer'");
+        } else {
+            System.out.println("warning: Season must be entered as 'Fall', 'Spring' or 'Summer'");
             this.season = "Season Not Set";
         }
     }
 
     /**
-     *
      * @return String representing the season the Semester is in
      */
     public String getSeason() {
@@ -118,23 +155,42 @@ public class Semester {
     }
 
     /**
-     *
      * @return int representing the year the semester falls in
      */
     public int getSemesterYear() {
         return semesterYear;
     }
 
-    // TODO: public void setYear, CHANGE TO JAVA.UTIL.DATE OBJECT METHODS
+
+    /**
+     * Sets a new year on the Semester
+     *
+     * @param semesterYear the year to be updated in the Semester
+     */
     public void setSemesterYear(int semesterYear) {
-        this.semesterYear = semesterYear;
+
+        LocalDate localDate = LocalDate.of(semesterYear,
+                this.semesterStartDate.getMonth(),
+                this.semesterStartDate.getDayOfMonth()
+        );
+
+        this.semesterStartDate = localDate;
 
     }
 
 
-    // TODO: public void setStartDate
+    // TODO: check to see if there is a semester conflict, used by other classes to prevent duplication
+    //       when creating a new Semester
+    public boolean semesterAlreadyExists(Semester semesterToCheck) {
+        // Check year and season conflict
+        if(semesterToCheck.getSemesterYear() == this.semesterStartDate.getYear() &&
+                semesterToCheck.season.equals(this.season)) {
+            return true;
+        }
+        return false;
+    }
 
-    // TODO: public boolean checkDuplicate and integrate into constructor
+    // TODO: set default season based on constructor
 
-
+    // TODO: make sure javadoc is in line with other doc in here
 }

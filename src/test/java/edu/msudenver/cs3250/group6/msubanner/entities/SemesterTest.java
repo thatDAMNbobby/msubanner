@@ -16,8 +16,8 @@ public class SemesterTest {
     @Test
     public void setSeasonTestFallFail() {
         Semester semester = new Semester();
+        System.out.print("test showing improper capitalization: ");
         semester.setSeason("fall");
-
         assertEquals("Season Not Set", semester.getSeason());
     }
 
@@ -48,9 +48,59 @@ public class SemesterTest {
     @Test
     public void setSemesterStartDateTest() {
         Semester semester = new Semester();
-        semester.setSeasonStartDate(2018, 1, 12);
+        semester.setSemesterStartDate(2018, 1, 12);
 
-        assertEquals("Friday, January 12, 2018", semester.getSemesterStartDate());
+        assertEquals(semester.getSemesterYear(), semester.getSemesterStartDate().getYear());
+        assertEquals("JANUARY", semester.getSemesterStartDate().getMonth().toString());
+        assertEquals(12, semester.getSemesterStartDate().getDayOfMonth());
     }
 
+    @Test
+    public void setSemesterYearTest() {
+        Semester semester = new Semester();
+        semester.setSemesterYear(2019);
+
+        assertEquals(2019, semester.getSemesterStartDate().getYear());
+    }
+
+    @Test
+    public void semesterAlreadyExistsTestTrue() {
+        Semester semester = new Semester();
+        Semester semester2 = new Semester();
+
+        assertEquals(true, semester.semesterAlreadyExists(semester2));
+    }
+
+    @Test
+    public void semesterAlreadyExistsTestFalse() {
+        Semester semester = new Semester();
+        Semester semester2 = new Semester();
+        semester2.setSeason("Spring");
+
+        assertEquals(false, semester.semesterAlreadyExists(semester2));
+    }
+
+    @Test
+    public void testAutoSetSeasonFall() {
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 9, 1);
+
+        assertEquals("Fall", semester.getSeason());
+    }
+
+    @Test
+    public void testAutoSetSeasonSpring() {
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 2, 1);
+
+        assertEquals("Spring", semester.getSeason());
+    }
+
+    @Test
+    public void testAutoSetSeasonSummer() {
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 7, 1);
+
+        assertEquals("Summer", semester.getSeason());
+    }
 }
