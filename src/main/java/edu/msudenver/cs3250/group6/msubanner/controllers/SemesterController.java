@@ -71,7 +71,6 @@ public class SemesterController {
         semester.setSemesterStartDate(startYear, startMonth, startDay);
         semester.setSemesterEndDate(endYear, endMonth, endDay);
         semester.setSeason(season);
-
         semesterService.addSemester(semester);
 
         ModelAndView mav = new ModelAndView("showsemester");
