@@ -41,6 +41,9 @@ public class MsubannerApplication implements CommandLineRunner {
     @Autowired
     private  HourBlockRepository hourBlockRepository;
 
+    @Autowired
+    private SemesterRepository semesterRepository;
+
 
     /**
      * Starts the spring application.
@@ -64,9 +67,13 @@ public class MsubannerApplication implements CommandLineRunner {
         departmentRepository.deleteAll();
         scheduleRepository.deleteAll();
         hourBlockRepository.deleteAll();
+        semesterRepository.deleteAll();
 
         Department department = new Department("Placeholder department");
         departmentRepository.save(department);
+
+        Semester semester = new Semester();
+        semesterRepository.save(semester);
 
         Section section = new Section();
         section.setId("900123456");
