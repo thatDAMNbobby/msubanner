@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The course service.
+ * The Course service.
  */
 @Service
 public class CourseService {
