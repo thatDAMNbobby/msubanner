@@ -177,4 +177,6 @@ public class Semester {
         }
         return false;
     }
+
+    // TODO: durr, add semester end date
 }

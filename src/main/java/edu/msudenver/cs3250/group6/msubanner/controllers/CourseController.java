@@ -47,7 +47,7 @@ public class CourseController {
     }
 
     /**
-     * Gets a course by id number.
+     * Gets a Course by id number.
      *
      * @param id the course id
      * @return the course
