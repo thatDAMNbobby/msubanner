@@ -1,0 +1,55 @@
+{{#layout}}
+<div class="container">
+    <h1>Semester Input Form (NOT WORKING YET)</h1>
+    <form action="#" method="post">
+        <h2>Semester Start Date</h2>
+        <p>Year: <input type="number" name="startYear" />&nbsp;
+           Month: <select name="startMonth">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+           Day:<input type="number" name="startDay" />
+        </p>
+
+        <h2>Semester End Date</h2>
+        <p>Year: <input type="number" name="endYear" />&nbsp;
+            Month: <select name="endMonth">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            Day:<input type="number" name="endDay" />
+        </p>
+
+        <h2>Semester Season</h2>
+        <p>Season: <select name="endMonth">
+                     <option value="Fall">Fall</option>
+                     <option value="Spring">Spring</option>
+                     <option value="Summer">Summer</option>
+                   </select>
+        </p>
+
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/layout}}
+{{>layout}}

@@ -84,4 +84,17 @@ public class SemesterController {
 
     // TODO: add rest of controller methods as well as other Semester templates in /Resources
 
+
+    /**
+     * Maps to the add semester form.
+     *
+     * @return ModelAndView redirecting to the form
+     */
+    @RequestMapping("/semesters/addsemester")
+    ModelAndView addSemesterForm() {
+        ModelAndView mav = new ModelAndView("addsemesterform");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
 }
