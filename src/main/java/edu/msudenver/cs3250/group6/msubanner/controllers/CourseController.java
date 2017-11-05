@@ -34,9 +34,9 @@ public class CourseController {
     private DepartmentService departmentService;
 
     /**
-     * Gets the list of all courses.
+     * Gets the list of all Courses.
      *
-     * @return the list of all courses
+     * @return the list of all Courses
      */
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public ModelAndView getAllCourses() {
