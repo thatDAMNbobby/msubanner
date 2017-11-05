@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Duration:</label>
+            <label class="col-sm-2 control-label">Duration (weeks):</label>
             <div class="col-sm-10">
                 <p class="form-control-static">{{duration}}</p>
             </div>
@@ -47,12 +47,30 @@
                 <p class="form-control-static">{{days}}</p>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Start Time:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{{hourBlock.startTime}}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Duration (hours):</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{{hourBlock.duration}}</p>
+            </div>
+        </div>
+
+
+        <!--
         <div class="form-group">
             <label class="col-sm-2 control-label">Hours:</label>
             <div class="col-sm-10">
-                <p class="form-control-static">{{hours}}</p>
+                <p class="form-control-static">{/{hours}/}</p>
             </div>
         </div>
+        -->
         <div class="row">
             <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
         </div>

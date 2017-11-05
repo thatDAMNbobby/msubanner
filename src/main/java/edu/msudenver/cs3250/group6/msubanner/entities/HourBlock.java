@@ -26,6 +26,16 @@ public class HourBlock {
      */
     private int duration;
 
+    public HourBlock() {
+        startTime = 6;
+        duration = 1;
+    }
+
+    public HourBlock(int startTime, int duration) {
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
     /**
      * Sets the id of an HourBlock instance.
       * @param id New id for the Hours

@@ -28,29 +28,10 @@ public class Schedule {
     */
     private String startDate;
 
-    public Schedule() {
-
-    }
 
     /**
-     * Returns the startDate of the schedule.
-     *
-     * @return startDate of the schedule
+     * number of weeks
      */
-    public String getStartDate() { return startDate; }
-
-    /**
-     * Sets the startDate of the schedule.
-     *
-     * @param startDate New id for the schedule
-     */
-    public void setStartDate(final String startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-    * number of weeks
-    */
     private int duration;
 
     /**
@@ -67,6 +48,14 @@ public class Schedule {
      * Example 02:00 AM to 03:50 AM
      */
     private String hours;
+
+    /** */
+    @DBRef
+    private HourBlock hourBlock;
+
+    public Schedule() {
+
+    }
 
     public Schedule(Room room, Building building, String semester, String startDate, int duration, String days, String hours) {
        //Set up checks
@@ -91,6 +80,31 @@ public class Schedule {
         }*/
     }
 
+
+    public Schedule(Room room, Building building, String semester, String startDate, int duration, String days, HourBlock hours) {
+        //Set up checks
+        this.room = room;
+        this.building = building;
+        this.semester = semester;
+        this.startDate = startDate;
+        this.days = days;
+        // this.hours = hours;
+        hourBlock = hours;
+
+
+        if (duration < 1) {
+            throw new IllegalArgumentException("Stay positive");
+        } else {
+            this.duration = duration;
+        }
+
+        /*
+        if (roomCapacity < 0) {
+            throw new IllegalArgumentException("Stay positive");
+        } else {
+            capacity = roomCapacity;
+        }*/
+    }
 
     /**
      * Returns the days of the schedule.
@@ -135,6 +149,21 @@ public class Schedule {
      */
     public String getId() {
         return id;
+    }
+
+    /** Returns the startDate of the schedule.
+     *
+     * @return startDate of the schedule
+     */
+    public String getStartDate() { return startDate; }
+
+    /**
+     * Sets the startDate of the schedule.
+     *
+     * @param startDate New id for the schedule
+     */
+    public void setStartDate(final String startDate) {
+        this.startDate = startDate;
     }
 
     /**
@@ -221,6 +250,15 @@ public class Schedule {
      */
     public void setDuration(final int duration) {this.duration = duration; }
 
+
+    public HourBlock getHourBlock() {
+        return hourBlock;
+    }
+
+    public void setHourBlock(HourBlock hourBlock) {
+        this.hourBlock = hourBlock;
+    }
+
     /**
      * Returns if one schedule is equal to another.
      */
@@ -268,5 +306,6 @@ public class Schedule {
         return "Schedule{" + "id=" + id + ", Room=" + room.toString()
                 + ", building:" + building.toString() + '}';
     }
+
 }
 
