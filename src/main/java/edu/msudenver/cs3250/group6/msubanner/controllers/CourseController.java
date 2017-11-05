@@ -21,12 +21,12 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 
 /**
- * The controller for the course class.
+ * The controller for the Course class.
  */
 @Controller
 public class CourseController {
 
-    /** The course service. */
+    /** The Course service. */
     @Autowired
     private CourseService courseService;
 
@@ -34,9 +34,9 @@ public class CourseController {
     private DepartmentService departmentService;
 
     /**
-     * Gets the list of all courses.
+     * Gets the list of all Courses.
      *
-     * @return the list of all courses
+     * @return the list of all Courses
      */
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public ModelAndView getAllCourses() {
@@ -47,7 +47,7 @@ public class CourseController {
     }
 
     /**
-     * Gets a course by id number.
+     * Gets a Course by id number.
      *
      * @param id the course id
      * @return the course

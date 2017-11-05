@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 /**
- * Repository for the course class.
+ * Repository for the Course class.
  */
 @RepositoryRestResource
 public interface CourseRepository extends MongoRepository<Course, String> {

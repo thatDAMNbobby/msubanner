@@ -93,6 +93,65 @@ public class SemesterTest {
     }
 
     @Test
+    public void setSemesterEndDateTest() {
+        System.out.println("\n" +
+                "\n-----------------------------------" +
+                "\nTesting Semester setSemesterEndDate()" +
+                "\n-----------------------------------");
+        Semester semester = new Semester();
+        semester.setSemesterEndDate(2020, 9, 15);
+
+        assertEquals(2020, semester.getSemesterEndDate().getYear());
+        assertEquals("SEPTEMBER", semester.getSemesterEndDate().getMonth().toString());
+        assertEquals(15, semester.getSemesterEndDate().getDayOfMonth());
+    }
+
+    @Test
+    public void testAutoSemesterEndDate() {
+        System.out.println("\n" +
+                "\n-------------------------------------------------------" +
+                "\nTesting Semester Auto initialization of semesterEndDate" +
+                "\n-------------------------------------------------------");
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 6, 10);
+
+        assertEquals(2020, semester.getSemesterEndDate().getYear());
+        assertEquals("SEPTEMBER", semester.getSemesterEndDate().getMonth().toString());
+        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+    }
+
+    @Test
+    public void testAutoSemesterEndDateIncreaseYear() {
+        System.out.println("\n" +
+                "\n----------------------------------------------------------------------" +
+                "\nTesting Semester Auto initialization of semesterEndDate with month > 9" +
+                "\n----------------------------------------------------------------------");
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 10, 10);
+        // semester.setSemesterEndDate(2020, 9, 25);
+
+        assertEquals(2021, semester.getSemesterEndDate().getYear());
+        assertEquals("JANUARY", semester.getSemesterEndDate().getMonth().toString());
+        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+    }
+
+    @Test
+    public void setSemesterEndDateTestWarn() {
+        System.out.println("\n" +
+                "\n-------------------------------------------" +
+                "\nTesting Semester setSemesterEndDate()  Warn" +
+                "\n-------------------------------------------");
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(2020, 9, 15);
+        semester.setSemesterEndDate(2010, 9, 15);
+
+        assertEquals(2020, semester.getSemesterStartDate().getYear());
+        assertEquals(2020, semester.getSemesterEndDate().getYear());
+        assertEquals("DECEMBER", semester.getSemesterEndDate().getMonth().toString());
+        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+    }
+
+    @Test
     public void setSemesterYearTest() {
         System.out.println("\n" +
                 "\n-----------------------------------" +
@@ -165,4 +224,5 @@ public class SemesterTest {
 
         assertEquals("Summer", semester.getSeason());
     }
+
 }

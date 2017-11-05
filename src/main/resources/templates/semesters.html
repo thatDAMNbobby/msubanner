@@ -1,0 +1,31 @@
+{{#layout}}
+<div>
+    <h2>Semester List</h2>
+    <h1>NOT WORKING YET</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Semester Year</th>
+            <th>Semester Season</th>
+            <th>Semester Start Date</th>
+            <th>Semester End Date</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            {{#allsemesters}}
+            <td><a href="/semesters/{{id}}">{{id}}</a></td>
+            <td><a href="/semesters/getsemester/{{id}}">View</a></td>
+            <td><a href="/semesters/editsemester/{{id}}">Edit</a></td>
+            <td><a href="/semesters/deletesemester/{{id}}">Delete</a> </td>
+        </tr>
+        {{/allsemesters}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/semesters/addsemester'" class="btn-default">New Semester</button>
+</div>
+{{/layout}}
+{{>layout}}
