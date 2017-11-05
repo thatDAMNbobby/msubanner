@@ -133,7 +133,7 @@ public class Semester {
      * Sets the semesterEndDate automatically based off of the
      *   semesterStartDate
      */
-    public void setSemesterEndDate() {
+    private void setSemesterEndDate() {
             LocalDate localDate = LocalDate.of(
                     semesterStartDate.getMonthValue() > 9 ? semesterStartDate.getYear() + 1 : semesterStartDate.getYear(),
                     semesterStartDate.getMonthValue() <= 9 ? semesterStartDate.getMonthValue() + 3 : 1,
