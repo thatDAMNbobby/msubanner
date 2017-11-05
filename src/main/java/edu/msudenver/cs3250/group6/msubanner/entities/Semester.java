@@ -24,6 +24,17 @@ public class Semester {
     private LocalDate semesterStartDate = LocalDate.now();
 
     /**
+     * LocalDate object containing the end date of the Semester
+     *   auto initializes to roughly 3 months after semesterStartDate
+     *   with some constraints and day default to 20
+     */
+    private LocalDate semesterEndDate = LocalDate.of(
+            semesterStartDate.getMonthValue() > 9 ? semesterStartDate.getYear() + 1 : semesterStartDate.getYear(),
+            semesterStartDate.getMonthValue() <= 9 ? semesterStartDate.getMonthValue() + 3 : 1,
+            25
+    );
+
+    /**
      * String representing the Semester season
      */
     private String season = autoSetSeason();
@@ -74,6 +85,61 @@ public class Semester {
         LocalDate localDate = LocalDate.of(year, month, date);
         this.semesterStartDate = localDate;
         this.autoSetSeason();
+
+        if(semesterStartDate.getYear() > semesterEndDate.getYear() ||
+                (semesterStartDate.getYear() == semesterEndDate.getYear() &&
+                 semesterStartDate.getMonthValue() > semesterEndDate.getMonthValue())
+                ) {
+            setSemesterEndDate();
+        }
+    }
+
+    /**
+     * @return LocalDate obj of the Semester End Date obj
+     */
+    public LocalDate getSemesterEndDate() {
+        return this.semesterEndDate;
+    }
+
+    /**
+     * Sets the semesterEndDate as a LocalDate obj if the semesterStartDate
+     *   is in an earlier month than the semesterEndDate, else autosets
+     *   a value in the future.
+     *
+     * @param endYear  the year the semester ends
+     * @param endMonth the month the semester ends
+     * @param endDate  the end day of the semester
+     */
+    public void setSemesterEndDate(int endYear, int endMonth, int endDate) {
+        if(semesterStartDate.getYear() < endYear ||
+               (semesterStartDate.getYear() <= endYear &&
+                semesterStartDate.getMonthValue() < endMonth)
+           ) {
+            LocalDate localDate = LocalDate.of(endYear, endMonth, endDate);
+            this.semesterEndDate = localDate;
+        }
+        else{
+            LocalDate localDate = LocalDate.of(
+                    semesterStartDate.getMonthValue() > 9 ? semesterStartDate.getYear() + 1 : semesterStartDate.getYear(),
+                    semesterStartDate.getMonthValue() <= 9 ? semesterStartDate.getMonthValue() + 3 : 1,
+                    25
+            );
+            System.out.println("warning: semesterEndDate automatically set, semesterEndDate must occur after semesterStartDate");
+
+        }
+    }
+
+    /**
+     * Sets the semesterEndDate automatically based off of the
+     *   semesterStartDate
+     */
+    public void setSemesterEndDate() {
+            LocalDate localDate = LocalDate.of(
+                    semesterStartDate.getMonthValue() > 9 ? semesterStartDate.getYear() + 1 : semesterStartDate.getYear(),
+                    semesterStartDate.getMonthValue() <= 9 ? semesterStartDate.getMonthValue() + 3 : 1,
+                    25
+            );
+            this.semesterEndDate = localDate;
     }
 
     /**
@@ -177,6 +243,4 @@ public class Semester {
         }
         return false;
     }
-
-    // TODO: durr, add semester end date
 }
