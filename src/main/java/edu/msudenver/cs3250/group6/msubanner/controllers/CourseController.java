@@ -21,7 +21,7 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 
 /**
- * The controller for the course class.
+ * The controller for the Course class.
  */
 @Controller
 public class CourseController {
