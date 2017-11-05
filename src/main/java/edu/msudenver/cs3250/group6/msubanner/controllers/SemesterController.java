@@ -50,4 +50,6 @@ public class SemesterController {
         return mav;
     }
 
+    // TODO: add rest of controller methods as well as other Semester templates in /Resources
+
 }
