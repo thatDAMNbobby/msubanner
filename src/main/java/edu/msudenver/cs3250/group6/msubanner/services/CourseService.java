@@ -14,46 +14,46 @@ import java.util.List;
 @Service
 public class CourseService {
 
-    /** The course repository. */
+    /** The Course repository. */
     @Autowired
     private CourseRepository courseRepository;
 
     /**
-     * Gets the list of all courses.
-     * @return the list of all courses
+     * Gets the list of all Courses.
+     * @return the list of all Courses
      */
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
     /**
-     * Gets a course by id.
-     * @param id the course id
-     * @return the course
+     * Gets a Course by id.
+     * @param id the Course id
+     * @return the Course
      */
     public Course getCourse(final String id) {
         return courseRepository.findOne(id);
     }
 
     /**
-     * Adds a course.
-     * @param course the course to add
+     * Adds a Course.
+     * @param course the Course to add
      */
     public void addCourse(final Course course) {
         courseRepository.save(course);
     }
 
     /**
-     * Updates a course.
-     * @param course the course to update
+     * Updates a Course.
+     * @param course the Course to update
      */
     public void updateCourse(final Course course) {
         courseRepository.save(course);
     }
 
     /**
-     * Deletes a course.
-     * @param id the course id
+     * Deletes a Course.
+     * @param id the Course id
      */
     public void deleteCourse(final String id) {
         courseRepository.delete(id);

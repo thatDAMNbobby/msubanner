@@ -26,7 +26,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 @Controller
 public class CourseController {
 
-    /** The course service. */
+    /** The Course service. */
     @Autowired
     private CourseService courseService;
 
