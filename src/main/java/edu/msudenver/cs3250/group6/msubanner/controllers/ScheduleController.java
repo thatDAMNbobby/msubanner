@@ -2,9 +2,11 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
+import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private HourBlockService hourBlockService;
+
+
     @RequestMapping("/schedules")
     public ModelAndView getAllSchedules() {
         ModelAndView mav = new ModelAndView("schedules");
@@ -28,12 +34,22 @@ public class ScheduleController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/schedules/addschedule")
     public ModelAndView addSchedule(@RequestParam final Room room, @RequestParam final Building building,
-                                    String semester, String startDate, int duration, String days, String hours) {
-        Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, hours);
+                                    String semester, String startDate, int duration, String days,
+                                    //String hours
+                                    int hourBlockStartTime, int hourBlockDuration
+                                    ) {
+        //Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, hours);
+
+        HourBlock block = new HourBlock(hourBlockStartTime, hourBlockDuration);
+        hourBlockService.addHourBlock(block);
+
+        Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, block);
         scheduleService.addSchedule(schedule);
+
 
         ModelAndView mav = new ModelAndView("schedules");
         mav.addObject("allschedules", scheduleService.getAllSchedules());
+
 
         return mav;
     }
@@ -61,13 +77,23 @@ public class ScheduleController {
             value = "/schedules/updateschedule/{id}")
     public ModelAndView updateSection(@RequestParam final Building building, final Room room, final String semester,
                                       final String startDate, final int duration, final String days,
-                                      final String hours , @PathVariable final String id) {
+                                      //final String hours ,
+                                      int hourBlockStartTime, int hourBlockDuration,
+                                      @PathVariable final String id) {
+
         Schedule schedule = scheduleService.getSchedule(id);
         schedule.setBuilding(building);
         schedule.setRoom(room);
         schedule.setDuration(duration);
         schedule.setDays(days);
-        schedule.setHours(hours);
+        //schedule.setHours(hours);
+        HourBlock oldBlock = schedule.getHourBlock();
+        hourBlockService.deleteHourBlock(oldBlock.getId());
+
+        HourBlock newBlock = new HourBlock(hourBlockStartTime, hourBlockDuration);
+        hourBlockService.addHourBlock(newBlock);
+        schedule.setHourBlock(newBlock);
+
         schedule.setSemester(semester);
         schedule.setStartDate(startDate);
         scheduleService.updateSchedule(schedule);

@@ -38,6 +38,10 @@ public class MsubannerApplication implements CommandLineRunner {
     @Autowired
     private  ScheduleRepository scheduleRepository;
 
+    @Autowired
+    private  HourBlockRepository hourBlockRepository;
+
+
     /**
      * Starts the spring application.
      * @param args the args
@@ -59,6 +63,7 @@ public class MsubannerApplication implements CommandLineRunner {
         roomRepository.deleteAll();
         departmentRepository.deleteAll();
         scheduleRepository.deleteAll();
+        hourBlockRepository.deleteAll();
 
         Department department = new Department("Placeholder department");
         departmentRepository.save(department);
@@ -96,6 +101,9 @@ public class MsubannerApplication implements CommandLineRunner {
         room.setBuilding(building);
         roomRepository.save(room);
 
+        HourBlock block = new HourBlock(6, 1);
+        hourBlockRepository.save(block);
+
         Schedule schedule = new Schedule();
         schedule.setScheduleName("Schedule 1");
         schedule.setRoom(room);
@@ -103,7 +111,8 @@ public class MsubannerApplication implements CommandLineRunner {
         schedule.setSemester("Fall");
         schedule.setId("4512");
         schedule.setDuration(2);
-        schedule.setHours("3:00 AM to 5:00 AM");
+        //schedule.setHours("3:00 AM to 5:00 AM");
+        schedule.setHourBlock(block);
         schedule.setDays("M W");
         schedule.setStartDate("YYYY/MM/DD");
         scheduleRepository.save(schedule);
