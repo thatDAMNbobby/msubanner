@@ -79,10 +79,41 @@ public class SemesterController {
         return mav;
     }
 
+    /**
+     * Updates a Semester
+     *
+     * @param startYear the year the semester starts
+     * @param startMonth the month the semester starts
+     * @param startDay the day the semester starts
+     * @param endYear the year the semester ends
+     * @param endMonth the month the semester ends
+     * @param endDay the day the semester ends
+     * @param season the season the semester is in (Fall, Spring, Summer)
+     * @return ModelAndView of the semester
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/semesters/updatesemester/{id}")
+    public ModelAndView updateSemester(@RequestParam int startYear, int startMonth, int startDay,
+                                    int endYear, int endMonth, int endDay,
+                                    String season) {
+        Semester semester = new Semester();
+        semester.setSemesterStartDate(startYear, startMonth, startDay);
+        semester.setSemesterEndDate(endYear, endMonth, endDay);
+        semester.setSeason(season);
+        semesterService.addSemester(semester);
+
+        ModelAndView mav = new ModelAndView("showsemester");
+        mav.addObject("semester", semester);
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
 
 
-    // TODO: add rest of controller methods as well as other Semester templates in /Resources
 
+
+
+
+
+    // TODO: add rest of controller methods
 
     /**
      * Maps to the add semester form.
