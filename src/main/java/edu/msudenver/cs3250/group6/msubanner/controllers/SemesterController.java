@@ -91,11 +91,11 @@ public class SemesterController {
      * @param season the season the semester is in (Fall, Spring, Summer)
      * @return ModelAndView of the semester
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/semesters/updatesemester/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/semesters/updatesemester/{id}")
     public ModelAndView updateSemester(@RequestParam int startYear, int startMonth, int startDay,
                                     int endYear, int endMonth, int endDay,
-                                    String season) {
-        Semester semester = new Semester();
+                                    String season, @PathVariable final String id) {
+        Semester semester = semesterService.getSemester(id);
         semester.setSemesterStartDate(startYear, startMonth, startDay);
         semester.setSemesterEndDate(endYear, endMonth, endDay);
         semester.setSeason(season);
@@ -109,11 +109,34 @@ public class SemesterController {
 
 
 
+    /**
+     * Deletes a Semester.
+     *
+     * @param id the semester's id
+     */
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/semesters/deletesemester/{id}")
+    public ModelAndView deleteSemester(@PathVariable final String id) {
+        semesterService.deleteSemester(id);
+        ModelAndView mav = new ModelAndView("semesters");
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
 
-
-
-
-    // TODO: add rest of controller methods
+    /**
+     * Maps to the edit course form.
+     *
+     * @param id id of the selected course
+     * @return ModelAndView containing the selected course
+     */
+    @RequestMapping("/semesters/editsemester/{id}")
+    public ModelAndView editCourse(@PathVariable final String id) {
+        ModelAndView mav = new ModelAndView("editsemesterform");
+        mav.addObject("semester", semesterService.getSemester(id));
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
 
     /**
      * Maps to the add semester form.

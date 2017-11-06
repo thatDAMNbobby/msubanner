@@ -1,7 +1,6 @@
 {{#layout}}
 <div>
     <h2>Semester List</h2>
-    <h1>NOT WORKING YET</h1>
     <table class="table table-striped">
         <tr>
             <th>Id</th>
@@ -20,7 +19,7 @@
             <td>{{season}}</td>
             <td>{{semesterStartDate}}</td>
             <td>{{semesterEndDate}}</td>
-            <td><a href="/semesters/getsemester/{{id}}">View</a></td>
+            <td><a href="/semesters/{{id}}">View</a></td>
             <td><a href="/semesters/editsemester/{{id}}">Edit</a></td>
             <td><a href="/semesters/deletesemester/{{id}}">Delete</a> </td>
         </tr>
