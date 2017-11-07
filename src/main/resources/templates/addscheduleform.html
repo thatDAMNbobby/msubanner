@@ -40,7 +40,12 @@
             </select>
         </p>
 
-        <p> Semester:<input type="text" name="semester"/> </p>
+        <p> Semester:<select name="semester">
+            {{#allsemesters}}
+            <option value="{{id}}">{{season}}, {{semesterYear}}</option>
+            {{/allsemesters}}
+        </select>
+        </p>
         <p> Start Date:<input type="text" name="startDate"/> </p>
         <p> Duration:<input type="number" name="duration"/> </p>
         <p> Days:<input type="text" name="days"/> </p>

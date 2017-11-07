@@ -16,6 +16,7 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 
 /**
  * The schedule controller.
@@ -60,7 +61,7 @@ public class ScheduleController {
     @RequestMapping(method = RequestMethod.POST,
             value = "/schedules/addschedule")
     public ModelAndView addSchedule(@RequestParam final Room room,
-            @RequestParam final Building building, final String semester,
+            @RequestParam final Building building, final Semester semester,
             final String startDate, final int duration, final Days days,
             final int hourBlockStartTime, final int hourBlockDuration) {
         HourBlock block = new HourBlock(hourBlockStartTime, hourBlockDuration);
@@ -107,7 +108,7 @@ public class ScheduleController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/updateschedule/{id}")
     public ModelAndView updateSection(@RequestParam final Building building,
-            final Room room, final String semester, final String startDate,
+            final Room room, final Semester semester, final String startDate,
             final int duration, final Days days, final int hourBlockStartTime,
             final int hourBlockDuration, @PathVariable final String id) {
 

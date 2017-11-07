@@ -147,7 +147,7 @@ public class MsubannerApplication implements CommandLineRunner {
         schedule.setScheduleName("Schedule 1");
         schedule.setRoom(room);
         schedule.setBuilding(building);
-        schedule.setSemester("Fall");
+        schedule.setSemester(semester);
         schedule.setId("4512");
         schedule.setDuration(2);
         // schedule.setHours("3:00 AM to 5:00 AM");

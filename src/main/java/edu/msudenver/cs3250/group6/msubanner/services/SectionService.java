@@ -1,7 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +62,7 @@ public class SectionService {
     /**
      * Gets all sections in a given semester.
      *
-     * @param semester String value of semester
+     * @param id String value of semester
      * @return List containing the sections
      */
     public List<Section> getSectionsBySemester(final String semester) {

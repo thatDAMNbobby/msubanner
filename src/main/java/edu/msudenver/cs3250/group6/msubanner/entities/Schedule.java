@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
@@ -26,8 +27,7 @@ public class Schedule {
     @DBRef
     private Building building;
 
-    /** The semester. */
-    private String semester;
+    private Semester semester;
 
     /**
      * stores the date in this field. format is {code YYYY/MM/DD }
@@ -61,7 +61,7 @@ public class Schedule {
      */
     public Schedule() {
     }
-
+  
     /**
      * Schedule constructor.
      *
@@ -74,7 +74,7 @@ public class Schedule {
      * @param hours the hours.
      */
     public Schedule(final Room room, final Building building,
-            final String semester, final String startDate, final int duration,
+            final Semester semester, final String startDate, final int duration,
             final Days days, final String hours) {
         // Set up checks
         this.room = room;
@@ -109,7 +109,7 @@ public class Schedule {
      * @param hours the hours
      */
     public Schedule(final Room room, final Building building,
-            final String semester, final String startDate, final int duration,
+            final Semester semester, final String startDate, final int duration,
             final Days days, final HourBlock hours) {
         // Set up checks
         this.room = room;
@@ -156,7 +156,7 @@ public class Schedule {
      *
      * @return semester of the schedule
      */
-    public String getSemester() {
+    public Semester getSemester() {
         return semester;
     }
 
@@ -165,7 +165,7 @@ public class Schedule {
      *
      * @param semester New id for the schedule
      */
-    public void setSemester(final String semester) {
+    public void setSemester(final Semester semester) {
         this.semester = semester;
     }
 

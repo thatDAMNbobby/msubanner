@@ -10,6 +10,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import edu.msudenver.cs3250.group6.msubanner.services.UserService;
+import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
 
 /*
  *  The purpose here is to get a mapping to the index.html in templates
@@ -40,6 +41,10 @@ class HomeController {
     /** The user service. */
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SemesterService semesterService;
+
     /**
      * Maps the home page to index.html.
      *
@@ -74,6 +79,7 @@ class HomeController {
         ModelAndView mav = new ModelAndView("addscheduleform");
         mav.addObject("allrooms", roomService.getAllRooms());
         mav.addObject("allbuildings", buildingService.getAllBuildings());
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
         mav.addObject("school_name", Global.SCHOOL_NAME);
 
         return mav;
