@@ -17,6 +17,7 @@ import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
 import edu.msudenver.cs3250.group6.msubanner.services.UserService;
+import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
 
 /**
  * The controller for the section class.
