@@ -61,7 +61,7 @@ public class ScheduleController {
     @RequestMapping(method = RequestMethod.POST,
             value = "/schedules/addschedule")
     public ModelAndView addSchedule(@RequestParam final Room room,
-            @RequestParam final Building building, final String semester,
+            @RequestParam final Building building, final Semester semester,
             final String startDate, final int duration, final Days days,
             final int hourBlockStartTime, final int hourBlockDuration) {
         HourBlock block = new HourBlock(hourBlockStartTime, hourBlockDuration);
