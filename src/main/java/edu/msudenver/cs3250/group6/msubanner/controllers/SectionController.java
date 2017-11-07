@@ -182,7 +182,7 @@ public class SectionController {
         Semester semester = semesterService.getSemester(id);
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections",
-                sectionService.getSectionsBySemester(semester));
+                sectionService.getSectionsBySemester(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
 
         System.out.println(sectionService.getSectionsBySemester(id));
