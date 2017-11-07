@@ -2,24 +2,45 @@ package edu.msudenver.cs3250.group6.msubanner.repositories;
 
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
 import java.util.List;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  * Section repository.
  */
 @RepositoryRestResource
 public interface SectionRepository extends MongoRepository<Section, String> {
-    public Section findById(String id);
-    public List<Section> findAll();
-    public List<Section> findAllByProfessor_Id(String id);
+    /**
+     * Finds a section by id.
+     *
+     * @param id the section id
+     * @return the section
+     */
+    Section findById(String id);
 
-    public List<Section> findSectionsByScheduleSemester(Semester semester);
-    public List<Section> findSectionsByScheduleSemesterId(String id);
+    /**
+     * Finds all sections.
+     *
+     * @return the list of sections
+     */
+    List<Section> findAll();
 
+    /**
+     * Finds all sections under a professor.
+     *
+     * @param id the professor's id
+     * @return the sections
+     */
+    List<Section> findAllByProfessorId(String id);
+  
+    /**
+     * Finds all sections under a specific semester.
+     *
+     * @param semester the semester
+     * @return the list of sections
+     */
+    List<Section> findAllByScheduleSemester(String semester);
 
 }
 

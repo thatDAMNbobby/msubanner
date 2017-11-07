@@ -1,7 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+/**
+ * The professor class.
+ */
 @Entity
 public class Professor {
     /**
@@ -12,32 +20,33 @@ public class Professor {
     @Column(unique = true)
     private long id;
     /**
-     * Relationship with sections
+     * Relationship with sections.
      */
     //@OneToMany(mappedBy = "professor")
     //private Section sections;
     /**
-     * Professor first name
+     * Professor first name.
      */
     @Column(unique = false)
     private String firstName;
     /**
-     * Professor last name
+     * Professor last name.
      */
     @Column(unique = false)
     private String lastName;
 
     /**
-     * Default constructor, creates blank professor
+     * Default constructor, creates blank professor.
      */
-    public Professor(){}
+    public Professor() {
+    }
 
     /**
      *
      * @param firstname professors first name
      * @param lastname professors last name
      */
-    public Professor(String firstname, String lastname){
+    public Professor(final String firstname, final String lastname) {
         this.firstName = firstname;
         this.lastName = lastname;
     }
@@ -62,7 +71,7 @@ public class Professor {
      *
      * @param firstName sets professors first name to firstName
      */
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -78,7 +87,7 @@ public class Professor {
      *
      * @param lastName sets professors last name to lastName
      */
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 

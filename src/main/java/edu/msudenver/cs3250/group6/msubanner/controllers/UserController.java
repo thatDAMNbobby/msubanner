@@ -1,18 +1,20 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import java.util.List;
 import java.util.Map;
 
-import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
-import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 
 /*
  * Reference:
@@ -66,7 +68,8 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/users/adduser")
     public ModelAndView addUser(@RequestParam final Map<String, String> body) {
-        System.out.println("Post request hit /users/adduser containing " + body.size() + " elements");
+        System.out.println("Post request hit /users/adduser containing "
+                + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
@@ -89,13 +92,15 @@ public class UserController {
     /**
      * Updates an existing user.
      *
+     * @param firstName the user's first name
+     * @param lastName the user's last name
      * @param id the user's id
-     * @return void
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/users/updateuser/{id}")
-    public ModelAndView updateUser(@RequestParam final String firstName, final String lastName,
-            @PathVariable final String id) {
+    public ModelAndView updateUser(@RequestParam final String firstName,
+            final String lastName, @PathVariable final String id) {
         User user = userService.getUser(id);
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -126,6 +131,7 @@ public class UserController {
 
     /**
      * Deletes the selected user.
+     *
      * @param id The id of the user
      * @return ModelAndView containing the list of all users
      */
@@ -142,7 +148,8 @@ public class UserController {
     /**
      * Maps to the add user form.
      *
-     * @return ModelAndView containing the global school name, redirecting to the add user form
+     * @return ModelAndView containing the global school name, redirecting to
+     *         the add user form
      */
     @RequestMapping("/users/adduser")
     public ModelAndView addUserForm() {
@@ -153,6 +160,7 @@ public class UserController {
 
     /**
      * Maps to the edit user form.
+     *
      * @param id The sid of the selected user
      * @return ModeAndView containing the selected user
      */

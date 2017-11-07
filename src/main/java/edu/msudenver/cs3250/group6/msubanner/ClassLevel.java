@@ -18,7 +18,7 @@ public enum ClassLevel {
     /** Senior class level. */
     SENIOR("Senior", 90),
     /** Graduate class level. */
-    GRADUATE("Graduate",120);
+    GRADUATE("Graduate", 120);
     /** Display name. */
     private String myDisplayName;
 

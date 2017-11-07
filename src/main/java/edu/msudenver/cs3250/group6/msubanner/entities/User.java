@@ -1,12 +1,8 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.Table;
 
 /**
  * Persistent User class.
@@ -18,8 +14,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    /** The user's first name. */
     private String firstName;
 
+    /** The user's last name. */
     private String lastName;
 
     /** Constant multiplier for hash method. */

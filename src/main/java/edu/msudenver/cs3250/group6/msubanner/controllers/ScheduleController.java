@@ -1,25 +1,41 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.*;
-import edu.msudenver.cs3250.group6.msubanner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.entities.Days;
+import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
+import edu.msudenver.cs3250.group6.msubanner.entities.Room;
+import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
+import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
+import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
+
+/**
+ * The schedule controller.
+ */
 @Controller
 public class ScheduleController {
 
+    /** The schedule service. */
     @Autowired
     private ScheduleService scheduleService;
 
+    /** The hour block service. */
     @Autowired
     private HourBlockService hourBlockService;
 
-    @Autowired
-    private SemesterService semesterService;
-
+    /**
+     * Gets all schedules.
+     *
+     * @return the model and view
+     */
     @RequestMapping("/schedules")
     public ModelAndView getAllSchedules() {
         ModelAndView mav = new ModelAndView("schedules");
@@ -28,25 +44,34 @@ public class ScheduleController {
         return mav;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/schedules/addschedule")
-    public ModelAndView addSchedule(@RequestParam final Room room, @RequestParam final Building building,
-                                    Semester semester, String startDate, int duration, String days,
-                                    //String hours
-                                    int hourBlockStartTime, int hourBlockDuration
-                                    ) {
-        //Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, hours);
-
+    /**
+     * Adds a schedule.
+     *
+     * @param room the room
+     * @param building the building
+     * @param semester the semester
+     * @param startDate the start date
+     * @param duration the duration
+     * @param days the days
+     * @param hourBlockStartTime the start time
+     * @param hourBlockDuration the duration
+     * @return the model and view
+     */
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/schedules/addschedule")
+    public ModelAndView addSchedule(@RequestParam final Room room,
+            @RequestParam final Building building, final String semester,
+            final String startDate, final int duration, final Days days,
+            final int hourBlockStartTime, final int hourBlockDuration) {
         HourBlock block = new HourBlock(hourBlockStartTime, hourBlockDuration);
         hourBlockService.addHourBlock(block);
 
-        Schedule schedule = new Schedule(room, building, semester, startDate, duration, days, block);
+        Schedule schedule = new Schedule(room, building, semester, startDate,
+                duration, days, block);
         scheduleService.addSchedule(schedule);
-
 
         ModelAndView mav = new ModelAndView("schedules");
         mav.addObject("allschedules", scheduleService.getAllSchedules());
-        mav.addObject("allsemesters", semesterService.getAllSemesters());
-
 
         return mav;
     }
@@ -66,28 +91,37 @@ public class ScheduleController {
     }
 
     /**
-     * Updates a schedule.
+     * Updates a section.
      *
-     * @param id the schedule's id
-     **/
+     * @param building the building
+     * @param room the room
+     * @param semester the semester
+     * @param startDate the start date
+     * @param duration the duration
+     * @param days the days
+     * @param hourBlockStartTime the start time
+     * @param hourBlockDuration the duration
+     * @param id the section id
+     * @return the model and view
+     */
     @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/updateschedule/{id}")
-    public ModelAndView updateSection(@RequestParam final Building building, final Room room, final Semester semester,
-                                      final String startDate, final int duration, final String days,
-                                      //final String hours ,
-                                      int hourBlockStartTime, int hourBlockDuration,
-                                      @PathVariable final String id) {
+    public ModelAndView updateSection(@RequestParam final Building building,
+            final Room room, final Semester semester, final String startDate,
+            final int duration, final Days days, final int hourBlockStartTime,
+            final int hourBlockDuration, @PathVariable final String id) {
 
         Schedule schedule = scheduleService.getSchedule(id);
         schedule.setBuilding(building);
         schedule.setRoom(room);
         schedule.setDuration(duration);
         schedule.setDays(days);
-        //schedule.setHours(hours);
+        // schedule.setHours(hours);
         HourBlock oldBlock = schedule.getHourBlock();
         hourBlockService.deleteHourBlock(oldBlock.getId());
 
-        HourBlock newBlock = new HourBlock(hourBlockStartTime, hourBlockDuration);
+        HourBlock newBlock = new HourBlock(hourBlockStartTime,
+                hourBlockDuration);
         hourBlockService.addHourBlock(newBlock);
         schedule.setHourBlock(newBlock);
 
@@ -102,10 +136,12 @@ public class ScheduleController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
     /**
      * Deletes a section.
      *
      * @param id the schedule's id
+     * @return a redirect string
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/deleteschedule/{id}")
@@ -116,6 +152,7 @@ public class ScheduleController {
 
     /**
      * Maps to the edit schedule form.
+     *
      * @param id the id of the schedule
      * @return ModelAndView containing the selected schedule
      */

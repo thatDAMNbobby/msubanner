@@ -1,19 +1,30 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
-import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
+import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
 
+/**
+ * The schedule service.
+ */
 @Service
 public class ScheduleService {
     /** The room repository. */
     @Autowired
     private ScheduleRepository scheduleRepository;
 
-    public List<Schedule> getAllSchedules() {return scheduleRepository.findAll(); }
+    /**
+     * Gets all schedules.
+     *
+     * @return the list of schedules
+     */
+    public List<Schedule> getAllSchedules() {
+        return scheduleRepository.findAll();
+    }
 
     /**
      * Gets a schedule by id.

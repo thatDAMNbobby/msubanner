@@ -1,6 +1,5 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -78,6 +77,7 @@ public class Course {
      * @param credits the number of credits
      * @param learningObjectives the learning objectives
      * @param prereqs the prerequisites
+     * @param department the department
      * @throws IllegalArgumentException if a parameter is invalid
      */
     public Course(final String title, final String description,
@@ -260,7 +260,8 @@ public class Course {
      * @param department Department this course belongs to
      * @throws IllegalArgumentException if department is null
      */
-    public void setDepartment(Department department) throws IllegalArgumentException {
+    public void setDepartment(final Department department)
+            throws IllegalArgumentException {
         if (department != null) {
             this.myDepartment = department;
         } else {
@@ -294,5 +295,4 @@ public class Course {
                 && this.getDescription().equals(course.getDescription())
                 && this.getTitle().equals(course.getTitle());
     }
-    
 }

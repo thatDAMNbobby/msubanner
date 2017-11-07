@@ -1,12 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+/**
+ * The schedule class.
+ */
 public class Schedule {
     /**
      * Schedule id number.
@@ -15,37 +18,36 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    /** The room. */
     @DBRef
     private Room room;
 
+    /** The building. */
     @DBRef
     private Building building;
 
     private Semester semester;
+
     /**
-     * stores the date in this field.
-     * format is {code YYYY/MM/DD }
-    */
+     * stores the date in this field. format is {code YYYY/MM/DD }
+     */
     private String startDate;
 
-
     /**
-     * number of weeks
+     * number of weeks.
      */
     private int duration;
 
     /**
-     * stores the days this schedule is for
-     * Example: Monday =  M, Tuesday = T, etc.
-     * An example that is Mon-Fri would be "MTWRF"
-     * Just tues/thursday would be "TR"
+     * stores the days this schedule is for Example: Monday = M, Tuesday = T,
+     * etc. An example that is Mon-Fri would be "MTWRF" Just tues/thursday would
+     * be "TR"
      */
-    private String days;
+    private Days days;
 
     /**
-     * time of class
-     * Format is HH:MM AM/PM to HH:MM AM/PM
-     * Example 02:00 AM to 03:50 AM
+     * time of class. Format is HH:MM AM/PM to HH:MM AM/PM Example 02:00 AM to
+     * 03:50 AM
      */
     private String hours;
 
@@ -53,12 +55,27 @@ public class Schedule {
     @DBRef
     private HourBlock hourBlock;
 
+    /**
+     * Default constructor.
+     */
     public Schedule() {
-
     }
-
-    public Schedule(Room room, Building building, Semester semester, String startDate, int duration, String days, String hours) {
-       //Set up checks
+  
+    /**
+     * Schedule constructor.
+     *
+     * @param room the room
+     * @param building the building
+     * @param semester the semester
+     * @param startDate the start date
+     * @param duration the duration
+     * @param days the days
+     * @param hours the hours.
+     */
+    public Schedule(final Room room, final Building building,
+            final Semester semester, final String startDate, final int duration,
+            final Days days, final String hours) {
+        // Set up checks
         this.room = room;
         this.building = building;
         this.semester = semester;
@@ -73,16 +90,27 @@ public class Schedule {
         }
 
         /*
-        if (roomCapacity < 0) {
-            throw new IllegalArgumentException("Stay positive");
-        } else {
-            capacity = roomCapacity;
-        }*/
+         * if (roomCapacity < 0) { throw new
+         * IllegalArgumentException("Stay positive"); } else { capacity =
+         * roomCapacity; }
+         */
     }
 
-
-    public Schedule(Room room, Building building, Semester semester, String startDate, int duration, String days, HourBlock hours) {
-        //Set up checks
+    /**
+     * Schedule constructor.
+     *
+     * @param room the room
+     * @param building the building
+     * @param semester the semester
+     * @param startDate the start date
+     * @param duration the duration
+     * @param days the days
+     * @param hours the hours
+     */
+    public Schedule(final Room room, final Building building,
+            final Semester semester, final String startDate, final int duration,
+            final Days days, final HourBlock hours) {
+        // Set up checks
         this.room = room;
         this.building = building;
         this.semester = semester;
@@ -91,7 +119,6 @@ public class Schedule {
         // this.hours = hours;
         hourBlock = hours;
 
-
         if (duration < 1) {
             throw new IllegalArgumentException("Stay positive");
         } else {
@@ -99,11 +126,10 @@ public class Schedule {
         }
 
         /*
-        if (roomCapacity < 0) {
-            throw new IllegalArgumentException("Stay positive");
-        } else {
-            capacity = roomCapacity;
-        }*/
+         * if (roomCapacity < 0) { throw new
+         * IllegalArgumentException("Stay positive"); } else { capacity =
+         * roomCapacity; }
+         */
     }
 
     /**
@@ -111,7 +137,7 @@ public class Schedule {
      *
      * @return days of the schedule
      */
-    public String getDays() {
+    public Days getDays() {
         return days;
     }
 
@@ -120,7 +146,7 @@ public class Schedule {
      *
      * @param days New id for the schedule
      */
-    public void setDays(final String days) {
+    public void setDays(final Days days) {
         this.days = days;
     }
 
@@ -151,11 +177,14 @@ public class Schedule {
         return id;
     }
 
-    /** Returns the startDate of the schedule.
+    /**
+     * Returns the startDate of the schedule.
      *
      * @return startDate of the schedule
      */
-    public String getStartDate() { return startDate; }
+    public String getStartDate() {
+        return startDate;
+    }
 
     /**
      * Sets the startDate of the schedule.
@@ -228,12 +257,15 @@ public class Schedule {
     public String getHours() {
         return hours;
     }
+
     /**
      * Sets the schedule hours.
      *
-     * @param hours new hours  for this schedule
+     * @param hours new hours for this schedule
      */
-    public void setHours(final String hours) {this.hours = hours; }
+    public void setHours(final String hours) {
+        this.hours = hours;
+    }
 
     /**
      * Returns the schedule duration.
@@ -243,19 +275,31 @@ public class Schedule {
     public int getDuration() {
         return duration;
     }
+
     /**
      * Sets the schedule hours.
      *
-     * @param duration new hours  for this schedule
+     * @param duration new hours for this schedule
      */
-    public void setDuration(final int duration) {this.duration = duration; }
+    public void setDuration(final int duration) {
+        this.duration = duration;
+    }
 
-
-    public HourBlock getHourBlock() {
+    /**
+     * Gets the hour block.
+     *
+     * @return the hour block
+     */
+    public final HourBlock getHourBlock() {
         return hourBlock;
     }
 
-    public void setHourBlock(HourBlock hourBlock) {
+    /**
+     * Sets the hour block.
+     *
+     * @param hourBlock the hour block
+     */
+    public final void setHourBlock(final HourBlock hourBlock) {
         this.hourBlock = hourBlock;
     }
 
@@ -275,7 +319,6 @@ public class Schedule {
                 && this.getRoom().equals(otherSchedule.getRoom())
                 && this.getBuilding().equals(otherSchedule.getBuilding());
     }
-
 
     /**
      * Name of the building.
@@ -308,4 +351,3 @@ public class Schedule {
     }
 
 }
-

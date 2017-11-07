@@ -29,7 +29,7 @@ public class Room {
     private int capacity;
 
     /**
-     * Building
+     * Building.
      */
     private Building building;
 
@@ -47,7 +47,8 @@ public class Room {
      * @param roomCapacity the room capacity
      * @param building the building the room is in
      */
-    public Room(final int roomNumber, final int roomCapacity, final Building building) {
+    public Room(final int roomNumber, final int roomCapacity,
+            final Building building) {
 
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
@@ -103,6 +104,7 @@ public class Room {
 
     /**
      * Sets the room's capacity.
+     *
      * @param capacity Capacity of the room
      * @throws IllegalArgumentException if capacity is negative
      */
@@ -117,6 +119,7 @@ public class Room {
 
     /**
      * Sets the building this room is in.
+     *
      * @param building new building containing this room
      * @throws IllegalArgumentException id building is null
      */

@@ -1,16 +1,18 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The controller for the room class.
@@ -18,12 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RoomController {
 
-    /**
-     * The room service.
-     */
+    /** The room service. */
     @Autowired
     private RoomService roomService;
 
+    /** The building service. */
     @Autowired
     private BuildingService buildingService;
 
@@ -63,8 +64,8 @@ public class RoomController {
      * @return the room
      */
     @RequestMapping(method = RequestMethod.POST, value = "/rooms/addroom")
-    public ModelAndView addRoom(@RequestParam final int roomNumber, final int roomCapacity,
-                                final Building building) {
+    public ModelAndView addRoom(@RequestParam final int roomNumber,
+            final int roomCapacity, final Building building) {
         Room room = new Room(roomNumber, roomCapacity, building);
         roomService.addRoom(room);
         ModelAndView mav = new ModelAndView("showroom");
@@ -74,14 +75,19 @@ public class RoomController {
     }
 
     /**
-     * Updates a course.
+     * Updates a room.
      *
-     * @param id the room's id
+     * @param roomNumber the room number
+     * @param roomCapacity the room capacity
+     * @param building the building
+     * @param id the room id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/rooms/updateroom/{id}")
-    public ModelAndView updateRoom(@RequestParam final int roomNumber, final int roomCapacity,
-                                    final Building building, @PathVariable final String id) {
+    public ModelAndView updateRoom(@RequestParam final int roomNumber,
+            final int roomCapacity, final Building building,
+            @PathVariable final String id) {
         Room room = roomService.getRoom(id);
         room.setRoomNumber(roomNumber);
         room.setRoomCapacity(roomCapacity);
@@ -106,10 +112,11 @@ public class RoomController {
 
     /**
      * Deletes the selected room.
+     *
      * @param id The room's id
      * @return ModelAndView containing the list of all rooms
      */
-    @RequestMapping(method=RequestMethod.GET,
+    @RequestMapping(method = RequestMethod.GET,
             value = "/rooms/deleteroom/{id}")
     public ModelAndView deleteRoomRedirect(@PathVariable final String id) {
         roomService.deleteRoom(id);
@@ -120,7 +127,8 @@ public class RoomController {
     }
 
     /**
-     * Maps to the edit room form
+     * Maps to the edit room form.
+     *
      * @param id The room's id
      * @return ModelAndView containing the selected room
      */
@@ -128,7 +136,7 @@ public class RoomController {
     public ModelAndView editRoom(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editroomform");
         mav.addObject("room", roomService.getRoom(id));
-        mav.addObject("allbuildings",buildingService.getAllBuildings());
+        mav.addObject("allbuildings", buildingService.getAllBuildings());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
@@ -141,7 +149,7 @@ public class RoomController {
     @RequestMapping("/rooms/addroom")
     public ModelAndView addRoomForm() {
         ModelAndView mav = new ModelAndView("addroomform");
-        mav.addObject("allbuildings",buildingService.getAllBuildings());
+        mav.addObject("allbuildings", buildingService.getAllBuildings());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }

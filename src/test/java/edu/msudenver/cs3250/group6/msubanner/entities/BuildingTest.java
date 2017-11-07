@@ -1,11 +1,12 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 
 public class BuildingTest {
 
