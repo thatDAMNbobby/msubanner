@@ -1,5 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +82,7 @@ class HomeController {
         mav.addObject("allbuildings", buildingService.getAllBuildings());
         mav.addObject("allsemesters", semesterService.getAllSemesters());
         mav.addObject("school_name", Global.SCHOOL_NAME);
-
+        mav.addObject("alldays", Days.Day.values());
         return mav;
     }
 }

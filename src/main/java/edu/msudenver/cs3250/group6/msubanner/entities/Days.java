@@ -36,6 +36,20 @@ public class Days {
         /** Saturday. */
         SATURDAY(7, "Saturday");
 
+        @Override
+        public String toString() {
+            switch(this) {
+                case SUNDAY: return "Sunday";
+                case MONDAY: return "Monday";
+                case TUESDAY: return "Tuesday";
+                case WEDNESDAY: return "Wednesday";
+                case THURSDAY: return "Thursday";
+                case FRIDAY: return "Friday";
+                case SATURDAY: return "Saturday";
+                default: throw new IllegalArgumentException();
+            }
+        }
+
         /** The day's number in the week (1-7). */
         private int myDayNum;
         /** The day's name. */
@@ -51,6 +65,7 @@ public class Days {
             myDayNum = dayNum;
             myDayName = dayName;
         }
+
     }
 
     /**
@@ -140,5 +155,11 @@ public class Days {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String output = dayList.toString();
+        return output.substring(1,output.length() - 1);
     }
 }

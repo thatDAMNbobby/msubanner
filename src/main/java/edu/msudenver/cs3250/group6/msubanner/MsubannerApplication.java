@@ -1,16 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Days;
-import edu.msudenver.cs3250.group6.msubanner.entities.Days.Day;
-import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
 import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
@@ -27,6 +17,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The msubanner application.
@@ -139,9 +133,7 @@ public class MsubannerApplication implements CommandLineRunner {
         HourBlock block = new HourBlock(6, 1);
         hourBlockRepository.save(block);
 
-        Days days = new Days();
-        days.addToDayList(Day.MONDAY);
-        days.addToDayList(Day.WEDNESDAY);
+        List<Day> days = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
 
         Schedule schedule = new Schedule();
         schedule.setScheduleName("Schedule 1");
