@@ -14,8 +14,8 @@ public class Professor {
     /**
      * Relationship with sections
      */
-    @OneToMany(mappedBy = "professor")
-    private Section sections;
+    //@OneToMany(mappedBy = "professor")
+    //private Section sections;
     /**
      * Professor first name
      */
@@ -46,10 +46,10 @@ public class Professor {
      *
      * @return returns sections that professor belongs to
      */
-    public Section getSections(){
+   /* public Section getSections(){
         return sections;
     }
-
+*/
     /**
      *
      * @return returns professors first name

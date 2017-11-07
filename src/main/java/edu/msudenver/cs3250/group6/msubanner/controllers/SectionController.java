@@ -1,14 +1,8 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
-import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
-import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
-import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
-import edu.msudenver.cs3250.group6.msubanner.services.UserService;
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
+import edu.msudenver.cs3250.group6.msubanner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +29,8 @@ public class SectionController {
     private UserService userService;
     @Autowired
     private ScheduleService scheduleService;
+    @Autowired
+    private SemesterService semesterService;
 
     /**
      * Gets the list of all sections.
@@ -152,16 +148,18 @@ public class SectionController {
     /**
      * Maps to the sections page with a list of all sections in a given semester.
      *
-     * @param semester String value of semester
+     * @param id String value of semester id
      * @return ModelAndView containing list of sections
      */
     @RequestMapping("/sections/bysemester")
-    public ModelAndView sectionsBySemester(@RequestParam String semester) {
+    public ModelAndView sectionsBySemester(@RequestParam final String id) {
+        Semester semester = semesterService.getSemester(id);
+
         ModelAndView mav = new ModelAndView("sections");
-        mav.addObject("allsections", sectionService.getSectionsBySemester(semester));
+        mav.addObject("allsections", sectionService.getSectionsBySemester(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
 
-        System.out.println(sectionService.getSectionsBySemester(semester));
+        System.out.println(sectionService.getSectionsBySemester(id));
         return mav;
     }
 
@@ -173,6 +171,7 @@ public class SectionController {
     @RequestMapping("/sections/selectsemester")
     public ModelAndView selectSemester() {
         ModelAndView mav = new ModelAndView("selectsemester");
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }

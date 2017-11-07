@@ -21,7 +21,7 @@ public class Schedule {
     @DBRef
     private Building building;
 
-    private String semester;
+    private Semester semester;
     /**
      * stores the date in this field.
      * format is {code YYYY/MM/DD }
@@ -57,7 +57,7 @@ public class Schedule {
 
     }
 
-    public Schedule(Room room, Building building, String semester, String startDate, int duration, String days, String hours) {
+    public Schedule(Room room, Building building, Semester semester, String startDate, int duration, String days, String hours) {
        //Set up checks
         this.room = room;
         this.building = building;
@@ -81,7 +81,7 @@ public class Schedule {
     }
 
 
-    public Schedule(Room room, Building building, String semester, String startDate, int duration, String days, HourBlock hours) {
+    public Schedule(Room room, Building building, Semester semester, String startDate, int duration, String days, HourBlock hours) {
         //Set up checks
         this.room = room;
         this.building = building;
@@ -129,7 +129,7 @@ public class Schedule {
      *
      * @return semester of the schedule
      */
-    public String getSemester() {
+    public Semester getSemester() {
         return semester;
     }
 
@@ -138,7 +138,7 @@ public class Schedule {
      *
      * @param semester New id for the schedule
      */
-    public void setSemester(final String semester) {
+    public void setSemester(final Semester semester) {
         this.semester = semester;
     }
 

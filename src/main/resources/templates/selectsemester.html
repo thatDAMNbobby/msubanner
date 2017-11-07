@@ -4,7 +4,11 @@
 </div>
 <div>
     <form action="/sections/bysemester/" method="post">
-        <p>Semester: <input type="text" name="semester"></p>
+        <p>Semester: <select name="id">
+            {{#allsemesters}}
+            <option value="{{id}}">{{season}}, {{semesterYear}}</option>
+            {{/allsemesters}}
+        </select></p>
         <p><button type="submit" class="btn-default">Search</button> </p>
     </form>
 </div>
