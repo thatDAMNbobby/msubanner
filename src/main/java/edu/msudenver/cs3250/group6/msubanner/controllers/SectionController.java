@@ -109,6 +109,7 @@ public class SectionController {
         mav.addObject("allcourses", courseService.getAllCourses());
         mav.addObject("allprofs", userService.getAllUsers());
         mav.addObject("allschedules", scheduleService.getAllSchedules());
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
 
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;

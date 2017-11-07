@@ -8,13 +8,12 @@
             {{#allsemesters}}
             <option value="{{id}}">{{season}}, {{semesterYear}}</option>
             {{/allsemesters}}
-        </select></p>
-        <p><button type="submit" class="btn-default">Search</button> </p>
+        </select>
+            <button type="submit" class="btn-default">Search</button> </p>
     </form>
 </div>
 <div class="row">
     <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
-    <button type="button" onclick="window.location.href='/sections/addsection'" class="btn-default">New Section</button>
 </div>
 {{/layout}}
 {{>layout}}

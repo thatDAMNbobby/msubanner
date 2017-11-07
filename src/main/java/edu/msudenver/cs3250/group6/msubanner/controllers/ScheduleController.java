@@ -2,10 +2,7 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.*;
-import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
-import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
-import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
-import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
+import edu.msudenver.cs3250.group6.msubanner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +17,8 @@ public class ScheduleController {
     @Autowired
     private HourBlockService hourBlockService;
 
+    @Autowired
+    private SemesterService semesterService;
 
     @RequestMapping("/schedules")
     public ModelAndView getAllSchedules() {
@@ -46,6 +45,7 @@ public class ScheduleController {
 
         ModelAndView mav = new ModelAndView("schedules");
         mav.addObject("allschedules", scheduleService.getAllSchedules());
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
 
 
         return mav;
