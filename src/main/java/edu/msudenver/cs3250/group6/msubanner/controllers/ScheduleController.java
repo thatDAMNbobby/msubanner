@@ -16,6 +16,7 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 
 /**
  * The schedule controller.
