@@ -1,5 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,14 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.entities.Days;
-import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The schedule controller.
@@ -62,13 +60,15 @@ public class ScheduleController {
             value = "/schedules/addschedule")
     public ModelAndView addSchedule(@RequestParam final Room room,
             @RequestParam final Building building, final Semester semester,
-            final String startDate, final int duration, final Days days,
+            final String startDate, final int duration, final String days,
             final int hourBlockStartTime, final int hourBlockDuration) {
         HourBlock block = new HourBlock(hourBlockStartTime, hourBlockDuration);
         hourBlockService.addHourBlock(block);
 
+        String[] words = days.split(",\\s*");
+        ArrayList<Day> list = Day.getList(words);
         Schedule schedule = new Schedule(room, building, semester, startDate,
-                duration, days, block);
+                duration, list, block);
         scheduleService.addSchedule(schedule);
 
         ModelAndView mav = new ModelAndView("schedules");
@@ -108,9 +108,9 @@ public class ScheduleController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/schedules/updateschedule/{id}")
     public ModelAndView updateSection(@RequestParam final Building building,
-            final Room room, final Semester semester, final String startDate,
-            final int duration, final Days days, final int hourBlockStartTime,
-            final int hourBlockDuration, @PathVariable final String id) {
+              final Room room, final Semester semester, final String startDate,
+              final int duration, final ArrayList<Day> days, final int hourBlockStartTime,
+              final int hourBlockDuration, @PathVariable final String id) {
 
         Schedule schedule = scheduleService.getSchedule(id);
         schedule.setBuilding(building);

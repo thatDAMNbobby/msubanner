@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.util.List;
+
 /**
  * The schedule class.
  */
@@ -44,7 +46,7 @@ public class Schedule {
      * etc. An example that is Mon-Fri would be "MTWRF" Just tues/thursday would
      * be "TR"
      */
-    private Days days;
+    private List<Day> days;
 
     /**
      * time of class. Format is HH:MM AM/PM to HH:MM AM/PM Example 02:00 AM to
@@ -75,7 +77,7 @@ public class Schedule {
      */
     public Schedule(final Room room, final Building building,
             final Semester semester, final String startDate, final int duration,
-            final Days days, final String hours) {
+            final List<Day> days, final String hours) {
         // Set up checks
         this.room = room;
         this.building = building;
@@ -110,7 +112,7 @@ public class Schedule {
      */
     public Schedule(final Room room, final Building building,
             final Semester semester, final String startDate, final int duration,
-            final Days days, final HourBlock hours) {
+            final List<Day> days, final HourBlock hours) {
         // Set up checks
         this.room = room;
         this.building = building;
@@ -138,7 +140,7 @@ public class Schedule {
      *
      * @return days of the schedule
      */
-    public Days getDays() {
+    public List<Day> getDays() {
         return days;
     }
 
@@ -147,9 +149,7 @@ public class Schedule {
      *
      * @param days New id for the schedule
      */
-    public void setDays(final Days days) {
-        this.days = days;
-    }
+    public void  setDays(final List<Day> days) { this.days = days; }
 
     /**
      * Returns the semester of the schedule.
