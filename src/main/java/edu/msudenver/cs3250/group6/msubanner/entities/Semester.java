@@ -258,4 +258,9 @@ public class Semester {
         }
         return false;
     }
+    
+    @Override
+    public String toString() {
+        return this.season + ", " + this.getSemesterYear();
+    }
 }
