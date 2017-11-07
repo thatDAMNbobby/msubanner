@@ -1,19 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import java.util.List;
-
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 
 /**
  * The controller for the building class.
@@ -31,7 +27,7 @@ public class BuildingController {
      * @return the list of all buildings
      */
     @RequestMapping("/buildings")
-    public ModelAndView getAllBuildings(){
+    public ModelAndView getAllBuildings() {
         ModelAndView mav = new ModelAndView("buildings");
         mav.addObject("allbuildings", buildingService.getAllBuildings());
         mav.addObject("school_name", Global.SCHOOL_NAME);
@@ -45,11 +41,12 @@ public class BuildingController {
      * @return the building
      */
     @RequestMapping("/buildings/getbuilding/{id}")
-    public ModelAndView getBuilding(@PathVariable final String id){
+    public ModelAndView getBuilding(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showbuilding");
         mav.addObject("building", buildingService.getBuilding(id));
         mav.addObject("school_name", Global.SCHOOL_NAME);
-        return mav;}
+        return mav;
+    }
 
     /**
      * Adds a building.
@@ -57,7 +54,8 @@ public class BuildingController {
      * @param buildingName the building name
      * @return the building
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/buildings/addbuilding")
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/buildings/addbuilding")
     public ModelAndView addBuilding(@RequestParam final String buildingName) {
         Building building = new Building(buildingName);
         buildingService.addBuilding(building);
@@ -69,7 +67,10 @@ public class BuildingController {
 
     /**
      * Updates a building.
+     *
+     * @param buildingName the building name
      * @param id the building's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/buildings/updatebuilding/{id}")
@@ -89,6 +90,7 @@ public class BuildingController {
      * Deletes a building.
      *
      * @param id the building's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/buildings/deletebuilding/{id}")
@@ -102,10 +104,13 @@ public class BuildingController {
 
     /**
      * Maps to the edit building form.
+     *
      * @param id Id of the building
-     * @return ModelAndView containing the building object referenced by id, and the Global school name
+     * @return ModelAndView containing the building object referenced by id, and
+     *         the Global school name
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/buildings/editbuilding/{id}")
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/buildings/editbuilding/{id}")
     public ModelAndView editBuilding(@PathVariable final String id) {
 
         ModelAndView mav = new ModelAndView("editbuildingform");
@@ -125,6 +130,5 @@ public class BuildingController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
-
 
 }

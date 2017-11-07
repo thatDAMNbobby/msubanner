@@ -1,11 +1,9 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Persistent Department class.

@@ -1,10 +1,10 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
  * Persistent Section class.
@@ -44,8 +44,10 @@ public class Section {
      *
      * @param course The course that this section belongs to
      * @param professor The professor for this section
+     * @param schedule the schedule
      */
-    public Section(final Course course, final User professor, final Schedule schedule) {
+    public Section(final Course course, final User professor,
+            final Schedule schedule) {
         if (course != null) {
             this.course = course;
         }
@@ -116,7 +118,9 @@ public class Section {
      *
      * @return the professor of this section
      */
-    public User getProfessor() { return professor; }
+    public User getProfessor() {
+        return professor;
+    }
 
     /**
      * Sets the professor of this section.
@@ -146,7 +150,7 @@ public class Section {
      *
      * @param schedule new schedule for this section
      */
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(final Schedule schedule) {
         if (schedule != null) {
             this.schedule = schedule;
         }

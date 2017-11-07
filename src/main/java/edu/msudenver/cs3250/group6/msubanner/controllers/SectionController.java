@@ -1,5 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
@@ -9,16 +17,6 @@ import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
 import edu.msudenver.cs3250.group6.msubanner.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.persistence.GeneratedValue;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The controller for the section class.
@@ -29,10 +27,16 @@ public class SectionController {
     /** The section service. */
     @Autowired
     private SectionService sectionService;
+
+    /** The course service. */
     @Autowired
     private CourseService courseService;
+
+    /** The user service. */
     @Autowired
     private UserService userService;
+
+    /** The schedule service. */
     @Autowired
     private ScheduleService scheduleService;
 
@@ -66,16 +70,18 @@ public class SectionController {
     /**
      * Adds a section.
      *
-     * @param course The course the section belongs to
-     * @return the section
+     * @param course the course
+     * @param professor the professor
+     * @param schedule the schedule
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
     public ModelAndView addSection(@RequestParam final Course course,
-                                   @RequestParam final User professor, final Schedule schedule) {
+            @RequestParam final User professor, final Schedule schedule) {
         Section section = new Section(course, professor, schedule);
-        System.out.println("Adding section " + course.getTitle() + " Taught by " + professor.getLastName() + ", " + professor.getFirstName());
+        System.out.println("Adding section " + course.getTitle() + " Taught by "
+                + professor.getLastName() + ", " + professor.getFirstName());
         sectionService.addSection(section);
-
 
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections", sectionService.getAllSections());
@@ -86,12 +92,17 @@ public class SectionController {
     /**
      * Updates a section.
      *
-     * @param id the section's id
+     * @param course the course
+     * @param professor the professor
+     * @param schedule the schedule
+     * @param id the section id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/sections/updatesection/{id}")
-    public ModelAndView updateSection(@RequestParam final Course course, final User professor,
-            final Schedule schedule, @PathVariable final String id) {
+    public ModelAndView updateSection(@RequestParam final Course course,
+            final User professor, final Schedule schedule,
+            @PathVariable final String id) {
         Section section = sectionService.getSection(id);
         section.setCourse(course);
         section.setProfessor(professor);
@@ -102,6 +113,7 @@ public class SectionController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
     /**
      * Maps to the add section form.
      *
@@ -117,8 +129,10 @@ public class SectionController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
     /**
      * Maps to the add section form.
+     *
      * @param id the id of the section
      * @return ModelAndView containing the selected section
      */
@@ -141,6 +155,7 @@ public class SectionController {
      * Deletes a section.
      *
      * @param id the section's id
+     * @return the redirect string
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/sections/deletesection/{id}")
@@ -150,15 +165,18 @@ public class SectionController {
     }
 
     /**
-     * Maps to the sections page with a list of all sections in a given semester.
+     * Maps to the sections page with a list of all sections in a given
+     * semester.
      *
      * @param semester String value of semester
      * @return ModelAndView containing list of sections
      */
     @RequestMapping("/sections/bysemester")
-    public ModelAndView sectionsBySemester(@RequestParam String semester) {
+    public ModelAndView sectionsBySemester(
+            @RequestParam final String semester) {
         ModelAndView mav = new ModelAndView("sections");
-        mav.addObject("allsections", sectionService.getSectionsBySemester(semester));
+        mav.addObject("allsections",
+                sectionService.getSectionsBySemester(semester));
         mav.addObject("school_name", Global.SCHOOL_NAME);
 
         System.out.println(sectionService.getSectionsBySemester(semester));

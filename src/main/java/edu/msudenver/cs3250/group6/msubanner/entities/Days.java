@@ -1,173 +1,144 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.HashSet;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * Persistent Days Class
+ * Persistent Days Class.
  */
 public class Days {
 
-    /**
-     * Days
-     */
+    /** Days. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
-    /**
-     * ArrayList of Day enums
-     */
-    private HashMap<Integer,String> dayList = new HashMap<Integer,String>();
+    /** ArrayList of Day enums. */
+    private HashSet<Day> dayList = new HashSet<Day>();
 
-    /**
-     * Valid Day to populate dayList
-     */
+    /** Valid Day to populate dayList. */
     public enum Day {
+        /** Sunday. */
         SUNDAY(1, "Sunday"),
-        MONDAY(2, "Monday" ),
+        /** Monday. */
+        MONDAY(2, "Monday"),
+        /** Tuesday. */
         TUESDAY(3, "Tuesday"),
+        /** Wednesday. */
         WEDNESDAY(4, "Wednesday"),
+        /** Thursday. */
         THURSDAY(5, "Thursday"),
+        /** Friday. */
         FRIDAY(6, "Friday"),
+        /** Saturday. */
         SATURDAY(7, "Saturday");
 
-        private int dayNum;
-        private String dayName;
+        /** The day's number in the week (1-7). */
+        private int myDayNum;
+        /** The day's name. */
+        private String myDayName;
 
         /**
-         * Constructor for Day
+         * Constructor for Day.
          *
          * @param dayName the name of the day
          * @param dayNum the number value of the day
          */
-        Day(int dayNum, final String dayName) {
-            this.dayNum = dayNum;
-            this.dayName = dayName;
+        Day(final int dayNum, final String dayName) {
+            myDayNum = dayNum;
+            myDayName = dayName;
         }
     }
 
     /**
      * Sets the id of an Days instance.
      *
-     * @param id
+     * @param idNum the day id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setId(final String idNum) {
+        id = idNum;
     }
 
     /**
-     * Returns the id of the Days
+     * Returns the id of the Days.
      *
      * @return String id number of the Days
      */
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
     /**
-     * Adds an association of number to day to the dayList HashMap
+     * Adds an association of number to day to the dayList HashMap.
      *
-     * @param dayToAdd
+     * @param dayToAdd the day to add to the day list
      */
-    public void addToDayList(String dayToAdd) {
-        if(dayToAdd.equals(Day.SUNDAY.dayName)) {
-            dayList.put(Day.SUNDAY.dayNum, Day.SUNDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.MONDAY.dayName)) {
-            dayList.put(Day.MONDAY.dayNum, Day.MONDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.TUESDAY.dayName)) {
-            dayList.put(Day.TUESDAY.dayNum, Day.TUESDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.WEDNESDAY.dayName)) {
-            dayList.put(Day.WEDNESDAY.dayNum, Day.WEDNESDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.THURSDAY.dayName)) {
-            dayList.put(Day.THURSDAY.dayNum, Day.THURSDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.FRIDAY.dayName)) {
-            dayList.put(Day.FRIDAY.dayNum, Day.FRIDAY.dayName);
-        }
-        else if(dayToAdd.equals(Day.SATURDAY.dayName)) {
-            dayList.put(Day.SATURDAY.dayNum, Day.SATURDAY.dayName);
-        }
-        else {
-            System.out.println("Console Warning: Invalid input '"+ dayToAdd +"', Days.addToDayList() expected a capitalized day name, ie. Monday, Tuesday, etc");
+    public void addToDayList(final Day dayToAdd) {
+        switch (dayToAdd) {
+        case SUNDAY:
+        case MONDAY:
+        case TUESDAY:
+        case WEDNESDAY:
+        case THURSDAY:
+        case FRIDAY:
+        case SATURDAY:
+            dayList.add(dayToAdd);
+            break;
+        default:
+            System.out.println("Console Warning: Invalid input '" + dayToAdd
+                    + "', Days.addToDayList() expected a capitalized day name"
+                    + ", ie. Monday, Tuesday, etc");
         }
     }
 
     /**
-     * Removes an association of number to day to the dayList HashMap
+     * Removes an association of number to day to the dayList HashMap.
      *
-     * @param dayToRemove
+     * @param dayToRemove the day to remove from the list
      */
-    public void removeDayFromList(String dayToRemove) {
-        if(dayToRemove.equals(Day.SUNDAY.dayName)) {
-            dayList.remove(Day.SUNDAY.dayNum);
+    public void removeDayFromList(final Day dayToRemove) {
+        switch (dayToRemove) {
+        case SUNDAY:
+        case MONDAY:
+        case TUESDAY:
+        case WEDNESDAY:
+        case THURSDAY:
+        case FRIDAY:
+        case SATURDAY:
+            dayList.remove(dayToRemove);
+            break;
+        default:
+            System.out.println("Console Warning: Invalid input '" + dayToRemove
+                    + "', Days.removeDayFromList() expected a capitalized day"
+                    + "name, ie. Monday, Tuesday, etc");
         }
-        else if(dayToRemove.equals(Day.MONDAY.dayName)) {
-            dayList.remove(Day.MONDAY.dayNum);
-        }
-        else if(dayToRemove.equals(Day.TUESDAY.dayName)) {
-            dayList.remove(Day.TUESDAY.dayNum);
-        }
-        else if(dayToRemove.equals(Day.WEDNESDAY.dayName)) {
-            dayList.remove(Day.WEDNESDAY.dayNum);
-        }
-        else if(dayToRemove.equals(Day.THURSDAY.dayName)) {
-            dayList.remove(Day.THURSDAY.dayNum);
-        }
-        else if(dayToRemove.equals(Day.FRIDAY.dayName)) {
-            dayList.remove(Day.FRIDAY.dayNum);
-        }
-        else if(dayToRemove.equals(Day.SATURDAY.dayName)) {
-            dayList.remove(Day.SATURDAY.dayNum);
-        }
-        else {
-            System.out.println("Console Warning: Invalid input '"+ dayToRemove +"', Days.removeDayFromList() expected a capitalized day name, ie. Monday, Tuesday, etc");
-        }
-
     }
 
     /**
-     * Returns a HashMap of Day values
+     * Returns a HashMap of Day values.
      *
      * @return HashMap of Day values
      */
-    public HashMap<Integer,String> getDayList() {
+    public HashSet<Day> getDayList() {
         return dayList;
     }
 
     /**
-     * Checks to see if there is crossover between two days
-     * inspired by: https://stackoverflow.com/questions/18644579/getting-the-difference-between-two-sets
+     * Checks to see if there is conflict between two sets of days.
      *
-     * @param mapToCompare the days list to be compared against the calling days list
-     * @return
+     * @param setToCompare the days list to be compared against the calling days
+     *        list
+     * @return if there is a conflict between days
      */
-    public boolean hasConflict(HashMap<Integer,String> mapToCompare) {
-
-        if(mapToCompare.size() >= 4 && this.dayList.size() >= 4) {
-            return true;
+    public boolean hasConflict(final HashSet<Day> setToCompare) {
+        for (Day day : dayList) {
+            if (setToCompare.contains(day)) {
+                return true;
+            }
         }
-
-        Set<Integer> set1 = new HashSet<>();
-        set1.addAll(this.dayList.keySet());
-
-        Set<Integer> set2 = new HashSet<>();
-        set2.addAll(mapToCompare.keySet());
-
-        set1.removeAll(set2);
-
-        if(set1.size() != this.dayList.keySet().size()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return false;
     }
 }
-

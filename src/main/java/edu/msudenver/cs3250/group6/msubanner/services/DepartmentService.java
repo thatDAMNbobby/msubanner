@@ -1,13 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Department;
+import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
 
 /**
  * Department service.

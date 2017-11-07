@@ -5,7 +5,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Persistent HourBlock class
+ * Persistent HourBlock class.
  */
 
 public class HourBlock {
@@ -17,7 +17,8 @@ public class HourBlock {
     private String id;
 
     /**
-     * Start time of the HourBlock. Integer between 6 and 20 represents 6am to 8pm.
+     * Start time of the HourBlock. Integer between 6 and 20 represents 6am to
+     * 8pm.
      */
     private int startTime;
 
@@ -26,21 +27,31 @@ public class HourBlock {
      */
     private int duration;
 
+    /**
+     * Hour block default constructor.
+     */
     public HourBlock() {
         startTime = 6;
         duration = 1;
     }
 
-    public HourBlock(int startTime, int duration) {
+    /**
+     * Hour block constructor.
+     *
+     * @param startTime the start time
+     * @param duration the duration
+     */
+    public HourBlock(final int startTime, final int duration) {
         this.startTime = startTime;
         this.duration = duration;
     }
 
     /**
      * Sets the id of an HourBlock instance.
-      * @param id New id for the Hours
+     *
+     * @param id New id for the Hours
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -65,17 +76,20 @@ public class HourBlock {
     /**
      * Sets the startTime of HourBlock.
      *
+     * @param startTime the start time
      * @throws IllegalArgumentException if HourBlock < 6 or > 20
      */
-    public void setStartTime(int startTime) throws IllegalArgumentException {
-        if(startTime > 20 || startTime < 6) {
-            throw new IllegalArgumentException("Start Time must be an integer between 6 and 20");
+    public void setStartTime(final int startTime)
+            throws IllegalArgumentException {
+        if (startTime > 20 || startTime < 6) {
+            throw new IllegalArgumentException(
+                    "Start Time must be an integer between 6 and 20");
         }
         this.startTime = startTime;
     }
 
     /**
-     * Gets the duration of the HourBlock
+     * Gets the duration of the HourBlock.
      *
      * @return duration of the HourBlock
      */
@@ -84,20 +98,22 @@ public class HourBlock {
     }
 
     /**
-     * Sets the duration of the HourBlock
+     * Sets the duration of the HourBlock.
      *
-     * @param duration
+     * @param duration the duration
      * @throws IllegalArgumentException if duration is not 1, 2, or 3
      */
-    public void setDuration(int duration) throws IllegalArgumentException {
-        if(duration < 1 || duration >3) {
-            throw new IllegalArgumentException("Duration must be an integer between 1 and 3");
+    public void setDuration(final int duration)
+            throws IllegalArgumentException {
+        if (duration < 1 || duration > 3) {
+            throw new IllegalArgumentException(
+                    "Duration must be an integer between 1 and 3");
         }
         this.duration = duration;
     }
 
     /**
-     * equals method for HourBlock tests if startTime and Duration are equal
+     * equals method for HourBlock tests if startTime and Duration are equal.
      */
     @Override
     public boolean equals(final Object o) {
@@ -109,13 +125,16 @@ public class HourBlock {
         }
 
         HourBlock hourBlock = (HourBlock) o;
-        return this.getStartTime() == hourBlock.getStartTime() &&
-               this.getDuration()  == hourBlock.getDuration();
+        return this.getStartTime() == hourBlock.getStartTime()
+                && this.getDuration() == hourBlock.getDuration();
     }
 
     /**
-     * hasConflict method - checks to see if there is a conflict with another HourBlock
-     *   using the logic "if lowerStartTime + duration > higherStartTime, then conflict"
+     * checks to see if there is a conflict with another HourBlock. using the
+     * logic "if lowerStartTime + duration > higherStartTime, then conflict"
+     *
+     * @param o the object to compare with
+     * @return if there is a conflict
      */
     public boolean hasConflict(final Object o) {
         if (o == null || !(o instanceof HourBlock)) {
@@ -126,13 +145,19 @@ public class HourBlock {
         }
 
         HourBlock hourBlock = (HourBlock) o;
-        if(this.getStartTime() == hourBlock.getStartTime()) return true;
-
-        if(this.getStartTime() < hourBlock.getStartTime() && this.getStartTime() + this.duration > hourBlock.getStartTime()) {
+        if (this.getStartTime() == hourBlock.getStartTime()) {
             return true;
         }
 
-        if(hourBlock.getStartTime() < this.getStartTime() && hourBlock.getStartTime() + hourBlock.duration > this.getStartTime()) {
+        if (this.getStartTime() < hourBlock.getStartTime()
+                && this.getStartTime() + this.duration > hourBlock
+                        .getStartTime()) {
+            return true;
+        }
+
+        if (hourBlock.getStartTime() < this.getStartTime()
+                && hourBlock.getStartTime() + hourBlock.duration > this
+                        .getStartTime()) {
             return true;
         }
 

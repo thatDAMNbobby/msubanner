@@ -1,16 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import edu.msudenver.cs3250.group6.msubanner.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 /*
  *  The purpose here is to get a mapping to the index.html in templates
@@ -26,15 +25,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 class HomeController {
 
+    /** The building repository. */
     @Autowired
     private BuildingService buildingService;
 
+    /** The room service. */
     @Autowired
     private RoomService roomService;
 
+    /** The course service. */
     @Autowired
     private CourseService courseService;
 
+    /** The user service. */
     @Autowired
     private UserService userService;
     /**

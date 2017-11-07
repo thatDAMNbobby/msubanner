@@ -1,11 +1,10 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.codehaus.groovy.runtime.powerassert.SourceText;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.*;
 
 public class HourBlockTest {
 
