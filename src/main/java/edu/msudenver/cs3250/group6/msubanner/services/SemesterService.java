@@ -1,14 +1,15 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
+import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
 
 /**
- * The Semester service
+ * The Semester service.
  */
 @Service
 public class SemesterService {
@@ -18,20 +19,27 @@ public class SemesterService {
     private SemesterRepository semesterRepository;
 
     /**
-     * Gets the list of all Semesters
+     * Gets the list of all Semesters.
+     *
      * @return the list of Semesters
      */
-    public List<Semester> getAllSemesters() { return semesterRepository.findAll(); }
+    public List<Semester> getAllSemesters() {
+        return semesterRepository.findAll();
+    }
 
     /**
-     * Gets a Semester by id
+     * Gets a Semester by id.
+     *
      * @param id the Semester id
      * @return the Semester
      */
-    public Semester getSemester(final String id) { return semesterRepository.findOne(id); }
+    public Semester getSemester(final String id) {
+        return semesterRepository.findOne(id);
+    }
 
     /**
      * Adds a Semester.
+     *
      * @param semester the Semester to add
      */
     public void addSemester(final Semester semester) {
@@ -40,6 +48,7 @@ public class SemesterService {
 
     /**
      * Updates a Semester.
+     *
      * @param semester the Semester to update
      */
     public void updateSemester(final Semester semester) {
@@ -48,10 +57,10 @@ public class SemesterService {
 
     /**
      * Deletes a Semester.
+     *
      * @param id the Semester id
      */
     public void deleteSemester(final String id) {
         semesterRepository.delete(id);
     }
 }
-

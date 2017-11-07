@@ -1,13 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
 
 /**
  * Building service.

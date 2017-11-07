@@ -1,24 +1,18 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 
 /**
  * The controller for the Course class.
@@ -30,6 +24,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    /** The department service. */
     @Autowired
     private DepartmentService departmentService;
 
@@ -71,15 +66,18 @@ public class CourseController {
      * @param courseCredits the course credits
      * @param courseLearningObjectives the course learning objectives
      * @param coursePrereqs the course prereqs
+     * @param courseDepartment the course department
      * @return the course
      */
     @RequestMapping(method = RequestMethod.POST, value = "/courses/addcourse")
-    public ModelAndView addCourse(@RequestParam final String courseTitle, String courseDescription,
-                                  int courseCredits, String courseLearningObjectives,
-                                  ClassLevel coursePrereqs, Department courseDepartment) {
+    public ModelAndView addCourse(@RequestParam final String courseTitle,
+            final String courseDescription, final int courseCredits,
+            final String courseLearningObjectives,
+            final ClassLevel coursePrereqs, final Department courseDepartment) {
 
-        Course course = new Course(courseTitle, courseDescription, courseCredits,
-                courseLearningObjectives, coursePrereqs, courseDepartment);
+        Course course = new Course(courseTitle, courseDescription,
+                courseCredits, courseLearningObjectives, coursePrereqs,
+                courseDepartment);
         courseService.addCourse(course);
 
         ModelAndView mav = new ModelAndView("showcourse");
@@ -93,13 +91,21 @@ public class CourseController {
     /**
      * Updates a course.
      *
-     * @param id the course's id
+     * @param title the course title
+     * @param description the course description
+     * @param credits the number of credits
+     * @param learningObjectives the course learning objectives
+     * @param prereqs the course prerequisites
+     * @param department the course department
+     * @param id the course id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/courses/updatecourse/{id}")
-    public ModelAndView updateCourse(@RequestParam final String title, final String description,
-                                     final int credits, final String learningObjectives, final ClassLevel prereqs,
-                                     final Department department, @PathVariable final String id) {
+    public ModelAndView updateCourse(@RequestParam final String title,
+            final String description, final int credits,
+            final String learningObjectives, final ClassLevel prereqs,
+            final Department department, @PathVariable final String id) {
         Course course = courseService.getCourse(id);
         course.setDescription(description);
         course.setTitle(title);
@@ -118,6 +124,7 @@ public class CourseController {
      * Deletes a course.
      *
      * @param id the course's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/courses/deletecourse/{id}")

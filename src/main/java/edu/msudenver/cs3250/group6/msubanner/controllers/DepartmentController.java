@@ -1,17 +1,16 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Department;
 import edu.msudenver.cs3250.group6.msubanner.services.DepartmentService;
 
@@ -60,8 +59,11 @@ public class DepartmentController {
      */
     @RequestMapping(method = RequestMethod.POST,
             value = "/departments/adddepartment")
-    public ModelAndView addDepartment(@RequestParam final Map<String, String> body) {
-        System.out.println("Post request hit /departments/adddepartment containing " + body.size() + " elements");
+    public ModelAndView addDepartment(
+            @RequestParam final Map<String, String> body) {
+        System.out.println(
+                "Post request hit /departments/adddepartment containing "
+                        + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
             System.out.println(key + ": " + val);
@@ -82,11 +84,15 @@ public class DepartmentController {
 
     /**
      * Updates a department.
+     *
+     * @param departmentName the department name
      * @param id the department's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/departments/updatedepartment/{id}")
-    public ModelAndView updateDepartment(@RequestParam final String departmentName,
+    public ModelAndView updateDepartment(
+            @RequestParam final String departmentName,
             @PathVariable final String id) {
         Department department = departmentService.getDepartment(id);
         department.setDepartmentName(departmentName);
@@ -101,6 +107,7 @@ public class DepartmentController {
      * Deletes a department.
      *
      * @param id the department's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/departments/deletedepartment/{id}")
@@ -112,6 +119,12 @@ public class DepartmentController {
         return mav;
     }
 
+    /**
+     * Edits a department.
+     *
+     * @param id the department id
+     * @return the model and view
+     */
     @RequestMapping("/departments/editdepartment/{id}")
     public ModelAndView editDepartment(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("editdepartmentform");

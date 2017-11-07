@@ -1,9 +1,5 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-
-import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
+import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
+
 /**
- * The controller for the Semester class
+ * The controller for the Semester class.
  */
 @Controller
 public class SemesterController {
@@ -52,7 +52,7 @@ public class SemesterController {
     }
 
     /**
-     * Adds a Semester
+     * Adds a Semester.
      *
      * @param startYear the year the semester starts
      * @param startMonth the month the semester starts
@@ -63,10 +63,11 @@ public class SemesterController {
      * @param season the season the semester is in (Fall, Spring, Summer)
      * @return ModelAndView of the semester
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/semesters/addsemester")
-    public ModelAndView addSemester(@RequestParam int startYear, int startMonth, int startDay,
-                                                  int endYear, int endMonth, int endDay,
-                                                  String season) {
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/semesters/addsemester")
+    public ModelAndView addSemester(@RequestParam final int startYear,
+            final int startMonth, final int startDay, final int endYear,
+            final int endMonth, final int endDay, final String season) {
         Semester semester = new Semester();
         semester.setSemesterStartDate(startYear, startMonth, startDay);
         semester.setSemesterEndDate(endYear, endMonth, endDay);
@@ -80,7 +81,7 @@ public class SemesterController {
     }
 
     /**
-     * Updates a Semester
+     * Updates a Semester.
      *
      * @param startYear the year the semester starts
      * @param startMonth the month the semester starts
@@ -89,12 +90,15 @@ public class SemesterController {
      * @param endMonth the month the semester ends
      * @param endDay the day the semester ends
      * @param season the season the semester is in (Fall, Spring, Summer)
+     * @param id the semester id
      * @return ModelAndView of the semester
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/semesters/updatesemester/{id}")
-    public ModelAndView updateSemester(@RequestParam int startYear, int startMonth, int startDay,
-                                    int endYear, int endMonth, int endDay,
-                                    String season, @PathVariable final String id) {
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/semesters/updatesemester/{id}")
+    public ModelAndView updateSemester(@RequestParam final int startYear,
+            final int startMonth, final int startDay, final int endYear,
+            final int endMonth, final int endDay, final String season,
+            @PathVariable final String id) {
         Semester semester = semesterService.getSemester(id);
         semester.setSemesterStartDate(startYear, startMonth, startDay);
         semester.setSemesterEndDate(endYear, endMonth, endDay);
@@ -107,12 +111,11 @@ public class SemesterController {
         return mav;
     }
 
-
-
     /**
      * Deletes a Semester.
      *
      * @param id the semester's id
+     * @return the model and view
      */
     @RequestMapping(method = RequestMethod.GET,
             value = "/semesters/deletesemester/{id}")

@@ -19,4 +19,5 @@
     <suppress checks="LineLength" files="[\\/]*Test.java$"/>
     <suppress checks="Name" files="[\\/]*Test.java$"/>
     <suppress checks="HideUtilityClassConstructor" files="MsubannerApplication.java|SectionControllerTest.java"/>
+    <suppress checks="NewlineAtEndOfFile" files="."/>
 </suppressions>

@@ -1,12 +1,12 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 
-import java.util.ArrayList;
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Section;
+import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
 
 /**
  * The section service.
@@ -66,6 +66,6 @@ public class SectionService {
      * @return List containing the sections
      */
     public List<Section> getSectionsBySemester(final String semester) {
-        return sectionRepository.findAllBySchedule_Semester(semester);
+        return sectionRepository.findAllByScheduleSemester(semester);
     }
 }
