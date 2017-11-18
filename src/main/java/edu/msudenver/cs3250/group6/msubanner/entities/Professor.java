@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * The professor class.
  */
 @Entity
-public class Professor {
+public class Professor extends User{
     /**
      * Semester id number.
      */
@@ -19,21 +18,7 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
     private long id;
-    /**
-     * Relationship with sections.
-     */
-    //@OneToMany(mappedBy = "professor")
-    //private Section sections;
-    /**
-     * Professor first name.
-     */
-    @Column(unique = false)
-    private String firstName;
-    /**
-     * Professor last name.
-     */
-    @Column(unique = false)
-    private String lastName;
+
 
     /**
      * Default constructor, creates blank professor.
@@ -47,8 +32,7 @@ public class Professor {
      * @param lastname professors last name
      */
     public Professor(final String firstname, final String lastname) {
-        this.firstName = firstname;
-        this.lastName = lastname;
+        super(firstname,lastname);
     }
 
     /**
@@ -64,7 +48,7 @@ public class Professor {
      * @return returns professors first name
      */
     public String getFirstName() {
-        return firstName;
+        return super.getFirstName();
     }
 
     /**
@@ -72,7 +56,7 @@ public class Professor {
      * @param firstName sets professors first name to firstName
      */
     public void setFirstName(final String firstName) {
-        this.firstName = firstName;
+        super.setFirstName(firstName);
     }
 
     /**
@@ -80,7 +64,7 @@ public class Professor {
      * @return returns professors last name
      */
     public String getLastName() {
-        return lastName;
+        return super.getLastName();
     }
 
     /**
@@ -88,7 +72,7 @@ public class Professor {
      * @param lastName sets professors last name to lastName
      */
     public void setLastName(final String lastName) {
-        this.lastName = lastName;
+        super.setLastName(lastName);
     }
 
 }
