@@ -160,6 +160,8 @@ public class Days {
     @Override
     public String toString() {
         String output = dayList.toString();
-        return output.substring(1,output.length() - 1);
+        String replaced = output.replace("[", "").replace("]", "");
+        return replaced;
+        //return output.substring(1,output.length() - 1);
     }
 }
