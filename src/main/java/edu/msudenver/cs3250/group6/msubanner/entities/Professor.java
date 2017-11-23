@@ -10,7 +10,8 @@ import javax.persistence.Id;
  * The professor class.
  */
 @Entity
-public class Professor extends User{
+public class Professor extends User {
+
     /**
      * Semester id number.
      */
@@ -23,8 +24,7 @@ public class Professor extends User{
     /**
      * Default constructor, creates blank professor.
      */
-    public Professor() {
-    }
+    public Professor() {}
 
     /**
      *
