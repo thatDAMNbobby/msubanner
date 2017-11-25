@@ -164,6 +164,10 @@ public class Room {
      */
     @Override
     public String toString() {
-        return "Id: " + id + ", Room Number: " + roomNumber;
+        return  "Id: " + this.getId() +
+                ", Room Number: " + this.getRoomNumber() +
+                ", Building: " + this.getBuilding() +
+                ", Capacity: " + this.getRoomCapacity();
+
     }
 }
