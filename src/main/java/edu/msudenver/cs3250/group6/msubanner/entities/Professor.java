@@ -13,12 +13,12 @@ import javax.persistence.Id;
 public class Professor extends User {
 
     /**
-     * Semester id number.
+     * Professor id number.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
-    private long id;
+    private String id;
 
 
     /**
@@ -27,12 +27,29 @@ public class Professor extends User {
     public Professor() {}
 
     /**
-     *
+     * Constructor
      * @param firstname professors first name
      * @param lastname professors last name
      */
     public Professor(final String firstname, final String lastname) {
         super(firstname,lastname);
+    }
+
+    /**
+     * Sets the professor's id number.
+     * @param id the new id number
+     */
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the professor's id number.
+     * @return the professor's id number
+     */
+    @Override
+    public String getId() {
+        return id;
     }
 
     /**
@@ -55,7 +72,7 @@ public class Professor extends User {
      *
      * @param firstName sets professors first name to firstName
      */
-    public void setFirstName(final String firstName) {
+    public void setFirstName(final String firstName) throws IllegalArgumentException {
         super.setFirstName(firstName);
     }
 
@@ -71,8 +88,23 @@ public class Professor extends User {
      *
      * @param lastName sets professors last name to lastName
      */
-    public void setLastName(final String lastName) {
+    public void setLastName(final String lastName) throws IllegalArgumentException {
         super.setLastName(lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
 }
