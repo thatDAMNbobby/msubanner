@@ -63,7 +63,10 @@ public class Schedule {
      */
     public Schedule() {
     }
-  
+
+
+    // TODO: Which constructor should be primarily used and do
+    // TODO: we need both?
     /**
      * Schedule constructor.
      *
@@ -120,7 +123,7 @@ public class Schedule {
         this.startDate = startDate;
         this.days = days;
         // this.hours = hours;
-        hourBlock = hours;
+        this.hourBlock = hours;
 
         if (duration < 1) {
             throw new IllegalArgumentException("Stay positive");
