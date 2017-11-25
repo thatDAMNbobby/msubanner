@@ -92,16 +92,32 @@ public class Professor extends User {
         super.setLastName(lastName);
     }
 
+    /**
+     * Get hashcode for User
+     *
+     * @return hashCode for super (User) class
+     */
     @Override
     public int hashCode() {
         return super.hashCode();
     }
 
+    /**
+     * Compares User class of Professor
+     *
+     * @param other User object
+     * @return boolean true if two professors are equal
+     */
     @Override
     public boolean equals(Object other) {
         return super.equals(other);
     }
 
+    /**
+     * Get String of Professor data
+     *
+     * @return String of Professor data
+     */
     @Override
     public String toString() {
         return super.toString();
