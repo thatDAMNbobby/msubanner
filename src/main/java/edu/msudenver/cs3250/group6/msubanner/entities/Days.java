@@ -1,6 +1,9 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -164,7 +167,9 @@ public class Days {
      */
     @Override
     public String toString() {
-        String output = dayList.toString();
+        List sortedList = new ArrayList(dayList);
+        Collections.sort(sortedList);
+        String output = sortedList.toString();
         String replaced = output.replace("[", "").replace("]", "");
         return replaced;
         //return output.substring(1,output.length() - 1);
