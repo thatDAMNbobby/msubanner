@@ -130,6 +130,6 @@ public class DaysTest {
 
         days.removeDayFromList(Day.MONDAY);
 
-        assertEquals("Tuesday, Saturday, Sunday", days.toString());
+        assertEquals("Sunday, Tuesday, Saturday", days.toString());
     }
 }

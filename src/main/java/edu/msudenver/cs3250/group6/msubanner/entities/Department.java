@@ -93,8 +93,9 @@ public class Department {
     }
 
     /**
+     * Generates hashcode for Department object
      *
-     * @return
+     * @return int value of hashcode
      */
     @Override
     public int hashCode() {
@@ -104,8 +105,9 @@ public class Department {
     }
 
     /**
+     * Returns a String for Department
      *
-     * @return
+     * @return String of Department values
      */
     @Override
     public String toString() {
