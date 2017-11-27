@@ -16,7 +16,7 @@ public class SectionTest {
     @Test
     public void sectionWithArgsTest() {
         Course course = new Course();
-        User prof = new User("Dr.", "Meseeks");
+        Professor prof = new Professor("Dr.", "Meseeks");
         Schedule schedule = new Schedule();
         Section section = new Section(course, prof, schedule);
         assertNotNull(course);
@@ -39,7 +39,7 @@ public class SectionTest {
     @Test
     public void getProfessor() {
         Course course = new Course();
-        User prof = new User();
+        Professor prof = new Professor();
         Schedule schedule = new Schedule();
         Section section = new Section(course, prof, schedule);
         assertEquals(prof, section.getProfessor());
@@ -48,7 +48,7 @@ public class SectionTest {
     @Test
     public void setProfessor() {
         Course course = new Course();
-        User prof = new User();
+        Professor prof = new Professor();
         Section section = new Section();
         section.setProfessor(prof);
         assertEquals(prof, section.getProfessor());
@@ -66,7 +66,7 @@ public class SectionTest {
     @Test
     public void getCourseTest() {
         Course course = new Course();
-        User prof = new User();
+        Professor prof = new Professor();
         Schedule schedule = new Schedule();
         Section section = new Section(course, prof, schedule);
         assertEquals(course, section.getCourse());
@@ -81,7 +81,7 @@ public class SectionTest {
     @Test
     public void toStringTest() {
         Course course = new Course();
-        User prof = new User("Mr.", "Meseeks");
+        Professor prof = new Professor("Mr.", "Meseeks");
         Schedule schedule = new Schedule();
         Section section = new Section(course, prof, schedule);
         String out = "Section{" + "id=" + section.getId() + ", Course="
