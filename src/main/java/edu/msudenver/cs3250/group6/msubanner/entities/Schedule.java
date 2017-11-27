@@ -26,7 +26,7 @@ public class Schedule {
      * Name of the schedule.
      */
     @Column
-    private String scheduleName;
+    private String myscheduleName;
 
     /** The room. */
     @DBRef
@@ -320,7 +320,7 @@ public class Schedule {
      * @return String the name of the schedule
      */
     public String getScheduleName() {
-        return this.scheduleName;
+        return this.myScheduleName;
     }
 
     /**
@@ -350,15 +350,15 @@ public class Schedule {
     @Override
     public String toString() {
         return "Schedule{" +
-                "id=" + id +
-                ", Room=" + room.getRoomNumber() +
-                ", building:" + building.getBuildingName() +
-                ", semester: " + semester.toString() +
+                "id=" + myId +
+                ", Room=" + myRoom.getRoomNumber() +
+                ", building:" + myBuilding.getBuildingName() +
+                ", semester: " + mySemester.toString() +
                 ", startDate:" + this.getStartDate() +
                 ", duration:" + this.getDuration() +
                 ", days:" + this.getDays() +
                 ", hours:" + this.getHours() +
-                ", hourBlock:" + hourBlock.toString() +
+                ", hourBlock:" + myHourBlock.toString() +
                 '}';
     }
 

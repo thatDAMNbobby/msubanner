@@ -184,9 +184,9 @@ public class HourBlock {
     @Override
     public String toString() {
         return "HourBlock{" +
-                "id='" + id + '\'' +
-                ", startTime=" + startTime +
-                ", duration=" + duration +
+                "id='" + myId + '\'' +
+                ", startTime=" + myStartTime +
+                ", duration=" + myDuration +
                 '}';
     }
 }

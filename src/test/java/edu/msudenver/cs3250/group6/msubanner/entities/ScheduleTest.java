@@ -24,7 +24,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         String hours1 = "3";
         String startDate1 = "2020/03/27";
 
@@ -47,7 +47,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 0;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         String hours1 = "3";
         String startDate1 = "2020/03/27";
 
@@ -63,7 +63,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -86,7 +86,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 0;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -107,8 +107,8 @@ public class ScheduleTest {
         semester2.setSemesterStartDate(2029,8,17);
         int duration1 = 2;
         int duration2 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
-        List<Day> days2 = new ArrayList<>(Arrays.asList(new Day[] {Day.TUESDAY, Day.THURSDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days2 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.TUESDAY, Days.Day.THURSDAY}));
 
         HourBlock hours1 = new HourBlock();
         HourBlock hours2 = new HourBlock();
@@ -146,7 +146,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -165,7 +165,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -183,7 +183,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -203,7 +203,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
@@ -221,7 +221,7 @@ public class ScheduleTest {
         Semester semester1 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         int duration1 = 2;
-        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
         HourBlock hours1 = new HourBlock();
         hours1.setId("6363");
         String startDate1 = "2020/03/27";
