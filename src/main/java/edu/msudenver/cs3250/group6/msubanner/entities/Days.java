@@ -77,7 +77,7 @@ public class Days {
      * @param idNum the day id
      */
     public void setId(final String idNum) {
-        id = idNum;
+        this.id = idNum;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Days {
      * @return String id number of the Days
      */
     public String getId() {
-        return id;
+        return this.id;
     }
 
     /**

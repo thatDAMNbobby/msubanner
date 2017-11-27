@@ -14,7 +14,7 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Days.Day;
 public class DaysTest {
 
     @Test
-    public void SetIdSetIdTest() {
+    public void setId() {
         Days days = new Days();
         days.setId("1");
         assertEquals("1", days.getId());
@@ -116,12 +116,18 @@ public class DaysTest {
     }
 
     @Test
-    public void testDaysToString() {
+    public void ToString() {
         Days days = new Days();
         days.addToDayList(Day.SATURDAY);
         days.addToDayList(Day.SUNDAY);
         days.addToDayList(Day.MONDAY);
         days.addToDayList(Day.TUESDAY);
+
+        Days days2 = new Days();
+        days2.addToDayList(Day.MONDAY);
+        days2.addToDayList(Day.WEDNESDAY);
+        days2.addToDayList(Day.THURSDAY);
+        days2.addToDayList(Day.FRIDAY);
 
         HashSet<Day> daysToTest = new HashSet<Day>();
         daysToTest.add(Day.SATURDAY);
@@ -131,5 +137,6 @@ public class DaysTest {
         days.removeDayFromList(Day.MONDAY);
 
         assertEquals("Sunday, Tuesday, Saturday", days.toString());
+        assertEquals("Monday, Wednesday, Thursday, Friday", days2.toString());
     }
 }

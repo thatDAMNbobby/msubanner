@@ -19,7 +19,7 @@ public class ScheduleTest {
         Semester semester2 = new Semester();
         semester1.setSemesterStartDate(2019,6,15);
         semester2.setSemesterStartDate(2020,1,15);
-        
+
     }
 
     @Test
