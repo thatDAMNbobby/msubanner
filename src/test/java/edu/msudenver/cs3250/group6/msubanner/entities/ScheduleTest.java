@@ -10,20 +10,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ScheduleTest {
-    @Before
-    public void initialize() {
-        Building building2 = new Building( "Temptation of the Ceiling Cat");
-
-        Room room3 = new Room(256, 255, building2);
-
-        Semester semester2 = new Semester();
-        semester2.setSemesterStartDate(2020,1,15);
-
-        List<Day> days2 = new ArrayList<>(Arrays.asList(new Day[] {Day.SUNDAY, Day.FRIDAY}));
-
-        int duration2 = 3;
-
-    }
 
     @Test
     public void scheduleDefaultConstructor() {
@@ -45,6 +31,13 @@ public class ScheduleTest {
         Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
 
         assertNotNull(schedule);
+        assertEquals(building1, schedule.getBuilding());
+        assertEquals(room1, schedule.getRoom());
+        assertEquals(semester1, schedule.getSemester());
+        assertEquals("2020/03/27", schedule.getStartDate());
+        assertEquals(days1, schedule.getDays());
+        assertEquals(hours1, schedule.getHours());
+        assertEquals(duration1, schedule.getDuration());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -64,87 +57,183 @@ public class ScheduleTest {
     }
 
     @Test
-    public void getDays() throws Exception {
+    public void scheduleParameterizedConstructor2() {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+
+        assertNotNull(schedule);
+        assertEquals(building1, schedule.getBuilding());
+        assertEquals(room1, schedule.getRoom());
+        assertEquals(semester1, schedule.getSemester());
+        assertEquals("2020/03/27", schedule.getStartDate());
+        assertEquals(days1, schedule.getDays());
+        assertEquals(hours1, schedule.getHourBlock());
+        assertEquals(duration1, schedule.getDuration());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void scheduleParameterizedConstructor2Duration() {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 0;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+
+        assertNotNull(schedule);
     }
 
     @Test
-    public void setDays() throws Exception {
+    public void setterTests() throws Exception {
+        Building building1 = new Building("House of Cats");
+        Building building2 = new Building("House of Dogs");
+        Room room1 = new Room(256, 255, building1);
+        Room room2 = new Room(258, 260, building2);
+        Semester semester1 = new Semester();
+        Semester semester2 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        semester2.setSemesterStartDate(2029,8,17);
+        int duration1 = 2;
+        int duration2 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Day> days2 = new ArrayList<>(Arrays.asList(new Day[] {Day.TUESDAY, Day.THURSDAY}));
+
+        HourBlock hours1 = new HourBlock();
+        HourBlock hours2 = new HourBlock();
+        String hours3 = "3";
+        String startDate1 = "2020/03/27";
+        String startDate2 = "2029/08/17";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setDays(days2);
+        schedule.setBuilding(building2);
+        schedule.setRoom(room2);
+        schedule.setSemester(semester2);
+        schedule.setDuration(duration2);
+        schedule.setStartDate(startDate2);
+        schedule.setId("5959");
+        schedule.setHours(hours3);
+        schedule.setHourBlock(hours2);
+
+        assertNotNull(schedule);
+        assertEquals(building2, schedule.getBuilding());
+        assertEquals(room2, schedule.getRoom());
+        assertEquals(semester2, schedule.getSemester());
+        assertEquals(startDate2, schedule.getStartDate());
+        assertEquals(days2, schedule.getDays());
+        assertEquals(hours2.toString(), schedule.getHourBlock().toString());
+        assertEquals(duration2, schedule.getDuration());
+        assertEquals(hours3, schedule.getHours());
+        assertEquals("5959", schedule.getId());
     }
 
-    @Test
-    public void getSemester() throws Exception {
+    @Test(expected = IllegalArgumentException.class)
+    public void checkNullRoom() throws Exception {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setRoom(null);
+        System.out.println(schedule.getRoom());
+
+        assertNotNull(schedule);
     }
 
-    @Test
-    public void setSemester() throws Exception {
-    }
+    @Test(expected = IllegalArgumentException.class)
+    public void checkNullBuilding() throws Exception {
 
-    @Test
-    public void getId() throws Exception {
-    }
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
 
-    @Test
-    public void getStartDate() throws Exception {
-    }
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setBuilding(null);
+        System.out.println(schedule.getBuilding());
 
-    @Test
-    public void setStartDate() throws Exception {
-    }
-
-    @Test
-    public void setId() throws Exception {
-    }
-
-    @Test
-    public void getRoom() throws Exception {
-    }
-
-    @Test
-    public void setRoom() throws Exception {
-    }
-
-    @Test
-    public void getBuilding() throws Exception {
-    }
-
-    @Test
-    public void setBuilding() throws Exception {
-    }
-
-    @Test
-    public void getHours() throws Exception {
-    }
-
-    @Test
-    public void setHours() throws Exception {
-    }
-
-    @Test
-    public void getDuration() throws Exception {
-    }
-
-    @Test
-    public void setDuration() throws Exception {
-    }
-
-    @Test
-    public void getHourBlock() throws Exception {
-    }
-
-    @Test
-    public void setHourBlock() throws Exception {
-    }
-
-    @Test
-    public void equals() throws Exception {
+        assertNotNull(schedule);
     }
 
     @Test
     public void setScheduleName() throws Exception {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setScheduleName("Awesome Schedule");
+
+
+        assertNotNull(schedule);
+        assertEquals("Awesome Schedule", schedule.getScheduleName());
+
     }
-//
-//    @Test
-//    public void toString() throws Exception {
-//    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setScheduleNameNull() throws Exception {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setScheduleName(null);
+
+
+        assertNotNull(schedule);
+    }
+
+    @Test
+    public void toStringTest() throws Exception {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        HourBlock hours1 = new HourBlock();
+        hours1.setId("6363");
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        schedule.setId("5959");
+
+        String expected = "Schedule{id=5959, Room=256, building:House of Cats, semester: Summer, 2019, " +
+                "startDate:2020/03/27, duration:2, days:[Monday, Wednesday], hours:null, " +
+                "hourBlock:HourBlock{id='6363', startTime=6, duration=1}}";
+
+        assertEquals(expected, schedule.toString());
+    }
 
 }

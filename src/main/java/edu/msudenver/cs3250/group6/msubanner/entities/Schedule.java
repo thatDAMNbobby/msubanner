@@ -19,7 +19,14 @@ public class Schedule {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
     private String id;
+
+    /**
+     * Name of the schedule.
+     */
+    @Column
+    private String scheduleName;
 
     /** The room. */
     @DBRef
@@ -305,30 +312,16 @@ public class Schedule {
     }
 
     /**
-     * Returns if one schedule is equal to another.
+     * Gets the schedule name.
+     *
+     * @return String the name of the schedule
      */
-    @Override
-    public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Schedule)) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        final Schedule otherSchedule = (Schedule) other;
-        return this.getId().equals(otherSchedule.getId())
-                && this.getRoom().equals(otherSchedule.getRoom())
-                && this.getBuilding().equals(otherSchedule.getBuilding());
+    public String getScheduleName() {
+        return this.scheduleName;
     }
 
     /**
-     * Name of the building.
-     */
-    @Column
-    private String scheduleName;
-
-    /**
-     * Sets the name of the building.
+     * Sets the name of the schedule.
      *
      * @param scheduleName New scheduleName of the schedule.
      * @throws IllegalArgumentException if new scheduleName is blank
@@ -347,8 +340,17 @@ public class Schedule {
      */
     @Override
     public String toString() {
-        return "Schedule{" + "id=" + id + ", Room=" + room.toString()
-                + ", building:" + building.toString() + '}';
+        return "Schedule{" +
+                "id=" + id +
+                ", Room=" + room.getRoomNumber() +
+                ", building:" + building.getBuildingName() +
+                ", semester: " + semester.toString() +
+                ", startDate:" + this.getStartDate() +
+                ", duration:" + this.getDuration() +
+                ", days:" + this.getDays() +
+                ", hours:" + this.getHours() +
+                ", hourBlock:" + hourBlock.toString() +
+                '}';
     }
 
 }
