@@ -22,15 +22,15 @@ public class BuildingTest {
 
     @Test
     public void testBuildingParameterized() {
-        Building building = new Building("awesome building");
-        assertEquals("awesome building", building.getBuildingName());
+        Building testBuilding = new Building("awesome building");
+        assertEquals("awesome building", testBuilding.getBuildingName());
 
     }
 
     @Test
     public void testBuildingNull() {
-        Building building = new Building("");
-        assertEquals("No building", building.getBuildingName());
+        Building testBuilding = new Building("");
+        assertEquals("No building", testBuilding.getBuildingName());
     }
 
     @Test

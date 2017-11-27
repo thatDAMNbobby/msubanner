@@ -1,14 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
-import java.util.List;
 
 /**
  * The schedule class.
@@ -19,8 +18,9 @@ public class Schedule {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     @Column(unique = true)
-    private String id;
+    private String myId;
 
     /**
      * Name of the schedule.
@@ -30,40 +30,41 @@ public class Schedule {
 
     /** The room. */
     @DBRef
-    private Room room;
+    private Room myRoom;
 
     /** The building. */
     @DBRef
-    private Building building;
+    private Building myBuilding;
 
-    private Semester semester;
+    /** The semester. */
+    private Semester mySemester;
 
     /**
      * stores the date in this field. format is {code YYYY/MM/DD }
      */
-    private String startDate;
+    private String myStartDate;
 
     /**
      * number of weeks.
      */
-    private int duration;
+    private int myDuration;
 
     /**
      * stores the days this schedule is for Example: Monday = M, Tuesday = T,
      * etc. An example that is Mon-Fri would be "MTWRF" Just tues/thursday would
      * be "TR"
      */
-    private List<Day> days;
+    private List<Days.Day> myDays;
 
     /**
      * time of class. Format is HH:MM AM/PM to HH:MM AM/PM Example 02:00 AM to
      * 03:50 AM
      */
-    private String hours;
+    private String myHours;
 
-    /** */
+    /** The Schedule's hour block. */
     @DBRef
-    private HourBlock hourBlock;
+    private HourBlock myHourBlock;
 
     /**
      * Default constructor.
@@ -84,19 +85,19 @@ public class Schedule {
      */
     public Schedule(final Room room, final Building building,
             final Semester semester, final String startDate, final int duration,
-            final List<Day> days, final String hours) {
+            final List<Days.Day> days, final String hours) {
         // Set up checks
-        this.room = room;
-        this.building = building;
-        this.semester = semester;
-        this.startDate = startDate;
-        this.days = days;
-        this.hours = hours;
+        this.myRoom = room;
+        this.myBuilding = building;
+        this.mySemester = semester;
+        this.myStartDate = startDate;
+        this.myDays = days;
+        this.myHours = hours;
 
         if (duration < 1) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            this.duration = duration;
+            this.myDuration = duration;
         }
 
         /*
@@ -119,20 +120,20 @@ public class Schedule {
      */
     public Schedule(final Room room, final Building building,
             final Semester semester, final String startDate, final int duration,
-            final List<Day> days, final HourBlock hours) {
+            final List<Days.Day> days, final HourBlock hours) {
         // Set up checks
-        this.room = room;
-        this.building = building;
-        this.semester = semester;
-        this.startDate = startDate;
-        this.days = days;
+        this.myRoom = room;
+        this.myBuilding = building;
+        this.mySemester = semester;
+        this.myStartDate = startDate;
+        this.myDays = days;
         // this.hours = hours;
-        this.hourBlock = hours;
+        this.myHourBlock = hours;
 
         if (duration < 1) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            this.duration = duration;
+            this.myDuration = duration;
         }
 
         /*
@@ -147,8 +148,8 @@ public class Schedule {
      *
      * @return days of the schedule
      */
-    public List<Day> getDays() {
-        return days;
+    public List<Days.Day> getDays() {
+        return myDays;
     }
 
     /**
@@ -156,7 +157,9 @@ public class Schedule {
      *
      * @param days New id for the schedule
      */
-    public void  setDays(final List<Day> days) { this.days = days; }
+    public void setDays(final List<Days.Day> days) {
+        this.myDays = days;
+    }
 
     /**
      * Returns the semester of the schedule.
@@ -164,7 +167,7 @@ public class Schedule {
      * @return semester of the schedule
      */
     public Semester getSemester() {
-        return semester;
+        return mySemester;
     }
 
     /**
@@ -173,7 +176,7 @@ public class Schedule {
      * @param semester New id for the schedule
      */
     public void setSemester(final Semester semester) {
-        this.semester = semester;
+        this.mySemester = semester;
     }
 
     /**
@@ -182,7 +185,7 @@ public class Schedule {
      * @return id number of the schedule
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -191,7 +194,7 @@ public class Schedule {
      * @return startDate of the schedule
      */
     public String getStartDate() {
-        return startDate;
+        return myStartDate;
     }
 
     /**
@@ -200,7 +203,7 @@ public class Schedule {
      * @param startDate New id for the schedule
      */
     public void setStartDate(final String startDate) {
-        this.startDate = startDate;
+        this.myStartDate = startDate;
     }
 
     /**
@@ -209,7 +212,7 @@ public class Schedule {
      * @param id New id for the schedule
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -218,7 +221,7 @@ public class Schedule {
      * @return course this section belongs to
      */
     public Room getRoom() {
-        return room;
+        return myRoom;
     }
 
     /**
@@ -231,7 +234,7 @@ public class Schedule {
         if (room == null) {
             throw new IllegalArgumentException("Room cannot be null!");
         }
-        this.room = room;
+        this.myRoom = room;
     }
 
     /**
@@ -240,7 +243,7 @@ public class Schedule {
      * @return the building of this schedule
      */
     public Building getBuilding() {
-        return building;
+        return myBuilding;
     }
 
     /**
@@ -254,7 +257,7 @@ public class Schedule {
         if (building == null) {
             throw new IllegalArgumentException("Building cannot be null!");
         }
-        this.building = building;
+        this.myBuilding = building;
     }
 
     /**
@@ -263,7 +266,7 @@ public class Schedule {
      * @return hours of this schedule
      */
     public String getHours() {
-        return hours;
+        return myHours;
     }
 
     /**
@@ -272,7 +275,7 @@ public class Schedule {
      * @param hours new hours for this schedule
      */
     public void setHours(final String hours) {
-        this.hours = hours;
+        this.myHours = hours;
     }
 
     /**
@@ -281,7 +284,7 @@ public class Schedule {
      * @return duration of this schedule
      */
     public int getDuration() {
-        return duration;
+        return myDuration;
     }
 
     /**
@@ -290,7 +293,7 @@ public class Schedule {
      * @param duration new hours for this schedule
      */
     public void setDuration(final int duration) {
-        this.duration = duration;
+        this.myDuration = duration;
     }
 
     /**
@@ -299,7 +302,7 @@ public class Schedule {
      * @return the hour block
      */
     public final HourBlock getHourBlock() {
-        return hourBlock;
+        return myHourBlock;
     }
 
     /**
@@ -308,7 +311,7 @@ public class Schedule {
      * @param hourBlock the hour block
      */
     public final void setHourBlock(final HourBlock hourBlock) {
-        this.hourBlock = hourBlock;
+        this.myHourBlock = hourBlock;
     }
 
     /**
@@ -322,6 +325,12 @@ public class Schedule {
 
     /**
      * Sets the name of the schedule.
+     */
+    @Column
+    private String myScheduleName;
+
+    /**
+     * Sets the name of the schedule.
      *
      * @param scheduleName New scheduleName of the schedule.
      * @throws IllegalArgumentException if new scheduleName is blank
@@ -330,9 +339,9 @@ public class Schedule {
             throws IllegalArgumentException {
         if (scheduleName == null || scheduleName.isEmpty()) {
             throw new IllegalArgumentException(
-                    "Building name cannot be blank.");
+                    "Schedule name cannot be blank.");
         }
-        this.scheduleName = scheduleName;
+        this.myScheduleName = scheduleName;
     }
 
     /**

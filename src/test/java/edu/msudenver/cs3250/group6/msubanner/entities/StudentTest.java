@@ -1,8 +1,10 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class StudentTest {
     @Test
@@ -13,12 +15,6 @@ public class StudentTest {
         Student emptyNamed = new Student("", "");
         assertEquals("First_Name", emptyNamed.getFirstName());
         assertEquals("Last_Name", emptyNamed.getLastName());
-    }
-
-    @Test
-    public void getId() {
-        Student student = new Student();
-        // assertNotEquals(0, student.getId());
     }
 
     @Test
@@ -67,6 +63,13 @@ public class StudentTest {
     }
 
     @Test
+    public void getId() {
+        Student student = new Student();
+        student.setId("3");
+        assertEquals("3", student.getId());
+    }
+
+    @Test
     public void getFirstName() {
         Student student = new Student("test name", "");
         assertEquals("test name", student.getFirstName());
@@ -86,16 +89,16 @@ public class StudentTest {
     }
 
     // not really testing anything, but makes for good coverage :/
-   /* @Test
-    public void testHashCode() {
-        Student student = new Student();
-        assertEquals(664411433, student.hashCode());
-    }*/
+    /*
+     * @Test public void testHashCode() { Student student = new Student();
+     * assertEquals(664411433, student.hashCode()); }
+     */
 
     @Test
     public void testToString() {
         Student student = new Student();
-        assertEquals("User: First_Name Last_Name " + student.getId(), student.toString());
+        assertEquals("Student: First_Name Last_Name " + student.getId(),
+                student.toString());
     }
 
     @Test
@@ -106,7 +109,7 @@ public class StudentTest {
         student1.setId("1");
 
         // test null and object not an instanceof
-        String notStudent = "Not a student at all";
+        User notStudent = new Professor("Student", "One");
         assertFalse(student1.equals(notStudent));
         assertFalse(student1.equals(null));
 

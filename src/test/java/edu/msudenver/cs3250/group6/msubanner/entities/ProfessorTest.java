@@ -1,8 +1,10 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ProfessorTest {
     @Test
@@ -96,7 +98,7 @@ public class ProfessorTest {
     @Test
     public void testToString() {
         Professor professor = new Professor();
-        assertEquals("User: First_Name Last_Name " + professor.getId(), professor.toString());
+        assertEquals("Professor: First_Name Last_Name " + professor.getId(), professor.toString());
     }
 
     @Test

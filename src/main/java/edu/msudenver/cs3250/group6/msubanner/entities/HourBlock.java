@@ -9,30 +9,42 @@ import javax.persistence.Id;
  */
 
 public class HourBlock {
+    /** The earliest start time possible - represented by an int. */
+    private static final int EARLIEST_START_TIME = 6;
+
+    /** The latest start time possible - represented by an int. */
+    private static final int LATEST_START_TIME = 20;
+
+    /** The minimum hours in an hour block. */
+    private static final int MIN_BLOCK_DURATION = 1;
+
+    /** The maximum hours in an hour block. */
+    private static final int MAX_BLOCK_DURATION = 3;
+
     /**
      * HourBlock id number.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /**
      * Start time of the HourBlock. Integer between 6 and 20 represents 6am to
      * 8pm.
      */
-    private int startTime;
+    private int myStartTime;
 
     /**
      * Duration of the HourBlock, can only be set to 1, 2, or 3.
      */
-    private int duration;
+    private int myDuration;
 
     /**
      * Hour block default constructor.
      */
     public HourBlock() {
-        startTime = 6;
-        duration = 1;
+        myStartTime = EARLIEST_START_TIME;
+        myDuration = MIN_BLOCK_DURATION;
     }
 
     /**
@@ -42,8 +54,8 @@ public class HourBlock {
      * @param duration the duration
      */
     public HourBlock(final int startTime, final int duration) {
-        this.startTime = startTime;
-        this.duration = duration;
+        this.myStartTime = startTime;
+        this.myDuration = duration;
     }
 
     /**
@@ -52,7 +64,7 @@ public class HourBlock {
      * @param id New id for the Hours
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -61,7 +73,7 @@ public class HourBlock {
      * @return id number of the HourBlock
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -70,7 +82,7 @@ public class HourBlock {
      * @return start time of the HourBlock
      */
     public int getStartTime() {
-        return startTime;
+        return myStartTime;
     }
 
     /**
@@ -81,11 +93,11 @@ public class HourBlock {
      */
     public void setStartTime(final int startTime)
             throws IllegalArgumentException {
-        if (startTime > 20 || startTime < 6) {
+        if (startTime > LATEST_START_TIME || startTime < EARLIEST_START_TIME) {
             throw new IllegalArgumentException(
                     "Start Time must be an integer between 6 and 20");
         }
-        this.startTime = startTime;
+        this.myStartTime = startTime;
     }
 
     /**
@@ -94,7 +106,7 @@ public class HourBlock {
      * @return duration of the HourBlock
      */
     public int getDuration() {
-        return duration;
+        return myDuration;
     }
 
     /**
@@ -105,11 +117,11 @@ public class HourBlock {
      */
     public void setDuration(final int duration)
             throws IllegalArgumentException {
-        if (duration < 1 || duration > 3) {
+        if (duration < MIN_BLOCK_DURATION || duration > MAX_BLOCK_DURATION) {
             throw new IllegalArgumentException(
                     "Duration must be an integer between 1 and 3");
         }
-        this.duration = duration;
+        this.myDuration = duration;
     }
 
     /**
@@ -150,13 +162,13 @@ public class HourBlock {
         }
 
         if (this.getStartTime() < hourBlock.getStartTime()
-                && this.getStartTime() + this.duration > hourBlock
+                && this.getStartTime() + this.myDuration > hourBlock
                         .getStartTime()) {
             return true;
         }
 
         if (hourBlock.getStartTime() < this.getStartTime()
-                && hourBlock.getStartTime() + hourBlock.duration > this
+                && hourBlock.getStartTime() + hourBlock.myDuration > this
                         .getStartTime()) {
             return true;
         }
