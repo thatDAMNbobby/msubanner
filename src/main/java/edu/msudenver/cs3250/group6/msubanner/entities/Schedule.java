@@ -64,9 +64,6 @@ public class Schedule {
     public Schedule() {
     }
 
-
-    // TODO: Which constructor should be primarily used and do
-    // TODO: we need both?
     /**
      * Schedule constructor.
      *

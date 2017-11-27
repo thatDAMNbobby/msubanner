@@ -3,23 +3,64 @@ package edu.msudenver.cs3250.group6.msubanner.entities;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ScheduleTest {
     @Before
     public void initialize() {
-        Building building1 = new Building("House of Cats");
         Building building2 = new Building( "Temptation of the Ceiling Cat");
 
-        Room room1 = new Room(256, 255, building1);
-        Room room2 = new Room(156, 255, building1);
         Room room3 = new Room(256, 255, building2);
 
-        Semester semester1 = new Semester();
         Semester semester2 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
         semester2.setSemesterStartDate(2020,1,15);
 
+        List<Day> days2 = new ArrayList<>(Arrays.asList(new Day[] {Day.SUNDAY, Day.FRIDAY}));
+
+        int duration2 = 3;
+
+    }
+
+    @Test
+    public void scheduleDefaultConstructor() {
+        Schedule schedule = new Schedule();
+        assertNotNull(schedule);
+    }
+
+    @Test
+    public void scheduleParameterizedConstructor1() {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 2;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        String hours1 = "3";
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+
+        assertNotNull(schedule);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void scheduleParameterizedConstructor1Duration() {
+        Building building1 = new Building("House of Cats");
+        Room room1 = new Room(256, 255, building1);
+        Semester semester1 = new Semester();
+        semester1.setSemesterStartDate(2019,6,15);
+        int duration1 = 0;
+        List<Day> days1 = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        String hours1 = "3";
+        String startDate1 = "2020/03/27";
+
+        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+
+        assertNotNull(schedule);
     }
 
     @Test
