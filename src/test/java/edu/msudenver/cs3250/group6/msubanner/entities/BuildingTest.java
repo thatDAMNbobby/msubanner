@@ -21,6 +21,19 @@ public class BuildingTest {
     }
 
     @Test
+    public void testBuildingParameterized() {
+        Building building = new Building("awesome building");
+        assertEquals("awesome building", building.getBuildingName());
+
+    }
+
+    @Test
+    public void testBuildingNull() {
+        Building building = new Building("");
+        assertEquals("No building", building.getBuildingName());
+    }
+
+    @Test
     public void testSetId() {
         building.setId("0");
         assertEquals("0", building.getId());
@@ -37,4 +50,15 @@ public class BuildingTest {
         assertNotNull(building.getBuildingName());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void setBuildingNameNull() {
+        building.setBuildingName("");
+    }
+
+    @Test
+    public void toStringTest() {
+        String toStringResult = building.toString();
+
+        assertEquals("Id: 1, Building Name: Test Name", building.toString());
+    }
 }

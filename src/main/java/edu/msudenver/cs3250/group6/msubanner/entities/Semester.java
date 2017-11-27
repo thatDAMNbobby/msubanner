@@ -43,6 +43,9 @@ public class Semester {
      */
     private String season = autoSetSeason();
 
+
+    //TODO: create default and parameterized constructors
+
     /**
      * Initialize or set season field automatically based on semesterStartDate.
      *
