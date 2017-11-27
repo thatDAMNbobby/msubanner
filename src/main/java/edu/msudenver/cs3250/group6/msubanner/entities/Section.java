@@ -15,22 +15,19 @@ public class Section {
     /** Section's Id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /** Course this section belongs to. */
     @DBRef
-    private Course course;
+    private Course myCourse;
 
     /** Section's professor. */
     @DBRef
-    private User professor;
+    private Professor myProfessor;
 
     /** Section's schedule. */
     @DBRef
-    private Schedule schedule;
-
-    /** Number used to compute hash value. */
-    private static final int HASH_SHIFT = 32;
+    private Schedule mySchedule;
 
     /**
      * Default constructor, creates a blank section.
@@ -46,16 +43,16 @@ public class Section {
      * @param professor The professor for this section
      * @param schedule the schedule
      */
-    public Section(final Course course, final User professor,
+    public Section(final Course course, final Professor professor,
             final Schedule schedule) {
         if (course != null) {
-            this.course = course;
+            this.myCourse = course;
         }
         if (professor != null) {
-            this.professor = professor;
+            this.myProfessor = professor;
         }
         if (schedule != null) {
-            this.schedule = schedule;
+            this.mySchedule = schedule;
         }
     }
 
@@ -67,7 +64,7 @@ public class Section {
      */
     public Section(final Course course) throws IllegalArgumentException {
         if (course != null) {
-            this.course = course;
+            this.myCourse = course;
         } else {
             throw new IllegalArgumentException("Course cannot be null");
         }
@@ -79,7 +76,7 @@ public class Section {
      * @return id of this section
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -88,7 +85,7 @@ public class Section {
      * @param id new id number for this section
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -97,7 +94,7 @@ public class Section {
      * @return course this section belongs to
      */
     public Course getCourse() {
-        return course;
+        return myCourse;
     }
 
     /**
@@ -110,7 +107,7 @@ public class Section {
         if (course == null) {
             throw new IllegalArgumentException("Course cannot be null!");
         }
-        this.course = course;
+        this.myCourse = course;
     }
 
     /**
@@ -119,7 +116,7 @@ public class Section {
      * @return the professor of this section
      */
     public User getProfessor() {
-        return professor;
+        return myProfessor;
     }
 
     /**
@@ -128,12 +125,12 @@ public class Section {
      * @param professor new professor for this section
      * @throws IllegalArgumentException if the professor is null
      */
-    public void setProfessor(final User professor)
+    public void setProfessor(final Professor professor)
             throws IllegalArgumentException {
         if (professor == null) {
             throw new IllegalArgumentException("Professor cannot be null!");
         }
-        this.professor = professor;
+        this.myProfessor = professor;
     }
 
     /**
@@ -142,7 +139,7 @@ public class Section {
      * @return the schedule of this section
      */
     public Schedule getSchedule() {
-        return schedule;
+        return mySchedule;
     }
 
     /**
@@ -152,7 +149,7 @@ public class Section {
      */
     public void setSchedule(final Schedule schedule) {
         if (schedule != null) {
-            this.schedule = schedule;
+            this.mySchedule = schedule;
         }
     }
 
@@ -178,7 +175,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + id + ", Course=" + course.toString()
-                + ", professor:" + professor.toString() + '}';
+        return "Section{" + "id=" + myId + ", Course=" + myCourse.toString()
+                + ", professor:" + myProfessor.toString() + '}';
     }
 }

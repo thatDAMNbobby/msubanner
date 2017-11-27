@@ -41,7 +41,7 @@ public class Days {
 
         @Override
         public String toString() {
-            switch(this) {
+            switch (this) {
                 case SUNDAY: return "Sunday";
                 case MONDAY: return "Monday";
                 case TUESDAY: return "Tuesday";
@@ -67,6 +67,24 @@ public class Days {
         Day(final int dayNum, final String dayName) {
             myDayNum = dayNum;
             myDayName = dayName;
+        }
+
+        /**
+         * Gets the list of days in a string array of day names.
+         *
+         * @param days the string array of day names
+         * @return the list of days
+         */
+        public static ArrayList<Day> getList(final String[] days) {
+            ArrayList<Day> out = new ArrayList<Day>();
+            for (String day : days) {
+                for (Day name : Day.values()) {
+                    if (day.equals(name.toString()) && !out.contains(name)) {
+                        out.add(name);
+                    }
+                }
+            }
+            return out;
         }
 
     }
@@ -161,13 +179,13 @@ public class Days {
     }
 
     /**
-     * Returns a string of the values in the day list
+     * Returns a string of the values in the day list.
      *
      * @return a String of Days
      */
     @Override
     public String toString() {
-        List sortedList = new ArrayList(dayList);
+        List<Day> sortedList = new ArrayList<Day>(dayList);
         Collections.sort(sortedList);
         String output = sortedList.toString();
         String replaced = output.replace("[", "").replace("]", "");

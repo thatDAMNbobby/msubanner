@@ -1,8 +1,8 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class RoomTest {
     @Test
@@ -81,7 +81,7 @@ public class RoomTest {
         room.setRoomCapacity(256);
         room.setRoomNumber(255);
 
-        assertEquals("Id: 5656, Room Number: 255, Building: Id: null, Building Name: The Cat Cave, Capacity: 256", room.toString() );
+        assertEquals("Id: 5656, Room Number: 255, Building: Id: null, Building Name: The Cat Cave, Capacity: 256", room.toString());
     }
 
 }

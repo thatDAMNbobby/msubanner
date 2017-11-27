@@ -15,29 +15,29 @@ public class Room {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /**
      * Room number.
      */
     @Column
-    private int roomNumber;
+    private int myRoomNumber;
 
     /**
      * Room Capacity.
      */
-    private int capacity;
+    private int myCapacity;
 
     /**
      * Building.
      */
-    private Building building;
+    private Building myBuilding;
 
     /**
      * Default Constructor.
      */
     public Room() {
-        this.roomNumber = 0;
+        this.myRoomNumber = 0;
     }
 
     /**
@@ -53,19 +53,19 @@ public class Room {
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            this.roomNumber = roomNumber;
+            this.myRoomNumber = roomNumber;
         }
 
         if (roomCapacity < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            capacity = roomCapacity;
+            myCapacity = roomCapacity;
         }
 
         if (building == null) {
             throw new IllegalArgumentException("Building cannot be null");
         } else {
-            this.building = building;
+            this.myBuilding = building;
         }
     }
 
@@ -75,7 +75,7 @@ public class Room {
      * @param id New id for the room
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Room {
      * @return id number of the room
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Room {
         if (roomNumber < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            this.roomNumber = roomNumber;
+            this.myRoomNumber = roomNumber;
         }
     }
 
@@ -113,7 +113,7 @@ public class Room {
         if (capacity < 0) {
             throw new IllegalArgumentException("Stay positive");
         } else {
-            this.capacity = capacity;
+            this.myCapacity = capacity;
         }
     }
 
@@ -128,7 +128,7 @@ public class Room {
         if (building == null) {
             throw new IllegalArgumentException("Building cannot be null");
         } else {
-            this.building = building;
+            this.myBuilding = building;
         }
     }
 
@@ -138,7 +138,7 @@ public class Room {
      * @return Name of the room
      */
     public int getRoomNumber() {
-        return roomNumber;
+        return myRoomNumber;
     }
 
     /**
@@ -147,7 +147,7 @@ public class Room {
      * @return Capacity of the room
      */
     public int getRoomCapacity() {
-        return capacity;
+        return myCapacity;
     }
 
     /**
@@ -156,7 +156,7 @@ public class Room {
      * @return Building containing this room
      */
     public Building getBuilding() {
-        return building;
+        return myBuilding;
     }
 
     /**
@@ -164,10 +164,9 @@ public class Room {
      */
     @Override
     public String toString() {
-        return  "Id: " + this.getId() +
-                ", Room Number: " + this.getRoomNumber() +
-                ", Building: " + this.getBuilding() +
-                ", Capacity: " + this.getRoomCapacity();
+        return "Id: " + this.getId() + ", Room Number: " + this.getRoomNumber()
+                + ", Building: " + this.getBuilding() + ", Capacity: "
+                + this.getRoomCapacity();
 
     }
 }

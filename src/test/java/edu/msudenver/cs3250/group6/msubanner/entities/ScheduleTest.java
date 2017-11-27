@@ -3,13 +3,11 @@ package edu.msudenver.cs3250.group6.msubanner.entities;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ScheduleTest {
     @Before
     public void initialize() {
         Building building1 = new Building("House of Cats");
-        Building building2 = new Building( "Temptation of the Ceiling Cat");
+        Building building2 = new Building("Temptation of the Ceiling Cat");
 
         Room room1 = new Room(256, 255, building1);
         Room room2 = new Room(156, 255, building1);
@@ -17,8 +15,8 @@ public class ScheduleTest {
 
         Semester semester1 = new Semester();
         Semester semester2 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
-        semester2.setSemesterStartDate(2020,1,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
+        semester2.setSemesterStartDate(2020, 1, 15);
 
     }
 

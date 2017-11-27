@@ -12,24 +12,18 @@ public class User {
     /** User's id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /** The user's first name. */
-    private String firstName;
+    private String myFirstName;
 
     /** The user's last name. */
-    private String lastName;
-
-    /** Constant multiplier for hash method. */
-    private static final int HASH_MULTIPLIER = 31;
-
-    /** Constant base for hash method. */
-    private static final int HASH_BASE = 17;
+    private String myLastName;
 
     /** Default constructor for user class. */
     public User() {
-        this.firstName = "First_Name";
-        this.lastName = "Last_Name";
+        this.myFirstName = "First_Name";
+        this.myLastName = "Last_Name";
     }
 
     /**
@@ -40,14 +34,14 @@ public class User {
      */
     public User(final String firstName, final String lastName) {
         if (firstName == null || firstName.equals("")) {
-            this.firstName = "First_Name";
+            this.myFirstName = "First_Name";
         } else {
-            this.firstName = firstName;
+            this.myFirstName = firstName;
         }
         if (lastName == null || lastName.equals("")) {
-            this.lastName = "Last_Name";
+            this.myLastName = "Last_Name";
         } else {
-            this.lastName = lastName;
+            this.myLastName = lastName;
         }
     }
 
@@ -58,7 +52,7 @@ public class User {
      * @throws Exception if the first name field is blank
      */
     public String getFirstName() {
-        return firstName;
+        return myFirstName;
     }
 
     /**
@@ -68,7 +62,7 @@ public class User {
      * @throws Exception if the last name field is blank
      */
     public String getLastName() {
-        return lastName;
+        return myLastName;
     }
 
     /**
@@ -77,7 +71,7 @@ public class User {
      * @return id
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -86,7 +80,7 @@ public class User {
      * @param id the id number
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -101,7 +95,7 @@ public class User {
             throw new IllegalArgumentException(
                     "First name must not be empty or null.");
         }
-        this.firstName = firstName;
+        this.myFirstName = firstName;
     }
 
     /**
@@ -116,7 +110,7 @@ public class User {
             throw new IllegalArgumentException(
                     "Last name must not be empty or null.");
         }
-        this.lastName = lastName;
+        this.myLastName = lastName;
     }
 
     /**
@@ -136,13 +130,15 @@ public class User {
                 && this.getFirstName().equals(otherUser.getFirstName())
                 && this.getLastName().equals(otherUser.getLastName());
     }
+
     /**
      * Required explanation on how to implement this for classes that extend
      * User.
      */
     @Override
     public String toString() {
-        return "User: " + firstName + " " + lastName + " " + id;
+        return this.getClass().getSimpleName() + ": " + myFirstName + " "
+                + myLastName + " " + myId;
     }
 
 }
