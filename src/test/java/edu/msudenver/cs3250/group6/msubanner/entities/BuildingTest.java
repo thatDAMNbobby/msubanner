@@ -60,5 +60,7 @@ public class BuildingTest {
         String toStringResult = building.toString();
 
         assertEquals("Id: 1, Building Name: Test Name", building.toString());
+        assertEquals(toStringResult, building.toString());
+
     }
 }

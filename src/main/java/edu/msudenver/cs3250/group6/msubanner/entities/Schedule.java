@@ -18,7 +18,15 @@ public class Schedule {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(unique = true)
     private String myId;
+
+    /**
+     * Name of the schedule.
+     */
+    @Column
+    private String myscheduleName;
 
     /** The room. */
     @DBRef
@@ -64,8 +72,6 @@ public class Schedule {
     public Schedule() {
     }
 
-    // TODO: Which constructor should be primarily used and do
-    // TODO: we need both?
     /**
      * Schedule constructor.
      *
@@ -309,30 +315,22 @@ public class Schedule {
     }
 
     /**
-     * Returns if one schedule is equal to another.
+     * Gets the schedule name.
+     *
+     * @return String the name of the schedule
      */
-    @Override
-    public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Schedule)) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        final Schedule otherSchedule = (Schedule) other;
-        return this.getId().equals(otherSchedule.getId())
-                && this.getRoom().equals(otherSchedule.getRoom())
-                && this.getBuilding().equals(otherSchedule.getBuilding());
+    public String getScheduleName() {
+        return this.myScheduleName;
     }
 
     /**
-     * Name of the building.
+     * Sets the name of the schedule.
      */
     @Column
     private String myScheduleName;
 
     /**
-     * Sets the name of the building.
+     * Sets the name of the schedule.
      *
      * @param scheduleName New scheduleName of the schedule.
      * @throws IllegalArgumentException if new scheduleName is blank
@@ -341,7 +339,7 @@ public class Schedule {
             throws IllegalArgumentException {
         if (scheduleName == null || scheduleName.isEmpty()) {
             throw new IllegalArgumentException(
-                    "Building name cannot be blank.");
+                    "Schedule name cannot be blank.");
         }
         this.myScheduleName = scheduleName;
     }
@@ -351,8 +349,17 @@ public class Schedule {
      */
     @Override
     public String toString() {
-        return "Schedule{" + "id=" + myId + ", Room=" + myRoom.toString()
-                + ", building:" + myBuilding.toString() + '}';
+        return "Schedule{" +
+                "id=" + myId +
+                ", Room=" + myRoom.getRoomNumber() +
+                ", building:" + myBuilding.getBuildingName() +
+                ", semester: " + mySemester.toString() +
+                ", startDate:" + this.getStartDate() +
+                ", duration:" + this.getDuration() +
+                ", days:" + this.getDays() +
+                ", hours:" + this.getHours() +
+                ", hourBlock:" + myHourBlock.toString() +
+                '}';
     }
 
 }

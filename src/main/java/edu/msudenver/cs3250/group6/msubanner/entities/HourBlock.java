@@ -175,4 +175,18 @@ public class HourBlock {
 
         return false;
     }
+
+    /**
+     * Get a readable version of the HourBlock fields
+     *
+     * @return String of fields from the HourBlock object
+     */
+    @Override
+    public String toString() {
+        return "HourBlock{" +
+                "id='" + myId + '\'' +
+                ", startTime=" + myStartTime +
+                ", duration=" + myDuration +
+                '}';
+    }
 }
