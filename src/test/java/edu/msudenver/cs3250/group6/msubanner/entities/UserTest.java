@@ -1,10 +1,9 @@
-package edu.msudenver.cs3250.group6.msubanner;
+package edu.msudenver.cs3250.group6.msubanner.entities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
 import org.junit.Test;
 
 public class UserTest {

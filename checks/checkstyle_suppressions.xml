@@ -9,7 +9,7 @@
 
 <suppressions>
     <!-- Tone down the checking for test classes -->
-    <suppress checks="MagicNumber" files="[\\/]*Test.java$"/>
+    <suppress checks="MagicNumber" files="MsubannerApplication.java|[\\/]*Test.java$"/>
     <suppress checks="EmptyBlock" files="[\\/]*Test.java$"/>
     <suppress checks="ImportControl" files="[\\/]*Test.java$"/>
     <suppress checks="Javadoc" files="[\\/]*Test.java$"/>

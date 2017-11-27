@@ -15,13 +15,13 @@ public class Building {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /**
      * Name of the building.
      */
     @Column
-    private String buildingName;
+    private String myBuildingName;
 
     // private Room myRooms;
 
@@ -29,7 +29,7 @@ public class Building {
      * Default Constructor.
      */
     public Building() {
-        this.buildingName = "No building";
+        this.myBuildingName = "No building";
     }
 
     /**
@@ -40,9 +40,9 @@ public class Building {
     public Building(final String buildingName) {
 
         if (buildingName == null || buildingName.isEmpty()) {
-            this.buildingName = "No building";
+            this.myBuildingName = "No building";
         } else {
-            this.buildingName = buildingName;
+            this.myBuildingName = buildingName;
         }
     }
 
@@ -53,7 +53,7 @@ public class Building {
      */
     public void setId(final String id) {
         if (id != null) {
-            this.id = id;
+            this.myId = id;
         }
     }
 
@@ -63,7 +63,7 @@ public class Building {
      * @return id number of the building
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Building {
             throw new IllegalArgumentException(
                     "Building name cannot be blank.");
         }
-        this.buildingName = buildingName;
+        this.myBuildingName = buildingName;
     }
 
     /**
@@ -87,7 +87,7 @@ public class Building {
      * @return Name of the building
      */
     public String getBuildingName() {
-        return buildingName;
+        return myBuildingName;
     }
 
     /**
@@ -95,6 +95,6 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Id: " + id + ", Building Name: " + buildingName;
+        return "Id: " + myId + ", Building Name: " + myBuildingName;
     }
 }

@@ -1,29 +1,29 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class DepartmentTest {
     @Test
     public void getDepartmentNameTestDefault() throws Exception {
         Department department = new Department();
-        assertEquals("Department Name", department.getDepartmentName() );
+        assertEquals("Department Name", department.getDepartmentName());
     }
 
     @Test
     public void setIdTest() throws Exception {
         Department department = new Department();
         department.setId("1");
-        assertEquals("1", department.getId() );
+        assertEquals("1", department.getId());
     }
 
     @Test
     public void setDepartmentNameTest() throws Exception {
         Department department = new Department();
         department.setDepartmentName("Cars");
-        assertEquals("Cars", department.getDepartmentName() );
+        assertEquals("Cars", department.getDepartmentName());
     }
 
     @Test

@@ -16,9 +16,7 @@ public class Course {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
-
-    // todo: Add field for department
+    private String myId;
 
     /**
      * Title of the course.
@@ -49,12 +47,6 @@ public class Course {
      * Department this course belongs to.
      */
     private Department myDepartment;
-
-    /** Constant multiplier for hash method. */
-    private static final int HASH_MULTIPLIER = 31;
-
-    /** Constant base for hash method. */
-    private static final int HASH_BASE = 17;
 
     /**
      * Default constructor, initializes fields with default values. Directions
@@ -128,7 +120,7 @@ public class Course {
      * @param id New id for the course
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -137,7 +129,7 @@ public class Course {
      * @return id number of the course
      */
     public String getId() {
-        return id;
+        return myId;
     }
 
     /**
@@ -202,7 +194,7 @@ public class Course {
      * @param learningObjectives the learning objectives
      */
     public void setLearningObjectives(final String learningObjectives) {
-        if (learningObjectives.equals("") || learningObjectives.equals(" ")) {
+        if (learningObjectives == null || learningObjectives.isEmpty()) {
             myLearningObjectives = "Default learning objectives.";
         } else {
             myLearningObjectives = learningObjectives;
@@ -274,7 +266,7 @@ public class Course {
      */
     @Override
     public String toString() {
-        return "Course{" + "Id=" + id + ", Title= " + myTitle
+        return "Course{" + "Id=" + myId + ", Title= " + myTitle
                 + ", Description= " + myDescription + "}";
     }
 
@@ -291,7 +283,7 @@ public class Course {
         }
 
         Course course = (Course) o;
-        return this.getId() == course.getId()
+        return this.getId().equals(course.getId())
                 && this.getDescription().equals(course.getDescription())
                 && this.getTitle().equals(course.getTitle());
     }

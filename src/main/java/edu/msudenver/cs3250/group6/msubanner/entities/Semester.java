@@ -16,7 +16,7 @@ public class Semester {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String myId;
 
     /**
      * LocalDate object containing the start date of the Semester.
@@ -41,10 +41,9 @@ public class Semester {
     /**
      * String representing the Semester season.
      */
-    private String season = autoSetSeason();
+    private String mySeason = autoSetSeason();
 
-
-    //TODO: create default and parameterized constructors
+    // TODO: create default and parameterized constructors
 
     /**
      * Initialize or set season field automatically based on semesterStartDate.
@@ -120,13 +119,13 @@ public class Semester {
      */
     public void setSemesterEndDate(final int endYear, final int endMonth,
             final int endDate) {
+        LocalDate localDate;
         if (semesterStartDate.getYear() < endYear
                 || (semesterStartDate.getYear() <= endYear
                         && semesterStartDate.getMonthValue() < endMonth)) {
-            LocalDate localDate = LocalDate.of(endYear, endMonth, endDate);
-            this.semesterEndDate = localDate;
+            localDate = LocalDate.of(endYear, endMonth, endDate);
         } else {
-            LocalDate localDate = LocalDate.of(
+            localDate = LocalDate.of(
                     semesterStartDate.getMonthValue() > 9
                             ? semesterStartDate.getYear() + 1
                             : semesterStartDate.getYear(),
@@ -136,8 +135,8 @@ public class Semester {
                     25);
             System.out.println("warning: semesterEndDate automatically set,"
                     + " semesterEndDate must occur after semesterStartDate");
-
         }
+        this.semesterEndDate = localDate;
     }
 
     /**
@@ -170,7 +169,7 @@ public class Semester {
         /**
          * String value of enum association for season.
          */
-        private String seasonName;
+        private String mySeasonName;
 
         /**
          * Constructor for Season.
@@ -178,7 +177,7 @@ public class Semester {
          * @param seasonName the first letter uppercase name of the season
          */
         Season(final String seasonName) {
-            this.seasonName = seasonName;
+            this.mySeasonName = seasonName;
         }
     }
 
@@ -188,7 +187,7 @@ public class Semester {
      * @param id New id for the Semester
      */
     public void setId(final String id) {
-        this.id = id;
+        this.myId = id;
     }
 
     /**
@@ -197,7 +196,7 @@ public class Semester {
      * @return id number of the Semester
      */
     public String getId() {
-        return this.id;
+        return this.myId;
     }
 
     /**
@@ -207,10 +206,10 @@ public class Semester {
      * @param season the season to update to
      */
     public void setSeason(final String season) {
-        if (season.equals(Season.FALL.seasonName)
-                || season.equals(Season.SPRING.seasonName)
-                || season.equals(Season.SUMMER.seasonName)) {
-            this.season = season;
+        if (season.equals(Season.FALL.mySeasonName)
+                || season.equals(Season.SPRING.mySeasonName)
+                || season.equals(Season.SUMMER.mySeasonName)) {
+            this.mySeason = season;
         } else {
             System.out.println("warning: Season must be entered as"
                     + " 'Fall', 'Spring' or 'Summer'");
@@ -222,7 +221,7 @@ public class Semester {
      * @return String representing the season the Semester is in
      */
     public String getSeason() {
-        return season;
+        return mySeason;
     }
 
     /**
@@ -256,14 +255,14 @@ public class Semester {
      */
     public boolean hasConflict(final Semester semesterToCheck) {
         if (semesterToCheck.getSemesterYear() == this.semesterStartDate
-                .getYear() && semesterToCheck.season.equals(this.season)) {
+                .getYear() && semesterToCheck.mySeason.equals(this.mySeason)) {
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String toString() {
-        return this.season + ", " + this.getSemesterYear();
+        return this.mySeason + ", " + this.getSemesterYear();
     }
 }

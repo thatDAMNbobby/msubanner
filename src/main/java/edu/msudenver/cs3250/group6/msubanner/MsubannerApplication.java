@@ -1,6 +1,26 @@
 package edu.msudenver.cs3250.group6.msubanner;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+import edu.msudenver.cs3250.group6.msubanner.entities.Building;
+import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Days;
+import edu.msudenver.cs3250.group6.msubanner.entities.Department;
+import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
+import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
+import edu.msudenver.cs3250.group6.msubanner.entities.Room;
+import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
+import edu.msudenver.cs3250.group6.msubanner.entities.Section;
+import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
@@ -10,17 +30,6 @@ import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * The msubanner application.
@@ -69,8 +78,7 @@ public class MsubannerApplication implements CommandLineRunner {
     /**
      * Starts the spring application.
      *
-     * @param args
-     *            the args
+     * @param args the args
      */
     public static void main(final String[] args) {
         SpringApplication.run(MsubannerApplication.class, args);
@@ -108,14 +116,13 @@ public class MsubannerApplication implements CommandLineRunner {
         course.setDepartment(department);
         courseRepository.save(course);
 
-        // TBA for professor
-        User user = new User();
-        user.setId("65");
-        user.setFirstName("TBA");
-        user.setLastName("TBA");
-        userRepository.save(user);
+        Professor prof = new Professor();
+        prof.setId("65");
+        prof.setFirstName("TBA");
+        prof.setLastName("TBA");
+        userRepository.save(prof);
 
-        section.setProfessor(user);
+        section.setProfessor(prof);
         section.setCourse(course);
         sectionRepository.save(section);
 
@@ -133,7 +140,8 @@ public class MsubannerApplication implements CommandLineRunner {
         HourBlock block = new HourBlock(6, 1);
         hourBlockRepository.save(block);
 
-        List<Day> days = new ArrayList<>(Arrays.asList(new Day[] {Day.MONDAY, Day.WEDNESDAY}));
+        List<Days.Day> days = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
 
         Schedule schedule = new Schedule();
         schedule.setScheduleName("Schedule 1");

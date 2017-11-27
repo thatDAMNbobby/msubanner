@@ -10,15 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Course;
+import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.entities.User;
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
 import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import edu.msudenver.cs3250.group6.msubanner.services.SectionService;
-import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
+import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 
 /**
  * The controller for the section class.
@@ -41,6 +40,8 @@ public class SectionController {
     /** The schedule service. */
     @Autowired
     private ScheduleService scheduleService;
+
+    /** The semester service. */
     @Autowired
     private SemesterService semesterService;
 
@@ -81,7 +82,7 @@ public class SectionController {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/sections/addsection")
     public ModelAndView addSection(@RequestParam final Course course,
-            @RequestParam final User professor, final Schedule schedule) {
+            @RequestParam final Professor professor, final Schedule schedule) {
         Section section = new Section(course, professor, schedule);
         System.out.println("Adding section " + course.getTitle() + " Taught by "
                 + professor.getLastName() + ", " + professor.getFirstName());
@@ -105,7 +106,7 @@ public class SectionController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/sections/updatesection/{id}")
     public ModelAndView updateSection(@RequestParam final Course course,
-            final User professor, final Schedule schedule,
+            final Professor professor, final Schedule schedule,
             @PathVariable final String id) {
         Section section = sectionService.getSection(id);
         section.setCourse(course);
@@ -179,7 +180,6 @@ public class SectionController {
     @RequestMapping("/sections/bysemester")
     public ModelAndView sectionsBySemester(
             @RequestParam final String id) {
-        Semester semester = semesterService.getSemester(id);
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections",
                 sectionService.getSectionsBySemester(id));

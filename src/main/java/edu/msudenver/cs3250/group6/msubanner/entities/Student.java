@@ -8,8 +8,9 @@ import javax.persistence.Id;
 /**
  * Student class.
  */
-public class Student extends User {
+public final class Student extends User {
 
+    /** The student id. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true)
@@ -18,7 +19,7 @@ public class Student extends User {
     /**
      * Default constructor.
      */
-    public Student(){}
+    public Student() { }
 
     /**
      * Constructor.
@@ -29,73 +30,13 @@ public class Student extends User {
         super(firstName, lastName);
     }
 
-    /**
-     * Sets the students id number.
-     * @param id the new id number
-     */
-    public void setId(final String id) {
-        this.id = id;
-    }
-
-    /**
-     * Sets the students first name.
-     * @param firstName the new first name
-     * @throws IllegalArgumentException
-     */
-    @Override
-    public void setFirstName(String firstName) throws IllegalArgumentException {
-        super.setFirstName(firstName);
-    }
-
-    /**
-     * Sets the students last name.
-     * @param lastName the new last name
-     * @throws IllegalArgumentException
-     */
-    @Override
-    public void setLastName(String lastName) throws IllegalArgumentException {
-        super.setLastName(lastName);
-    }
-
-    /**
-     * Gets the students id number.
-     * @return the students id number
-     */
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Gets the students first name.
-     * @return then students first name
-     */
-    @Override
-    public String getFirstName() {
-        return super.getFirstName();
-    }
-
-    /**
-     * Gets the students last name.
-     * @return the students last name
-     */
-    @Override
-    public String getLastName() {
-        return super.getLastName();
-    }
-
     @Override
     public int hashCode() {
         return super.hashCode();
     }
 
     @Override
-    public boolean equals(Object other) {
-        return super.equals(other);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
+    public boolean equals(final Object other) {
+        return other instanceof Student && super.equals(other);
     }
 }

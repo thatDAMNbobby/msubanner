@@ -1,16 +1,14 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Days;
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
-import edu.msudenver.cs3250.group6.msubanner.services.CourseService;
 import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
-import edu.msudenver.cs3250.group6.msubanner.services.UserService;
 import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
 
 /*
@@ -35,14 +33,7 @@ class HomeController {
     @Autowired
     private RoomService roomService;
 
-    /** The course service. */
-    @Autowired
-    private CourseService courseService;
-
-    /** The user service. */
-    @Autowired
-    private UserService userService;
-
+    /** The semester service. */
     @Autowired
     private SemesterService semesterService;
 
