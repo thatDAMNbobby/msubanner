@@ -88,11 +88,8 @@ public class StudentTest {
         assertEquals("First_Name", student.getFirstName());
     }
 
-    // not really testing anything, but makes for good coverage :/
-    /*
-     * @Test public void testHashCode() { Student student = new Student();
-     * assertEquals(664411433, student.hashCode()); }
-     */
+    @Test public void testHashCode() { Student student = new Student();
+      assertEquals(student.hashCode(), student.hashCode()); }
 
     @Test
     public void testToString() {
