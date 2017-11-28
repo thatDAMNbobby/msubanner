@@ -9,16 +9,11 @@ import javax.persistence.Id;
 /**
  * The professor class.
  */
-@Entity
+
 public final class Professor extends User {
 
-    /**
-     * Professor id number.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
-    private String id;
+    private String firstName = super.getFirstName();
+    private String lastName = super.getFirstName();
 
     /**
      * Default constructor, creates blank professor.
@@ -39,6 +34,36 @@ public final class Professor extends User {
     @Override
     public boolean equals(final Object other) {
         return other instanceof Professor && super.equals(other);
+    }
+
+    @Override
+    public String getFirstName() {
+        return super.getFirstName();
+    }
+
+    @Override
+    public String getLastName() {
+        return super.getLastName();
+    }
+
+    @Override
+    public String getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setLastName(String lastName) throws IllegalArgumentException {
+        super.setLastName(lastName);
+    }
+
+    @Override
+    public void setFirstName(String firstName) throws IllegalArgumentException {
+        super.setFirstName(firstName);
+    }
+
+    @Override
+    public void setId(String id) {
+        super.setId(id);
     }
 
 

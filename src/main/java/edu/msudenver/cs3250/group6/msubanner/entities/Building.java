@@ -15,7 +15,7 @@ public class Building {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /**
      * Name of the building.
@@ -53,7 +53,7 @@ public class Building {
      */
     public void setId(final String id) {
         if (id != null) {
-            this.myId = id;
+            this.id = id;
         }
     }
 
@@ -63,7 +63,7 @@ public class Building {
      * @return id number of the building
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -95,6 +95,6 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Id: " + myId + ", Building Name: " + myBuildingName;
+        return "Id: " + id + ", Building Name: " + myBuildingName;
     }
 }

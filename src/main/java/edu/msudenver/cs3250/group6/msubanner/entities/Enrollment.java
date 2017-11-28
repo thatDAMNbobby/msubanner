@@ -1,16 +1,18 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import javax.persistence.*;
 
-@Entity
 public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
     private String id;
 
+    @DBRef
     private Student student;
 
+    @DBRef
     private Section section;
 
 
@@ -86,4 +88,3 @@ public class Enrollment {
         return id;
     }
 }
-

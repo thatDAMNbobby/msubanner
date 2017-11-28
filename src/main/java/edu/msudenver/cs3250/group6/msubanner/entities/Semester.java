@@ -16,7 +16,7 @@ public class Semester {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /**
      * LocalDate object containing the start date of the Semester.
@@ -187,7 +187,7 @@ public class Semester {
      * @param id New id for the Semester
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -196,7 +196,7 @@ public class Semester {
      * @return id number of the Semester
      */
     public String getId() {
-        return this.myId;
+        return this.id;
     }
 
     /**

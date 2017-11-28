@@ -10,12 +10,6 @@ import javax.persistence.Id;
  */
 public final class Student extends User {
 
-    /** The student id. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true)
-    private String id;
-
     /**
      * Default constructor.
      */

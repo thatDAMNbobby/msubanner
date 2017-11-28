@@ -1,5 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Course {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /**
      * Title of the course.
@@ -120,7 +121,7 @@ public class Course {
      * @param id New id for the course
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -129,7 +130,7 @@ public class Course {
      * @return id number of the course
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -266,7 +267,7 @@ public class Course {
      */
     @Override
     public String toString() {
-        return "Course{" + "Id=" + myId + ", Title= " + myTitle
+        return "Course{" + "Id=" + id + ", Title= " + myTitle
                 + ", Description= " + myDescription + "}";
     }
 

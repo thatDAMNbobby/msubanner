@@ -26,7 +26,7 @@ public class HourBlock {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /**
      * Start time of the HourBlock. Integer between 6 and 20 represents 6am to
@@ -74,7 +74,7 @@ public class HourBlock {
      * @param id New id for the Hours
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -83,7 +83,7 @@ public class HourBlock {
      * @return id number of the HourBlock
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -193,7 +193,7 @@ public class HourBlock {
      */
     @Override
     public String toString() {
-        return "HourBlock{id = " + myId + ", startTime = "
+        return "HourBlock{id = " + id + ", startTime = "
                 + myStartTime + ", duration = " + myDuration + '}';
     }
 }

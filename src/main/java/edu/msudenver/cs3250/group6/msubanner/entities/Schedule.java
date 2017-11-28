@@ -20,7 +20,7 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Column(unique = true)
-    private String myId;
+    private String id;
 
     /**
      * Name of the schedule.
@@ -185,7 +185,7 @@ public class Schedule {
      * @return id number of the schedule
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -212,7 +212,7 @@ public class Schedule {
      * @param id New id for the schedule
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -350,7 +350,7 @@ public class Schedule {
     @Override
     public String toString() {
         return "Schedule{" +
-                "id=" + myId +
+                "id=" + id +
                 ", Room=" + myRoom.getRoomNumber() +
                 ", building:" + myBuilding.getBuildingName() +
                 ", semester: " + mySemester.toString() +
