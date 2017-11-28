@@ -193,7 +193,7 @@ public class HourBlock {
      */
     @Override
     public String toString() {
-        return "HourBlock{id = " + myId + ", startTime = "
+        return "HourBlock{id = " + id + ", startTime = "
                 + myStartTime + ", duration = " + myDuration + '}';
     }
 }
