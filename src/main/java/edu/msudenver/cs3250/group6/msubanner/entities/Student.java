@@ -20,7 +20,7 @@ public final class Student extends User {
      * Default constructor.
      */
     public Student() { }
-
+    
     /**
      * Constructor.
      * @param firstName Student's first name
