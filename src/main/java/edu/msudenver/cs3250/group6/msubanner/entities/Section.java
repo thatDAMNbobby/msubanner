@@ -44,15 +44,21 @@ public class Section {
      * @param schedule the schedule
      */
     public Section(final Course course, final Professor professor,
-            final Schedule schedule) {
+            final Schedule schedule) throws IllegalArgumentException {
         if (course != null) {
             this.myCourse = course;
+        } else {
+            throw new IllegalArgumentException("Course cannot be null");
         }
         if (professor != null) {
             this.myProfessor = professor;
+        } else {
+            throw new IllegalArgumentException("Professor cannot be null");
         }
         if (schedule != null) {
             this.mySchedule = schedule;
+        } else {
+            throw new IllegalArgumentException("Schedule cannot be null");
         }
     }
 
