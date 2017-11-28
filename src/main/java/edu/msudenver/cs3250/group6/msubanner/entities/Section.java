@@ -153,10 +153,13 @@ public class Section {
      *
      * @param schedule new schedule for this section
      */
-    public void setSchedule(final Schedule schedule) {
+    public void setSchedule(final Schedule schedule) throws IllegalArgumentException {
         if (schedule != null) {
             this.mySchedule = schedule;
+        } else {
+            throw new IllegalArgumentException("Course cannot be null");
         }
+
     }
 
     /**
@@ -174,6 +177,20 @@ public class Section {
         return this.getId().equals(otherSection.getId())
                 && this.getCourse().equals(otherSection.getCourse())
                 && this.getProfessor().equals(otherSection.getProfessor());
+    }
+
+    /**
+     * Get the hashCode of a Section object
+     *
+     * @return hashCode of section object
+     */
+    @Override
+    public int hashCode() {
+        int result = myId.hashCode();
+        result = 31 * result + myCourse.hashCode();
+        result = 31 * result + myProfessor.hashCode();
+        result = 31 * result + mySchedule.hashCode();
+        return result;
     }
 
     /**

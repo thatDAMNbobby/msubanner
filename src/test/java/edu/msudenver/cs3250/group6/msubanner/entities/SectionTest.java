@@ -10,8 +10,59 @@ public class SectionTest {
     @Test
     public void sectionTest() {
         Section section = new Section();
-
+        assertNotNull(section);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sectionTestCourseNull() {
+        Course course = null;
+        Professor professor = new Professor();
+        Schedule schedule = new Schedule();
+
+        Section section = new Section(course, professor, schedule);
+
+        assertNotNull(section);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sectionTestProfessorNull() {
+        Course course = new Course();
+        Professor professor = null;
+        Schedule schedule = new Schedule();
+
+        Section section = new Section(course, professor, schedule);
+
+        assertNotNull(section);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sectionTestScheduleNull() {
+        Course course = new Course();
+        Professor professor = new Professor();
+        Schedule schedule = null;
+
+        Section section = new Section(course, professor, schedule);
+
+        assertNotNull(section);
+    }
+
+    @Test
+    public void sectionTestCourseParameter() {
+        Course course = new Course();
+        Section section = new Section(course);
+
+        assertNotNull(section);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void sectionTestCourseParameterCourseNull() {
+        Course course = null;
+        Section section = new Section(course);
+
+        assertNotNull(section);
+    }
+
+
 
     @Test
     public void sectionWithArgsTest() {
@@ -63,6 +114,63 @@ public class SectionTest {
         assertEquals(course, section.getCourse());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void setCourseNullTest() {
+        Course course = null;
+        Section section = new Section();
+        section.setCourse(course);
+        assertEquals(course, section.getCourse());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setProfessorNullTest() {
+        Course course = new Course();
+        Professor professor = new Professor();
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, professor, schedule);
+
+        Professor professor2 = null;
+        section.setProfessor(professor2);
+
+        assertNotNull(section);
+    }
+
+    @Test
+    public void getSchedule() {
+        Course course = new Course();
+        Professor professor = new Professor();
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, professor, schedule);
+
+        assertEquals(schedule, section.getSchedule());
+    }
+
+    @Test
+    public void setSchedule() {
+        Course course = new Course();
+        Professor professor = new Professor();
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, professor, schedule);
+
+        Schedule schedule2 = new Schedule();
+        section.setSchedule(schedule2);
+
+        assertEquals(schedule2, section.getSchedule());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setScheduleNull() {
+        Course course = new Course();
+        Professor professor = new Professor();
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, professor, schedule);
+
+        Schedule schedule2 = null;
+        section.setSchedule(schedule2);
+
+        assertEquals(schedule2, section.getSchedule());
+    }
+
     @Test
     public void getCourseTest() {
         Course course = new Course();
@@ -88,5 +196,46 @@ public class SectionTest {
                 + course.toString() + ", professor:" + prof.toString()
                 + '}';
         assertEquals(out, section.toString());
+    }
+
+
+    @Test
+    public void equalsTest() {
+        Course course = new Course();
+        Professor prof = new Professor("Mr.", "Meseeks");
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
+        section.setId("55");
+        Section section2 = new Section(course, prof, schedule);
+        section2.setId("55");
+
+        assertEquals(true, section.equals(section2));
+        assertEquals(true, section.equals(section));
+    }
+
+    @Test
+    public void equalsNullInstanceTest() {
+        Course course = new Course();
+        Professor prof = new Professor("Mr.", "Meseeks");
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
+        section.setId("55");
+        Section section2 = null;
+
+        assertEquals(false, section.equals(section2));
+    }
+
+
+    @Test
+    public void hashCodeTest() {
+        Course course = new Course();
+        Professor prof = new Professor("Mr.", "Meseeks");
+        Schedule schedule = new Schedule();
+        Section section = new Section(course, prof, schedule);
+        section.setId("55");
+        Section section2 = new Section(course, prof, schedule);
+        section2.setId("55");
+
+        assertEquals(section2.hashCode(), section.hashCode());
     }
 }
