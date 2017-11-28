@@ -20,7 +20,7 @@ public final class Student extends User {
      * Default constructor.
      */
     public Student() { }
-
+    
     /**
      * Constructor.
      * @param firstName Student's first name
@@ -28,11 +28,6 @@ public final class Student extends User {
      */
     public Student(final String firstName, final String lastName) {
         super(firstName, lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override

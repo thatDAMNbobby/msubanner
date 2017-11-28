@@ -37,11 +37,6 @@ public final class Professor extends User {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
     public boolean equals(final Object other) {
         return other instanceof Professor && super.equals(other);
     }
