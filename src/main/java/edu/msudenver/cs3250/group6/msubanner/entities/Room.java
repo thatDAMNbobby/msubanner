@@ -37,7 +37,9 @@ public class Room {
      * Default Constructor.
      */
     public Room() {
-        this.myRoomNumber = 0;
+        myRoomNumber = 0;
+        myCapacity = 0;
+        myBuilding = new Building();
     }
 
     /**

@@ -41,16 +41,7 @@ public class Days {
 
         @Override
         public String toString() {
-            switch (this) {
-                case SUNDAY: return "Sunday";
-                case MONDAY: return "Monday";
-                case TUESDAY: return "Tuesday";
-                case WEDNESDAY: return "Wednesday";
-                case THURSDAY: return "Thursday";
-                case FRIDAY: return "Friday";
-                case SATURDAY: return "Saturday";
-                default: throw new IllegalArgumentException();
-            }
+            return myDayName;
         }
 
         /** The day's number in the week (1-7). */
@@ -68,25 +59,6 @@ public class Days {
             myDayNum = dayNum;
             myDayName = dayName;
         }
-
-        /**
-         * Gets the list of days in a string array of day names.
-         *
-         * @param days the string array of day names
-         * @return the list of days
-         */
-        public static ArrayList<Day> getList(final String[] days) {
-            ArrayList<Day> out = new ArrayList<Day>();
-            for (String day : days) {
-                for (Day name : Day.values()) {
-                    if (day.equals(name.toString()) && !out.contains(name)) {
-                        out.add(name);
-                    }
-                }
-            }
-            return out;
-        }
-
     }
 
     /**
@@ -113,21 +85,7 @@ public class Days {
      * @param dayToAdd the day to add to the day list
      */
     public void addToDayList(final Day dayToAdd) {
-        switch (dayToAdd) {
-        case SUNDAY:
-        case MONDAY:
-        case TUESDAY:
-        case WEDNESDAY:
-        case THURSDAY:
-        case FRIDAY:
-        case SATURDAY:
-            dayList.add(dayToAdd);
-            break;
-        default:
-            System.out.println("Console Warning: Invalid input '" + dayToAdd
-                    + "', Days.addToDayList() expected a capitalized day name"
-                    + ", ie. Monday, Tuesday, etc");
-        }
+        dayList.add(dayToAdd);
     }
 
     /**
@@ -136,21 +94,7 @@ public class Days {
      * @param dayToRemove the day to remove from the list
      */
     public void removeDayFromList(final Day dayToRemove) {
-        switch (dayToRemove) {
-        case SUNDAY:
-        case MONDAY:
-        case TUESDAY:
-        case WEDNESDAY:
-        case THURSDAY:
-        case FRIDAY:
-        case SATURDAY:
-            dayList.remove(dayToRemove);
-            break;
-        default:
-            System.out.println("Console Warning: Invalid input '" + dayToRemove
-                    + "', Days.removeDayFromList() expected a capitalized day"
-                    + "name, ie. Monday, Tuesday, etc");
-        }
+        dayList.remove(dayToRemove);
     }
 
     /**
@@ -190,6 +134,24 @@ public class Days {
         String output = sortedList.toString();
         String replaced = output.replace("[", "").replace("]", "");
         return replaced;
-        //return output.substring(1,output.length() - 1);
+        // return output.substring(1,output.length() - 1);
+    }
+
+    /**
+     * Gets the list of days in a string array of day names.
+     *
+     * @param days the string array of day names
+     * @return the list of days
+     */
+    public static ArrayList<Day> getList(final String[] days) {
+        ArrayList<Day> out = new ArrayList<Day>();
+        for (String day : days) {
+            for (Day name : Day.values()) {
+                if (day.equals(name.toString()) && !out.contains(name)) {
+                    out.add(name);
+                }
+            }
+        }
+        return out;
     }
 }
