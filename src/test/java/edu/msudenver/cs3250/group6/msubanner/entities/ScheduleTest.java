@@ -1,6 +1,5 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
