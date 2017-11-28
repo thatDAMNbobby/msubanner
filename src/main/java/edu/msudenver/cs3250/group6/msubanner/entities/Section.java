@@ -15,7 +15,7 @@ public class Section {
     /** Section's Id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /** Course this section belongs to. */
     @DBRef
@@ -23,7 +23,7 @@ public class Section {
 
     /** Section's professor. */
     @DBRef
-    private Professor myProfessor;
+    private Professor professor;
 
     /** Section's schedule. */
     @DBRef
@@ -51,7 +51,7 @@ public class Section {
             throw new IllegalArgumentException("Course cannot be null");
         }
         if (professor != null) {
-            this.myProfessor = professor;
+            this.professor = professor;
         } else {
             throw new IllegalArgumentException("Professor cannot be null");
         }
@@ -82,7 +82,7 @@ public class Section {
      * @return id of this section
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Section {
      * @param id new id number for this section
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -121,8 +121,8 @@ public class Section {
      *
      * @return the professor of this section
      */
-    public User getProfessor() {
-        return myProfessor;
+    public Professor getProfessor() {
+        return professor;
     }
 
     /**
@@ -136,7 +136,7 @@ public class Section {
         if (professor == null) {
             throw new IllegalArgumentException("Professor cannot be null!");
         }
-        this.myProfessor = professor;
+        this.professor = professor;
     }
 
     /**
@@ -186,9 +186,9 @@ public class Section {
      */
     @Override
     public int hashCode() {
-        int result = myId.hashCode();
+        int result = id.hashCode();
         result = 31 * result + myCourse.hashCode();
-        result = 31 * result + myProfessor.hashCode();
+        result = 31 * result + professor.hashCode();
         result = 31 * result + mySchedule.hashCode();
         return result;
     }
@@ -198,7 +198,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + myId + ", Course=" + myCourse.toString()
-                + ", professor:" + myProfessor.toString() + '}';
+        return "Section{" + "id=" + id + ", Course=" + myCourse.toString()
+                + ", professor:" + professor.toString() + '}';
     }
 }

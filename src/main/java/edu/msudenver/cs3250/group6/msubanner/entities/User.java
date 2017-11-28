@@ -12,7 +12,7 @@ public class User {
     /** User's id number. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /** The user's first name. */
     private String myFirstName;
@@ -71,7 +71,7 @@ public class User {
      * @return id
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -80,7 +80,7 @@ public class User {
      * @param id the id number
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -138,7 +138,7 @@ public class User {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ": " + myFirstName + " "
-                + myLastName + " " + myId;
+                + myLastName + " " + id;
     }
 
 }

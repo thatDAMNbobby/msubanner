@@ -17,7 +17,7 @@ public class Department {
     /** Department Id. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /** Department name. */
     @Column
@@ -56,7 +56,7 @@ public class Department {
      * @return Department id
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -74,7 +74,7 @@ public class Department {
      * @param id ID to assign to the department
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -92,7 +92,7 @@ public class Department {
         }
         Department that = (Department) o;
 
-        if (myId != null ? !myId.equals(that.myId) : that.myId != null) {
+        if (id != null ? !id.equals(that.id) : that.id != null) {
             return false;
         }
         return myDepartmentName != null
@@ -107,7 +107,7 @@ public class Department {
      */
     @Override
     public int hashCode() {
-        int result = myId != null ? myId.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = HASH_MULT * result
                 + (myDepartmentName != null ? myDepartmentName.hashCode() : 0);
         return result;
@@ -120,7 +120,7 @@ public class Department {
      */
     @Override
     public String toString() {
-        return "Department{" + "id='" + myId + '\'' + ", myDepartmentName='"
+        return "Department{" + "id='" + id + '\'' + ", myDepartmentName='"
                 + myDepartmentName + '\'' + '}';
     }
 }

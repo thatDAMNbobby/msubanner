@@ -15,7 +15,7 @@ public class Room {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String myId;
+    private String id;
 
     /**
      * Room number.
@@ -75,7 +75,7 @@ public class Room {
      * @param id New id for the room
      */
     public void setId(final String id) {
-        this.myId = id;
+        this.id = id;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Room {
      * @return id number of the room
      */
     public String getId() {
-        return myId;
+        return id;
     }
 
     /**
@@ -169,4 +169,7 @@ public class Room {
                 + this.getRoomCapacity();
 
     }
+
+    Professor p = new Professor("first", "last");
+
 }
