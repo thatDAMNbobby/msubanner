@@ -52,9 +52,19 @@ public class HourBlock {
      *
      * @param startTime the start time
      * @param duration the duration
+     * @throws IllegalArgumentException if start time or duration are invalid
      */
     public HourBlock(final int startTime, final int duration) {
+        if (startTime > LATEST_START_TIME || startTime < EARLIEST_START_TIME) {
+            throw new IllegalArgumentException(
+                    "Start Time must be an integer between 6 and 20");
+        }
         this.myStartTime = startTime;
+
+        if (duration < MIN_BLOCK_DURATION || duration > MAX_BLOCK_DURATION) {
+            throw new IllegalArgumentException(
+                    "Duration must be an integer between 1 and 3");
+        }
         this.myDuration = duration;
     }
 
@@ -163,13 +173,13 @@ public class HourBlock {
 
         if (this.getStartTime() < hourBlock.getStartTime()
                 && this.getStartTime() + this.myDuration > hourBlock
-                        .getStartTime()) {
+                .getStartTime()) {
             return true;
         }
 
         if (hourBlock.getStartTime() < this.getStartTime()
                 && hourBlock.getStartTime() + hourBlock.myDuration > this
-                        .getStartTime()) {
+                .getStartTime()) {
             return true;
         }
 
@@ -183,10 +193,7 @@ public class HourBlock {
      */
     @Override
     public String toString() {
-        return "HourBlock{" +
-                "id='" + myId + '\'' +
-                ", startTime=" + myStartTime +
-                ", duration=" + myDuration +
-                '}';
+        return "HourBlock{id = " + myId + ", startTime = "
+                + myStartTime + ", duration = " + myDuration + '}';
     }
 }

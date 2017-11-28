@@ -1,12 +1,13 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ScheduleTest {
 
@@ -230,7 +231,7 @@ public class ScheduleTest {
 
         String expected = "Schedule{id=5959, Room=256, building:House of Cats, semester: Summer, 2019, " +
                 "startDate:2020/03/27, duration:2, days:[Monday, Wednesday], hours:null, " +
-                "hourBlock:HourBlock{id='6363', startTime=6, duration=1}}";
+                "hourBlock:HourBlock{id = 6363, startTime = 6, duration = 1}}";
 
         assertEquals(expected, schedule.toString());
     }

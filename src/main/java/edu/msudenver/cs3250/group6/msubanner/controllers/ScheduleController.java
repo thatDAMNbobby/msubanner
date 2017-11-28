@@ -70,7 +70,7 @@ public class ScheduleController {
         hourBlockService.addHourBlock(block);
 
         String[] words = days.split(",\\s*");
-        ArrayList<Days.Day> list = Days.Day.getList(words);
+        ArrayList<Days.Day> list = Days.getList(words);
         Schedule schedule = new Schedule(room, building, semester, startDate,
                 duration, list, block);
         scheduleService.addSchedule(schedule);

@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -138,5 +140,23 @@ public class DaysTest {
 
         assertEquals("Sunday, Tuesday, Saturday", days.toString());
         assertEquals("Monday, Wednesday, Thursday, Friday", days2.toString());
+    }
+
+    @Test
+    public void getListTest() {
+        String[] testDays = new String[5];
+        testDays[0] = "Monday";
+        testDays[1] = "Tuesday";
+        testDays[2] = "Wednesday";
+        testDays[3] = "Thursday";
+        testDays[4] = "Monday";
+
+        List<Day> testList = new ArrayList<Day>();
+        testList.add(Day.MONDAY);
+        testList.add(Day.TUESDAY);
+        testList.add(Day.WEDNESDAY);
+        testList.add(Day.THURSDAY);
+
+        assertEquals(testList, Days.getList(testDays));
     }
 }
