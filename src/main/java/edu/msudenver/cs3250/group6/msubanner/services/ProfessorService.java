@@ -1,29 +1,33 @@
 package edu.msudenver.cs3250.group6.msubanner.services;
 
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
-import edu.msudenver.cs3250.group6.msubanner.repositories.ProfessorRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
+import edu.msudenver.cs3250.group6.msubanner.repositories.ProfessorRepository;
 
 /**
- * The professor service class
+ * The professor service class.
  */
 
 @Service
 public class ProfessorService {
 
-    /** The professor repository */
+    /** The professor repository. */
     @Autowired
     private ProfessorRepository professorRepository;
 
     /**
-     * Gets the list of all professors
+     * Gets the list of all professors.
+     *
      * @return the list of all professors
      */
-    public List<Professor> getAllProfessors(){ return professorRepository.findAll();}
+    public List<Professor> getAllProfessors() {
+        return professorRepository.findAll();
+    }
 
     /**
      * Gets a professor by id.

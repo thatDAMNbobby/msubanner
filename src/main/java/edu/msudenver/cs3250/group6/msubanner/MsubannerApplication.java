@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.msudenver.cs3250.group6.msubanner.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +21,16 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
+import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.HourBlockRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.ProfessorRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
+import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
 
 /**
  * The msubanner application.
@@ -70,6 +79,7 @@ public class MsubannerApplication implements CommandLineRunner {
     /** The professor repository. */
     @Autowired
     private ProfessorRepository professorRepository;
+
     /**
      * Starts the spring application.
      *
@@ -138,7 +148,7 @@ public class MsubannerApplication implements CommandLineRunner {
         hourBlockRepository.save(block);
 
         List<Days.Day> days = new ArrayList<>(Arrays.asList(
-                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
 
         Schedule schedule = new Schedule();
         schedule.setScheduleName("Schedule 1");

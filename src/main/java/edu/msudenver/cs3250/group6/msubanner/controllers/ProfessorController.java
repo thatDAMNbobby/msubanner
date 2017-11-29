@@ -1,8 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.Global;
-import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
-import edu.msudenver.cs3250.group6.msubanner.services.ProfessorService;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import edu.msudenver.cs3250.group6.msubanner.Global;
+import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
+import edu.msudenver.cs3250.group6.msubanner.services.ProfessorService;
 
 /**
- * Controller for Professor class
- *
- * @author Group 6
+ * Controller for Professor class.
  */
 @Controller
 public class ProfessorController {
 
-    /** The professor service*/
+    /** The professor service. */
     @Autowired
     private ProfessorService professorService;
 
@@ -46,7 +45,8 @@ public class ProfessorController {
      * @param id the professor id
      * @return the professor
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/professors/getprofessor/{id}")
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/professors/getprofessor/{id}")
     public ModelAndView getProfessor(@PathVariable final String id) {
         ModelAndView mav = new ModelAndView("showprofessor");
         mav.addObject("professor", professorService.getProfessor(id));
@@ -60,9 +60,12 @@ public class ProfessorController {
      * @param body the professor info
      * @return the professor
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/professors/addprofessor")
-    public ModelAndView addProfessor(@RequestParam final Map<String, String> body) {
-        System.out.println("Post request hit /professors/addprofessor containing "
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/professors/addprofessor")
+    public ModelAndView addProfessor(
+            @RequestParam final Map<String, String> body) {
+        System.out
+        .println("Post request hit /professors/addprofessor containing "
                 + body.size() + " elements");
         for (String key : body.keySet()) {
             String val = body.get(key);
@@ -94,7 +97,7 @@ public class ProfessorController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/professors/updateprofessor/{id}")
     public ModelAndView updateProfessor(@RequestParam final String firstName,
-                                   final String lastName, @PathVariable final String id) {
+            final String lastName, @PathVariable final String id) {
         Professor professor = professorService.getProfessor(id);
         professor.setFirstName(firstName);
         professor.setLastName(lastName);
