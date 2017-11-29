@@ -1,6 +1,5 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,7 +7,6 @@ import javax.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /** The enrollment class for students/sections. */
-@Entity
 public class Enrollment {
     /** The id. */
     @Id
