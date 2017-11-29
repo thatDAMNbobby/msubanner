@@ -1,5 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +13,6 @@ import javax.persistence.Id;
 
 public class Department {
 
-    /** The hash multiplier. */
-    private static final int HASH_MULT = 31;
-
     /** Department Id. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,23 +20,23 @@ public class Department {
 
     /** Department name. */
     @Column
-    private String myDepartmentName;
+    private String deptName;
 
     /** Default constructor for user class. */
     public Department() {
-        this.myDepartmentName = "Department Name";
+        this.deptName = "Department Name";
     }
 
     /**
      * Constructor.
      *
-     * @param departmentName the department name
+     * @param newDeptName the department name
      */
-    public Department(final String departmentName) {
-        if (myDepartmentName == null || myDepartmentName.equals("")) {
-            myDepartmentName = "Department Name";
+    public Department(final String newDeptName) {
+        if (newDeptName == null || newDeptName.isEmpty()) {
+            deptName = "Department Name";
         } else {
-            myDepartmentName = departmentName;
+            deptName = newDeptName;
         }
     }
 
@@ -47,7 +46,7 @@ public class Department {
      * @return Department name
      */
     public String getDepartmentName() {
-        return myDepartmentName;
+        return deptName;
     }
 
     /**
@@ -62,19 +61,19 @@ public class Department {
     /**
      * Sets the department name.
      *
-     * @param name name to set department name to
+     * @param newDeptName name to set department name to
      */
-    public void setDepartmentName(final String name) {
-        myDepartmentName = name;
+    public void setDepartmentName(final String newDeptName) {
+        deptName = newDeptName;
     }
 
     /**
      * Sets the department's ID.
      *
-     * @param id ID to assign to the department
+     * @param newId ID to assign to the department
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
@@ -92,12 +91,8 @@ public class Department {
         }
         Department that = (Department) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) {
-            return false;
-        }
-        return myDepartmentName != null
-                ? myDepartmentName.equals(that.myDepartmentName)
-                : that.myDepartmentName == null;
+        return Objects.equals(id, that.id)
+                && Objects.equals(deptName, that.deptName);
     }
 
     /**
@@ -107,10 +102,7 @@ public class Department {
      */
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = HASH_MULT * result
-                + (myDepartmentName != null ? myDepartmentName.hashCode() : 0);
-        return result;
+        return Objects.hash(this.id, this.deptName);
     }
 
     /**
@@ -120,7 +112,7 @@ public class Department {
      */
     @Override
     public String toString() {
-        return "Department{" + "id='" + id + '\'' + ", myDepartmentName='"
-                + myDepartmentName + '\'' + '}';
+        return "Department{id = " + id + ", departmentName = "
+                + deptName + "}";
     }
 }

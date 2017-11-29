@@ -111,9 +111,9 @@ public class SemesterTest {
         semester.setSemesterStartDate(2020, 6, 10);
 
         assertEquals(2020, semester.getSemesterEndDate().getYear());
-        assertEquals("SEPTEMBER",
+        assertEquals("OCTOBER",
                 semester.getSemesterEndDate().getMonth().toString());
-        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+        assertEquals(10, semester.getSemesterEndDate().getDayOfMonth());
     }
 
     @Test
@@ -127,26 +127,26 @@ public class SemesterTest {
         // semester.setSemesterEndDate(2020, 9, 25);
 
         assertEquals(2021, semester.getSemesterEndDate().getYear());
-        assertEquals("JANUARY",
+        assertEquals("FEBRUARY",
                 semester.getSemesterEndDate().getMonth().toString());
-        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+        assertEquals(10, semester.getSemesterEndDate().getDayOfMonth());
     }
 
     @Test
     public void setSemesterEndDateTestWarn() {
         System.out
-                .println("\n" + "\n-------------------------------------------"
-                        + "\nTesting Semester setSemesterEndDate()  Warn"
-                        + "\n-------------------------------------------");
+        .println("\n" + "\n-------------------------------------------"
+                + "\nTesting Semester setSemesterEndDate()  Warn"
+                + "\n-------------------------------------------");
         Semester semester = new Semester();
         semester.setSemesterStartDate(2020, 9, 15);
         semester.setSemesterEndDate(2010, 9, 15);
 
         assertEquals(2020, semester.getSemesterStartDate().getYear());
-        assertEquals(2020, semester.getSemesterEndDate().getYear());
-        assertEquals("DECEMBER",
+        assertEquals(2021, semester.getSemesterEndDate().getYear());
+        assertEquals("JANUARY",
                 semester.getSemesterEndDate().getMonth().toString());
-        assertEquals(25, semester.getSemesterEndDate().getDayOfMonth());
+        assertEquals(15, semester.getSemesterEndDate().getDayOfMonth());
     }
 
     @Test

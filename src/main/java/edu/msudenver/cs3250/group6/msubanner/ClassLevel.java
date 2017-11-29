@@ -20,19 +20,19 @@ public enum ClassLevel {
     /** Graduate class level. */
     GRADUATE("Graduate", 120);
     /** Display name. */
-    private String myDisplayName;
+    private String displayName;
 
     /** Minimum number of credits completed. */
-    private int myMinCredits;
+    private int minCredits;
 
     /**
      * Constructor for class level.
-     * @param displayName the display name
-     * @param minCredits the min number of credits completed
+     * @param newName the display name
+     * @param newMinCredits the min number of credits completed
      */
-    ClassLevel(final String displayName, final int minCredits) {
-        myDisplayName = displayName;
-        myMinCredits = minCredits;
+    ClassLevel(final String newName, final int newMinCredits) {
+        this.displayName = newName;
+        this.minCredits = newMinCredits;
     }
 
     /**
@@ -40,7 +40,7 @@ public enum ClassLevel {
      * @return the display name
      */
     public String getDisplayName() {
-        return myDisplayName;
+        return displayName;
     }
 
     /**
@@ -48,11 +48,11 @@ public enum ClassLevel {
      * @return the minimum credits completed
      */
     public int getMinCredits() {
-        return myMinCredits;
+        return minCredits;
     }
 
     @Override
     public String toString() {
-        return myDisplayName + ": " + myMinCredits + " minimum credits";
+        return displayName + ": " + minCredits + " minimum credits";
     }
 }

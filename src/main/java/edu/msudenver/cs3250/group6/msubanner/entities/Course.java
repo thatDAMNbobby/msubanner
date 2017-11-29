@@ -1,6 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
-import javax.persistence.Entity;
+import java.util.Objects;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,94 +23,94 @@ public class Course {
     /**
      * Title of the course.
      */
-    private String myTitle;
+    private String title;
 
     /**
      * Description of the course.
      */
-    private String myDescription;
+    private String description;
 
     /**
      * Credits for this course.
      */
-    private int myCredits;
+    private int credits;
 
     /**
      * Learning objectives for this course.
      */
-    private String myLearningObjectives;
+    private String learningObjectives;
 
     /**
      * Pre-requisites for this course.
      */
-    private ClassLevel myPrereqs;
+    private ClassLevel prereqs;
 
     /**
      * Department this course belongs to.
      */
-    private Department myDepartment;
+    private Department department;
 
     /**
      * Default constructor, initializes fields with default values. Directions
      * for use: Do NOT
      */
     public Course() {
-        this.myTitle = "Empty title";
-        this.myDescription = "No description available";
-        this.myCredits = 0;
-        this.myLearningObjectives = "No objective available";
-        this.myPrereqs = ClassLevel.FRESHMAN;
-        this.myDepartment = new Department("Blank department");
+        this.title = "Empty title";
+        this.description = "No description available";
+        this.credits = 0;
+        this.learningObjectives = "No objective available";
+        this.prereqs = ClassLevel.FRESHMAN;
+        this.department = new Department("Blank department");
     }
 
     /**
      * Course constructor.
      *
-     * @param title the course title
-     * @param description the course description
-     * @param credits the number of credits
-     * @param learningObjectives the learning objectives
-     * @param prereqs the prerequisites
-     * @param department the department
+     * @param newTitle the course title
+     * @param newDescription the course description
+     * @param newCredits the number of credits
+     * @param newObjectives the learning objectives
+     * @param newPrereqs the prerequisites
+     * @param newDepartment the department
      * @throws IllegalArgumentException if a parameter is invalid
      */
-    public Course(final String title, final String description,
-            final int credits, final String learningObjectives,
-            final ClassLevel prereqs, final Department department)
-            throws IllegalArgumentException {
+    public Course(final String newTitle, final String newDescription,
+            final int newCredits, final String newObjectives,
+            final ClassLevel newPrereqs, final Department newDepartment)
+                    throws IllegalArgumentException {
 
-        if (title == null || title.isEmpty()) {
-            myTitle = "Empty title";
+        if (newTitle == null || newTitle.isEmpty()) {
+            title = "Empty title";
         } else {
-            myTitle = title;
+            title = newTitle;
         }
-        if (description == null || description.isEmpty()) {
-            myDescription = "No description available";
+        if (newDescription == null || newDescription.isEmpty()) {
+            description = "No description available";
         } else {
-            myDescription = description;
-        }
-
-        if (learningObjectives == null || learningObjectives.isEmpty()) {
-            myLearningObjectives = "No learning objective available";
-        } else {
-            myLearningObjectives = learningObjectives;
+            description = newDescription;
         }
 
-        if (credits < 0) {
+        if (newObjectives == null || newObjectives.isEmpty()) {
+            learningObjectives = "No learning objective available";
+        } else {
+            learningObjectives = newObjectives;
+        }
+
+        if (newCredits < 0) {
             throw new IllegalArgumentException("Credits must be non-negative");
         }
-        myCredits = credits;
+        credits = newCredits;
 
-        if (prereqs != null) {
+        if (newPrereqs != null) {
             // throw new IllegalArgumentException("Prerequisite cannot be
             // null");
-            myPrereqs = prereqs;
+            prereqs = newPrereqs;
         } else {
-            myPrereqs = ClassLevel.FRESHMAN;
+            prereqs = ClassLevel.FRESHMAN;
         }
 
-        if (department != null) {
-            myDepartment = department;
+        if (newDepartment != null) {
+            department = newDepartment;
         } else {
             throw new IllegalArgumentException("Department cannot be null");
         }
@@ -118,10 +119,10 @@ public class Course {
     /**
      * Sets the id of the course.
      *
-     * @param id New id for the course
+     * @param newId New id for the course
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
@@ -136,14 +137,15 @@ public class Course {
     /**
      * Sets the title of the course.
      *
-     * @param title New title of the course
+     * @param newTitle New title of the course
      * @throws IllegalArgumentException if new title is blank
      */
-    public void setTitle(final String title) throws IllegalArgumentException {
-        if (title == null || title.isEmpty()) {
+    public void setTitle(final String newTitle)
+            throws IllegalArgumentException {
+        if (newTitle == null || newTitle.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be blank.");
         }
-        this.myTitle = title;
+        this.title = newTitle;
     }
 
     /**
@@ -152,19 +154,19 @@ public class Course {
      * @return Title of the course
      */
     public String getTitle() {
-        return myTitle;
+        return title;
     }
 
     /**
      * Sets the decription of the course.
      *
-     * @param description New description of the course
+     * @param newDescription New description of the course
      */
-    public void setDescription(final String description) {
-        if (description == null || description.isEmpty()) {
+    public void setDescription(final String newDescription) {
+        if (newDescription == null || newDescription.isEmpty()) {
             throw new IllegalArgumentException("Description cannot be blank!");
         }
-        this.myDescription = description;
+        this.description = newDescription;
     }
 
     /**
@@ -173,42 +175,43 @@ public class Course {
      * @return Description of the course
      */
     public String getDescription() {
-        return myDescription;
+        return description;
     }
 
     /**
      * Sets the number of credits.
      *
-     * @param credits the number of credits
+     * @param newCredits the number of credits
      * @throws IllegalArgumentException if a negative number is used
      */
-    public void setCredits(final int credits) throws IllegalArgumentException {
-        if (credits < 0) {
+    public void setCredits(final int newCredits)
+            throws IllegalArgumentException {
+        if (newCredits < 0) {
             throw new IllegalArgumentException("Credits cannot be negative!");
         }
-        myCredits = credits;
+        credits = newCredits;
     }
 
     /**
      * Sets the learning objectives.
      *
-     * @param learningObjectives the learning objectives
+     * @param newObjectives the learning objectives
      */
-    public void setLearningObjectives(final String learningObjectives) {
-        if (learningObjectives == null || learningObjectives.isEmpty()) {
-            myLearningObjectives = "Default learning objectives.";
+    public void setLearningObjectives(final String newObjectives) {
+        if (newObjectives == null || newObjectives.isEmpty()) {
+            learningObjectives = "Default learning objectives.";
         } else {
-            myLearningObjectives = learningObjectives;
+            learningObjectives = newObjectives;
         }
     }
 
     /**
      * Sets the prerequisites.
      *
-     * @param prereqs the class level prereq
+     * @param newPrereqs the class level prereq
      */
-    public void setPrereqs(final ClassLevel prereqs) {
-        myPrereqs = prereqs;
+    public void setPrereqs(final ClassLevel newPrereqs) {
+        prereqs = newPrereqs;
     }
 
     /**
@@ -217,7 +220,7 @@ public class Course {
      * @return the prereq class level
      */
     public ClassLevel getPrereqs() {
-        return myPrereqs;
+        return prereqs;
     }
 
     /**
@@ -226,7 +229,7 @@ public class Course {
      * @return the learning objectives
      */
     public String getLearningObjectives() {
-        return myLearningObjectives;
+        return learningObjectives;
     }
 
     /**
@@ -235,7 +238,7 @@ public class Course {
      * @return the number of credits
      */
     public int getCredits() {
-        return myCredits;
+        return credits;
     }
 
     /**
@@ -244,19 +247,19 @@ public class Course {
      * @return The department this course belongs to
      */
     public Department getDepartment() {
-        return myDepartment;
+        return department;
     }
 
     /**
      * Sets the department.
      *
-     * @param department Department this course belongs to
+     * @param newDepartment Department this course belongs to
      * @throws IllegalArgumentException if department is null
      */
-    public void setDepartment(final Department department)
+    public void setDepartment(final Department newDepartment)
             throws IllegalArgumentException {
-        if (department != null) {
-            this.myDepartment = department;
+        if (newDepartment != null) {
+            this.department = newDepartment;
         } else {
             throw new IllegalArgumentException("Department cannot be null");
         }
@@ -267,8 +270,8 @@ public class Course {
      */
     @Override
     public String toString() {
-        return "Course{" + "Id=" + id + ", Title= " + myTitle
-                + ", Description= " + myDescription + "}";
+        return "Course{" + "Id=" + id + ", Title= " + title + ", Description= "
+                + description + "}";
     }
 
     /**
@@ -284,8 +287,16 @@ public class Course {
         }
 
         Course course = (Course) o;
-        return this.getId().equals(course.getId())
-                && this.getDescription().equals(course.getDescription())
-                && this.getTitle().equals(course.getTitle());
+        return Objects.equals(id, course.id)
+                && Objects.equals(title, course.title)
+                && Objects.equals(description, course.description);
+    }
+
+    /**
+     * hashCode method for Course.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description);
     }
 }

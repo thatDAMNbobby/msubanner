@@ -21,39 +21,37 @@ public class Building {
      * Name of the building.
      */
     @Column
-    private String myBuildingName;
-
-    // private Room myRooms;
+    private String buildingName;
 
     /**
      * Default Constructor.
      */
     public Building() {
-        this.myBuildingName = "No building";
+        this.buildingName = "No building";
     }
 
     /**
      * Constructor.
      *
-     * @param buildingName the building name
+     * @param newBuildingName the building name
      */
-    public Building(final String buildingName) {
+    public Building(final String newBuildingName) {
 
-        if (buildingName == null || buildingName.isEmpty()) {
-            this.myBuildingName = "No building";
+        if (newBuildingName == null || newBuildingName.isEmpty()) {
+            this.buildingName = "No building";
         } else {
-            this.myBuildingName = buildingName;
+            this.buildingName = newBuildingName;
         }
     }
 
     /**
      * Sets the id of the building.
      *
-     * @param id New id for the building
+     * @param newId New id for the building
      */
-    public void setId(final String id) {
-        if (id != null) {
-            this.id = id;
+    public void setId(final String newId) {
+        if (newId != null) {
+            this.id = newId;
         }
     }
 
@@ -69,16 +67,16 @@ public class Building {
     /**
      * Sets the name of the building.
      *
-     * @param buildingName New buildingName of the building.
+     * @param newBuildingName New buildingName of the building.
      * @throws IllegalArgumentException if new buildingName is blank
      */
-    public void setBuildingName(final String buildingName)
+    public void setBuildingName(final String newBuildingName)
             throws IllegalArgumentException {
-        if (buildingName == null || buildingName.isEmpty()) {
+        if (newBuildingName == null || newBuildingName.isEmpty()) {
             throw new IllegalArgumentException(
                     "Building name cannot be blank.");
         }
-        this.myBuildingName = buildingName;
+        this.buildingName = newBuildingName;
     }
 
     /**
@@ -87,7 +85,7 @@ public class Building {
      * @return Name of the building
      */
     public String getBuildingName() {
-        return myBuildingName;
+        return buildingName;
     }
 
     /**
@@ -95,6 +93,6 @@ public class Building {
      */
     @Override
     public String toString() {
-        return "Id: " + id + ", Building Name: " + myBuildingName;
+        return "Id: " + id + ", Building Name: " + buildingName;
     }
 }

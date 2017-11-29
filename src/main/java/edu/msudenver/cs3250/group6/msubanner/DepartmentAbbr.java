@@ -12,14 +12,14 @@ public enum DepartmentAbbr {
     CIS("CIS");
 
     /** Display name. */
-    private String myDisplayName;
+    private String displayName;
 
     /**
      * Constructor for department abbreviation.
-     * @param displayName the display name
+     * @param newName the display name
      */
-    DepartmentAbbr(final String displayName) {
-        myDisplayName = displayName;
+    DepartmentAbbr(final String newName) {
+        displayName = newName;
     }
 
     /**
@@ -27,11 +27,11 @@ public enum DepartmentAbbr {
      * @return the display name
      */
     public String getDisplayName() {
-        return myDisplayName;
+        return displayName;
     }
 
     @Override
     public String toString() {
-        return myDisplayName;
+        return displayName;
     }
 }

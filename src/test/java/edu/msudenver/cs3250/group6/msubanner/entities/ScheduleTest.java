@@ -22,13 +22,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         String hours1 = "3";
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
 
         assertNotNull(schedule);
         assertEquals(building1, schedule.getBuilding());
@@ -45,13 +47,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 0;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         String hours1 = "3";
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
 
         assertNotNull(schedule);
     }
@@ -61,13 +65,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
 
         assertNotNull(schedule);
         assertEquals(building1, schedule.getBuilding());
@@ -84,13 +90,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 0;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
 
         assertNotNull(schedule);
     }
@@ -103,12 +111,14 @@ public class ScheduleTest {
         Room room2 = new Room(258, 260, building2);
         Semester semester1 = new Semester();
         Semester semester2 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
-        semester2.setSemesterStartDate(2029,8,17);
+        semester1.setSemesterStartDate(2019, 6, 15);
+        semester2.setSemesterStartDate(2029, 8, 17);
         int duration1 = 2;
         int duration2 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
-        List<Days.Day> days2 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.TUESDAY, Days.Day.THURSDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
+        List<Days.Day> days2 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.TUESDAY, Days.Day.THURSDAY }));
 
         HourBlock hours1 = new HourBlock();
         HourBlock hours2 = new HourBlock();
@@ -116,7 +126,8 @@ public class ScheduleTest {
         String startDate1 = "2020/03/27";
         String startDate2 = "2029/08/17";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setDays(days2);
         schedule.setBuilding(building2);
         schedule.setRoom(room2);
@@ -144,13 +155,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setRoom(null);
         System.out.println(schedule.getRoom());
 
@@ -163,13 +176,15 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setBuilding(null);
         System.out.println(schedule.getBuilding());
 
@@ -181,15 +196,16 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setScheduleName("Awesome Schedule");
-
 
         assertNotNull(schedule);
         assertEquals("Awesome Schedule", schedule.getScheduleName());
@@ -201,15 +217,16 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setScheduleName(null);
-
 
         assertNotNull(schedule);
     }
@@ -219,19 +236,21 @@ public class ScheduleTest {
         Building building1 = new Building("House of Cats");
         Room room1 = new Room(256, 255, building1);
         Semester semester1 = new Semester();
-        semester1.setSemesterStartDate(2019,6,15);
+        semester1.setSemesterStartDate(2019, 6, 15);
         int duration1 = 2;
-        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY}));
+        List<Days.Day> days1 = new ArrayList<>(Arrays.asList(
+                new Days.Day[] {Days.Day.MONDAY, Days.Day.WEDNESDAY }));
         HourBlock hours1 = new HourBlock();
         hours1.setId("6363");
         String startDate1 = "2020/03/27";
 
-        Schedule schedule = new Schedule(room1, building1, semester1, startDate1, duration1, days1, hours1);
+        Schedule schedule = new Schedule(room1, building1, semester1,
+                startDate1, duration1, days1, hours1);
         schedule.setId("5959");
 
-        String expected = "Schedule{id=5959, Room=256, building:House of Cats, semester: Summer, 2019, " +
-                "startDate:2020/03/27, duration:2, days:[Monday, Wednesday], hours:null, " +
-                "hourBlock:HourBlock{id = 6363, startTime = 6, duration = 1}}";
+        String expected = "Schedule{id: 5959, room: 256, building: House of Cats, semester: Summer, 2019, "
+                + "startDate: 2020/03/27, duration: 2, days: [Monday, Wednesday], hours: null, "
+                + "hourBlock: HourBlock{id = 6363, startTime = 6, duration = 1}}";
 
         assertEquals(expected, schedule.toString());
     }

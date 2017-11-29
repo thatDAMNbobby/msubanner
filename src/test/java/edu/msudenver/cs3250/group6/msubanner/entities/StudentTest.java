@@ -88,8 +88,11 @@ public class StudentTest {
         assertEquals("First_Name", student.getFirstName());
     }
 
-    @Test public void testHashCode() { Student student = new Student();
-      assertEquals(student.hashCode(), student.hashCode()); }
+    @Test
+    public void testHashCode() {
+        Student student = new Student();
+        assertEquals(student.hashCode(), student.hashCode());
+    }
 
     @Test
     public void testToString() {

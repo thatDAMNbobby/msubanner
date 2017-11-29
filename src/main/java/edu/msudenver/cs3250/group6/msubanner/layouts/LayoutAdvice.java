@@ -36,7 +36,7 @@ class LayoutAdvice {
  */
 class Layout implements Mustache.Lambda {
     /** the body. */
-    private String myBody;
+    private String body;
 
     @Override
     public void execute(final Fragment frag, final Writer out)
@@ -49,14 +49,14 @@ class Layout implements Mustache.Lambda {
      * @return the body
      */
     public String getBody() {
-        return myBody;
+        return body;
     }
 
     /**
      * Sets the body.
-     * @param body the body
+     * @param newBody the body
      */
-    public void setBody(final String body) {
-        myBody = body;
+    public void setBody(final String newBody) {
+        body = newBody;
     }
 }
