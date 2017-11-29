@@ -6,18 +6,15 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
-
 public class BuildingTest {
 
-    private BuildingService buildingService = new BuildingService();
     private Building building;
 
     @Before
     public void before() {
-         building = new Building();
-         building.setBuildingName("Test Name");
-         building.setId("1");
+        building = new Building();
+        building.setBuildingName("Test Name");
+        building.setId("1");
     }
 
     @Test

@@ -1,5 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.Objects;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,49 +34,51 @@ public class HourBlock {
      * Start time of the HourBlock. Integer between 6 and 20 represents 6am to
      * 8pm.
      */
-    private int myStartTime;
+    private int startTime;
 
     /**
      * Duration of the HourBlock, can only be set to 1, 2, or 3.
      */
-    private int myDuration;
+    private int duration;
 
     /**
      * Hour block default constructor.
      */
     public HourBlock() {
-        myStartTime = EARLIEST_START_TIME;
-        myDuration = MIN_BLOCK_DURATION;
+        startTime = EARLIEST_START_TIME;
+        duration = MIN_BLOCK_DURATION;
     }
 
     /**
      * Hour block constructor.
      *
-     * @param startTime the start time
-     * @param duration the duration
+     * @param newStartTime the start time
+     * @param newDuration the duration
      * @throws IllegalArgumentException if start time or duration are invalid
      */
-    public HourBlock(final int startTime, final int duration) {
-        if (startTime > LATEST_START_TIME || startTime < EARLIEST_START_TIME) {
+    public HourBlock(final int newStartTime, final int newDuration) {
+        if (newStartTime > LATEST_START_TIME
+                || newStartTime < EARLIEST_START_TIME) {
             throw new IllegalArgumentException(
                     "Start Time must be an integer between 6 and 20");
         }
-        this.myStartTime = startTime;
+        this.startTime = newStartTime;
 
-        if (duration < MIN_BLOCK_DURATION || duration > MAX_BLOCK_DURATION) {
+        if (newDuration < MIN_BLOCK_DURATION
+                || newDuration > MAX_BLOCK_DURATION) {
             throw new IllegalArgumentException(
                     "Duration must be an integer between 1 and 3");
         }
-        this.myDuration = duration;
+        this.duration = newDuration;
     }
 
     /**
      * Sets the id of an HourBlock instance.
      *
-     * @param id New id for the Hours
+     * @param newId New id for the Hours
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
@@ -92,22 +96,23 @@ public class HourBlock {
      * @return start time of the HourBlock
      */
     public int getStartTime() {
-        return myStartTime;
+        return startTime;
     }
 
     /**
      * Sets the startTime of HourBlock.
      *
-     * @param startTime the start time
+     * @param newStartTime the start time
      * @throws IllegalArgumentException if HourBlock < 6 or > 20
      */
-    public void setStartTime(final int startTime)
+    public void setStartTime(final int newStartTime)
             throws IllegalArgumentException {
-        if (startTime > LATEST_START_TIME || startTime < EARLIEST_START_TIME) {
+        if (newStartTime > LATEST_START_TIME
+                || newStartTime < EARLIEST_START_TIME) {
             throw new IllegalArgumentException(
                     "Start Time must be an integer between 6 and 20");
         }
-        this.myStartTime = startTime;
+        this.startTime = newStartTime;
     }
 
     /**
@@ -116,22 +121,23 @@ public class HourBlock {
      * @return duration of the HourBlock
      */
     public int getDuration() {
-        return myDuration;
+        return duration;
     }
 
     /**
      * Sets the duration of the HourBlock.
      *
-     * @param duration the duration
+     * @param newDuration the duration
      * @throws IllegalArgumentException if duration is not 1, 2, or 3
      */
-    public void setDuration(final int duration)
+    public void setDuration(final int newDuration)
             throws IllegalArgumentException {
-        if (duration < MIN_BLOCK_DURATION || duration > MAX_BLOCK_DURATION) {
+        if (newDuration < MIN_BLOCK_DURATION
+                || newDuration > MAX_BLOCK_DURATION) {
             throw new IllegalArgumentException(
                     "Duration must be an integer between 1 and 3");
         }
-        this.myDuration = duration;
+        this.duration = newDuration;
     }
 
     /**
@@ -147,8 +153,16 @@ public class HourBlock {
         }
 
         HourBlock hourBlock = (HourBlock) o;
-        return this.getStartTime() == hourBlock.getStartTime()
-                && this.getDuration() == hourBlock.getDuration();
+        return startTime == hourBlock.startTime
+                && duration == hourBlock.duration;
+    }
+
+    /**
+     * hashCode method for HourBlock.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(startTime, duration);
     }
 
     /**
@@ -172,13 +186,13 @@ public class HourBlock {
         }
 
         if (this.getStartTime() < hourBlock.getStartTime()
-                && this.getStartTime() + this.myDuration > hourBlock
+                && this.getStartTime() + this.duration > hourBlock
                 .getStartTime()) {
             return true;
         }
 
         if (hourBlock.getStartTime() < this.getStartTime()
-                && hourBlock.getStartTime() + hourBlock.myDuration > this
+                && hourBlock.getStartTime() + hourBlock.duration > this
                 .getStartTime()) {
             return true;
         }
@@ -187,13 +201,13 @@ public class HourBlock {
     }
 
     /**
-     * Get a readable version of the HourBlock fields
+     * Get a readable version of the HourBlock fields.
      *
      * @return String of fields from the HourBlock object
      */
     @Override
     public String toString() {
-        return "HourBlock{id = " + id + ", startTime = "
-                + myStartTime + ", duration = " + myDuration + '}';
+        return "HourBlock{id = " + id + ", startTime = " + startTime
+                + ", duration = " + duration + "}";
     }
 }

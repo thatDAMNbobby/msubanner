@@ -1,16 +1,16 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class EnrollmentTest {
-
 
     @Test
     public void testHasConflict() {
         Enrollment enrollment = new Enrollment();
-        assertFalse(enrollment.hasConfilct());
+        assertFalse(enrollment.hasConflict());
     }
 
     @Test

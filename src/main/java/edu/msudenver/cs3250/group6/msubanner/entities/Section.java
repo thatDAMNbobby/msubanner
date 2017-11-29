@@ -1,5 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.Objects;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ public class Section {
 
     /** Course this section belongs to. */
     @DBRef
-    private Course myCourse;
+    private Course course;
 
     /** Section's professor. */
     @DBRef
@@ -27,36 +29,37 @@ public class Section {
 
     /** Section's schedule. */
     @DBRef
-    private Schedule mySchedule;
+    private Schedule schedule;
 
     /**
      * Default constructor, creates a blank section.
      */
     public Section() {
-
     }
 
     /**
      * Creates a new section and instantiates the course and professor fields.
      *
-     * @param course The course that this section belongs to
-     * @param professor The professor for this section
-     * @param schedule the schedule
+     * @param newCourse The course that this section belongs to
+     * @param newProf The professor for this section
+     * @param newSchedule the schedule
+     * @throws IllegalArgumentException if an invalid course, professor, or
+     *         schedule are used
      */
-    public Section(final Course course, final Professor professor,
-            final Schedule schedule) throws IllegalArgumentException {
-        if (course != null) {
-            this.myCourse = course;
+    public Section(final Course newCourse, final Professor newProf,
+            final Schedule newSchedule) throws IllegalArgumentException {
+        if (newCourse != null) {
+            this.course = newCourse;
         } else {
             throw new IllegalArgumentException("Course cannot be null");
         }
-        if (professor != null) {
-            this.professor = professor;
+        if (newProf != null) {
+            this.professor = newProf;
         } else {
             throw new IllegalArgumentException("Professor cannot be null");
         }
-        if (schedule != null) {
-            this.mySchedule = schedule;
+        if (newSchedule != null) {
+            this.schedule = newSchedule;
         } else {
             throw new IllegalArgumentException("Schedule cannot be null");
         }
@@ -65,12 +68,12 @@ public class Section {
     /**
      * Overloaded constructor - allows for creation without a professor.
      *
-     * @param course the course
+     * @param newCourse the course
      * @throws IllegalArgumentException if course is null
      */
-    public Section(final Course course) throws IllegalArgumentException {
-        if (course != null) {
-            this.myCourse = course;
+    public Section(final Course newCourse) throws IllegalArgumentException {
+        if (newCourse != null) {
+            this.course = newCourse;
         } else {
             throw new IllegalArgumentException("Course cannot be null");
         }
@@ -88,10 +91,10 @@ public class Section {
     /**
      * Sets the section id number.
      *
-     * @param id new id number for this section
+     * @param newId new id number for this section
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
@@ -100,20 +103,21 @@ public class Section {
      * @return course this section belongs to
      */
     public Course getCourse() {
-        return myCourse;
+        return course;
     }
 
     /**
      * Sets the course this section belongs to.
      *
-     * @param course new course for this section
+     * @param newCourse new course for this section
      * @throws IllegalArgumentException if the course is null
      */
-    public void setCourse(final Course course) throws IllegalArgumentException {
-        if (course == null) {
+    public void setCourse(final Course newCourse)
+            throws IllegalArgumentException {
+        if (newCourse == null) {
             throw new IllegalArgumentException("Course cannot be null!");
         }
-        this.myCourse = course;
+        this.course = newCourse;
     }
 
     /**
@@ -128,15 +132,15 @@ public class Section {
     /**
      * Sets the professor of this section.
      *
-     * @param professor new professor for this section
+     * @param newProf new professor for this section
      * @throws IllegalArgumentException if the professor is null
      */
-    public void setProfessor(final Professor professor)
+    public void setProfessor(final Professor newProf)
             throws IllegalArgumentException {
-        if (professor == null) {
+        if (newProf == null) {
             throw new IllegalArgumentException("Professor cannot be null!");
         }
-        this.professor = professor;
+        this.professor = newProf;
     }
 
     /**
@@ -145,17 +149,19 @@ public class Section {
      * @return the schedule of this section
      */
     public Schedule getSchedule() {
-        return mySchedule;
+        return schedule;
     }
 
     /**
      * Set's the section's schedule.
      *
-     * @param schedule new schedule for this section
+     * @param newSchedule new schedule for this section
+     * @throws IllegalArgumentException if the schedule is null
      */
-    public void setSchedule(final Schedule schedule) throws IllegalArgumentException {
-        if (schedule != null) {
-            this.mySchedule = schedule;
+    public void setSchedule(final Schedule newSchedule)
+            throws IllegalArgumentException {
+        if (newSchedule != null) {
+            this.schedule = newSchedule;
         } else {
             throw new IllegalArgumentException("Course cannot be null");
         }
@@ -174,23 +180,20 @@ public class Section {
             return true;
         }
         final Section otherSection = (Section) other;
-        return this.getId().equals(otherSection.getId())
-                && this.getCourse().equals(otherSection.getCourse())
-                && this.getProfessor().equals(otherSection.getProfessor());
+        return Objects.equals(id, otherSection.id)
+                && Objects.equals(course, otherSection.course)
+                && Objects.equals(professor, otherSection.professor)
+                && Objects.equals(schedule, otherSection.schedule);
     }
 
     /**
-     * Get the hashCode of a Section object
+     * Get the hashCode of a Section object.
      *
      * @return hashCode of section object
      */
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + myCourse.hashCode();
-        result = 31 * result + professor.hashCode();
-        result = 31 * result + mySchedule.hashCode();
-        return result;
+        return Objects.hash(id, course, professor, schedule);
     }
 
     /**
@@ -198,7 +201,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "Section{" + "id=" + id + ", Course=" + myCourse.toString()
-                + ", professor:" + professor.toString() + '}';
+        return "Section{id = " + id + ", Course = " + course.toString()
+        + ", professor = " + professor.toString() + "}";
     }
 }

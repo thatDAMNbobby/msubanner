@@ -41,33 +41,33 @@ public class Days {
 
         @Override
         public String toString() {
-            return myDayName;
+            return dayName;
         }
 
         /** The day's number in the week (1-7). */
-        private int myDayNum;
+        private int dayNum;
         /** The day's name. */
-        private String myDayName;
+        private String dayName;
 
         /**
          * Constructor for Day.
          *
-         * @param dayName the name of the day
-         * @param dayNum the number value of the day
+         * @param newDayName the name of the day
+         * @param newDayNum the number value of the day
          */
-        Day(final int dayNum, final String dayName) {
-            myDayNum = dayNum;
-            myDayName = dayName;
+        Day(final int newDayNum, final String newDayName) {
+            this.dayNum = newDayNum;
+            this.dayName = newDayName;
         }
     }
 
     /**
      * Sets the id of an Days instance.
      *
-     * @param idNum the day id
+     * @param newId the day id
      */
-    public void setId(final String idNum) {
-        this.id = idNum;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**

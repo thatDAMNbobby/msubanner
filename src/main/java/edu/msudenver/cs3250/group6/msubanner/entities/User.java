@@ -1,5 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.entities;
 
+import java.util.Objects;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,33 +17,33 @@ public class User {
     private String id;
 
     /** The user's first name. */
-    private String myFirstName;
+    private String firstName;
 
     /** The user's last name. */
-    private String myLastName;
+    private String lastName;
 
     /** Default constructor for user class. */
     public User() {
-        this.myFirstName = "First_Name";
-        this.myLastName = "Last_Name";
+        this.firstName = "First_Name";
+        this.lastName = "Last_Name";
     }
 
     /**
      * Constructor.
      *
-     * @param firstName the user's firat name
-     * @param lastName the user's last name
+     * @param newFirstName the user's first name
+     * @param newLastName the user's last name
      */
-    public User(final String firstName, final String lastName) {
-        if (firstName == null || firstName.equals("")) {
-            this.myFirstName = "First_Name";
+    public User(final String newFirstName, final String newLastName) {
+        if (newFirstName == null || newFirstName.equals("")) {
+            this.firstName = "First_Name";
         } else {
-            this.myFirstName = firstName;
+            this.firstName = newFirstName;
         }
-        if (lastName == null || lastName.equals("")) {
-            this.myLastName = "Last_Name";
+        if (newLastName == null || newLastName.equals("")) {
+            this.lastName = "Last_Name";
         } else {
-            this.myLastName = lastName;
+            this.lastName = newLastName;
         }
     }
 
@@ -52,7 +54,7 @@ public class User {
      * @throws Exception if the first name field is blank
      */
     public String getFirstName() {
-        return myFirstName;
+        return firstName;
     }
 
     /**
@@ -62,7 +64,7 @@ public class User {
      * @throws Exception if the last name field is blank
      */
     public String getLastName() {
-        return myLastName;
+        return lastName;
     }
 
     /**
@@ -77,45 +79,44 @@ public class User {
     /**
      * Sets the user's id.
      *
-     * @param id the id number
+     * @param newId the id number
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
      * Sets the user's first name.
      *
-     * @param firstName the first name
+     * @param newFirstName the first name
      * @throws IllegalArgumentException if the first name value is null or empty
      */
-    public void setFirstName(final String firstName)
+    public void setFirstName(final String newFirstName)
             throws IllegalArgumentException {
-        if (firstName == null || firstName.equals("")) {
+        if (newFirstName == null || newFirstName.equals("")) {
             throw new IllegalArgumentException(
                     "First name must not be empty or null.");
         }
-        this.myFirstName = firstName;
+        this.firstName = newFirstName;
     }
 
     /**
      * Sets the user's last name.
      *
-     * @param lastName the last name
+     * @param newLastName the last name
      * @throws IllegalArgumentException if the last name value is null or empty
      */
-    public void setLastName(final String lastName)
+    public void setLastName(final String newLastName)
             throws IllegalArgumentException {
-        if (lastName == null || lastName.equals("")) {
+        if (newLastName == null || newLastName.equals("")) {
             throw new IllegalArgumentException(
                     "Last name must not be empty or null.");
         }
-        this.myLastName = lastName;
+        this.lastName = newLastName;
     }
 
     /**
-     * Required explanation on how to implement this for classes that extend
-     * User.
+     * Equals for User.
      */
     @Override
     public boolean equals(final Object other) {
@@ -126,9 +127,17 @@ public class User {
             return true;
         }
         final User otherUser = (User) other;
-        return this.getId() == otherUser.getId()
-                && this.getFirstName().equals(otherUser.getFirstName())
-                && this.getLastName().equals(otherUser.getLastName());
+        return Objects.equals(id, otherUser.id)
+                && Objects.equals(firstName, otherUser.firstName)
+                && Objects.equals(lastName, otherUser.lastName);
+    }
+
+    /**
+     * hashCode for User.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName);
     }
 
     /**
@@ -137,8 +146,8 @@ public class User {
      */
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + ": " + myFirstName + " "
-                + myLastName + " " + id;
+        return this.getClass().getSimpleName() + ": " + firstName + " "
+                + lastName + " " + id;
     }
 
 }

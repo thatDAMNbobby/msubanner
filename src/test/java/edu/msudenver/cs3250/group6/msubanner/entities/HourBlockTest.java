@@ -168,6 +168,13 @@ public class HourBlockTest {
     }
 
     @Test
+    public void hashCodeTest() {
+        HourBlock hourBlock = new HourBlock(7, 2);
+        HourBlock hourBlock2 = new HourBlock(7, 2);
+        assertEquals(hourBlock.hashCode(), hourBlock2.hashCode());
+    }
+
+    @Test
     public void toStringTest() {
         HourBlock hourBlock = new HourBlock();
         hourBlock.setId("1");

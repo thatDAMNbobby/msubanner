@@ -10,6 +10,14 @@ import javax.persistence.Id;
  * Persistent Semester class.
  */
 public class Semester {
+    /** Number representation of August. */
+    private static final int AUGUST = 8;
+
+    /** Number representation of December / months in a year. */
+    private static final int DECEMBER = 12;
+
+    /** Number of months in a typical semester. */
+    private static final int SEMESTER_LENGTH = 4;
 
     /**
      * Semester id number.
@@ -29,19 +37,12 @@ public class Semester {
      * initializes to roughly 3 months after semesterStartDate with some
      * constraints and day default to 20
      */
-    private LocalDate semesterEndDate = LocalDate.of(
-            semesterStartDate.getMonthValue() > 9
-                    ? semesterStartDate.getYear() + 1
-                    : semesterStartDate.getYear(),
-            semesterStartDate.getMonthValue() <= 9
-                    ? semesterStartDate.getMonthValue() + 3
-                    : 1,
-            25);
+    private LocalDate semesterEndDate = generateSemesterEndDate();
 
     /**
      * String representing the Semester season.
      */
-    private String mySeason = autoSetSeason();
+    private String season = autoSetSeason();
 
     // TODO: create default and parameterized constructors
 
@@ -53,9 +54,9 @@ public class Semester {
     private String autoSetSeason() {
         if (this.semesterStartDate.getMonth().toString().equals("JANUARY")
                 || this.semesterStartDate.getMonth().toString()
-                        .equals("FEBRUARY")
+                .equals("FEBRUARY")
                 || this.semesterStartDate.getMonth().toString()
-                        .equals("MARCH")) {
+                .equals("MARCH")) {
 
             this.setSeason("Spring");
             return "Spring";
@@ -63,7 +64,7 @@ public class Semester {
                 || this.semesterStartDate.getMonth().toString().equals("MAY")
                 || this.semesterStartDate.getMonth().toString().equals("JUNE")
                 || this.semesterStartDate.getMonth().toString()
-                        .equals("JULY")) {
+                .equals("JULY")) {
             this.setSeason("Summer");
             return "Summer";
         } else {
@@ -71,6 +72,28 @@ public class Semester {
             this.setSeason("Fall");
         }
         return "Fall";
+    }
+
+    /**
+     * Generates a rough end date for a semester 4 months later.
+     *
+     * @return the estimated semester end date
+     */
+    private LocalDate generateSemesterEndDate() {
+        int endMonth;
+        int endYear;
+        if (semesterStartDate.getMonthValue() > AUGUST) {
+            endYear = semesterStartDate.getYear() + 1;
+        } else {
+            endYear = semesterStartDate.getYear();
+        }
+        endMonth = (semesterStartDate.getMonthValue() + SEMESTER_LENGTH)
+                % DECEMBER;
+        if (endMonth == 0) {
+            endMonth = DECEMBER;
+        }
+        return LocalDate.of(endYear, endMonth,
+                semesterStartDate.getDayOfMonth());
     }
 
     /**
@@ -95,9 +118,11 @@ public class Semester {
 
         if (semesterStartDate.getYear() > semesterEndDate.getYear()
                 || (semesterStartDate.getYear() == semesterEndDate.getYear()
-                        && semesterStartDate.getMonthValue() > semesterEndDate
-                                .getMonthValue())) {
-            setSemesterEndDate();
+                && semesterStartDate.getMonthValue() > semesterEndDate
+                .getMonthValue())) {
+            LocalDate endDate = generateSemesterEndDate();
+            setSemesterEndDate(endDate.getYear(), endDate.getMonthValue(),
+                    endDate.getDayOfMonth());
         }
     }
 
@@ -122,36 +147,13 @@ public class Semester {
         LocalDate localDate;
         if (semesterStartDate.getYear() < endYear
                 || (semesterStartDate.getYear() <= endYear
-                        && semesterStartDate.getMonthValue() < endMonth)) {
+                && semesterStartDate.getMonthValue() < endMonth)) {
             localDate = LocalDate.of(endYear, endMonth, endDate);
         } else {
-            localDate = LocalDate.of(
-                    semesterStartDate.getMonthValue() > 9
-                            ? semesterStartDate.getYear() + 1
-                            : semesterStartDate.getYear(),
-                    semesterStartDate.getMonthValue() <= 9
-                            ? semesterStartDate.getMonthValue() + 3
-                            : 1,
-                    25);
+            localDate = generateSemesterEndDate();
             System.out.println("warning: semesterEndDate automatically set,"
                     + " semesterEndDate must occur after semesterStartDate");
         }
-        this.semesterEndDate = localDate;
-    }
-
-    /**
-     * Sets the semesterEndDate automatically based off of the
-     * semesterStartDate.
-     */
-    private void setSemesterEndDate() {
-        LocalDate localDate = LocalDate.of(
-                semesterStartDate.getMonthValue() > 9
-                        ? semesterStartDate.getYear() + 1
-                        : semesterStartDate.getYear(),
-                semesterStartDate.getMonthValue() <= 9
-                        ? semesterStartDate.getMonthValue() + 3
-                        : 1,
-                25);
         this.semesterEndDate = localDate;
     }
 
@@ -169,25 +171,25 @@ public class Semester {
         /**
          * String value of enum association for season.
          */
-        private String mySeasonName;
+        private String seasonName;
 
         /**
          * Constructor for Season.
          *
-         * @param seasonName the first letter uppercase name of the season
+         * @param newSeasonName the first letter uppercase name of the season
          */
-        Season(final String seasonName) {
-            this.mySeasonName = seasonName;
+        Season(final String newSeasonName) {
+            this.seasonName = newSeasonName;
         }
     }
 
     /**
      * Sets the id of a Semester instance.
      *
-     * @param id New id for the Semester
+     * @param newId New id for the Semester
      */
-    public void setId(final String id) {
-        this.id = id;
+    public void setId(final String newId) {
+        this.id = newId;
     }
 
     /**
@@ -203,13 +205,13 @@ public class Semester {
      * Sets the season with a valid string of the season name, otherwise
      * permissively runs autoSetSeason().
      *
-     * @param season the season to update to
+     * @param newSeason the season to update to
      */
-    public void setSeason(final String season) {
-        if (season.equals(Season.FALL.mySeasonName)
-                || season.equals(Season.SPRING.mySeasonName)
-                || season.equals(Season.SUMMER.mySeasonName)) {
-            this.mySeason = season;
+    public void setSeason(final String newSeason) {
+        if (newSeason.equals(Season.FALL.seasonName)
+                || newSeason.equals(Season.SPRING.seasonName)
+                || newSeason.equals(Season.SUMMER.seasonName)) {
+            this.season = newSeason;
         } else {
             System.out.println("warning: Season must be entered as"
                     + " 'Fall', 'Spring' or 'Summer'");
@@ -221,7 +223,7 @@ public class Semester {
      * @return String representing the season the Semester is in
      */
     public String getSeason() {
-        return mySeason;
+        return season;
     }
 
     /**
@@ -255,14 +257,17 @@ public class Semester {
      */
     public boolean hasConflict(final Semester semesterToCheck) {
         if (semesterToCheck.getSemesterYear() == this.semesterStartDate
-                .getYear() && semesterToCheck.mySeason.equals(this.mySeason)) {
+                .getYear() && semesterToCheck.season.equals(this.season)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * toString for Semester.
+     */
     @Override
     public String toString() {
-        return this.mySeason + ", " + this.getSemesterYear();
+        return season + ", " + getSemesterYear();
     }
 }
