@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.msudenver.cs3250.group6.msubanner.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,15 +22,6 @@ import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Section;
 import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.HourBlockRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
 
 /**
  * The msubanner application.
@@ -75,6 +67,9 @@ public class MsubannerApplication implements CommandLineRunner {
     @Autowired
     private SemesterRepository semesterRepository;
 
+    /** The professor repository. */
+    @Autowired
+    private ProfessorRepository professorRepository;
     /**
      * Starts the spring application.
      *
@@ -98,6 +93,7 @@ public class MsubannerApplication implements CommandLineRunner {
         scheduleRepository.deleteAll();
         hourBlockRepository.deleteAll();
         semesterRepository.deleteAll();
+        professorRepository.deleteAll();
 
         Department department = new Department("Placeholder department");
         departmentRepository.save(department);
@@ -121,6 +117,7 @@ public class MsubannerApplication implements CommandLineRunner {
         prof.setFirstName("TBA");
         prof.setLastName("TBA");
         userRepository.save(prof);
+        professorRepository.save(prof);
 
         section.setProfessor(prof);
         section.setCourse(course);
