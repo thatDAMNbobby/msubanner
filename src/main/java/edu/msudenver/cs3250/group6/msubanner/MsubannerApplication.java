@@ -31,6 +31,10 @@ import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
 import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 /**
  * The msubanner application.
@@ -38,7 +42,7 @@ import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan({ "edu" })
-public class MsubannerApplication implements CommandLineRunner {
+public class MsubannerApplication extends WebSecurityConfigurerAdapter implements CommandLineRunner {
 
     /** The section repository. */
     @Autowired
@@ -164,4 +168,19 @@ public class MsubannerApplication implements CommandLineRunner {
         scheduleRepository.save(schedule);
 
     }
+
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/", "/login", "/error", "/static/**").permitAll()
+                .antMatchers("/**").authenticated()
+                .and().exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
+        ;
+    }
+
+
+
 }
