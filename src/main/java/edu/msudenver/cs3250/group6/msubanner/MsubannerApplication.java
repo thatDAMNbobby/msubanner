@@ -174,7 +174,7 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter implement
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/error").permitAll()
+                .antMatchers("/", "/login", "/error", "/static/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .and().exceptionHandling()
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
