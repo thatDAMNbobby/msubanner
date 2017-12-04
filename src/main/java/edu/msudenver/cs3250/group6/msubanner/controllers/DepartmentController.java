@@ -132,4 +132,16 @@ public class DepartmentController {
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
+
+    /**
+     * Maps to the add department form.
+     *
+     * @return the add department form string
+     */
+    @RequestMapping("/departments/adddepartment")
+    ModelAndView addDepartmentForm() {
+        ModelAndView mav = new ModelAndView("adddepartmentform");
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
 }

@@ -2,6 +2,7 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import java.util.ArrayList;
 
+import edu.msudenver.cs3250.group6.msubanner.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +18,6 @@ import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
 import edu.msudenver.cs3250.group6.msubanner.entities.Room;
 import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
 import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
-import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 
 /**
  * The schedule controller.
@@ -33,6 +32,18 @@ public class ScheduleController {
     /** The hour block service. */
     @Autowired
     private HourBlockService hourBlockService;
+
+    /** The building repository. */
+    @Autowired
+    private BuildingService buildingService;
+
+    /** The room service. */
+    @Autowired
+    private RoomService roomService;
+
+    /** The semester service. */
+    @Autowired
+    private SemesterService semesterService;
 
     /**
      * Gets all schedules.
@@ -172,6 +183,22 @@ public class ScheduleController {
         mav.addObject("room", room);
         mav.addObject("building", building);
         mav.addObject("school_name", Global.SCHOOL_NAME);
+        return mav;
+    }
+
+    /**
+     * Maps to the add schedule form.
+     *
+     * @return the add schedule form string
+     */
+    @RequestMapping("schedules/addschedule")
+    ModelAndView addScheduleForm() {
+        ModelAndView mav = new ModelAndView("addscheduleform");
+        mav.addObject("allrooms", roomService.getAllRooms());
+        mav.addObject("allbuildings", buildingService.getAllBuildings());
+        mav.addObject("allsemesters", semesterService.getAllSemesters());
+        mav.addObject("school_name", Global.SCHOOL_NAME);
+        mav.addObject("alldays", Days.Day.values());
         return mav;
     }
 }
