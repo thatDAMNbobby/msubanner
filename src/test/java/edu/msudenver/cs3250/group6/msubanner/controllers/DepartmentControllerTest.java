@@ -91,4 +91,10 @@ public class DepartmentControllerTest {
         ModelAndView mav = controller.editDepartment("9696");
         assertThat("department".equals(mav));
     }
+
+    @Test
+    public void testAddDepartmentForm() throws Exception {
+        ModelAndView mav = controller.addDepartmentForm();
+        assertThat("adddepartmentform".equals(mav));
+    }
 }
