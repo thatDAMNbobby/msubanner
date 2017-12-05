@@ -93,7 +93,6 @@ public class UserControllerTest {
 
     @Test
     public void testDeleteUserVoid() throws Exception {
-
         controller.deleteUser("808080");
         ResponseEntity<Void> voidMsg2 = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 
@@ -101,15 +100,36 @@ public class UserControllerTest {
     }
 
     @Test
-    public void deleteUserRedirect() throws Exception {
+    public void testDeleteUserRedirect() throws Exception {
+        User user = new User();
+        user.setFirstName("Peter");
+        user.setLastName("Pettigrew");
+        user.setId("747372");
+
+        userRepository.save(user);
+
+        ModelAndView mav = controller.deleteUserRedirect("747372");
+
+        assertThat("users".equals(mav));
     }
 
     @Test
-    public void addUserForm() throws Exception {
+    public void testAddUserForm() throws Exception {
+        ModelAndView mav = controller.addUserForm();
+        assertThat("adduserform".equals(mav));
     }
 
     @Test
     public void editUser() throws Exception {
+        User user = new User();
+        user.setFirstName("Peter");
+        user.setLastName("Pettigrew");
+        user.setId("747372");
+
+        userRepository.save(user);
+
+        ModelAndView mav = controller.editUser("747372");
+        assertThat("edituserform".equals(mav));
     }
 
 }
