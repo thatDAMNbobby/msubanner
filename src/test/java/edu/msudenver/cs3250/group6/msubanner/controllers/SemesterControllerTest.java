@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,7 +61,7 @@ public class SemesterControllerTest {
     }
 
     @Test
-    public void updateSemester() throws Exception {
+    public void testUpdateSemester() throws Exception {
         Semester semester = new Semester();
 
         semester.setId("554");
@@ -79,15 +80,31 @@ public class SemesterControllerTest {
     }
 
     @Test
-    public void deleteSemester() throws Exception {
+    public void testDeleteSemester() throws Exception {
+        Semester semester = new Semester();
+
+        semester.setId("554");
+        semesterRepository.save(semester);
+
+        ModelAndView mav = controller.deleteSemester("554");
+        assertThat("allsemesters".equals(mav));
     }
 
     @Test
-    public void editCourse() throws Exception {
+    public void testEditCourse() throws Exception {
+        Semester semester = new Semester();
+
+        semester.setId("554");
+        semesterRepository.save(semester);
+
+        ModelAndView mav = controller.editCourse("554");
+        assertThat("editsemesterform".equals(mav));
     }
 
     @Test
     public void addSemesterForm() throws Exception {
+        ModelAndView mav = controller.addSemesterForm();
+        assertThat("addcourseform".equals(mav));
     }
 
 }
