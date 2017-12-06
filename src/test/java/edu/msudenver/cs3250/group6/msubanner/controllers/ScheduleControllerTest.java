@@ -1,9 +1,7 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.entities.Days;
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
+import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +24,9 @@ public class ScheduleControllerTest {
 
     @Autowired
     public ScheduleService service;
+
+    @Autowired
+    public HourBlockService hbService;
 
     @Test
     public void getAllSchedules() throws Exception {
@@ -56,7 +57,7 @@ public class ScheduleControllerTest {
         List<Schedule> s = service.getAllSchedules();
         Schedule sc = s.get(0);
         ModelAndView mav = controller.editSchedule(sc.getId());
-        assertThat(true);
+        assertThat("schedules".equals(mav));
     }
 
     @Test
@@ -84,4 +85,18 @@ public class ScheduleControllerTest {
         assertThat("addscheduleform".equals(mav));
     }
 
+    //seems like a good enough place to put this
+    @Test
+    public void testHourBlock() {
+
+        HourBlock hb = new HourBlock();
+        hb.setId("2");
+        hb.setStartTime(8);
+        hb.setDuration(2);
+
+        hbService.updateHourBlock(hb);
+
+        HourBlock hb2 = hbService.getHourBlock("2");
+        assertThat(hb.equals(hb2));
+    }
 }
