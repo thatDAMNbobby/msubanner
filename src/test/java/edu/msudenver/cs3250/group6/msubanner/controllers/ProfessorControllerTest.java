@@ -2,9 +2,6 @@ package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
-import edu.msudenver.cs3250.group6.msubanner.ClassLevel;
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
 import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
 import edu.msudenver.cs3250.group6.msubanner.repositories.ProfessorRepository;
 import org.junit.Test;
