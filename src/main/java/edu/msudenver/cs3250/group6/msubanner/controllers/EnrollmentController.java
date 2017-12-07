@@ -35,8 +35,8 @@ public class EnrollmentController {
      */
     @RequestMapping(value = "/enrollments", method = RequestMethod.GET)
     public ModelAndView getAllEnrollments() {
-        ModelAndView mav = new ModelAndView("Enrollments");
-        mav.addObject("allEnrollments", enrollmentService.getAllEnrollments());
+        ModelAndView mav = new ModelAndView("enrollment");
+        mav.addObject("allenrollments", enrollmentService.getAllEnrollments());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
     }
@@ -89,7 +89,7 @@ public class EnrollmentController {
             value = "/enrollments/deleteenrollment/{id}")
     public ModelAndView deleteEnrollment(@PathVariable final String id) {
         enrollmentService.deleteEnrollment(id);
-        ModelAndView mav = new ModelAndView("enrollments");
+        ModelAndView mav = new ModelAndView("enrollment");
         mav.addObject("allenrollments", enrollmentService.getAllEnrollments());
         mav.addObject("school_name", Global.SCHOOL_NAME);
         return mav;
