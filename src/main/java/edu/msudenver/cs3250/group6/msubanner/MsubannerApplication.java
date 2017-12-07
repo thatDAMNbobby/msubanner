@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.*;
+import edu.msudenver.cs3250.group6.msubanner.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,26 +13,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import edu.msudenver.cs3250.group6.msubanner.entities.Building;
-import edu.msudenver.cs3250.group6.msubanner.entities.Course;
-import edu.msudenver.cs3250.group6.msubanner.entities.Days;
-import edu.msudenver.cs3250.group6.msubanner.entities.Department;
-import edu.msudenver.cs3250.group6.msubanner.entities.HourBlock;
-import edu.msudenver.cs3250.group6.msubanner.entities.Professor;
-import edu.msudenver.cs3250.group6.msubanner.entities.Room;
-import edu.msudenver.cs3250.group6.msubanner.entities.Schedule;
-import edu.msudenver.cs3250.group6.msubanner.entities.Section;
-import edu.msudenver.cs3250.group6.msubanner.entities.Semester;
-import edu.msudenver.cs3250.group6.msubanner.repositories.BuildingRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.CourseRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.DepartmentRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.HourBlockRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.ProfessorRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.RoomRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.ScheduleRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SectionRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.SemesterRepository;
-import edu.msudenver.cs3250.group6.msubanner.repositories.UserRepository;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -84,6 +66,11 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
     @Autowired
     private ProfessorRepository professorRepository;
 
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private StudentRepository enrollmentRepository;
     /**
      * Starts the spring application.
      *
@@ -108,6 +95,9 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
         hourBlockRepository.deleteAll();
         semesterRepository.deleteAll();
         professorRepository.deleteAll();
+        studentRepository.deleteAll();
+        enrollmentRepository.deleteAll();
+
 
         Department department = new Department("Placeholder department");
         departmentRepository.save(department);
@@ -125,6 +115,16 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
         course.setLearningObjectives("none");
         course.setDepartment(department);
         courseRepository.save(course);
+
+
+
+        Student student = new Student();
+        student.setId("9002");
+        student.setFirstName("Gary");
+        student.setLastName("Harmon");
+        userRepository.save(student);
+        enrollmentRepository.save(student);
+        studentRepository.save(student);
 
         Professor prof = new Professor();
         prof.setId("65");
@@ -166,6 +166,8 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
         schedule.setDays(days);
         schedule.setStartDate("YYYY/MM/DD");
         scheduleRepository.save(schedule);
+
+
 
     }
 

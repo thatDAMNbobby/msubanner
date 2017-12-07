@@ -13,11 +13,11 @@ public final class Professor extends User {
     /**
      * Constructor.
      *
-     * @param firstname professors first name
-     * @param lastname professors last name
+     * @param firstName professors first name
+     * @param lastName professors last name
      */
-    public Professor(final String firstname, final String lastname) {
-        super(firstname, lastname);
+    public Professor(final String firstName, final String lastName) {
+        super(firstName, lastName);
     }
 
     @Override

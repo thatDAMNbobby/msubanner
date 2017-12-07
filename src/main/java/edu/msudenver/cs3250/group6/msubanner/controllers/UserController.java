@@ -149,7 +149,7 @@ public class UserController {
      * Maps to the add user form.
      *
      * @return ModelAndView containing the global school name, redirecting to
-     *         the add user form
+     * the add user form
      */
     @RequestMapping("/users/adduser")
     public ModelAndView addUserForm() {

@@ -1,0 +1,32 @@
+{{#layout}}
+<div>
+    <h2>Enrollment List</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Professor</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {{#allenrollments}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{student.firstName}} {student.lastName}}</td>
+            <td>{{professor.lastName}} {{professor.firstName}}</td>
+            <td>{{course.title}}</td>
+            <td><a href="/enrollments/getenrollment/{{id}}">View</a></td>
+            <td><a href="/enrollments/editenrollment/{{id}}">Edit</a></td>
+            <td><a href="/enrollments/deleteenrollment/{{id}}">Delete</a> </td>
+        </tr>
+        {{/allenrollments}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/enrollments/addenrollment'" class="btn-default">Register</button>
+</div>
+{{/layout}}
+{{>layout}}
