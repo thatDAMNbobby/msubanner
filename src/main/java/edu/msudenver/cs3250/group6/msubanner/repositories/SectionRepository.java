@@ -43,8 +43,11 @@ public interface SectionRepository extends MongoRepository<Section, String> {
      */
     List<Section> findAllByScheduleSemester(String semester);
 
-    List<Section> findAllBySchedule_Semester_Id();
-
+    /**
+     * Finds all sections under a specific semester id.
+     * @param id semester's id
+     * @return the list of sections
+     */
     List<Section> findAllByScheduleSemesterId(String id);
 
 }

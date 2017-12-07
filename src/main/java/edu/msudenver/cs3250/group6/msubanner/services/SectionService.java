@@ -62,7 +62,7 @@ public class SectionService {
     /**
      * Gets all sections in a given semester.
      *
-     * @param semester the semester
+     * @param id the semester id
      * @return List containing the sections
      */
     public List<Section> getSectionsBySemester(final String id) {
