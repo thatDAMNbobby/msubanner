@@ -14,9 +14,9 @@
         {{#allenrollments}}
         <tr>
             <td>{{id}}</td>
-            <td>{{student.firstName}} {student.lastName}}</td>
-            <td>{{professor.lastName}} {{professor.firstName}}</td>
-            <td>{{course.title}}</td>
+            <td>{{student.firstName}} {{student.lastName}}</td>
+            <td>{{section.professor.lastName}} {{section.professor.firstName}}</td>
+            <td>{{section.course.title}}</td>
             <td><a href="/enrollments/getenrollment/{{id}}">View</a></td>
             <td><a href="/enrollments/editenrollment/{{id}}">Edit</a></td>
             <td><a href="/enrollments/deleteenrollment/{{id}}">Delete</a> </td>
