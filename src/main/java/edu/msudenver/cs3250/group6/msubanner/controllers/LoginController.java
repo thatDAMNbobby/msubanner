@@ -8,9 +8,11 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -20,33 +22,48 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public final class LoginController {
 
+    /**
+     * The login handler.
+     */
     private SavedRequestAwareAuthenticationSuccessHandler handler =
             new SavedRequestAwareAuthenticationSuccessHandler();
 
+    /**
+     * Maps the login form to the login.
+     *
+     * @return string with value "login"
+     */
     @GetMapping
     public String form() {
         return "login";
     }
 
-    // For some reason, successful logins map to "http://localhost:8080/static/css/style.css"
-    // TODO: See if we can redirect to some other page on success.
+    /**
+     * Method to read in info from login form.
+     * @param map takes Map of two Strings
+     * @param request HTTPServlet Request
+     * @param response HttpServlet response
+     * @return ModelAndView of the index page upon good login
+     * @throws Exception if improper input is entered
+     */
     @PostMapping
-    public ModelAndView authenticate(@RequestParam final Map<String, String> map,
-                                     HttpServletRequest request,
-                                     HttpServletResponse response)
+    public ModelAndView authenticate(
+            @RequestParam final Map<String, String> map,
+                        final HttpServletRequest request,
+                        final HttpServletResponse response)
             throws Exception {
 
         String username = map.get("username");
         String password = map.get("password");
 
-
         if (username.equals("user") && password.equals("password")) {
 
             Authentication result = new UsernamePasswordAuthenticationToken(
-                    username, "N/A",
-                    AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+                username, "N/A",
+                AuthorityUtils.commaSeparatedStringToAuthorityList(
+                        "ROLE_USER"));
 
             SecurityContextHolder.getContext().setAuthentication(result);
 
