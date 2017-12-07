@@ -30,4 +30,6 @@ public final class Student extends User {
     public int hashCode() {
         return super.hashCode();
     }
+
+
 }

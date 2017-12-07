@@ -50,7 +50,7 @@ public class SectionController {
      *
      * @return the list of all sections
      */
-    @RequestMapping("/sections")
+    @RequestMapping(method = RequestMethod.GET, value = "/sections")
     public ModelAndView getAllSections() {
         ModelAndView mav = new ModelAndView("sections");
         mav.addObject("allsections", sectionService.getAllSections());

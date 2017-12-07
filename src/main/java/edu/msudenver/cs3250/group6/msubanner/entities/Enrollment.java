@@ -6,6 +6,8 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.util.Objects;
+
 /** The enrollment class for students/sections. */
 public class Enrollment {
     /** The id. */
@@ -101,5 +103,24 @@ public class Enrollment {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Get the hashCode of a Section object.
+     *
+     * @return hashCode of section object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, student, section);
+    }
+
+    /**
+     * Returns the Enrollment as a nice, readable string.
+     */
+    @Override
+    public String toString() {
+        return "Section{id = " + id + ", Course = " + student.toString()
+                + ", professor = " + section.toString() + "}";
     }
 }

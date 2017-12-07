@@ -31,6 +31,10 @@ public class Section {
     @DBRef
     private Schedule schedule;
 
+    /** Section's student's */
+    @DBRef
+    private Student student;
+
     /**
      * Default constructor, creates a blank section.
      */
@@ -142,6 +146,30 @@ public class Section {
         }
         this.professor = newProf;
     }
+
+    /**
+     * Returns the student enrolled in this section.
+     *
+     * @return the student enrolled in this section
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    /**
+     * Sets the student for this section.
+     *
+     * @param newStudent new student for this section
+     * @throws IllegalArgumentException if the student is null
+     */
+    public void setStudent(final Student newStudent)
+            throws IllegalArgumentException {
+        if (newStudent == null) {
+            throw new IllegalArgumentException("Student cannot be null!");
+        }
+        this.student = newStudent;
+    }
+
 
     /**
      * Returns the section's schedule.

@@ -2,6 +2,7 @@ package edu.msudenver.cs3250.group6.msubanner.services;
 
 import java.util.List;
 
+import edu.msudenver.cs3250.group6.msubanner.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,4 +70,6 @@ public class SectionService {
         //return sectionRepository.findAllByScheduleSemester(semester);
         return sectionRepository.findAllByScheduleSemesterId(id);
     }
+
+
 }
