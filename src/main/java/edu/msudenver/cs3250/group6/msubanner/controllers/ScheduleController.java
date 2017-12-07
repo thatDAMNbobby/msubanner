@@ -1,8 +1,11 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import java.util.ArrayList;
-
-import edu.msudenver.cs3250.group6.msubanner.services.*;
+import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
+import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
+import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
+import edu.msudenver.cs3250.group6.msubanner.services.HourBlockService;
+import edu.msudenver.cs3250.group6.msubanner.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import edu.msudenver.cs3250.group6.msubanner.Global;
 import edu.msudenver.cs3250.group6.msubanner.entities.Building;
 import edu.msudenver.cs3250.group6.msubanner.entities.Days;
@@ -71,6 +73,7 @@ public class ScheduleController {
      * @param hourBlockDuration the duration
      * @return the model and view
      */
+    @SuppressWarnings("CheckStyle")
     @RequestMapping(method = RequestMethod.POST,
             value = "/schedules/addschedule")
     public ModelAndView addSchedule(@RequestParam final Room room,
@@ -127,7 +130,6 @@ public class ScheduleController {
             final int duration, final ArrayList<Days.Day> days,
             final int hourBlockStartTime,
               final int hourBlockDuration, @PathVariable final String id) {
-
         Schedule schedule = scheduleService.getSchedule(id);
         schedule.setBuilding(building);
         schedule.setRoom(room);

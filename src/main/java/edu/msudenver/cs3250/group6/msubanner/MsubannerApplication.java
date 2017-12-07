@@ -169,10 +169,14 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
 
     }
 
-
-
+    /**
+     * Config for Authentication.
+     *
+     * @param http HttpSecurity
+     * @throws Exception if login unsuccessful
+     */
     @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    protected final void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/error", "/static/**").permitAll()
                 .antMatchers("/**").authenticated()
@@ -180,7 +184,5 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
                 .authenticationEntryPoint(new
                         LoginUrlAuthenticationEntryPoint("/login"));
     }
-
-
 
 }

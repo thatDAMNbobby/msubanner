@@ -7,7 +7,12 @@
   CS4250 checkstyle suppressions configuration - modified for CS3250 Group6
  -->
 
+
 <suppressions>
+    <!-- Suppress warnings for form input methods -->
+    <suppress checks="ParameterNumber" files="[\\/]*.java"/>
+    <suppress checks="TodoComment" files="[\\/]*.java"/>
+
     <!-- Tone down the checking for test classes -->
     <suppress checks="MagicNumber" files="MsubannerApplication.java|[\\/]*Test.java$"/>
     <suppress checks="EmptyBlock" files="[\\/]*Test.java$"/>
@@ -20,4 +25,5 @@
     <suppress checks="Name" files="[\\/]*Test.java$"/>
     <suppress checks="HideUtilityClassConstructor" files="MsubannerApplication.java|SectionControllerTest.java"/>
     <suppress checks="NewlineAtEndOfFile" files="."/>
+
 </suppressions>
