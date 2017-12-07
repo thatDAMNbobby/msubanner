@@ -1,7 +1,6 @@
 package edu.msudenver.cs3250.group6.msubanner.controllers;
 
 import java.util.ArrayList;
-
 import edu.msudenver.cs3250.group6.msubanner.services.BuildingService;
 import edu.msudenver.cs3250.group6.msubanner.services.ScheduleService;
 import edu.msudenver.cs3250.group6.msubanner.services.SemesterService;
@@ -131,7 +130,6 @@ public class ScheduleController {
             final int duration, final ArrayList<Days.Day> days,
             final int hourBlockStartTime,
               final int hourBlockDuration, @PathVariable final String id) {
-
         Schedule schedule = scheduleService.getSchedule(id);
         schedule.setBuilding(building);
         schedule.setRoom(room);
