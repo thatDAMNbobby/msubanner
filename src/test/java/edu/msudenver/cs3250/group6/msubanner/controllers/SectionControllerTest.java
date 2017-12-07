@@ -137,7 +137,7 @@ public class SectionControllerTest {
     }
 
 //    @Test
-//    public void sectionsBySemester() throws Exception {
+//    public void testSectionsBySemester() throws Exception {
 //        Semester someSemester = new Semester();
 //        semesterRepository.save(someSemester);
 //
@@ -164,6 +164,8 @@ public class SectionControllerTest {
 
     @Test
     public void selectSemester() throws Exception {
+        ModelAndView mav = controller.selectSemester();
+        assertThat("selectsemester".equals(mav));
     }
 
 }
