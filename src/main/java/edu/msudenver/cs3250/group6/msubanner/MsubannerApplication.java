@@ -109,22 +109,45 @@ public class MsubannerApplication extends WebSecurityConfigurerAdapter
         semesterRepository.deleteAll();
         professorRepository.deleteAll();
 
-        Department department = new Department("Placeholder department");
+        Department department = new Department("Morty's Memories");
         departmentRepository.save(department);
+
+        Department department2 = new Department("Pickled Ricks");
+        departmentRepository.save(department2);
+
+        Department department3 = new Department("Citadel Ricks");
+        departmentRepository.save(department3);
+
+        Department department4 = new Department("Jerry Day Care");
+        departmentRepository.save(department4);
 
         Semester semester = new Semester();
         semesterRepository.save(semester);
+
+        Semester semester2 = new Semester();
+        semester2.setSemesterStartDate(2018, 1, 12);
+        semester2.setSemesterEndDate(2018, 3, 15);
+        semester2.setSeason("Spring");
+        semesterRepository.save(semester2);
 
         Section section = new Section();
         section.setId("900123456");
 
         Course course = new Course();
         course.setId("4250");
-        course.setTitle("Bla");
+        course.setTitle("Intergalactic Travel for Ricks");
         course.setCredits(2);
         course.setLearningObjectives("none");
         course.setDepartment(department);
         courseRepository.save(course);
+
+        Course course2 = new Course();
+        course2.setId("3250");
+        course2.setTitle("Murder Dome for Fun and Profit");
+        course2.setCredits(3);
+        course2.setLearningObjectives("Rickmance the Stone");
+        course2.setDepartment(department2);
+        courseRepository.save(course2);
 
         Professor prof = new Professor();
         prof.setId("65");
