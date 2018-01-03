@@ -1,0 +1,13 @@
+{{#layout}}
+{{#department}}
+<div class="container">
+    <h1>Department Input Form (Currently Working)</h1>
+    <form action="/departments/updatedepartment/{{id}}" method="get">
+        <p>Department Name: <input type="text" name="departmentName" value="{{departmentName}}"/></p>
+{{/department}}
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/layout}}
+{{>layout}}

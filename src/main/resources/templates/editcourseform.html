@@ -1,0 +1,28 @@
+{{#layout}}
+{{#course}}
+<div class="container">
+    <h1>Course Input Form</h1>
+    <form action="/courses/updatecourse/{{id}}" method="get">
+        <p>Course Title: <input type="text" name="title" value="{{title}}"/></p>
+        <p>Course Description: <input type="text" name="description" value="{{description}}"></p>
+        <p>Number of Credits: <input type="number" name="credits"value="{{credits}}" /></p>
+        <p>Learning Objectives: <input type="text" name="learningObjectives" value="{{learningObjectives}}"/></p>
+        <p>Prerequisites: <select name="prereqs">
+            <option value="FRESHMAN">Freshman</option>
+            <option value="SOPHOMORE">Sophomore</option>
+            <option value="JUNIOR">Junior</option>
+            <option value="SENIOR">Senior</option>
+        </select>
+        <p>Department: <select name="department">
+        {{#alldepartments}}
+            <option value="{{id}}">{{departmentName}}</option>
+        {{/alldepartments}}
+            </select>
+        </p>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/course}}
+{{/layout}}
+{{>layout}}

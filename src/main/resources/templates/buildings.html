@@ -1,0 +1,28 @@
+{{#layout}}
+<div>
+    <h2>Building List</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Building Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            {{#allbuildings}}
+            <td><a href="/buildings/{{id}}">{{id}}</a></td>
+            <td>{{buildingName}}</td>
+            <td><a href="/buildings/getbuilding/{{id}}">View</a></td>
+            <td><a href="/buildings/editbuilding/{{id}}">Edit</a></td>
+            <td><a href="/buildings/deletebuilding/{{id}}">Delete</a> </td>
+        </tr>
+        {{/allbuildings}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/buildings/addbuilding'" class="btn-default">New Building</button>
+</div>
+{{/layout}}
+{{>layout}}

@@ -1,0 +1,28 @@
+{{#layout}}
+<div>
+    <h2>Department List</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Department Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            {{#alldepartments}}
+            <td>{{id}}</a></td>
+            <td>{{departmentName}}</td>
+            <td><a href="/departments/{{id}}">View</a></td>
+            <td><a href="/departments/editdepartment/{{id}}">Edit</a></td>
+            <td><a href="/departments/deletedepartment/{{id}}">Delete</a> </td>
+        </tr>
+        {{/alldepartments}}
+    </table>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+    <button type="button" onclick="window.location.href='/departments/adddepartment'" class="btn-default">New Department</button>
+</div>
+{{/layout}}
+{{>layout}}

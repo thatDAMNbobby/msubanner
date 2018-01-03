@@ -1,0 +1,20 @@
+{{#layout}}
+<div>
+    <h2>Select semester (Broken)</h2>
+</div>
+<div>
+    <form action="/sections/bysemester/" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p>Semester: <select name="id">
+            {{#allsemesters}}
+            <option value="{{id}}">{{season}}, {{semesterYear}}</option>
+            {{/allsemesters}}
+        </select>
+            <button type="submit" class="btn-default">Search</button> </p>
+    </form>
+</div>
+<div class="row">
+    <button type="button" onclick="history.back()" class="btn btn-default">Back</button>
+</div>
+{{/layout}}
+{{>layout}}

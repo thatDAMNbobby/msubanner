@@ -1,0 +1,84 @@
+{{#layout}}
+<div class="container">
+    <h1>Schedule Input Form (Working)</h1>
+    <form action="#" method="post">
+        <p>Room:
+            <select name="room">
+                {{#allrooms}}
+                <option value="{{id}}" >{{roomNumber}}</option>
+                {{/allrooms}}
+            </select>
+        Building:
+            <select name="building">
+                {{#allbuildings}}
+                <option value="{{id}}" >{{buildingName}}</option>
+                {{/allbuildings}}
+            </select>
+        Start Time:
+            <select name="hourBlockStartTime">
+                <option value="6" >6</option>
+                <option value="7" >7</option>
+                <option value="8" >8</option>
+                <option value="9" >9</option>
+                <option value="10" >10</option>
+                <option value="11" >11</option>
+                <option value="12" >12</option>
+                <option value="13" >13</option>
+                <option value="14" >14</option>
+                <option value="15" >15</option>
+                <option value="16" >16</option>
+                <option value="17" >17</option>
+                <option value="18" >18</option>
+                <option value="19" >19</option>
+                <option value="20" >20</option>
+            </select>
+            Duration:
+            <select name="hourBlockDuration">
+                <option value="1" >1</option>
+                <option value="2" >2</option>
+                <option value="3" >3</option>
+            </select>
+            Days of the Week:
+            <!--<input type="text" name="days" />-->
+            <select name="days">
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Monday, Wednesday">Monday, Wednesday</option>
+                <option value="Tuesday, Thursday">Tuesday, Thursday</option>
+                <option value="Monday, Wednesday, Friday">Monday, Wednesday, Friday</option>
+                <option value="Sunday, Saturday">Sunday, Saturday</option>
+            </select>
+            <!--<select name="days">
+                {{#alldays}}
+                <option value="{{this}}"?>{{this}}</option>
+                {{/alldays}}
+            </select>-->
+        </p>
+
+        <p> Semester:<select name="semester">
+            {{#allsemesters}}
+            <option value="{{id}}">{{season}}, {{semesterYear}}</option>
+            {{/allsemesters}}
+        </select>
+        </p>
+        <!-- <p> Start Date:<input type="text" name="startDate"/> </p> -->
+        <p>
+            Start Date:
+            <input type="date" name="startDate">
+        </p>
+        <p> Duration:<input type="number" name="duration"/> </p>
+        <p> Days:<input type="text" name="days"/> </p>
+        <!-- <p> Hours:<input type="text" name="hours"/> </p> -->
+
+
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/layout}}
+{{>layout}}

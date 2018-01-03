@@ -1,0 +1,59 @@
+{{#layout}}
+{{#schedule}}
+<div class="container">
+    <h1>Schedule Input Form (Working)</h1>
+    <form action="/schedules/updateschedule/{{id}}" method="get">
+        <p>Room:
+            <select name="room">
+                <option value="{{room.id}}">{{room.roomNumber}}</option>
+                {{#allrooms}}
+                <option value="{{id}}" >{{roomNumber}}</option>
+                {{/allrooms}}
+            </select>
+            Building:
+            <select name="building">
+                <option value="{{building.id}}">{{building.buildingName}}</option>
+                {{#allbuildings}}
+                <option value="{{id}}" >{{buildingName}}</option>
+                {{/allbuildings}}
+            </select>
+            Start Time:
+            <select name="hourBlockStartTime">
+                <option value="6" >6</option>
+                <option value="7" >7</option>
+                <option value="8" >8</option>
+                <option value="9" >9</option>
+                <option value="10" >10</option>
+                <option value="11" >11</option>
+                <option value="12" >12</option>
+                <option value="13" >13</option>
+                <option value="14" >14</option>
+                <option value="15" >15</option>
+                <option value="16" >16</option>
+                <option value="17" >17</option>
+                <option value="18" >18</option>
+                <option value="19" >19</option>
+                <option value="20" >20</option>
+            </select>
+            Duration:
+            <select name="hourBlockDuration">
+                <option value="1" >1</option>
+                <option value="2" >2</option>
+                <option value="3" >3</option>
+            </select>
+        </p>
+
+        <p> Semester:<input type="text" name="semester" value="{{semester}}"/></p>
+        <p> Start Date:<input type="text" name="startDate" value="{{startDate}}"/></p>
+        <p> Duration:<input type="number" name="duration" value="{{duration}}"/></p>
+        <p> Days:<input type="text" name="days" value="{{days}}"/></p>
+        <!-- <p> Hours:<input type="text" name="hours" value="{/{hours}/{"/></p> -->
+
+
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+{{/schedule}}
+{{/layout}}
+{{>layout}}
